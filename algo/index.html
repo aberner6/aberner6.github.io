@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>algo</title>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<link href="css/tipsy.css" rel="stylesheet" type="text/css"/>
+<link href="css/simpletextrotator.css" rel="stylesheet" type="text/css"/>
+
+<link href="css/boostrap.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/d3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script> -->
+<script src="js/jquery.tipsy.js"></script>
+<script type="text/javascript" src="js/colorbrewer.js"></script>
+<script type="text/javascript" src="js/SeamlessLoop.js"></script>
+<script type="text/javascript" src="js/jquery.simple-text-rotator.min.js"></script>
+
+</head>
+
+<body>
+<header id="navbar" role="banner" class="navbar navbar-fixed-top navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      
+      <div class="navbar-brand-container">
+        <a class="name navbar-brand">
+            From the Outside In
+        </a>
+      </div>
+<div id="moreInfoBtn" style="color: rgb(255, 255, 255); background-color: rgb(145, 145, 145);">i</div>
+        <!-- <img src="info.png"> -->
+    </div>
+  </div>
+</header>
+
+
+
+
+<div id = "game">
+
+
+  <!-- stand in -->
+<div id = "title">
+    <div class = "title1">
+      <p>
+        <b>From the Outside In</b> </br> In this game, neurons (brain cells) are modeled as simple inputs and outputs.</br>
+Players can stimulate input neurons repeatedly to trigger output at the next layer of cells.
+    </p>
+<!--     <div class="p1">- 2 input neurons</div>
+    <div class = "p2">- Linked through weighted lines</div>
+    <div class = "p3">- To an output neuron.</div> -->
+    </div>
+      <div id = "enter">
+        <img src="forwardNav.png" width="10" height="10">
+      </div>
+</div>
+  <!-- <div id = "neurons"> -->
+  <div id = "neurop1">
+click to trigger input</div>
+  <div id = "neurop2">
+click to trigger input</div>
+    <!-- <div class = "p2">Click a bottom circle to trigger input</div> -->
+  <!-- </div> -->
+  <div id = "connections1"><p>connection paths</p></div>
+  <div id = "connections2"><p>connection paths</p></div>
+
+  <div id = "output">Try to create a strong enough input to trigger output!</div>
+  <div id = "refresh1p">
+    <p>Success! Play again!</p>
+  </div>
+<!-- <p id='manual-example'>
+  <a rel='tipsy' title='Well hello there'>My tooltip is manually triggered</a>
+  <a href='#' onclick='$("#manual-example a[rel=tipsy]").tipsy("show"); return false;'>Show</a>
+  <a href='#' onclick='$("#manual-example a[rel=tipsy]").tipsy("hide"); return false;'>Hide</a>
+</p>
+ -->
+
+  <!-- stand in -->
+<div id='manual-example' class='example'>
+<a rel='tipsy' title='  Connection Weight + Learning Constant * Error = Learned Connection Weight (> or <) Pre-Designated Threshold'></a>
+</div>
+
+
+      <div id = "enterContainer">
+        DETAILS
+      </div>
+    <!-- <div id = "clickExpl"> -->
+      <!-- <img src="forwardNav.png" width="10" height="10"> -->
+    <!-- </div> -->
+
+<div id = "explanation">
+Neurons, cells inside the brain, communicate by sending electrical and chemical signals. 
+
+Computational neuroscientists (also known as theoretical neuroscientists)  try to understand this communication by using mathematical <div class = "scoreboard">equations</div> that model neurons as <div class = "inputInteraction">inputs</div> and <div class = "outputInteraction">outputs.</div> <div class = "inputInteraction">Inputs</div> send <div class="goInteraction">go signals</div>; <div class = "outputInteraction">outputs</div> process these signals and then relay the message to other outputs. 
+</br></br>
+
+In this model, <div class = "inputInteraction">two inputs</div> are connected to <div class = "outputInteraction">one output.</div>
+The output waits for a <div class="goInteraction">go</div> signal from the input. When this signal is received, the <div class = "outputInteraction">output</div> becomes active and can pass the message along.
+But sometimes when the <div class = "inputInteraction">input</div> says go, the <div class = "outputInteraction">output</div> cannot hear it. 
+</br></br>
+
+When neuroscientists  are modeling the brain activity, they also have to think about the strength of <div class = "trailInteraction">connections</div> between cells. 
+The strength of a <div class = "trailInteraction">connection</div> is called its weight.
+</br></br>
+
+When two cells have a good <div class = "trailInteraction">connection</div>--a strong weight-- the output is more likely to <div class="winInteraction">hear</div> the input. 
+Persistence also matters.  If the <div class = "inputInteraction">input</div> says <div class="goInteraction">Go!</div> over and over, the weight eventually increases--the <div class = "outputInteraction">output</div> can hear better. 
+</br>
+</br>
+In this model, you can track the weights of two <div class = "trailInteraction">connections</div> on the scoreboard.
+Try sending <div class="goInteraction">Go</div> signals to the <div class = "outputInteraction">output</div>.  If the <div class = "outputInteraction">output</div> cannot hear the signal, try to build a stronger <div class = "trailInteraction">connection!</div>
+</div>
+       <div id = "success">
+        <img src="flag.png">
+      </div> 
+
+</div>
+
+
+
+      <div id = "enterGame">
+        <img src="forwardNav2.png" width="12" height="12">
+      </div>
+
+<div id = "container">
+<div id = "title">
+    <div class = "title1">
+      <p>
+        <b>From the Outside In</b> considers the perceptron: an algorithm that describes how our neurons process our environment - full of smell, touch, sight, sound and taste.<br>If we find something significant in all of these incoming senses, our neurons will try to pass a signal along to its network, communicating that we should pay attention to that smell - a whiff of smoke coming from down the hall, for example.
+<!-- Here, we are considering the way the brain understands the senses of smell and touch - represented in the sense cloud - processes these through a simple perceptron: the three neurons and one output. -->
+    </p>
+    <div class="p1">- 2 input neurons</div>
+    <div class = "p2">- Linked through weighted lines</div>
+    <div class = "p3">- To an output neuron.</div>
+    </div>
+      <div id = "enter">
+        <img src="forwardNav.png" width="10" height="10">
+      </div>
+</div>
+
+  <div id="intro">
+      <div id="intro4">
+        <p>Try triggering these sense inputs: see if the output neuron responds</p>
+
+      </div>
+  </div>
+
+  <div id="intro2">
+        <p>The output neuron has a threshold (set randomly at 0.5 here) that the input multiplied by the weight of its connection must exceed:<br><b>input*weight>threshold</b></p>
+  </div>
+  <div id="equation">
+        <p></p>
+  </div>
+    <div id="buttons">
+      <div id="sound">
+        <img src="smellNav.png" width="10" height="8">
+      </div>
+      <div class = "soundText">
+        Trigger touch
+      </div>
+      <div id="smell">
+        <img src="smellNav.png" width="10" height="8">
+      </div>
+        <div class = "smellText">
+        Trigger smell
+      </div>
+    </div>
+
+  <div id = "senseCloud"></div>
+  <div id = "neurons"><p>{ input neurons }</p></div>
+  <div id = "connections">{ links }</div>
+  <div id = "output">{ output neuron }</div>
+  <div id="check">
+    <img src="check.png" width="20" height="20">
+    <p>Input greater than Threshold!</p>
+    <p>SUCCESS - signal passes</p>
+  </div>
+  <div id="x">
+    <img src="x.png" width="20" height="20">
+    <p>Input less than Threshold</p>
+    <p>Signal fails - train more!</p>
+  </div>
+  <div id = "refresh">
+    <img src="refresh.png" width="25" height="20">
+  </div>
+  <div id = "refreshp">
+    <p>Randomize weights</p>
+  </div>
+</div>
+
+  
+<script type="text/javascript" src="refresh.js"></script>
+
+</body>
+</html>
