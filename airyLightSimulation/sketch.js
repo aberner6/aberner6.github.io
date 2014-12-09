@@ -40,8 +40,8 @@ radius = map(sliderPositionLens.value(),0,wallHeight,-100,wallHeight/2.5);
     ellipse(200-75+i,85,radius,radius);
     ellipse(200,10+i,radius,radius);
   }
-  fill(100);
-  stroke(100);
+  fill(178);
+  stroke(255);
   line(0, sliderPositionLight.value(), 200, sliderPositionLight.value());  
   ellipse(200, wallHeight, 20, 20);
 }
