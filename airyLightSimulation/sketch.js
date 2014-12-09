@@ -31,8 +31,6 @@ function draw() {
   fill(0, sliderPositionLens.value(), 255, 127);
   ellipse(200, sliderPositionLens.value(), 20, 20);
 
-  line(0, sliderPositionLight.value(), 200, sliderPositionLight.value());  
-
 radius = map(sliderPositionLens.value(),0,wallHeight,-100,wallHeight/2.5);
 // radius = sliderPositionLens.value()/5;
   for(var i = 0; i < 100;){
@@ -43,5 +41,7 @@ radius = map(sliderPositionLens.value(),0,wallHeight,-100,wallHeight/2.5);
     ellipse(200,10+i,radius,radius);
   }
   fill(100);
+  stroke(100);
+  line(0, sliderPositionLight.value(), 200, sliderPositionLight.value());  
   ellipse(200, wallHeight, 20, 20);
 }
