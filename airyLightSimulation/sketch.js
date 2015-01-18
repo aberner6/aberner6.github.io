@@ -4,7 +4,7 @@ var sliderPositionLens;
 var sliderPositionLight;
 var heightOnWall = 300;
 
-var wallHeight = 600;
+var wallHeight = 680;
 var margin = 100;
 
 var radius = 10;
@@ -16,7 +16,8 @@ function setup() {
   // hue, saturation, and brightness
   // colorMode(HSB, 255);
   // slider has a range between 0 and 255 with a starting value of 127
-  sliderPositionLens = createSlider(wallHeight/1.2, wallHeight, wallHeight);
+  // sliderPositionLens = createKnob(0,360,0,wallHeight,wallHeight/1.2, wallHeight); 
+   sliderPositionLens = createSlider(wallHeight/1.2, wallHeight, wallHeight);
 
   // sliderPositionLight = createSlider(0, wallHeight, wallHeight);
 
