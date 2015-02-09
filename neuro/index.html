@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Keyword Network</title>
+<link href="tipsy.css" rel="stylesheet" type="text/css" /> 
+
+<script type="text/javascript" src="js/d3.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<script src="js/jquery.tipsy.js"></script>
+<!-- <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
+<!-- <script src="js/fisheye.js"></script> -->
+<script type="text/javascript" src="js/colorbrewer.js"></script>
+    <style type="text/css">
+
+
+.link{
+    /*fill: rgb(226, 226, 226);*/
+    /*fill:lightblue;*/
+  fill: none;
+  opacity:1;
+  /*stroke: #666;*/
+  stroke-width: .3px;
+}
+ .klink {
+      fill: none;
+  opacity:1;
+    /*fill: rgb(226, 226, 226);*/
+    /*fill: silver;*/
+  /*fill: rgb(197, 217, 223);*/
+  /*stroke: #666;*/
+  stroke-width: .3px;
+}
+
+.node, .knode {
+    /*stroke-width:0.5px;*/
+  cursor: move;
+}
+
+/*.node.fixed {
+  stroke: #000;
+  stroke-width: .1px;
+}*/
+.axis{
+        display:none;
+
+}
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+.axis text {
+font-weight: 200;    
+    font-family: "Helvetica Neue";
+    font-size: 8px;
+}
+.newlabel{
+    font-size: 12px;
+    color: gray;
+}
+.paperTitle{
+    font-size: 18px;
+    color:gray;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;  
+ font-weight: 200;       
+     font-family: "Helvetica Neue";     
+}
+.labels{
+    font-size: 10px;
+    text-transform:lowercase;
+    display:none;
+}
+.kandellabels{
+    font-size: 10px;
+    text-transform:lowercase;
+    display:none;
+}
+.line {
+  /*fill: none;*/
+}
+
+.button {
+    padding:4px;
+background-color: white;
+border: solid 1px lightgray;
+cursor: pointer;
+position: fixed;
+/*border-style: 1px;*/
+/*border-bottom-style: solid;*/
+font-family: Helvetica Neue;
+font-size: 12px;
+text-align: center;
+font-weight: 200;
+background-color: white;
+
+/*border-bottom: 1px solid rgba(170, 165, 165, 1);*/
+color: #666;
+}
+  .button:hover{
+    color: white;
+    border:1px solid yellow; 
+    background-color: darkgray;
+    /*background-color: rgba(65, 63, 63, 1);*/
+  }
+#citeRate.selected{
+    color: white;
+    border:1px solid yellow; 
+        background-color: darkgray;
+    /*background-color: rgba(65, 63, 63, 1);  */
+}
+#focusKandel.selected{
+    color: white;
+    border:1px solid yellow; 
+        background-color: darkgray;
+    /*background-color: rgba(65, 63, 63, 1);  */
+}
+#labelsOn.selected{
+    color: white;
+    border:1px solid yellow; 
+        background-color: darkgray;
+    /*background-color: rgba(65, 63, 63, 1);  */
+}
+.button#citeRate {
+position: absolute;
+/*right: 7px;*/
+  left: 50%;
+  margin-left: -44px;
+  top:2%;
+/*or*/
+/*margin:auto;*/
+/*width:10%;*/
+/*or*/
+/*float:right;*/
+/*left:50%;*/
+/*top:10px;*/
+    /*or*/
+/*left:50%;
+top: 35px;
+display:none;*/
+}
+.button#focusKandel {
+position: absolute;
+  left: 50%;
+  margin-left:47px;
+  top:2%;
+/*right: 7px;*/
+/*or*/
+/*margin:auto;*/
+/*width:10%;*/
+/*or*/
+/*float:right;*/
+/*left:50%;*/
+/*top:10px;*/
+
+    /*or*/
+/*left:60%;
+top: 35px;
+display:none;*/
+}
+/*.button#clickZoom {
+right: 2px;
+bottom: 10px;
+}*/
+.button#labelsOn {
+position: absolute;
+  left: 50%;
+  margin-left: -98px;
+  top:2%;
+/*right: 7px;*/
+/*or*/
+/*margin:auto;*/
+/*width:10%;*/
+/*or*/
+/*float:right;*/
+/*left:50%;*/
+/*top:10px;*/
+
+    /*or*/
+/*left:40%;
+top: 35px;
+display: none;*/
+}
+
+
+.button#reset {
+top: 7%;
+left: 50%;
+margin-left: 10px;
+display: none;
+font-size: 14pt;
+font-weight: 400;
+}
+body{
+   height: 100%;    
+    overflow: auto;
+    letter-spacing: 1pt;
+    color:gray;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;  
+ font-weight: 200;       
+     font-family: "Helvetica Neue";      
+}
+#container{
+    z-index: 1;
+    left: 5%;
+    width: 100%;
+    height: 100%;
+    right:5%;
+}
+.button#key{
+    position:absolute;
+/*    left:7px;
+    top:35px;
+*/
+left: 2%;
+bottom: 2%;
+}
+.keyCirc, .newlabel, .paperCirc, .journoCirc, .descriplabel{
+    display:none;
+}
+.descriplabel{
+position: fixed;
+font-size: 12px;
+display: none;
+width: 15%;
+height: 5%;
+letter-spacing: 1 pt;
+bottom: 22%;
+left: 2%;
+}
+#titlename{
+font-size: 18px;
+display: none;
+letter-spacing: 1 pt;
+top: 13%;
+position: absolute;
+left:50%;
+text-align: center;
+margin-left:-159px;
+/*margin-left: -109px;*/
+background: white;
+
+/*font-size: 12px;
+display: none;
+letter-spacing: 1 pt;
+top:100px;*/
+}
+#titlename.selected{
+font-size: 18px;
+display: none;
+letter-spacing: 1 pt;
+top: 50px;
+position: absolute;
+/*left:86%;*/
+left:187px;
+
+text-align: left;
+/*margin-left:-159px;*/
+background: white;
+}
+.paperTitle.selected{
+font-size: 18px;
+display: none;
+letter-spacing: 1 pt;
+top: 2%;
+position: absolute;
+left:86%;
+text-align: center;
+margin-left:-159px;
+background: white;
+}
+#header{
+left: 2%;
+top: 2%;
+font-size: 18px;
+border-style: none;
+font-weight: 500;
+position: absolute;
+}
+    </style>
+</head>
+
+<body>
+<div id="header">Neuroscience Keyword Network</div>
+
+    <div id = "container">
+<div class="button" id="citeRate">Full network</div> 
+<div class="button" id="focusKandel">One paper</div> 
+<!-- <div class="button" id="labelsOn">Labels</div>
+ -->
+    </div>
+<center>
+<div id="titlename">
+    Scientific papers related to 'memory' - <br>filtered by top neuroscience journals
+</div>
+
+</center>
+
+
+<div class="button" id = "key">Key</div>
+<!-- <div id="keyText"></div> -->
+
+<!-- <center> -->
+<!-- <div class="button" id="citeRate">Full network</div> 
+<div class="button" id="focusKandel">One paper</div> 
+<div class="button" id="labelsOn">Labels</div> -->
+<!-- </center> -->
+
+<!-- <div class="button" id="clickZoom">zoom</div> -->
+<center><div class="button" id="reset">RESET</div></center>
+<div class = "descriplabel">
+    <p>
+    This network is generated by keyword co-occurence: a physical simulation of charged particles and springs places related papers in closer proximity and connects them to their respective Major Keyword, while unrelated papers are farther apart and not linked.
+    </p>
+</div>
+<script type="text/javascript" src="nodeslinks.js"></script>
+
+</body>
+</html>
