@@ -59,8 +59,8 @@ function renderData()
         .attr("cy", function(d) { return projection(d.projection)[1]; })
 		.transition()
 		.duration(function(d){
-			// return 2000;
-			return transScale(d.created_at)
+			return 1000;
+			// return transScale(d.created_at)
 		})
 		.attr("opacity",1)
 
@@ -85,12 +85,17 @@ function renderData()
 		.attr("stroke-opacity",1)
   .transition()
       .ease("linear")
-		.duration(function(d){
-			// return 2000;
-			return trans2Scale(d.created_at)
-		})
+      .duration(1000)
       .style("stroke-opacity", 1e-6)
-		.attr("stroke-width",.1)
+      .style("stroke-width", 1)
+
+  //     .ease("linear")
+		// .duration(function(d){
+		// 	// return 2000;
+		// 	return trans2Scale(d.created_at)
+		// })
+  //     .style("stroke-opacity", 1e-6)
+		// .attr("stroke-width",.1)
       .attr("r", 20)
       .remove();
 
@@ -157,10 +162,10 @@ function setTimeZone()
 			return e.width;
 		})
 		.attr('height',height)
-		.attr('stroke-width','.1')
+		// .attr('stroke-width','.1')
     .style("stroke-dasharray", "1,4")
-		.attr('stroke','lightgray')
-		.attr("opacity",1)
+		.attr('stroke','darkgray')
+		.attr("opacity",.3)
 
 	tzs.attr("fill-opacity", 1)
 	.attr("fill","none")
