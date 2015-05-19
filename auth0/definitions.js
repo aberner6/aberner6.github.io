@@ -235,7 +235,7 @@ var lineData = [];
             var suns = svg.selectAll("img").data(lat_tz);
                 suns.enter()
             	.append("svg:image")
-                .attr("xlink:href", "/sunwhite.png")
+                .attr("xlink:href", "sunwhite.png")
 				.attr("x", function(e){
 					return e.x + (e.width / 2)-14;
 				})
@@ -277,7 +277,7 @@ var lineData = [];
             var moons = svg.selectAll("img").data(lat_tz);
                 moons.enter()
             	.append("svg:image")
-                .attr("xlink:href", "/moonwhite.png")
+                .attr("xlink:href", "moonwhite.png")
                 .attr("width", "20")
                 .attr("height", "20")
                 .attr("opacity",function(e){
