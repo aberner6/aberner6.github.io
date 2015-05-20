@@ -105,7 +105,7 @@ d3.json("world.json", function(error, world) {
 	// Pusher.log = function(message) {
 	// 	console.log(message);
 	// };
-})
+
 // var p;
 	pusher = new Pusher('54da1f9bddbf14929983');
 	channel = pusher.subscribe('world_map');
@@ -114,7 +114,7 @@ d3.json("world.json", function(error, world) {
 		// p = point;
 		loadPoint(point);
 	});
-
+})
 	// d3.json("data.json", function(error, points) {
 	// 	points.forEach(function(p){
 	// 		loadPoint(p);
