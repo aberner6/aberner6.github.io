@@ -10,20 +10,27 @@ body{
 #reset{
   letter-spacing: 2px;
   position: absolute;
-  right: 10px;
+  /*right: 10px;*/
   cursor: pointer;
   border-left: 1px gray solid;
   border-right: 1px gray solid;
   font: 14px 'Gotham';
   text-transform: none;
-  color: gray;
+  text-align: center;
+  color: white;
   padding: 5px;
-  margin-left: 1.65%;
-  opacity: .7;
+
+  /*margin-left: 1.65%;*/
+  opacity: 1;
   background-color: rgba(0, 0, 0, 0.3);
-  top: 75px;
+  bottom: 75px;
+  width:8%;
+  left: 45%;
   display:none;
   border-radius: 4px;
+}
+#reset:hover{
+  opacity:.5;
 }
 .topRect {
   fill: url(#temperature-gradient);

@@ -39,9 +39,9 @@ function renderData()
 			return d.color;
 		})
 		// .attr("fill","none")
-  //       .style("stroke", function(d){
-		// 	return d.color;
-		// })
+        .style("stroke", function(d){
+			return d.color;
+		})
 		.style("stroke-width",1)
 		.attr("r",3)
 		.style("opacity",0)
@@ -59,12 +59,18 @@ function renderData()
         .attr("cy", function(d) { return projection(d.projection)[1]; })
         .transition()
 	      .ease("linear")
-	    		// .duration(function(d){
-		// 	return 1000;
-		// 	// return transScale(d.created_at)
+	 //    .duration(function(d){
+		// 	// return 1000;
+		// 	return transScale(d.created_at)
 		// })
+	      .duration(
+	      	// 800)
+	      	function(d){
+	      	if(data.length>rMax){ rMax = data.length };
+	      	return durScale(data.length);
+	      })
 		.style("opacity",1)
-        .duration(800)
+        // .duration(800)
 	      .remove();
 
 		// .transition()
@@ -186,10 +192,10 @@ function setTimeZone()
 			return e.width;
 		})
 		.attr('height',height)
-		// .attr('stroke-width','.1')
-    .style("stroke-dasharray", "1,4")
-		.attr('stroke','darkgray')
-		.attr("opacity",.3)
+		.attr('stroke-width','.1')
+    // .style("stroke-dasharray", "1,4")
+		.attr('stroke','white')
+		// .attr("opacity",1)
 
 	tzs.attr("fill-opacity", 1)
 	.attr("fill","none")
@@ -260,6 +266,7 @@ var lineData = [];
                 suns.enter()
             	.append("svg:image")
                 .attr("xlink:href", "sunwhite.png")
+            	.attr("class","suns")
 				.attr("x", function(e){
 					return e.x + (e.width / 2)-14;
 				})
@@ -302,6 +309,7 @@ var lineData = [];
                 moons.enter()
             	.append("svg:image")
                 .attr("xlink:href", "moonwhite.png")
+            	.attr("class","moons")
                 .attr("width", "20")
                 .attr("height", "20")
                 .attr("opacity",function(e){
@@ -355,6 +363,7 @@ var lineData = [];
 	svg.selectAll("path").moveToFront();
 	svg.selectAll("text").moveToFront();
 	svg.selectAll("circle").moveToFront();
+	svg.selectAll(".moons, .suns").moveToFront();
 
 }
 
