@@ -37,12 +37,12 @@ function resizeGraph(){
 	  .attr("pointer-events", "all")
 }
 resizeGraph();
-    var initialZoom = (175 * height / 847);
+    var initialZoom = (148 * height / 847);
     var maxZoom = 800;
 
 var projection = d3.geo.mercator()
     .scale(initialZoom)
-    .translate([width / 2, height / 2.8]);
+    .translate([width / 1.92, height / 2.22]);
 
     // var zoom = d3.behavior.zoom(true)
     //             .scale( projection.scale() )
@@ -50,6 +50,61 @@ var projection = d3.geo.mercator()
     //             .on("zoom", globeZoom);
     // svgEl.call(zoom)
     //           .on('dblclick.zoom', null);
+// d3.select(".imageMap")
+//     .scale(initialZoom)
+//     .translate([width / 2, height / 2.8]);
+ // var lands = svg.selectAll("img")
+ //                // suns.enter()
+ //            	.append("svg:image")
+ //                .attr("xlink:href", "dottedworldmap.png")
+ //            	.attr("class","land")
+	// 			.attr("x", 0)
+	// 	        .attr("y",0)
+    // .scale(initialZoom)
+    // .translate([width / 2, height / 2.8]);
+
+
+
+// 2531 × 1236
+var imgHeight = 1025, imgWidth = 1538,      // Image dimensions (don't change these)
+    // widthIs =  960, heightIs = 650,             // Dimensions of cropped region
+     // .scale(initialZoom)
+    // .translate([width / 2, height / 2.8]);
+    // translate0 = [width / 2, height / 2.8], scale0 = initialZoom;  // Initial offset & scale
+    translate0 = [0, -200], scale0 = 1;  // Initial offset & scale
+
+svg.append("rect")
+    .attr("class", "overlay")
+    .attr("width", width + "px")
+    .attr("height", height + "px");
+
+svg = svg.append("g")
+    .attr("transform", "translate(" + translate0 + ")scale(" + scale0 + ")")
+    
+    .call(d3.behavior.zoom().scaleExtent([1,8]).on("zoom", zoomIt))
+    // .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
+  .append("g");
+
+svg.append("image")
+    .attr("width",  imgWidth + "px")
+    .attr("height", imgHeight + "px")
+    .attr("opacity",.3)
+    .attr("xlink:href", "dottedworldmap.png");
+
+function zoomIt() {
+  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  console.log("translate: " + d3.event.translate + ", scale: " + d3.event.scale);
+}
+
+
+
+
+
+
+
+
+
+
 
     var zoom = d3.behavior.zoom(true)
                 .scale( projection.scale() )
@@ -87,13 +142,13 @@ var lat_tz = d3.range(-180,180,15).map(function (lat){
 
 var countries;
 d3.json("world.json", function(error, world) {
-	countries = svg.append("path")
-		.classed('world', true)
-		.datum( topojson.feature(world, world.objects.land) )
-		.attr("d", path)
-		.attr("stroke","rgb(125,95,95)")//"#eb5424")//"rgb(154,54,54)")
-		.attr("stroke-width",.5)
-		.attr("fill","black")
+	// countries = svg.append("path")
+	// 	.classed('world', true)
+	// 	.datum( topojson.feature(world, world.objects.land) )
+	// 	.attr("d", path)
+	// 	.attr("stroke","rgb(125,95,95)")//"#eb5424")//"rgb(154,54,54)")
+	// 	.attr("stroke-width",1)
+	// 	.attr("fill","black")
 
 	redraw();
 	setInterval(redraw, 5 * 60 * 1000);
@@ -115,6 +170,12 @@ d3.json("world.json", function(error, world) {
 		loadPoint(point);
 	});
 })
+
+
+
+
+
+
 	// d3.json("data.json", function(error, points) {
 	// 	points.forEach(function(p){
 	// 		loadPoint(p);
@@ -166,7 +227,7 @@ var zoomInOut = function(t, s) {
     	projection.translate(_trans);
 		// console.log(_trans);
 		// Reproject everything in the map
-		countries.transition().duration(1).attr('d', path);
+		// countries.transition().duration(1).attr('d', path);
 
 		d3.selectAll(".outerCircs").transition().duration(1)
         .attr("cx", function(d) { return projection(d.projection)[0]; })
@@ -183,13 +244,18 @@ var zoomInOut = function(t, s) {
 d3.select("#reset").on("click", resetZoom);
 
 function resetZoom(){
+  svg.attr("transform", "translate(" + [-1.3705342146357111,-16.35040502017796] + ")scale(" + 1+ ")");
+
+	// translate: -1.3705342146357111,-16.35040502017796, scale: 1
+	// svg.transition().attr("transform", "translate(" + translate0 + ")scale(" + scale0 + ")")
+
 	showReset = false;
 	// zoom.translate([width / 2, height / 2]).scale(initialZoom);
 	projection.translate([width / 2, height / 2.8]).scale(initialZoom);
 
 	// Reproject everything in the map
-	countries.transition().duration(1)
-		 .attr("d", path);
+	// countries.transition().duration(1)
+	// 	 .attr("d", path);
 
 	d3.selectAll(".outerCircs").transition().duration(1)
         .attr("cx", function(d) { return projection(d.projection)[0]; })
