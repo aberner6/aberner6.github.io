@@ -91,7 +91,7 @@ d3.json("world.json", function(error, world) {
 		.classed('world', true)
 		.datum( topojson.feature(world, world.objects.land) )
 		.attr("d", path)
-		.attr("stroke","rgb(85,85,85)")//"#eb5424")//"rgb(154,54,54)")
+		.attr("stroke","rgb(125,95,95)")//"#eb5424")//"rgb(154,54,54)")
 		.attr("stroke-width",.5)
 		.attr("fill","black")
 

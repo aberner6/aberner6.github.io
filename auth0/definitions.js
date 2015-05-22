@@ -1,6 +1,6 @@
 
 var dataIs = [];
-var innerCircs, outerCircs;
+var innerCircs, outerCircs, nameCircs;
 var maxTime, minTime;
 var rMax = 100;
 var durMax = 100;
@@ -30,6 +30,39 @@ function renderData()
 		.range([1200, 800])
 	innerCircs = svg.selectAll("innerCircs").data(data);
 	outerCircs = svg.selectAll("outerCircs").data(data);
+
+var ordNames = d3.scale.ordinal()
+	.domain([uniqueNames])
+	.range([width/2-20,width/2+20])
+
+	// nameCircs = svg.selectAll("nameCircs").data(data);
+	// nameCircs.enter().append("rect").attr("class","nameCircs")
+ //        .attr("fill", function(d){
+	// 		return d.color;
+	// 	})
+ //        .attr("stroke", function(d){
+	// 		return d.color;
+	// 	})
+	// 	.attr("opacity",.3)
+	// 	.attr("x",function(d){
+	// 		return ordNames(d.name);
+	// 	})
+	// 	.attr("y",function(d){
+	// 		return height*2/3-50;//-d.count;
+	// 	})
+	// 	.attr("width",10)
+	// 	.attr("height", function(d){
+	// 		// if(d.)
+	// 		return d.count;
+	// 	})
+	// 	.transition()
+	//       .duration(function(d){
+	//       	if(data.length>rMax){ rMax = data.length };
+	//       	return durScale(data.length);
+	//       })
+	//     .remove();
+
+
 
 	var now = Date.now();
 	var limit = eventWindow;
@@ -367,6 +400,14 @@ var lineData = [];
 
 }
 
+var names = [];
+var uniqueNames = [];
+var uniqueCount = 0;
+var summary = [];
+var dataNames, set;
+var maxIs;
+// var
+
 function loadPoint(point)
 {
 	if (!strategies[point.strategy]) {
@@ -379,13 +420,23 @@ function loadPoint(point)
 	}
 
 	strategies[point.strategy].count++;
+
+	names.push(point.strategy);
+
+	$.each(names, function(i, el){
+		var index = 0;
+    	if($.inArray(el, uniqueNames) === -1){
+    	 uniqueNames.push(el);	
+    	}
+	});
+	point.count = strategies[point.strategy].count;
 	point.color = strategies[point.strategy].color
 	point.created_at = Date.now();
 
 // if(point.geo.lng)
 //can i find a way to say if this longitude has already been placed, 
 //increase the radius of the existing circle?
-
+	point.name = strategies[point.strategy].name;
 	point.projection = [point.geo.lng, point.geo.lat];
 	data.push(point);
 	renderData();
