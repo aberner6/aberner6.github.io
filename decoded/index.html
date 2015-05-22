@@ -1,0 +1,139 @@
+ <!-- Annelie and Amadeus - please don't edit -->
+<html>
+  <head>
+    <title>Visualizing Retail Data</title>
+    <style>
+      body{
+        /*background-color:black;*/
+      }
+      path{
+        fill:gray;
+      }
+      .xAxis, .axis path,
+      .xAxis, .axis line {
+          fill: none;
+          stroke: black;
+          opacity:1;
+          shape-rendering: crispEdges;
+      }
+      .axis text {
+          font-family:"Lato-Light";
+          font-size: 10px;
+          stroke: none;
+          color:black;
+      }
+    .geo-node {
+        stroke-width: 0.0;
+        stroke: rgba(255, 0, 250, 0.66); 
+        fill: rgba(255, 0, 250, 0.66); 
+
+          cursor: pointer;                
+      }
+      path.point-shoes{
+        fill:red;
+        stroke:none;
+        opacity:.5;
+      }
+      path.point-sweaters{
+        fill:blue;
+        stroke:none;
+        opacity:.5;
+      }
+      path.point-watches{
+        fill:yellow;
+        stroke:none;
+        opacity:.5;
+      }
+      .geo-globe{
+        fill:rgba(247, 247, 247, 0.12);
+      }
+
+
+
+  #orthographic {
+    float:left;
+    /*padding: 0px 10px 0 10px;*/
+    text-align: right;
+    cursor: pointer; /*changed this -annelie*/
+          width:50px;
+      opacity: 0.5;
+
+  }
+   #orthographic:hover {
+      opacity: 1;
+    }
+  #mercator {
+    float:left;
+    /*padding: 0px 10px 0 10px;*/
+    text-align: left;
+      cursor: pointer; /*changed this -annelie*/
+      width:50px;
+            opacity: 0.5;
+  }
+
+   #mercator:hover {
+      opacity: 1;
+    }
+  #scatterPlot {
+    float:left;
+    padding: 0px 10px 0 10px;
+    text-align: left;
+      cursor: pointer; /*changed this -annelie*/
+      width:26px;
+            opacity: 0.5;
+  }
+
+   #scatterPlot:hover {
+      opacity: 1;
+    }
+
+#icons{
+      margin-left:30px;
+      margin-top:15px;
+}
+    .keyText{
+      color:black;
+      font-family:"Lato-Light";
+      font-size:12px;
+    }
+    .today{
+      top:10px;
+      width:1008px;
+      left:15%;
+      position:fixed;
+    }
+    #forKey{
+      margin-left:30px;
+      margin-top:30px;
+      /*top: 40px;*/
+      position: absolute;
+    }
+    </style>
+  </head>
+  <body>
+<div id = "icons">
+        <div id = "mercator">
+          <img src="mercator.png">        
+        </div>
+        <div id = "scatterPlot">
+            <img src="scatterPlot.png">
+        </div>
+        <div id="orthographic">
+           <img src="orthographic.png">
+        </div>
+</div>
+        <div id = "forKey"></div>
+    <!-- <h1>Retail Data</h1> -->
+    <div class="today">
+    </div>
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="topojson.v1.min.js"></script>
+    <script src = "d3.geo.js"></script>
+    <script src="decoded.js"></script> 
+  </body>
+</html>
+<!-- Notes:
+Topo JSON is a more compact version of geoJSON: https://github.com/mbostock/topojson
+Generate topo json files: https://github.com/mbostock/world-atlas
