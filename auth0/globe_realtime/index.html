@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>WebGL Globe</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+      html {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000000 url(loading.gif) center center no-repeat;
+        color: #ffffff;
+        font-family: sans-serif;
+        font-size: 13px;
+        line-height: 20px;
+        height: 100%;
+      }
+
+      #info {
+
+        font-size: 11px;
+        position: absolute;
+        bottom: 5px;
+        background-color: rgba(0,0,0,0.8);
+        border-radius: 3px;
+        right: 10px;
+        padding: 10px;
+
+      }
+
+      #currentInfo {
+        /*width: 270px;*/
+        position: absolute;
+        left: 20px;
+        top: 63px;
+
+        background-color: rgba(0,0,0,0.2);
+
+        /*border-top: 1px solid rgba(255,255,255,0.4);*/
+        padding: 10px;
+      }
+
+      a {
+        color: #aaa;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .bull {
+        padding: 0 5px;
+        color: #555;
+      }
+
+      #title {
+        position: absolute;
+        top: 20px;
+
+        /*width: 270px;*/
+        left: 20px;
+        background-color: rgba(0,0,0,0.2);
+        border-radius: 3px;
+        font: 20px Helvetica Neue;
+        padding: 10px;
+      }
+
+      .year {
+        font: 16px Georgia;
+        line-height: 26px;
+        height: 30px;
+        text-align: center;
+        /*float: left;*/
+        width: 90px;
+        color: rgba(255, 255, 255, 0.4);
+
+        cursor: pointer;
+        -webkit-transition: all 0.1s ease-out;
+      }
+
+      .year:hover, .year.active {
+        font-size: 23px;
+        color: #fff;
+      }
+
+      #ce span {
+        display: none;
+      }
+
+      #ce {
+        width: 107px;
+        height: 55px;
+        display: block;
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+        background: url(ce.png);
+      }
+
+
+    </style>
+  </head>
+  <body>
+
+  <div id="container"></div>
+
+  <div id="info">
+<!--     <strong><a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong> <span class="bull">&bull;</span> Created by the Google Data Arts Team <span class="bull">&bull;</span> Data acquired from <a href="http://sedac.ciesin.columbia.edu/gpw/">SEDAC</a> -->
+  </div>
+
+  <div id="currentInfo">
+    <span id="year1990" class="year">2015</span>
+    <span id="year1995" class="year"></span>
+    <span id="year2000" class="year"></span>
+    <!-- 2000 -->
+  </div>
+
+  <div id="title">
+    Auth0
+  </div>
+
+  <a id="ce" href="http://www.chromeexperiments.com/globe">
+    <span>This is a Chrome Experiment</span>
+  </a>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.8.0/lodash.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://js.pusher.com/2.2/pusher.min.js"></script>
+
+  <script type="text/javascript" src="third-party/Detector.js"></script>
+  <script type="text/javascript" src="third-party/three.min.js"></script>
+  <script type="text/javascript" src="third-party/Tween.js"></script>
+  <script type="text/javascript" src="globe.js"></script>
+  <script type="text/javascript">
+var pusher = null
+, channel = null
+, data = []
+, eventWindow = 1 * 60 * 1000;
+    if(!Detector.webgl){
+      Detector.addGetWebGLMessage();
+    } else {
+
+      var years = ['1990','1995','2000'];
+      var container = document.getElementById('container');
+      var globe = new DAT.Globe(container);
+
+      console.log(globe);
+      var i, tweens = [];
+setTimeout(function(){goTo()},1000)
+      var settime = function(globe, t) {
+        return function() {
+          new TWEEN.Tween(globe).to({time: t/years.length},500).easing(TWEEN.Easing.Cubic.EaseOut).start();
+          var y = document.getElementById('year'+years[t]);
+          if (y.getAttribute('class') === 'year active') {
+            return;
+          }
+          var yy = document.getElementsByClassName('year');
+          for(i=0; i<yy.length; i++) {
+            yy[i].setAttribute('class','year');
+          }
+          y.setAttribute('class', 'year active');
+        };
+      };
+      
+      for(var i = 0; i<years.length; i++) {
+        var y = document.getElementById('year'+years[i]);
+        y.addEventListener('mouseover', settime(globe,i), false);
+      }
+      
+      var xhr;
+      TWEEN.start();
+      
+
+
+
+
+
+      pusher = new Pusher('54da1f9bddbf14929983');
+      channel = pusher.subscribe('world_map');
+      var latlngArray = [];
+      var whatsThis = [];
+      var newthing = [
+          'new',
+          [0,0,1]
+      ];
+
+      var visible = false;
+
+      // channel.bind('login', function(p) {
+        
+
+        // if (!visible ){
+        //   whatsThis.push({0:p.geo.lat,1:p.geo.lng});
+          
+        //   for(i=0; i<whatsThis.length; i++){ 
+        //     latlngArray.push(whatsThis[i][0], whatsThis[i][1],Math.random(0,1))
+        //   }
+        //   newthing[0] = 1990;
+        //   newthing[1] = latlngArray;
+
+        //   visible = true;
+        //   showGlobe()
+        // }
+        // else
+        // {
+          // globe.addRealTimePoint(p.geo.lat, p.geo.lng, 0xffffff);  
+        // }
+
+        
+
+        // addLine(scene,point.geo.lat, point.geo.lng, 0xff0000)
+      // });
+      
+
+
+
+
+
+
+
+      // showGlobe();
+var realtime = false;
+      channel.bind('login', function(p) {
+          if(realtime==true){
+            globe.addRealTimePoint(p.geo.lat, p.geo.lng, 5); 
+          }
+      });
+
+      function showGlobe(){
+          if(newthing[1].length>0){
+            globe.addData(newthing[1], {format: 'magnitude', name: newthing[0].toString(), animated: true});
+
+            globe.createPoints();
+            settime(globe,0)();
+            globe.animate();
+            document.body.style.backgroundImage = 'none'; // remove loading
+          }
+      }
+// setInterval(
+//             function makeData(){
+//             newthing[0] = 1990;
+//             newthing[1] = latlngArray;
+//             data = newthing;//JSON.parse(xhr.responseText);
+//             window.data = newthing;
+//             // console.log(data);
+
+//             globe.addData(newthing[1], {format: 'magnitude', name: newthing[0].toString(), animated: true});
+
+//             globe.createPoints();
+//             settime(globe,0)();
+//             globe.animate();
+//             document.body.style.backgroundImage = 'none'; // remove loading
+// // }, 6000);
+//             }
+
+
+// setInterval(function(){
+//   var limit = Date.now() - eventWindow;
+//   latlngArray = [];
+//   whatsThis = [];
+
+//   data = _.filter(data, function(d){
+//     return d.created_at > limit;
+//   })
+// }, 1000)
+
+
+
+var coords = [];
+var centroids = [];
+var dataIs = [];
+d3.csv("centroids-5000.csv",function(d){
+  for (i=0; i<5000; i++){
+    dataIs.push(parseInt(d[i].lat), parseInt(d[i].lon), .001)
+  }
+// setInterval(function(){
+  centroids[0] = 1990;
+  centroids[1] = dataIs; 
+})
+function goTo(){
+  if(centroids[1].length>1){
+    realtime = false;
+      window.data = centroids;
+      // for (i=0;i<data.length;i++) {
+        globe.addData(centroids[1], {format: 'magnitude', name: centroids[0].toString(), animated: true});
+      // }
+      globe.createPoints();
+      settime(globe,0)();
+      globe.animate();
+  }
+}
+
+
+    }
+
+  </script>
+
+  </body>
+
+</html>
