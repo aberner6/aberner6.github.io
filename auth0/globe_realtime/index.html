@@ -274,7 +274,7 @@ var realtime = false;
 var coords = [];
 var centroids = [];
 var dataIs = [];
-d3.csv("centroids-5000.csv",function(d){
+d3.csv("centroids-5000-not-rounded.csv",function(d){
   for (i=0; i<5000; i++){
     dataIs.push(parseInt(d[i].lat), parseInt(d[i].lon), .001)
   }
