@@ -4,7 +4,7 @@ var sliderPositionLens;
 var sliderPositionLight;
 var heightOnWall = 300;
 
-var wallHeight = 680;
+var wallHeight = 280;
 var margin = 100;
 
 var radius = 10;
@@ -12,7 +12,7 @@ var grow = +1;
 var d = 1;
 
 function setup() {
-  createCanvas(720, wallHeight+margin);
+  createCanvas(720, wallHeight*2+margin);
   // hue, saturation, and brightness
   // colorMode(HSB, 255);
   // slider has a range between 0 and 255 with a starting value of 127
@@ -53,4 +53,30 @@ radius = map(sliderPositionLens.value(),wallHeight/1.2,wallHeight,10,wallHeight/
   fill(178);
   stroke(255);
   rect(200-10, wallHeight-18, 20, 20);
+
+
+
+
+
+
+  // Set the hue according to the slider
+  stroke(0, sliderPositionLens.value(), 255);
+  fill(0, sliderPositionLens.value(), 255, 127);
+  ellipse(542, sliderPositionLens.value()*2-60, 20, 20);
+
+radius = map(sliderPositionLens.value(),wallHeight/1.2,wallHeight,10,wallHeight/2.5);
+  for(var i = 0; i < 100;){
+    stroke(0);
+   strokeWeight(.1);
+    i = i+50;
+    ellipse(530-75+i,85,radius,radius);
+    ellipse(530,10+i,radius,radius);
+  }
+
+  strokeWeight(2);
+  stroke(170); 
+  // line(0, sliderPositionLight.value(), 210, sliderPositionLight.value()); 
+  fill(178);
+  stroke(255);
+  rect(530, wallHeight*2-40, 25, 40);
 }
