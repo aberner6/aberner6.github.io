@@ -118,7 +118,18 @@ thisHour.push(parseDate(thisTime[j]).getHours())
 for (j=0; j<=24; j++){ totalPhotos[j] = photoConsolidation(j)}
     console.log(totalPhotos)
 
-                    mindate = new Date("Tue Jun 30 2015 8:00:00 GMT-0400 (EDT)");//parseDate(thisTime[0]);
+                    // mindate = Date.now();
+var now = new Date; // now
+
+now.setHours(7);   // set hours to 0
+now.setMinutes(0); // set minutes to 0
+now.setSeconds(0); // set seconds to 0// divide by 1000, truncate milliseconds
+                    // new Date("Tue Jun 30 2015 8:00:00 GMT-0400 (EDT)");
+// console.log()
+
+
+mindate = now;
+                    //parseDate(thisTime[0]);
 //parseDate(thisTime[0]);
                     maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
                     maxdate = calcTime("copenhagen", 2);
@@ -153,7 +164,7 @@ for (j=0; j<=24; j++){ totalPhotos[j] = photoConsolidation(j)}
                     xAxis
                         .scale(xScale)
                         .orient("bottom")
-                        .ticks(10);
+                        .ticks(12);
                     svg.append("g")
                         .attr("class", "axis") //Assign "axis" class
                         .attr("transform", "translate(0," + (centerline) + ")")
@@ -607,11 +618,11 @@ var trackTotal = [];
                         .enter()
                         .append("svg:rect")
                         .attr("class", function(d,i){
-    // if (parseInt(d.dist) > -50) {
-    //     for (j = 0; j < uniqueNames.length; j++) {
-    //         specialStore.push({"device":uniqueNames[j],"dist":d.dist,"timestamp":d.timeIs})
-    //     }
-    // }
+    if (parseInt(d.dist) > -50) {
+        // for (j = 0; j < uniqueNames.length; j++) {
+            specialStore.push({"device":d.device,"dist":d.dist,"timestamp":d.timeIs})
+        // } 
+    }
                             return d.dist+"bt1"
                         })
                         .attr("x", function(d, i) {
@@ -671,7 +682,7 @@ var sumText = svg.selectAll("keyText")
 
     })
 var uniqueKDone = false;
-    function keyConsolidation(givenKey,i) { 
+    function keyConsolidation(givenKey) { 
         var total = 0;
         for (i = 0;i<specialStore.length; i++){ 
             if(specialStore[i].device == givenKey){
@@ -681,8 +692,8 @@ var uniqueKDone = false;
         }
          return total;
      } 
-for (i = 0; i<uniqueNames.length; i++){
-   totalK[i]= keyConsolidation(uniqueNames[i])
+for (j = 0; j<uniqueNames.length; j++){
+   totalK.push({"name":uniqueNames[j], "total":keyConsolidation(uniqueNames[j])})
     uniqueKDone=true;   
 }
 if(uniqueKDone){
@@ -707,21 +718,21 @@ if(uniqueKDone){
 function makeText(totalK){
 
 d3.selectAll(".summary").remove();    
-// var sumText = svg.selectAll("summary")
-//     .data((totalK))
-//     .enter()
-//     .append("text").attr("class", "summary")
-//     .attr("font-size",14)
-//     .attr("fill",function(d,i){
-//         return oColor(i);
-//     })
-//     .attr("x", function(d,i){
-//         return w/3 + i*10;
-//     })
-//     .attr("y", h)
-//     .html(function(d,i){
-//         return (d)+" Time in Workshop"; 
-//     })
+var sumText = svg.selectAll("summary")
+    .data(totalK)
+    .enter()
+    .append("text").attr("class", "summary")
+    .attr("font-size",14)
+    .attr("fill",function(d,i){
+        return oColor(d.name);
+    })
+    .attr("x", function(d,i){
+        return 100 + i*300;
+    })
+    .attr("y", h)
+    .html(function(d,i){
+        return d.name+" Device "+(d.total)+" Time at Table"; 
+    })
 }
         //          if(data.feed.entry[i]['gsx$button']['$t']=="button1"){
         //             totalButton1++;
