@@ -76,11 +76,27 @@
         // Fri May 22 11:34:30
         var thisTime = [];
 var thisHour = [];
+ 
+        var howMany = [];
+var countIt = 0;
+
+var totalPhotos = [];
+
+    function photoConsolidation(index) { 
+        var total = 0;
+        for (i = 0;i<thisTime.length; i++){ 
+            if(parseDate(thisTime[i]).getHours() == index){
+                total++;
+            }else{
+            }
+        }
+         return total;
+     } 
         $(document).ready(function() {
             // https://docs.google.com/spreadsheets/d/1XX6jJc4uu4PsNp7JvQ4dZ8K9cIFnheQbqOe4QQsfZdE/pubhtml
             // https://docs.google.com/spreadsheets/d/1XX6jJc4uu4PsNp7JvQ4dZ8K9cIFnheQbqOe4QQsfZdE/pubhtml
             $.getJSON("https://spreadsheets.google.com/feeds/list/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/od6/public/values?alt=json", function(data) {
-                console.log(data.feed.entry.length)
+                console.log(data.feed)
 
                 // ['a', 'b', 'c'].forEach(function(d, i, arr) {
                 //     console.log(d, i, arr)
@@ -99,6 +115,9 @@ thisHour.push(parseDate(thisTime[j]).getHours())
                 console.log(entry.length + "length")
 
                 if (thisTime.length > 1) {
+for (j=0; j<=24; j++){ totalPhotos[j] = photoConsolidation(j)}
+    console.log(totalPhotos)
+
                     mindate = new Date("Tue Jun 30 2015 8:00:00 GMT-0400 (EDT)");//parseDate(thisTime[0]);
 //parseDate(thisTime[0]);
                     maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
@@ -141,7 +160,7 @@ thisHour.push(parseDate(thisTime[j]).getHours())
                         .call(xAxis);
 
 
-                    console.log(thisTime);
+                    // console.log(thisTime);
                     var suns = svg.append("g")
                         .attr("id", "sky")
                         .selectAll("img").data(data.feed.entry)
@@ -170,6 +189,7 @@ var minHour = d3.min(thisHour, function(j) {
     return j;  //References first value in each subarray
 });
 
+
 var scaleIt = d3.scale.linear()
     .domain([minHour, maxHour])
     .range([centerline+100, h-100])
@@ -188,45 +208,67 @@ var scaleIt = d3.scale.linear()
                         .transition()
                         .duration(dur)
 .attr("y", function(d,i){
-
     if(i>0){
-        if(parseDate(thisTime[i]).getHours()==parseDate(thisTime[i-1]).getHours()||parseDate(thisTime[i]).getHours()==parseDate(thisTime[i-1]).getHours()+1){
-                // var thisIndex++;
-                // console.log(scaleIt(parseDate(thisTime[i]).getHours()))
-                return scaleIt(parseDate(thisTime[i]).getHours());
+        if(parseDate(thisTime[i]).getHours()==parseDate(thisTime[i-1]).getHours()){
+            return centerline+totalPhotos[parseDate(thisTime[i]).getHours()]*65;
+                // return scaleIt(parseDate(thisTime[i]).getHours());     
             }
             else{
-                return centerline+100;
+                return centerline+70;
             }
-        }else{
-            return centerline+100;
+        }
+        else{
+            return centerline+70;
         }
 });
+
                     suns
                         .on("click", function(d) {
-                            if (clicked == false) {
+            d3.select(this).each(moveToFront);
                                 d3.select(this)
                                     .transition()
                                     .duration(dur / 2)
-                                    .attr("y", centerline+20)
                                     .attr("width", 200)
                                     .attr("height", 200)
-                                clicked = true;
-                            }
-                            if (clicked) {
+                                .each("end", function(d,i){
                                 d3.select(this)
                                     .transition()
-                                    .delay(dur)
-                                    .duration(dur / 4)
-                                    .attr("y", function(d,i){
-                                        console.log(d)
-                                        return h / 2 + 200
-                                    })
+                                    .delay(dur/2)
+                                    .duration(dur / 2)
                                     .attr("width", 50)
                                     .attr("height", 50)
-                                clicked = false;
-                            }
-                        })
+                                })
+                            })
+//Move SVG elements to the end of their container,
+//so they appear "on top".
+var moveToFront = function() { 
+    this.parentNode.appendChild(this); 
+}
+
+                        // .on("click", function(d) {
+                        //     if (clicked == false) {
+                        //         d3.select(this)
+                        //             .transition()
+                        //             .duration(dur / 2)
+                        //             .attr("y", centerline+20)
+                        //             .attr("width", 200)
+                        //             .attr("height", 200)
+                        //         clicked = true;
+                        //     }
+                        //     if (clicked) {
+                        //         d3.select(this)
+                        //             .transition()
+                        //             .delay(dur)
+                        //             .duration(dur / 4)
+                        //             .attr("y", function(d,i){
+                        //                 console.log(d)
+                        //                 return h / 2 + 200
+                        //             })
+                        //             .attr("width", 50)
+                        //             .attr("height", 50)
+                        //         clicked = false;
+                        //     }
+                        // })
 
                     var imgLine = svg.append("g")
                         .selectAll("line").data(data.feed.entry)
@@ -247,18 +289,17 @@ var scaleIt = d3.scale.linear()
                         .transition()
                         .duration(dur)
 .attr("y2", function(d,i){
-
     if(i>0){
-        if(parseDate(thisTime[i]).getHours()==parseDate(thisTime[i-1]).getHours()||parseDate(thisTime[i]).getHours()==parseDate(thisTime[i-1]).getHours()+1){
-                // var thisIndex++;
-                // console.log(scaleIt(parseDate(thisTime[i]).getHours()))
-                return scaleIt(parseDate(thisTime[i]).getHours());
+        if(parseDate(thisTime[i]).getHours()==parseDate(thisTime[i-1]).getHours()){
+            return centerline+totalPhotos[parseDate(thisTime[i]).getHours()]*65;
+                // return scaleIt(parseDate(thisTime[i]).getHours());     
             }
             else{
-                return centerline+100;
+                return centerline+70;
             }
-        }else{
-            return centerline+100;
+        }
+        else{
+            return centerline+70;
         }
 });
                 }
