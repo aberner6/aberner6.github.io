@@ -103,10 +103,11 @@
             return total;
         }
         $(document).ready(function() {
-            // https://docs.google.com/spreadsheets/d/1XX6jJc4uu4PsNp7JvQ4dZ8K9cIFnheQbqOe4QQsfZdE/pubhtml
-            // https://docs.google.com/spreadsheets/d/1XX6jJc4uu4PsNp7JvQ4dZ8K9cIFnheQbqOe4QQsfZdE/pubhtml
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/od6/public/values?alt=json", function(data) {
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1M4Br9JcmwuAYDkpD3h3W4lw96wj5mBndkOYlY7mgtQ8/od6/public/values?alt=json", function(data) {
                 console.log(data.feed)
+                //instagrma2
+// https://docs.google.com/spreadsheets/d/1M4Br9JcmwuAYDkpD3h3W4lw96wj5mBndkOYlY7mgtQ8/pubhtml
+
 
                 // ['a', 'b', 'c'].forEach(function(d, i, arr) {
                 //     console.log(d, i, arr)
@@ -311,7 +312,7 @@
                 // var parseDate = d3.time.format('%B %d, %Y %I:%M%p').parse;
                 console.log(data.feed.entry[data.feed.entry.length - 1])
                 for (i = 0; i < data.feed.entry.length; i++) {
-                    if (data.feed.entry[i]['gsx$device']['$t'] == "wombat_wombat") {
+                    if (data.feed.entry[i]['gsx$device']['$t'] == "banjo_ferret") {
                         but1.push({
                             "buttonIs": data.feed.entry[i]['gsx$button']['$t'],
                             "timeIs": data.feed.entry[i]['gsx$timestamp']['$t'].replace(" at", '')
