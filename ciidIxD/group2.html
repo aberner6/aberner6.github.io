@@ -637,17 +637,7 @@ var otherK = [];
                                 }
                             }
                         })
-                        // .attr("stroke", function(d, i) {
-                        //     for (j = 0; j < uniqueNames.length; j++) {
-                        //         if (d.device == uniqueNames[j]) {
-                        //             return oColor(uniqueNames[j]);
-                        //         }
-                        //     }
-                        // })
-                        // .attr("stroke-width",1)                        
-                        // .attr("opacity", function(d) {
-                        //     return 1;
-                        // })
+
                     var sumText = svg.selectAll("keyText")
                         .data(d3.range(2))
                         .enter()
@@ -705,15 +695,6 @@ var otherK = [];
                         console.log(totalK)
                         makeText(totalK, otherK);
                     }
-                    // makeText(); 
-
-
-                    //  //The line SVG Path we draw
-                    // var lineGraph = svg.append("path")
-                    //                     .attr("d", lineFunction(sevenBT))
-                    //                     .attr("stroke", color(7))
-                    //                     .attr("stroke-width", strokePath)
-                    //                     .attr("fill", "none"); 
                 }
             })
         }

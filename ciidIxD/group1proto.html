@@ -31,7 +31,7 @@
     }
     
     .sumNum {
-        font-size: 18px;
+        font-size: 24px;
         padding: 2px;
     }
     
@@ -64,9 +64,9 @@
 
         var dur = 2000;
 
-        var w = screen.width,
-            h = screen.height - 200,
-            margin = 25;
+        var w = window.innerWidth;
+        var h = window.innerHeight - 40;
+        margin = 25;
         var padding = 200;
         var svg = d3.select("body")
             .append("svg")
@@ -474,9 +474,9 @@
                 }
             })
         }
-var oColor = d3.scale.ordinal()
-             .domain([groupNames])
-             .range(["#96CEB4", "#ADB3FF", "#FFEEAD", "#5ECBFF", "#FF6F69", "#45E9E9", "#6F79F0", "#cab2d6"])
+        var oColor = d3.scale.ordinal()
+            .domain([groupNames])
+            .range(["#96CEB4", "#ADB3FF", "#FFEEAD", "#5ECBFF", "#FF6F69", "#45E9E9", "#6F79F0", "#cab2d6"])
         var maxTime;
         var maxActivity = 100;
         var minActivity = 0;
@@ -498,16 +498,16 @@ var oColor = d3.scale.ordinal()
         var specialStore = [];
         var trackTotal = [];
 
-var stream4 = centerline/1.3;
-var stream5 = centerline/1.8;
-var stream3 = centerline;
+        var stream4 = centerline / 1.4;
+        var stream5 = centerline / 1.8;
+        var stream3 = centerline / 1.05;
 
         var hHere = 10;
         var quant = 0;
         var multiplier = 10;
         var threshold = -70;
 
-var fourDone = false;
+        var fourDone = false;
 
         function doBT() {
 
@@ -515,400 +515,404 @@ var fourDone = false;
             // OLD
             // $.getJSON("https://spreadsheets.google.com/feeds/list/1CK2L-NwoswZ9l4-MU4tbu-bwt3eI1Oot_bbXkuFNl8c/od6/public/values?alt=json", function(data) {
 
-                            // if (fiveBT.length > 0) {
-                                mindateBT = mindate;
-                                maxdateBT = maxdate;
-                                xScaleBT = d3.time.scale()
-                                    .domain([mindateBT, maxdateBT])
-                                    .range([100, w - 100]);
-                            // }
+            // if (fiveBT.length > 0) {
+            mindateBT = mindate;
+            maxdateBT = maxdate;
+            xScaleBT = d3.time.scale()
+                .domain([mindateBT, maxdateBT])
+                .range([100, w - 100]);
+            // }
             //NEW
             //stream4
             // https://docs.google.com/spreadsheets/d/1KbBkdpGt0X_dEfHBQB-S6ONUwvj6_nD22lnVqi7wYEA/pubhtml
             $.getJSON("https://spreadsheets.google.com/feeds/list/1KbBkdpGt0X_dEfHBQB-S6ONUwvj6_nD22lnVqi7wYEA/od6/public/values?alt=json", function(data) {
-                            for (j = 0; j < data.feed.entry.length; j++) {
-                                if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
-                                    for (k = 0; k < groupNames.length; k++) {
-                                        if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
-                                            fourBT.push({
-                                                "device": data.feed.entry[j]['gsx$device']['$t'],
-                                                "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'], 
-                                                "dist": data.feed.entry[j]['gsx$dist']['$t']
-                                            })
-                                        }
-                                    }
-                                } else {}
-                            }
-                            if (mindateBT) {
-                                var blRect = svg.append("g").attr("class", "bt4")
-                                    .selectAll("rect").data(fourBT)
-                                    .enter()
-                                    .append("svg:rect")
-                                    .attr("class", function(d, i) {
-                                        if (parseInt(d.dist) > threshold) {
-                                            fourSpecialStore.push({
-                                                    "device": d.device,
-                                                    "dist": d.dist,
-                                                    "timestamp": d.timeIs
-                                                })
-                                            fourDone = true;
-                                        }
-                                        return d.device //+ "bt1"
-                                    })
-                                    .attr("x", function(d, i) {
-                                        return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
-                                    })
-                                    .attr("y", function(d, i) {
-                                        if (parseInt(d.dist) > threshold) {
-                                            // console.log(d.device);
-                                            for (j = 0; j < groupNames.length; j++) {
-                                                if (d.device == groupNames[j]) {
-                                                    return stream4 - 10 - j * multiplier;
-                                                }
-                                            }
-                                        } else {
-                                            return -h * 20;
-                                        }
-                                    })
-                                    .attr("width", 6)
-                                    .attr("height", hHere)
-                                    .attr("fill", function(d) {
-                                        for (j = 0; j < groupNames.length; j++) {
-                                            if (d.device == groupNames[j]) {
-                                                return oColor(groupNames[j]);
-                                            }
-                                        }
+                    for (j = 0; j < data.feed.entry.length; j++) {
+                        if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
+                            for (k = 0; k < groupNames.length; k++) {
+                                if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
+                                    fourBT.push({
+                                        "device": data.feed.entry[j]['gsx$device']['$t'],
+                                        "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'],
+                                        "dist": data.feed.entry[j]['gsx$dist']['$t']
                                     })
                                 }
-    })
- // https://docs.google.com/spreadsheets/d/1E-Z69e9SS4sBcqWbpptwWps2mG8R2ka_Jij7tltSDGo/pubhtml
-                        //stream5
-$.getJSON("https://spreadsheets.google.com/feeds/list/1E-Z69e9SS4sBcqWbpptwWps2mG8R2ka_Jij7tltSDGo/default/public/values?alt=json", function(data) {
-                            for (j = 0; j < data.feed.entry.length; j++) {
-                                if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
-                                    for (k = 0; k < groupNames.length; k++) {
-                                        if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
-                                            fiveBT.push({
-                                                "device": data.feed.entry[j]['gsx$device']['$t'],
-                                                "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'], //.replace(" at", '')
-                                                "dist": data.feed.entry[j]['gsx$dist']['$t']
-                                            })
-                                        }
-                                    }
-                                } else {}
                             }
-                            if (mindateBT) {
-                                var blRect = svg.append("g").attr("class", "bt4")
-                                    .selectAll("rect").data(fiveBT)
-                                    .enter()
-                                    .append("svg:rect")
-                                    .attr("class", function(d, i) {
-                                        if (parseInt(d.dist) > threshold) {
-                                            fiveSpecialStore.push({
-                                                    "device": d.device,
-                                                    "dist": d.dist,
-                                                    "timestamp": d.timeIs
-                                                })
-                                        }
-                                        return d.device //+ "bt1"
-                                    })
-                                    .attr("y", function(d, i) {
-                                        if (parseInt(d.dist) > threshold) {
-                                            console.log(d.device);
-                                            for (j = 0; j < groupNames.length; j++) {
-                                                if (d.device == groupNames[j]) {
-                                                    return stream5 - 10 - j * multiplier;
-                                                }
-                                            }
-                                        } else {
-                                            return -h * 20;
-                                        }
-                                    })
-                                    .attr("width", 6)
-                                    .attr("height", hHere)
-                                    .attr("fill", function(d) {
-                                        for (j = 0; j < groupNames.length; j++) {
-                                            if (d.device == groupNames[j]) {
-                                                return oColor(groupNames[j]);
-                                            }
-                                        }
-                                    })
-                                    .attr("x", function(d, i) {
-                                        return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
-                                    })                                    
-
-                                }
-    })
-
-                        //NEW
-                        //stream3
-                        $.getJSON("https://spreadsheets.google.com/feeds/list/1uoO3dA5MMMY2LusVtnKh4e3cuJDkTxq-eF6xAZ4IGiI/od6/public/values?alt=json", function(data) {
-                            for (j = 0; j < data.feed.entry.length; j++) {
-                                if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
-                                    for (k = 0; k < groupNames.length; k++) {
-                                        if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
-                                            storeBT.push({
-                                                "device": data.feed.entry[j]['gsx$device']['$t'],
-                                                "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'],
-                                                "dist": data.feed.entry[j]['gsx$dist']['$t']
-                                            })
-                                        }
-                                    }
-                                } else {}
-                            }
-                            if (mindateBT) {
-                                var blRect = svg.append("g").attr("class", "bt1")
-                                    .selectAll("rect").data(storeBT)
-                                    .enter()
-                                    .append("svg:rect")
-                                    .attr("class", function(d, i) {
-                                        if (parseInt(d.dist) > threshold) {
-                                            specialStore.push({
-                                                    "device": d.device,
-                                                    "dist": d.dist,
-                                                    "timestamp": d.timeIs
-                                                })
-                                        }
-                                        return d.device //+ "bt1"
-                                    })
-                                    .attr("x", function(d, i) {
-                                        return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
-                                    })
-                                    .attr("y", function(d, i) {
-                                        if (parseInt(d.dist) > threshold) {
-                                            for (j = 0; j < groupNames.length; j++) {
-                                                if (d.device == groupNames[j]) {
-                                                    return centerline - 10 - j * multiplier;
-                                                }
-                                            }
-                                        } else {
-                                            return -h * 20;
-                                        }
-                                    })
-                                    .attr("width", 6)
-                                    .attr("height", hHere)
-                                    .attr("fill", function(d) {
-                                        for (j = 0; j < groupNames.length; j++) {
-                                            if (d.device == groupNames[j]) {
-                                                return oColor(groupNames[j]);
-                                            }
-                                        }
-                                    })
-                            }
-                        })
-}
-var isDone = setInterval(function(){
-    if(fourDone){
-        runConsol();
-        clearInterval(isDone)
-    }
-},500);
-
-function runConsol(){
-                                var uniqueKDone = false;
-                                function threeConsolidation(givenKey) {
-                                    var total = 0;
-                                    for (i = 0; i < specialStore.length; i++) {
-                                        if (specialStore[i].device == givenKey) {
-                                            total++;
-                                        } else {}
-                                    }
-                                    return total;
-                                }
-                                function fourConsolidation(givenKey) {
-                                    var total = 0;
-                                    for (i = 0; i < fourSpecialStore.length; i++) {
-                                        if (fourSpecialStore[i].device == givenKey) {
-                                            total++;
-                                        } else {}
-                                    }
-                                    return total;
-                                }
-                                function fiveConsolidation(givenFi) {
-                                    var total = 0;
-                                    for (k = 0; k < fiveSpecialStore.length; k++) {
-                                        if (fiveSpecialStore[k].device == givenFi) {
-                                            total++;
-                                        } else {}
-                                    }
-                                    return total;
-                                }
-                                if(fourSpecialStore.length>1){
-                                    console.log("yeah")
-                                    for (j = 0; j < groupNames.length; j++) {
-                                    totalK.push({
-                                        "name": groupNames[j],
-                                        "total": threeConsolidation(groupNames[j])
-                                    })
-                                   
-                                        totalFour.push({
-                                            "name": groupNames[j],
-                                            "total": fourConsolidation(groupNames[j])
-                                        })
-                                   
-                                     totalFive.push({
-                                        "name": groupNames[j],
-                                        "total": fiveConsolidation(groupNames[j])
-                                    })
-                                    makeText(totalK, totalFour, totalFive);
-                                    }
-                                }    
-}
-
-
-
-
-                    var sumText = svg.selectAll("keyText")
-                        .data(d3.range(3))
-                        .enter()
-                        .append("text").attr("class", "keyText")
-                        .attr("font-size", 12)
-                        .attr("fill", "black")
-                        .attr("text-anchor", "end")
-                        .attr("x", 90)
-                        .attr("y", function(d, i) {
-                            console.log(i);
-                            if (i == 0) {
-                                return stream3;
-                            } 
-                            if(i==1){
-                                return stream4;
-                            }
-                            if(i==2){
-                                return stream5;
-                            }
-                                //- 1 * multiplier * 1.5;
-                        })
-                        .html(function(d, i) {
-                            if (i == 0) {
-                                return "TABLE";
-                            } 
-                            if(i==1){
-                                return "WORKSHOP";
-                            }
-                            if(i==2){
-                                return "CENTER";
-                            }
-                                //- 1 * multiplier * 1.5;
-                        })
-
-                    function makeText(totalK, totalFour, totalFive) {
-                        //(35*10)/60 seconds
-                        d3.selectAll(".summary").remove();
-                        d3.selectAll(".sumNum").remove();
-
-                        var xTotal = d3.scale.linear()
-                            .domain([0, totalK.length - 1])
-                            .range([100, w - 150])
-                        var minTotal = d3.min(totalK, function(d) {
-                            return d.total;
-                        })
-                        var maxTotal = d3.max(totalK, function(d) {
-                            return d.total;
-                        })
-                        var scaleCirc = d3.scale.linear()
-                            .domain([minTotal, maxTotal])
-                            .range([0, 30])
-
-                        var sumText = svg.selectAll("sumNum")
-                            .data(totalK)
-                            .enter()
-                            .append("text").attr("class", "sumNum")
-                            .attr("text-size", 18)
-                            .attr("text-anchor", "center")
-                            .attr("fill", function(d, i) {
-                                return oColor(d.name);
-                            })
-                            .attr("x", function(d, i) {
-                                return xTotal(i); 
-                            })
-                            .attr("y", h - 60)
-                            .html(function(d, i) {
-                                var thisNum = Math.round(d.total * 10 / 60)
-                                return (thisNum) + "h";
-                            })
-
-                        var sumText = svg.selectAll("summary")
-                            .data(totalK)
-                            .enter()
-                            .append("text").attr("class", "summary")
-                            .attr("font-size", 10)
-                            .attr("text-anchor", "center")
-                            .attr("fill", "black")
-                            .attr("x", function(d, i) {
-                                    return xTotal(i);
-                            })
-                            .attr("y", h - 50)
-                            .html(function(d, i) {
-                                return "AT TABLE" //+d.name; 
-                            })
-                        var sumText = svg.selectAll("sumNum")
-                            .data(totalFour)
-                            .enter()
-                            .append("text").attr("class", "sumNum")
-                            .attr("text-size", 18)
-                            .attr("text-anchor", "center")
-                            .attr("fill", function(d, i) {
-                                return oColor(d.name);
-                            })
-                            .attr("x", function(d, i) {
-                                return xTotal(i); 
-                            })
-                            .attr("y", h - 40)
-                            .html(function(d, i) {
-                                var thisNum = Math.round(d.total * 10 / 60)
-                                return (thisNum) + "h";
-                            })
-
-                        var sumText = svg.selectAll("summary")
-                            .data(totalFour)
-                            .enter()
-                            .append("text").attr("class", "summary")
-                            .attr("font-size", 10)
-                            .attr("text-anchor", "center")
-                            .attr("fill", "black")
-                            .attr("x", function(d, i) {
-                                    return xTotal(i);
-                            })
-                            .attr("y", h - 30)
-                            .html(function(d, i) {
-                                return "AT WORKSHOP" //+d.name; 
-                            })
-                        var sumText = svg.selectAll("sumNum")
-                            .data(totalFive)
-                            .enter()
-                            .append("text").attr("class", "sumNum")
-                            .attr("text-size", 18)
-                            .attr("text-anchor", "center")
-                            .attr("fill", function(d, i) {
-                                return oColor(d.name);
-                            })
-                            .attr("x", function(d, i) {
-                                return xTotal(i); 
-                            })
-                            .attr("y", h - 20)
-                            .html(function(d, i) {
-                                var thisNum = Math.round(d.total * 10 / 60)
-                                return (thisNum) + "h";
-                            })
-
-                        var sumText = svg.selectAll("summary")
-                            .data(totalFive)
-                            .enter()
-                            .append("text").attr("class", "summary")
-                            .attr("font-size", 10)
-                            .attr("text-anchor", "center")
-                            .attr("fill", "black")
-                            .attr("x", function(d, i) {
-                                    return xTotal(i);
-                            })
-                            .attr("y", h - 10)
-                            .html(function(d, i) {
-                                return "AT CENTER" //+d.name; 
-                            })
-
-
+                        } else {}
                     }
+                    if (mindateBT) {
+                        var blRect = svg.append("g").attr("class", "bt4")
+                            .selectAll("rect").data(fourBT)
+                            .enter()
+                            .append("svg:rect")
+                            .attr("class", function(d, i) {
+                                if (parseInt(d.dist) > threshold) {
+                                    fourSpecialStore.push({
+                                        "device": d.device,
+                                        "dist": d.dist,
+                                        "timestamp": d.timeIs
+                                    })
+                                    fourDone = true;
+                                }
+                                return d.device //+ "bt1"
+                            })
+                            .attr("x", function(d, i) {
+                                return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
+                            })
+                            .attr("y", function(d, i) {
+                                if (parseInt(d.dist) > threshold) {
+                                    // console.log(d.device);
+                                    for (j = 0; j < groupNames.length; j++) {
+                                        if (d.device == groupNames[j]) {
+                                            return stream4 - 10 - j * multiplier;
+                                        }
+                                    }
+                                } else {
+                                    return -h * 20;
+                                }
+                            })
+                            .attr("width", 6)
+                            .attr("height", hHere)
+                            .attr("fill", function(d) {
+                                for (j = 0; j < groupNames.length; j++) {
+                                    if (d.device == groupNames[j]) {
+                                        return oColor(groupNames[j]);
+                                    }
+                                }
+                            })
+                    }
+                })
+                // https://docs.google.com/spreadsheets/d/1E-Z69e9SS4sBcqWbpptwWps2mG8R2ka_Jij7tltSDGo/pubhtml
+                //stream5
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1E-Z69e9SS4sBcqWbpptwWps2mG8R2ka_Jij7tltSDGo/default/public/values?alt=json", function(data) {
+                for (j = 0; j < data.feed.entry.length; j++) {
+                    if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
+                        for (k = 0; k < groupNames.length; k++) {
+                            if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
+                                fiveBT.push({
+                                    "device": data.feed.entry[j]['gsx$device']['$t'],
+                                    "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'], //.replace(" at", '')
+                                    "dist": data.feed.entry[j]['gsx$dist']['$t']
+                                })
+                            }
+                        }
+                    } else {}
+                }
+                if (mindateBT) {
+                    var blRect = svg.append("g").attr("class", "bt4")
+                        .selectAll("rect").data(fiveBT)
+                        .enter()
+                        .append("svg:rect")
+                        .attr("class", function(d, i) {
+                            if (parseInt(d.dist) > threshold) {
+                                fiveSpecialStore.push({
+                                    "device": d.device,
+                                    "dist": d.dist,
+                                    "timestamp": d.timeIs
+                                })
+                            }
+                            return d.device //+ "bt1"
+                        })
+                        .attr("y", function(d, i) {
+                            if (parseInt(d.dist) > threshold) {
+                                console.log(d.device);
+                                for (j = 0; j < groupNames.length; j++) {
+                                    if (d.device == groupNames[j]) {
+                                        return stream5 - 10 - j * multiplier;
+                                    }
+                                }
+                            } else {
+                                return -h * 20;
+                            }
+                        })
+                        .attr("width", 6)
+                        .attr("height", hHere)
+                        .attr("fill", function(d) {
+                            for (j = 0; j < groupNames.length; j++) {
+                                if (d.device == groupNames[j]) {
+                                    return oColor(groupNames[j]);
+                                }
+                            }
+                        })
+                        .attr("x", function(d, i) {
+                            return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
+                        })
+
+                }
+            })
+
+            //NEW
+            //stream3
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1uoO3dA5MMMY2LusVtnKh4e3cuJDkTxq-eF6xAZ4IGiI/od6/public/values?alt=json", function(data) {
+                for (j = 0; j < data.feed.entry.length; j++) {
+                    if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
+                        for (k = 0; k < groupNames.length; k++) {
+                            if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
+                                storeBT.push({
+                                    "device": data.feed.entry[j]['gsx$device']['$t'],
+                                    "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'],
+                                    "dist": data.feed.entry[j]['gsx$dist']['$t']
+                                })
+                            }
+                        }
+                    } else {}
+                }
+                if (mindateBT) {
+                    var blRect = svg.append("g").attr("class", "bt1")
+                        .selectAll("rect").data(storeBT)
+                        .enter()
+                        .append("svg:rect")
+                        .attr("class", function(d, i) {
+                            if (parseInt(d.dist) > threshold) {
+                                specialStore.push({
+                                    "device": d.device,
+                                    "dist": d.dist,
+                                    "timestamp": d.timeIs
+                                })
+                            }
+                            return d.device //+ "bt1"
+                        })
+                        .attr("x", function(d, i) {
+                            return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
+                        })
+                        .attr("y", function(d, i) {
+                            if (parseInt(d.dist) > threshold) {
+                                for (j = 0; j < groupNames.length; j++) {
+                                    if (d.device == groupNames[j]) {
+                                        return stream3 - 10 - j * multiplier;
+                                    }
+                                }
+                            } else {
+                                return -h * 20;
+                            }
+                        })
+                        .attr("width", 6)
+                        .attr("height", hHere)
+                        .attr("fill", function(d) {
+                            for (j = 0; j < groupNames.length; j++) {
+                                if (d.device == groupNames[j]) {
+                                    return oColor(groupNames[j]);
+                                }
+                            }
+                        })
+                }
+            })
+        }
+        var isDone = setInterval(function() {
+            if (fourDone) {
+                runConsol();
+                clearInterval(isDone)
+            }
+        }, 500);
+
+        function runConsol() {
+            var uniqueKDone = false;
+
+            function threeConsolidation(givenKey) {
+                var total = 0;
+                for (i = 0; i < specialStore.length; i++) {
+                    if (specialStore[i].device == givenKey) {
+                        total++;
+                    } else {}
+                }
+                return total;
+            }
+
+            function fourConsolidation(givenKey) {
+                var total = 0;
+                for (i = 0; i < fourSpecialStore.length; i++) {
+                    if (fourSpecialStore[i].device == givenKey) {
+                        total++;
+                    } else {}
+                }
+                return total;
+            }
+
+            function fiveConsolidation(givenFi) {
+                var total = 0;
+                for (k = 0; k < fiveSpecialStore.length; k++) {
+                    if (fiveSpecialStore[k].device == givenFi) {
+                        total++;
+                    } else {}
+                }
+                return total;
+            }
+            if (fourSpecialStore.length > 1) {
+                console.log("yeah")
+                for (j = 0; j < groupNames.length; j++) {
+                    totalK.push({
+                        "name": groupNames[j],
+                        "total": threeConsolidation(groupNames[j])
+                    })
+
+                    totalFour.push({
+                        "name": groupNames[j],
+                        "total": fourConsolidation(groupNames[j])
+                    })
+
+                    totalFive.push({
+                        "name": groupNames[j],
+                        "total": fiveConsolidation(groupNames[j])
+                    })
+                    makeText(totalK, totalFour, totalFive);
+                }
+            }
+        }
+
+
+
+
+        var sumText = svg.selectAll("keyText")
+            .data(d3.range(3))
+            .enter()
+            .append("text").attr("class", "keyText")
+            .attr("font-size", 12)
+            .attr("fill", "black")
+            .attr("text-anchor", "end")
+            .attr("x", 90)
+            .attr("y", function(d, i) {
+                console.log(i);
+                if (i == 0) {
+                    return stream3;
+                }
+                if (i == 1) {
+                    return stream4;
+                }
+                if (i == 2) {
+                    return stream5;
+                }
+                //- 1 * multiplier * 1.5;
+            })
+            .html(function(d, i) {
+                if (i == 0) {
+                    return "TABLE";
+                }
+                if (i == 1) {
+                    return "WORKSHOP";
+                }
+                if (i == 2) {
+                    return "CENTER";
+                }
+                //- 1 * multiplier * 1.5;
+            })
+
+        function makeText(totalK, totalFour, totalFive) {
+            //(35*10)/60 seconds
+            d3.selectAll(".summary").remove();
+            d3.selectAll(".sumNum").remove();
+
+            var xTotal = d3.scale.linear()
+                .domain([0, groupNames.length - 1])
+                .range([w / 2 - 300, w / 2 + 300])
+            var minTotal = d3.min(totalK, function(d) {
+                return d.total;
+            })
+            var maxTotal = d3.max(totalK, function(d) {
+                return d.total;
+            })
+            var scaleCirc = d3.scale.linear()
+                .domain([minTotal, maxTotal])
+                .range([0, 30])
+            var leftText = 10;
+            var sumText = svg.selectAll("sumNum")
+                .data(totalK)
+                .enter()
+                .append("text").attr("class", "sumNum")
+                .attr("text-size", 18)
+                .attr("text-anchor", "start")
+                .attr("fill", function(d, i) {
+                    return oColor(d.name);
+                })
+                .attr("x", function(d, i) {
+                    return xTotal(i);
+                })
+                .attr("y", h - 60)
+                .html(function(d, i) {
+                    var thisNum = Math.round(d.total * 10 / 60)
+                    return (thisNum) + "h";
+                })
+            var sumText = svg.selectAll("summary")
+                .data(totalK)
+                .enter()
+                .append("text").attr("class", "summary")
+                .attr("font-size", 10)
+                .attr("text-anchor", "end")
+                .attr("fill", "black")
+                .attr("x", function(d, i) {
+                    return xTotal(i) - leftText;
+                })
+                .attr("y", h - 60)
+                .html(function(d, i) {
+                    return "AT TABLE" //+d.name; 
+                })
+
+
+            var sumText = svg.selectAll("sumNum")
+                .data(totalFour)
+                .enter()
+                .append("text").attr("class", "sumNum")
+                .attr("text-size", 18)
+                .attr("text-anchor", "start")
+                .attr("fill", function(d, i) {
+                    return oColor(d.name);
+                })
+                .attr("x", function(d, i) {
+                    return xTotal(i);
+                })
+                .attr("y", h - 35)
+                .html(function(d, i) {
+                    var thisNum = Math.round(d.total * 10 / 60)
+                    return (thisNum) + "h";
+                })
+            var sumText = svg.selectAll("summary")
+                .data(totalFour)
+                .enter()
+                .append("text").attr("class", "summary")
+                .attr("font-size", 10)
+                .attr("text-anchor", "end")
+                .attr("fill", "black")
+                .attr("x", function(d, i) {
+                    return xTotal(i) - leftText;
+                })
+                .attr("y", h - 35)
+                .html(function(d, i) {
+                    return "AT WORKSHOP" //+d.name; 
+                })
+
+            var sumText = svg.selectAll("sumNum")
+                .data(totalFive)
+                .enter()
+                .append("text").attr("class", "sumNum")
+                .attr("text-size", 18)
+                .attr("text-anchor", "start")
+                .attr("fill", function(d, i) {
+                    return oColor(d.name);
+                })
+                .attr("x", function(d, i) {
+                    return xTotal(i);
+                })
+                .attr("y", h - 10)
+                .html(function(d, i) {
+                    var thisNum = Math.round(d.total * 10 / 60)
+                    return (thisNum) + "h";
+                })
+            var sumText = svg.selectAll("summary")
+                .data(totalFive)
+                .enter()
+                .append("text").attr("class", "summary")
+                .attr("font-size", 10)
+                .attr("text-anchor", "end")
+                .attr("fill", "black")
+                .attr("x", function(d, i) {
+                    return xTotal(i) - leftText;
+                })
+                .attr("y", h - 10)
+                .html(function(d, i) {
+                    return "AT CENTER" //+d.name; 
+                })
+
+
+        }
     </script>
 </body>
+
 </html>
