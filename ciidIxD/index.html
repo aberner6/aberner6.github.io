@@ -533,7 +533,14 @@
                         // d3.scale.category10();
                         d3.scale.ordinal()
                         .domain([uniqueNames])
-                        .range(["#96CEB4", "#FFEEAD", "#FF6F69", "#FFCC5C", "#AAD8B0"])
+                        // .range(["#96CEB4", "#FFEEAD", "#FF6F69", "#FFCC5C", "#AAD8B0"])
+                        .range(["#96CEB4","#ADB3FF","#FFEEAD", "#5ECBFF","#FF6F69", "#45E9E9","#6F79F0","#cab2d6"])
+
+//                         .range(["#FFDAA0",
+// "#5ECBFF","#0095E2","#a6cee3","#cab2d6","#bebada",
+// "#45E9E9",
+// "#ADB3FF",
+// "#6F79F0"])
                         // .range(["#77C4D3","#EA2E49","#0095E2","#2BBD83","#F6CA46"])
                         // .range(["#9e0142","#fee08b","#66c2a5","#3288bd","#5e4fa2"])
                         // .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a"]);
@@ -612,9 +619,17 @@
                                 }
                             }
                         })
-                        .attr("opacity", function(d) {
-                            return 1;
-                        })
+                        // .attr("stroke", function(d, i) {
+                        //     for (j = 0; j < uniqueNames.length; j++) {
+                        //         if (d.device == uniqueNames[j]) {
+                        //             return oColor(uniqueNames[j]);
+                        //         }
+                        //     }
+                        // })
+                        // .attr("stroke-width",1)                        
+                        // .attr("opacity", function(d) {
+                        //     return 1;
+                        // })
                     var sumText = svg.selectAll("keyText")
                         .data(d3.range(2))
                         .enter()
@@ -691,7 +706,7 @@
             })
             var scaleCirc = d3.scale.linear()
                 .domain([minTotal, maxTotal])
-                .range([18, 30])
+                .range([0, 30])
 
             var sumCirc = svg.selectAll("sumCirc")
                 .data(totalK)
@@ -700,6 +715,7 @@
                 .attr("stroke", function(d, i) {
                     return oColor(d.name);
                 })
+                .attr("stroke-width",2)
                 .attr("fill", "none")
                 .attr("cx", function(d, i) {
                     if (d.total < 10) {
@@ -720,7 +736,11 @@
                 .attr("text-anchor", "center")
                 .attr("fill", "black")
                 .attr("x", function(d, i) {
+                    if(d.total==0){
+                        return xTotal(i) + 18 + 4;
+                    }else{
                     return xTotal(i) + scaleCirc(d.total) + 4;
+                    }
                 })
                 .attr("y", h - 20)
                 .html(function(d, i) {
