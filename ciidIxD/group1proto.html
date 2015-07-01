@@ -55,6 +55,8 @@
         var but1 = [];
         var uniques = [];
         var storeBT = [];
+        // var storeBT = [];
+
         var storeThis = [];
 
         var dashArray = "1 5 1 1";
@@ -62,10 +64,6 @@
 
         var dur = 2000;
 
-        var totalButton2 = 0;
-        var totalButton3 = 0;
-        var totalButton4 = 0;
-        var totalButton5 = 0;
         var w = screen.width,
             h = screen.height - 200,
             margin = 25;
@@ -82,7 +80,8 @@
         var centerline = h / 2;
 
         var mindateBT, maxdateBT, xScaleBT, yScaleBT;
-        var parseDateBT = d3.time.format('%a %b %e %H:%M:%S').parse;
+        // Wed Jul 1 10:14:21 2015
+        var parseDateBT = d3.time.format('%a %b %e %H:%M:%S %Y').parse;
         // Fri May 22 11:34:30
         var thisTime = [];
         var thisHour = [];
@@ -107,10 +106,10 @@
             // https://docs.google.com/spreadsheets/d/1XX6jJc4uu4PsNp7JvQ4dZ8K9cIFnheQbqOe4QQsfZdE/pubhtml
             $.getJSON("https://spreadsheets.google.com/feeds/list/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/od6/public/values?alt=json", function(data) {
                 console.log(data.feed)
-                // ['a', 'b', 'c'].forEach(function(d, i, arr) {
-                //     console.log(d, i, arr)
-                //     })
-                //returns 
+                    // ['a', 'b', 'c'].forEach(function(d, i, arr) {
+                    //     console.log(d, i, arr)
+                    //     })
+                    //returns 
 
                 for (j = 0; j < data.feed.entry.length; j++) {
                     thisTime.push(data.feed.entry[j]['gsx$date']['$t'].replace(" at", ''));
@@ -188,17 +187,7 @@
                         .selectAll("img").data(data.feed.entry)
                         .enter()
                         .append("svg:image")
-                        //Define clipping path
-                        // suns.append("clipPath") //Make a new clipPath
-                        //     .attr("id", "chart-area") //Assign an ID
-                        //     .append("rect") //Within the clipPath, create a new rect
-                        //     .attr("x", function(d, i) {
-                        //         console.log(i)
-                        //         return i * 100;
-                        //     }) //Set rect's position and size…
-                        //     .attr("y", 100)
-                        //     .attr("width", 10)
-                        //     .attr("height", 10)
+
                     var extraPad = 1;
                     var clicked = false;
 
@@ -317,7 +306,7 @@
                         })
 
                     }
-                }                // for (i = 0; i < data.feed.entry.length; i++) {
+                } // for (i = 0; i < data.feed.entry.length; i++) {
                 //     if (data.feed.entry[i]['gsx$device']['$t'] == "banjo_ferret") {
                 //         but1.push({
                 //             "buttonIs": data.feed.entry[i]['gsx$button']['$t'],
@@ -485,166 +474,292 @@
                 }
             })
         }
-        var oColor;
+var oColor = d3.scale.ordinal()
+             .domain([groupNames])
+             .range(["#96CEB4", "#ADB3FF", "#FFEEAD", "#5ECBFF", "#FF6F69", "#45E9E9", "#6F79F0", "#cab2d6"])
         var maxTime;
         var maxActivity = 100;
         var minActivity = 0;
         var distData = [];
         var names = [];
         var uniqueNames = [];
-        var groupNames = ["GX15","J10i","K610i"]
-        var zeroBT = [];
-        var oneBT = [];
-        var twoBT = [];
-        var threeBT = [];
-        var fourBT = [];
-        var fiveBT = [];
-        var sixBT = [];
-        var sevenBT = [];
+        var groupNames = ["GX15", "J10i", "K610i"]
 
         var specialBT = [];
+        var fourBT = [];
+        var fiveBT = [];
 
         var totalK = [];
+        var totalFour = [];
+        var totalFive = [];
 
+        var fiveSpecialStore = [];
+        var fourSpecialStore = [];
         var specialStore = [];
         var trackTotal = [];
 
-        function doBT() {
-            // https://docs.google.com/document/d/1LNbO-5UUnWgNv4T6asMBW4lczOJfgwtCJQpc-vfGiP0/pub     
-            // https://docs.google.com/feeds/list/1LNbO-5UUnWgNv4T6asMBW4lczOJfgwtCJQpc-vfGiP0/od6/public/values?alt=json       
+var stream4 = centerline/1.3;
+var stream5 = centerline/1.8;
+var stream3 = centerline;
 
+        var hHere = 10;
+        var quant = 0;
+        var multiplier = 10;
+        var threshold = -70;
+
+var fourDone = false;
+
+        function doBT() {
 
             // "https://dl.dropboxusercontent.com/u/97059/fitbit/fitbit.json"
-// OLD
+            // OLD
             // $.getJSON("https://spreadsheets.google.com/feeds/list/1CK2L-NwoswZ9l4-MU4tbu-bwt3eI1Oot_bbXkuFNl8c/od6/public/values?alt=json", function(data) {
-//NEW
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1uoO3dA5MMMY2LusVtnKh4e3cuJDkTxq-eF6xAZ4IGiI/od6/public/values?alt=json", function(data) {
-// https://docs.google.com/spreadsheets/d/1uoO3dA5MMMY2LusVtnKh4e3cuJDkTxq-eF6xAZ4IGiI/pubhtml
-                for (j = 0; j < data.feed.entry.length; j++) {
-                    if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
 
-                        storeBT.push({
-                            "device": data.feed.entry[j]['gsx$device']['$t'],
-                            "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'], //.replace(" at", '')
-                            "dist": data.feed.entry[j]['gsx$dist']['$t']
-                        })
-                    } else {}
-                    names.push(data.feed.entry[j]['gsx$device']['$t']);
-                    if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
-                        distData.push((parseInt(data.feed.entry[j]['gsx$dist']['$t'])) * -1);
-                    }
-                    $.each(names, function(i, el) {
-                        if ($.inArray(el, uniqueNames) === -1) {
-                            uniqueNames.push(el);
-                        }
-                    });
-                }
-                if (storeBT.length > 0) {
-                    oColor =
-                        // d3.scale.category10();
-                        d3.scale.ordinal()
-                        .domain([groupNames])
-                        // .range(["#96CEB4", "#FFEEAD", "#FF6F69", "#FFCC5C", "#AAD8B0"])
-                        .range(["#96CEB4","#ADB3FF","#FFEEAD", "#5ECBFF","#FF6F69", "#45E9E9","#6F79F0","#cab2d6"])
-
-//                         .range(["#FFDAA0",
-// "#5ECBFF","#0095E2","#a6cee3","#cab2d6","#bebada",
-// "#45E9E9",
-// "#ADB3FF",
-// "#6F79F0"])
-                        // .range(["#77C4D3","#EA2E49","#0095E2","#2BBD83","#F6CA46"])
-                        // .range(["#9e0142","#fee08b","#66c2a5","#3288bd","#5e4fa2"])
-                        // .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a"]);
-
-                    // .range(["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd"]);
-
-                    mindateBT = parseDateBT(storeBT[0].timeIs);
-                    maxdateBT = parseDateBT(storeBT[storeBT.length - 1].timeIs) //Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
-
-                    minActivity = d3.min(d3.values(distData));
-                    maxActivity = d3.max(d3.values(distData));
-
-                    yScaleBT = d3.scale.linear()
-                        .domain([minActivity, maxActivity])
-                        .range([centerline, centerline / 2])
-                    yAxis
-                        .scale(yScaleBT)
-                        .orient("left")
-                        .ticks(4);
-                    // svg.append("g")
-                    //     .attr("class", "axis") //Assign "axis" class
-                    //     .attr("transform", "translate(100," + (0) + ")")
-                    //     .call(yAxis);
-
-                    xScaleBT = d3.time.scale()
-                        .domain([mindateBT, maxdateBT])
-                        .range([100, w - 100]);
-                }
-                if (mindateBT) {
-
-                    var hHere = 10;
-                    var quant = 0;
-                    var multiplier = 10;
-var threshold = -70;
-
-                    var blRect = svg.append("g").attr("class", "bt1")
-                        .selectAll("rect").data(storeBT)
-                        .enter()
-                        .append("svg:rect")
-                        .attr("class", function(d, i) {
-                            if (parseInt(d.dist) > threshold) {
-                                // for (j = 0; j < uniqueNames.length; j++) {
-                                specialStore.push({
-                                        "device": d.device,
-                                        "dist": d.dist,
-                                        "timestamp": d.timeIs
+                            // if (fiveBT.length > 0) {
+                                mindateBT = mindate;
+                                maxdateBT = maxdate;
+                                xScaleBT = d3.time.scale()
+                                    .domain([mindateBT, maxdateBT])
+                                    .range([100, w - 100]);
+                            // }
+            //NEW
+            //stream4
+            // https://docs.google.com/spreadsheets/d/1KbBkdpGt0X_dEfHBQB-S6ONUwvj6_nD22lnVqi7wYEA/pubhtml
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1KbBkdpGt0X_dEfHBQB-S6ONUwvj6_nD22lnVqi7wYEA/od6/public/values?alt=json", function(data) {
+                            for (j = 0; j < data.feed.entry.length; j++) {
+                                if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
+                                    for (k = 0; k < groupNames.length; k++) {
+                                        if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
+                                            fourBT.push({
+                                                "device": data.feed.entry[j]['gsx$device']['$t'],
+                                                "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'], 
+                                                "dist": data.feed.entry[j]['gsx$dist']['$t']
+                                            })
+                                        }
+                                    }
+                                } else {}
+                            }
+                            if (mindateBT) {
+                                var blRect = svg.append("g").attr("class", "bt4")
+                                    .selectAll("rect").data(fourBT)
+                                    .enter()
+                                    .append("svg:rect")
+                                    .attr("class", function(d, i) {
+                                        if (parseInt(d.dist) > threshold) {
+                                            fourSpecialStore.push({
+                                                    "device": d.device,
+                                                    "dist": d.dist,
+                                                    "timestamp": d.timeIs
+                                                })
+                                            fourDone = true;
+                                        }
+                                        return d.device //+ "bt1"
                                     })
-                                    // } 
-                            }
-                            return d.dist + "bt1"
-                        })
-                        .attr("x", function(d, i) {
-                            return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
-                        })
-                        .attr("y", function(d, i) {
-                            if (parseInt(d.dist) > threshold) {
-                                for (j = 0; j < groupNames.length; j++) {
-                                    if (d.device == groupNames[j]) {
-                                        return centerline - 10 -j * multiplier;
+                                    .attr("x", function(d, i) {
+                                        return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
+                                    })
+                                    .attr("y", function(d, i) {
+                                        if (parseInt(d.dist) > threshold) {
+                                            // console.log(d.device);
+                                            for (j = 0; j < groupNames.length; j++) {
+                                                if (d.device == groupNames[j]) {
+                                                    return stream4 - 10 - j * multiplier;
+                                                }
+                                            }
+                                        } else {
+                                            return -h * 20;
+                                        }
+                                    })
+                                    .attr("width", 6)
+                                    .attr("height", hHere)
+                                    .attr("fill", function(d) {
+                                        for (j = 0; j < groupNames.length; j++) {
+                                            if (d.device == groupNames[j]) {
+                                                return oColor(groupNames[j]);
+                                            }
+                                        }
+                                    })
+                                }
+    })
+ // https://docs.google.com/spreadsheets/d/1E-Z69e9SS4sBcqWbpptwWps2mG8R2ka_Jij7tltSDGo/pubhtml
+                        //stream5
+$.getJSON("https://spreadsheets.google.com/feeds/list/1E-Z69e9SS4sBcqWbpptwWps2mG8R2ka_Jij7tltSDGo/default/public/values?alt=json", function(data) {
+                            for (j = 0; j < data.feed.entry.length; j++) {
+                                if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
+                                    for (k = 0; k < groupNames.length; k++) {
+                                        if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
+                                            fiveBT.push({
+                                                "device": data.feed.entry[j]['gsx$device']['$t'],
+                                                "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'], //.replace(" at", '')
+                                                "dist": data.feed.entry[j]['gsx$dist']['$t']
+                                            })
+                                        }
                                     }
+                                } else {}
+                            }
+                            if (mindateBT) {
+                                var blRect = svg.append("g").attr("class", "bt4")
+                                    .selectAll("rect").data(fiveBT)
+                                    .enter()
+                                    .append("svg:rect")
+                                    .attr("class", function(d, i) {
+                                        if (parseInt(d.dist) > threshold) {
+                                            fiveSpecialStore.push({
+                                                    "device": d.device,
+                                                    "dist": d.dist,
+                                                    "timestamp": d.timeIs
+                                                })
+                                        }
+                                        return d.device //+ "bt1"
+                                    })
+                                    .attr("y", function(d, i) {
+                                        if (parseInt(d.dist) > threshold) {
+                                            console.log(d.device);
+                                            for (j = 0; j < groupNames.length; j++) {
+                                                if (d.device == groupNames[j]) {
+                                                    return stream5 - 10 - j * multiplier;
+                                                }
+                                            }
+                                        } else {
+                                            return -h * 20;
+                                        }
+                                    })
+                                    .attr("width", 6)
+                                    .attr("height", hHere)
+                                    .attr("fill", function(d) {
+                                        for (j = 0; j < groupNames.length; j++) {
+                                            if (d.device == groupNames[j]) {
+                                                return oColor(groupNames[j]);
+                                            }
+                                        }
+                                    })
+                                    .attr("x", function(d, i) {
+                                        return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
+                                    })                                    
+
                                 }
-                            } else {
-                                for (j = 0; j < groupNames.length; j++) {
-                                    if (d.device == groupNames[j]) {
-                                        return -h*20;//centerline / 1.5 - j * multiplier * 1.5;
+    })
+
+                        //NEW
+                        //stream3
+                        $.getJSON("https://spreadsheets.google.com/feeds/list/1uoO3dA5MMMY2LusVtnKh4e3cuJDkTxq-eF6xAZ4IGiI/od6/public/values?alt=json", function(data) {
+                            for (j = 0; j < data.feed.entry.length; j++) {
+                                if (parseInt(data.feed.entry[j]['gsx$dist']['$t']) < 0) {
+                                    for (k = 0; k < groupNames.length; k++) {
+                                        if (data.feed.entry[j]['gsx$device']['$t'] == groupNames[k]) {
+                                            storeBT.push({
+                                                "device": data.feed.entry[j]['gsx$device']['$t'],
+                                                "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'],
+                                                "dist": data.feed.entry[j]['gsx$dist']['$t']
+                                            })
+                                        }
                                     }
-                                }
-                            } 
-                        })
-                        .attr("width", 6)
-                        .attr("height", hHere)
-                        .attr("fill", function(d) {
-                            for (j = 0; j < groupNames.length; j++) {
-                                if (d.device == groupNames[j]) {
-                                    return oColor(groupNames[j]);
-                                } else{
-                                    return "none";
-                                }
+                                } else {}
+                            }
+                            if (mindateBT) {
+                                var blRect = svg.append("g").attr("class", "bt1")
+                                    .selectAll("rect").data(storeBT)
+                                    .enter()
+                                    .append("svg:rect")
+                                    .attr("class", function(d, i) {
+                                        if (parseInt(d.dist) > threshold) {
+                                            specialStore.push({
+                                                    "device": d.device,
+                                                    "dist": d.dist,
+                                                    "timestamp": d.timeIs
+                                                })
+                                        }
+                                        return d.device //+ "bt1"
+                                    })
+                                    .attr("x", function(d, i) {
+                                        return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
+                                    })
+                                    .attr("y", function(d, i) {
+                                        if (parseInt(d.dist) > threshold) {
+                                            for (j = 0; j < groupNames.length; j++) {
+                                                if (d.device == groupNames[j]) {
+                                                    return centerline - 10 - j * multiplier;
+                                                }
+                                            }
+                                        } else {
+                                            return -h * 20;
+                                        }
+                                    })
+                                    .attr("width", 6)
+                                    .attr("height", hHere)
+                                    .attr("fill", function(d) {
+                                        for (j = 0; j < groupNames.length; j++) {
+                                            if (d.device == groupNames[j]) {
+                                                return oColor(groupNames[j]);
+                                            }
+                                        }
+                                    })
                             }
                         })
-                        // .attr("stroke", function(d, i) {
-                        //     for (j = 0; j < uniqueNames.length; j++) {
-                        //         if (d.device == uniqueNames[j]) {
-                        //             return oColor(uniqueNames[j]);
-                        //         }
-                        //     }
-                        // })
-                        // .attr("stroke-width",1)                        
-                        // .attr("opacity", function(d) {
-                        //     return 1;
-                        // })
+}
+var isDone = setInterval(function(){
+    if(fourDone){
+        runConsol();
+        clearInterval(isDone)
+    }
+},500);
+
+function runConsol(){
+                                var uniqueKDone = false;
+                                function threeConsolidation(givenKey) {
+                                    var total = 0;
+                                    for (i = 0; i < specialStore.length; i++) {
+                                        if (specialStore[i].device == givenKey) {
+                                            total++;
+                                        } else {}
+                                    }
+                                    return total;
+                                }
+                                function fourConsolidation(givenKey) {
+                                    var total = 0;
+                                    for (i = 0; i < fourSpecialStore.length; i++) {
+                                        if (fourSpecialStore[i].device == givenKey) {
+                                            total++;
+                                        } else {}
+                                    }
+                                    return total;
+                                }
+                                function fiveConsolidation(givenFi) {
+                                    var total = 0;
+                                    for (k = 0; k < fiveSpecialStore.length; k++) {
+                                        if (fiveSpecialStore[k].device == givenFi) {
+                                            total++;
+                                        } else {}
+                                    }
+                                    return total;
+                                }
+                                if(fourSpecialStore.length>1){
+                                    console.log("yeah")
+                                    for (j = 0; j < groupNames.length; j++) {
+                                    totalK.push({
+                                        "name": groupNames[j],
+                                        "total": threeConsolidation(groupNames[j])
+                                    })
+                                   
+                                        totalFour.push({
+                                            "name": groupNames[j],
+                                            "total": fourConsolidation(groupNames[j])
+                                        })
+                                   
+                                     totalFive.push({
+                                        "name": groupNames[j],
+                                        "total": fiveConsolidation(groupNames[j])
+                                    })
+                                    makeText(totalK, totalFour, totalFive);
+                                    }
+                                }    
+}
+
+
+
+
                     var sumText = svg.selectAll("keyText")
-                        .data(d3.range(2))
+                        .data(d3.range(3))
                         .enter()
                         .append("text").attr("class", "keyText")
                         .attr("font-size", 12)
@@ -652,181 +767,148 @@ var threshold = -70;
                         .attr("text-anchor", "end")
                         .attr("x", 90)
                         .attr("y", function(d, i) {
+                            console.log(i);
                             if (i == 0) {
-                                return centerline - 1 * multiplier * 1.5;
-                            } else {
-                                return centerline / 1.5 - 1 * multiplier * 1.5;
+                                return stream3;
+                            } 
+                            if(i==1){
+                                return stream4;
                             }
+                            if(i==2){
+                                return stream5;
+                            }
+                                //- 1 * multiplier * 1.5;
                         })
                         .html(function(d, i) {
                             if (i == 0) {
                                 return "TABLE";
-                            } else {
+                            } 
+                            if(i==1){
                                 return "WORKSHOP";
                             }
-
+                            if(i==2){
+                                return "CENTER";
+                            }
+                                //- 1 * multiplier * 1.5;
                         })
-                    var uniqueKDone = false;
 
-                    function keyConsolidation(givenKey) {
-                        var total = 0;
-                        for (i = 0; i < specialStore.length; i++) {
-                            if (specialStore[i].device == givenKey) {
-                                total++;
-                            } else {}
-                        }
-                        return total;
-                    }
-                    for (j = 0; j < groupNames.length; j++) {
-                        totalK.push({
-                            "name": groupNames[j],
-                            "total": keyConsolidation(groupNames[j])
+                    function makeText(totalK, totalFour, totalFive) {
+                        //(35*10)/60 seconds
+                        d3.selectAll(".summary").remove();
+                        d3.selectAll(".sumNum").remove();
+
+                        var xTotal = d3.scale.linear()
+                            .domain([0, totalK.length - 1])
+                            .range([100, w - 150])
+                        var minTotal = d3.min(totalK, function(d) {
+                            return d.total;
                         })
-                        uniqueKDone = true;
+                        var maxTotal = d3.max(totalK, function(d) {
+                            return d.total;
+                        })
+                        var scaleCirc = d3.scale.linear()
+                            .domain([minTotal, maxTotal])
+                            .range([0, 30])
+
+                        var sumText = svg.selectAll("sumNum")
+                            .data(totalK)
+                            .enter()
+                            .append("text").attr("class", "sumNum")
+                            .attr("text-size", 18)
+                            .attr("text-anchor", "center")
+                            .attr("fill", function(d, i) {
+                                return oColor(d.name);
+                            })
+                            .attr("x", function(d, i) {
+                                return xTotal(i); 
+                            })
+                            .attr("y", h - 60)
+                            .html(function(d, i) {
+                                var thisNum = Math.round(d.total * 10 / 60)
+                                return (thisNum) + "h";
+                            })
+
+                        var sumText = svg.selectAll("summary")
+                            .data(totalK)
+                            .enter()
+                            .append("text").attr("class", "summary")
+                            .attr("font-size", 10)
+                            .attr("text-anchor", "center")
+                            .attr("fill", "black")
+                            .attr("x", function(d, i) {
+                                    return xTotal(i);
+                            })
+                            .attr("y", h - 50)
+                            .html(function(d, i) {
+                                return "AT TABLE" //+d.name; 
+                            })
+                        var sumText = svg.selectAll("sumNum")
+                            .data(totalFour)
+                            .enter()
+                            .append("text").attr("class", "sumNum")
+                            .attr("text-size", 18)
+                            .attr("text-anchor", "center")
+                            .attr("fill", function(d, i) {
+                                return oColor(d.name);
+                            })
+                            .attr("x", function(d, i) {
+                                return xTotal(i); 
+                            })
+                            .attr("y", h - 40)
+                            .html(function(d, i) {
+                                var thisNum = Math.round(d.total * 10 / 60)
+                                return (thisNum) + "h";
+                            })
+
+                        var sumText = svg.selectAll("summary")
+                            .data(totalFour)
+                            .enter()
+                            .append("text").attr("class", "summary")
+                            .attr("font-size", 10)
+                            .attr("text-anchor", "center")
+                            .attr("fill", "black")
+                            .attr("x", function(d, i) {
+                                    return xTotal(i);
+                            })
+                            .attr("y", h - 30)
+                            .html(function(d, i) {
+                                return "AT WORKSHOP" //+d.name; 
+                            })
+                        var sumText = svg.selectAll("sumNum")
+                            .data(totalFive)
+                            .enter()
+                            .append("text").attr("class", "sumNum")
+                            .attr("text-size", 18)
+                            .attr("text-anchor", "center")
+                            .attr("fill", function(d, i) {
+                                return oColor(d.name);
+                            })
+                            .attr("x", function(d, i) {
+                                return xTotal(i); 
+                            })
+                            .attr("y", h - 20)
+                            .html(function(d, i) {
+                                var thisNum = Math.round(d.total * 10 / 60)
+                                return (thisNum) + "h";
+                            })
+
+                        var sumText = svg.selectAll("summary")
+                            .data(totalFive)
+                            .enter()
+                            .append("text").attr("class", "summary")
+                            .attr("font-size", 10)
+                            .attr("text-anchor", "center")
+                            .attr("fill", "black")
+                            .attr("x", function(d, i) {
+                                    return xTotal(i);
+                            })
+                            .attr("y", h - 10)
+                            .html(function(d, i) {
+                                return "AT CENTER" //+d.name; 
+                            })
+
+
                     }
-                    if (uniqueKDone) {
-                        console.log(totalK)
-                        makeText(totalK);
-                    }
-                    // makeText(); 
-
-
-                    //  //The line SVG Path we draw
-                    // var lineGraph = svg.append("path")
-                    //                     .attr("d", lineFunction(sevenBT))
-                    //                     .attr("stroke", color(7))
-                    //                     .attr("stroke-width", strokePath)
-                    //                     .attr("fill", "none"); 
-                }
-            })
-        }
-
-
-
-        function makeText(totalK) {
-            //(35*10)/60 seconds
-            d3.selectAll(".summary").remove();
-            d3.selectAll(".sumNum").remove();
-
-            var xTotal = d3.scale.linear()
-                .domain([0, totalK.length - 1])
-                .range([100, w - 150])
-            var minTotal = d3.min(totalK, function(d) {
-                return d.total;
-            })
-            var maxTotal = d3.max(totalK, function(d) {
-                return d.total;
-            })
-            var scaleCirc = d3.scale.linear()
-                .domain([minTotal, maxTotal])
-                .range([0, 30])
-
-            var sumCirc = svg.selectAll("sumCirc")
-                .data(totalK)
-                .enter()
-                .append("circle").attr("class", "sumCirc")
-                .attr("stroke", function(d, i) {
-                    return oColor(d.name);
-                })
-                .attr("stroke-width",2)
-                .attr("fill", "none")
-                .attr("cx", function(d, i) {
-                    if (d.total < 10) {
-                        return xTotal(i);
-                    } else {
-                        return xTotal(i);
-                    }
-                })
-                .attr("cy", h - 30)
-                .attr("r", function(d, i) {
-                    return scaleCirc(d.total);
-                })
-            var sumText = svg.selectAll("summary")
-                .data(totalK)
-                .enter()
-                .append("text").attr("class", "summary")
-                .attr("font-size", 10)
-                .attr("text-anchor", "center")
-                .attr("fill", "black")
-                .attr("x", function(d, i) {
-                    if(d.total==0){
-                        return xTotal(i) + 18 + 4;
-                    }else{
-                    return xTotal(i) + scaleCirc(d.total) + 4;
-                    }
-                })
-                .attr("y", h - 20)
-                .html(function(d, i) {
-                    return "AT TABLE" //+d.name; 
-                })
-            var sumText = svg.selectAll("sumNum")
-                .data(totalK)
-                .enter()
-                .append("text").attr("class", "sumNum")
-                .attr("text-size", 18)
-                .attr("text-anchor", "center")
-                .attr("fill", function(d, i) {
-                    return oColor(d.name);
-                })
-                .attr("x", function(d, i) {
-                    // test.style.fontSize = 14;
-                    // var width = $('.summary').width(); 
-                    return xTotal(i); //i*300//-width/2;
-                })
-                .attr("y", h - 20)
-                .html(function(d, i) {
-                    var thisNum = Math.round(d.total * 10 / 60)
-                    return (thisNum) + "h";
-                })
-
-
-
-        }
-        //          if(data.feed.entry[i]['gsx$button']['$t']=="button1"){
-        //             totalButton1++;
-        //             but1.push({"total":totalButton1, "time":data.feed.entry[i]['gsx$timestamp']['$t']})
-        //             return "buttonCirc1";                       
-        //         }
-        //         if(data.feed.entry[i]['gsx$button']['$t']=="button2"){
-        //             totalButton2++;
-        //             return "buttonCirc2";                       
-        //         }
-        //         if(data.feed.entry[i]['gsx$button']['$t']=="button3"){
-        //             totalButton3++;
-        //             return "buttonCirc3";
-        //         }
-        //         if(data.feed.entry[i]['gsx$button']['$t']=="button4"){
-        //             totalButton4++;
-        //             return "buttonCirc4";
-        //         }
-        //         if(data.feed.entry[i]['gsx$button']['$t']=="button5"){
-        //             totalButton5++;
-        //             return "buttonCirc5";
-        //         }
-        //     })
-
-
-
-
-        // $.getJSON("https://spreadsheets.google.com/feeds/list/1Ds8TAVMTrV8jFZovhnOWe4OxuehaeXlOAhyrlugI4ss/od6/public/values?alt=json", function(data) {
-        //     console.log(data.feed.entry.length);
-        //     var dataLength = data.feed.entry.length;
-        //   //first row "title" column
-        //     for(i=0; i<dataLength; i++){
-        //       console.log(data.feed.entry[i]['gsx$imageurl']['$t'])//data.feed.entry[i]['gsx$caption']['$t'])
-        //         $('.results').prepend('<img src="'+ data.feed.entry[i]['gsx$imageurl']['$t']+'" alt="'+data.feed.entry[i]['gsx$caption']['$t']+'"/>');
-        //     }
-
-        //    entry = data.feed.entry;
-        //     console.log(entry)
-        // });
-        // })
     </script>
 </body>
-<!-- <body> -->
-<!-- <canvas id="myCanvas" width="1300" height="800"> -->
-<!-- Insert fallback content here -->
-<!-- </canvas> -->
-<!-- </body> -->
-
 </html>
