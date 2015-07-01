@@ -312,7 +312,7 @@
                 // var parseDate = d3.time.format('%B %d, %Y %I:%M%p').parse;
                 console.log(data.feed.entry[data.feed.entry.length - 1])
                 for (i = 0; i < data.feed.entry.length; i++) {
-                    if (data.feed.entry[i]['gsx$device']['$t'] == "banjo_ferret") {
+                    if (data.feed.entry[i]['gsx$device']['$t'] == "wombat_wombat") {
                         but1.push({
                             "buttonIs": data.feed.entry[i]['gsx$button']['$t'],
                             "timeIs": data.feed.entry[i]['gsx$timestamp']['$t'].replace(" at", '')
