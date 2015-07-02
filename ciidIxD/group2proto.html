@@ -621,7 +621,14 @@ function getCETorCESTDate() {
             
             //new
             // https://docs.google.com/spreadsheets/d/1JoCJS0y0d9HLM0sXU1PdNkQaHS1gGWL9JV8CR9M3zdk/pubhtml
-                $.getJSON("https://spreadsheets.google.com/feeds/list/1JoCJS0y0d9HLM0sXU1PdNkQaHS1gGWL9JV8CR9M3zdk/default/public/values?alt=json", function(data) {
+                // $.getJSON("https://spreadsheets.google.com/feeds/list/1JoCJS0y0d9HLM0sXU1PdNkQaHS1gGWL9JV8CR9M3zdk/default/public/values?alt=json", function(data) {
+
+
+
+
+                $.getJSON("https://spreadsheets.google.com/feeds/list/13mKnqOeD71x6Un7VS-FPKvz3mepx5RewYO9fy680HRw/default/public/values?alt=json", function(data) {
+
+ // https://docs.google.com/spreadsheets/d/13mKnqOeD71x6Un7VS-FPKvz3mepx5RewYO9fy680HRw/pubhtml                   
                     for (j = 0; j < data.feed.entry.length; j++) {
                         if (parseInt(data.feed.entry[j]['gsx$signal']['$t']) < 0) {
                             for (k = 0; k < groupNames.length; k++) {
@@ -686,7 +693,11 @@ function getCETorCESTDate() {
  
 //new
 // https://docs.google.com/spreadsheets/d/1eshMmsJjIyGbFTyiE4sk2oxDlXHZdiZLapbPWFuUUHo/pubhtml
-       $.getJSON("https://spreadsheets.google.com/feeds/list/1eshMmsJjIyGbFTyiE4sk2oxDlXHZdiZLapbPWFuUUHo/default/public/values?alt=json", function(data) {
+       // $.getJSON("https://spreadsheets.google.com/feeds/list/1eshMmsJjIyGbFTyiE4sk2oxDlXHZdiZLapbPWFuUUHo/default/public/values?alt=json", function(data) {
+
+
+// https://docs.google.com/spreadsheets/d/19SBZ3MUBY9u7yzXr785FREUApVVxf65qBb04E64CmQc/pubhtml
+       $.getJSON("https://spreadsheets.google.com/feeds/list/19SBZ3MUBY9u7yzXr785FREUApVVxf65qBb04E64CmQc/default/public/values?alt=json", function(data) {        
                 for (j = 0; j < data.feed.entry.length; j++) {
                     if (parseInt(data.feed.entry[j]['gsx$signal']['$t']) < 0) {
                         for (k = 0; k < groupNames.length; k++) {
@@ -750,9 +761,14 @@ function getCETorCESTDate() {
 
 //new
             // https://docs.google.com/spreadsheets/d/1OhuAQAhomWhUDXFdtj4u-YXEriN_uUBmftXJPBIV4UU/pubhtml
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1OhuAQAhomWhUDXFdtj4u-YXEriN_uUBmftXJPBIV4UU/default/public/values?alt=json", function(data) {
+            // $.getJSON("https://spreadsheets.google.com/feeds/list/1OhuAQAhomWhUDXFdtj4u-YXEriN_uUBmftXJPBIV4UU/default/public/values?alt=json", function(data) {
                 //OLD
             // $.getJSON("https://spreadsheets.google.com/feeds/list/1uoO3dA5MMMY2LusVtnKh4e3cuJDkTxq-eF6xAZ4IGiI/od6/public/values?alt=json", function(data) {
+
+
+
+// https://docs.google.com/spreadsheets/d/1P6_MZYdQB-136omE9qNjaAPC0QMOE76sn-vap0MbTZw/pubhtml        
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1P6_MZYdQB-136omE9qNjaAPC0QMOE76sn-vap0MbTZw/default/public/values?alt=json", function(data) {   
                 for (j = 20; j < data.feed.entry.length; j++) {
                     // console.log(data.feed.entry[0])
                     if (parseInt(data.feed.entry[j]['gsx$signal']['$t']) < 0) {
