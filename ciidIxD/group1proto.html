@@ -543,9 +543,14 @@ var rectWidth = .5;
             //stream4
             // https://docs.google.com/spreadsheets/d/1KbBkdpGt0X_dEfHBQB-S6ONUwvj6_nD22lnVqi7wYEA/pubhtml
             // $.getJSON("https://spreadsheets.google.com/feeds/list/1KbBkdpGt0X_dEfHBQB-S6ONUwvj6_nD22lnVqi7wYEA/od6/public/values?alt=json", function(data) {
+        
+
+
             //NEW
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1rrNd1dzEkB6EypfL-oIOkpENfwXZKlW_BgZb-1SxijA/default/public/values?alt=json", function(data) {
+            // $.getJSON("https://spreadsheets.google.com/feeds/list/1rrNd1dzEkB6EypfL-oIOkpENfwXZKlW_BgZb-1SxijA/default/public/values?alt=json", function(data) {
             // https://docs.google.com/spreadsheets/d/1rrNd1dzEkB6EypfL-oIOkpENfwXZKlW_BgZb-1SxijA/pubhtml
+
+                 $.getJSON("https://spreadsheets.google.com/feeds/list/1JoCJS0y0d9HLM0sXU1PdNkQaHS1gGWL9JV8CR9M3zdk/default/public/values?alt=json", function(data) {           
                     for (j = 0; j < data.feed.entry.length; j++) {
                         if (parseInt(data.feed.entry[j]['gsx$signal']['$t']) < 0) {
                             for (k = 0; k < groupNames.length; k++) {
@@ -607,7 +612,10 @@ var rectWidth = .5;
             // $.getJSON("https://spreadsheets.google.com/feeds/list/1E-Z69e9SS4sBcqWbpptwWps2mG8R2ka_Jij7tltSDGo/default/public/values?alt=json", function(data) {
 //new
 // https://docs.google.com/spreadsheets/d/1g6RLK61hF3KAB4F7V4ijRldY_3ugvIKyzIxpKbsc6nM/pubhtml
-       $.getJSON("https://spreadsheets.google.com/feeds/list/1g6RLK61hF3KAB4F7V4ijRldY_3ugvIKyzIxpKbsc6nM/default/public/values?alt=json", function(data) {
+       // $.getJSON("https://spreadsheets.google.com/feeds/list/1g6RLK61hF3KAB4F7V4ijRldY_3ugvIKyzIxpKbsc6nM/default/public/values?alt=json", function(data) {
+     
+
+       $.getJSON("https://spreadsheets.google.com/feeds/list/1eshMmsJjIyGbFTyiE4sk2oxDlXHZdiZLapbPWFuUUHo/default/public/values?alt=json", function(data) {
                 for (j = 0; j < data.feed.entry.length; j++) {
                     if (parseInt(data.feed.entry[j]['gsx$signal']['$t']) < 0) {
                         for (k = 0; k < groupNames.length; k++) {
@@ -668,9 +676,10 @@ var rectWidth = .5;
             //NEW
             //stream3
             // https://docs.google.com/spreadsheets/d/1L8MoZwOlAIGXzHfiw88xC3i-S62z5wZsrYdNrEwEBz8/pubhtml
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1L8MoZwOlAIGXzHfiw88xC3i-S62z5wZsrYdNrEwEBz8/default/public/values?alt=json", function(data) {
-                //OLD
-            // $.getJSON("https://spreadsheets.google.com/feeds/list/1uoO3dA5MMMY2LusVtnKh4e3cuJDkTxq-eF6xAZ4IGiI/od6/public/values?alt=json", function(data) {
+            // $.getJSON("https://spreadsheets.google.com/feeds/list/1L8MoZwOlAIGXzHfiw88xC3i-S62z5wZsrYdNrEwEBz8/default/public/values?alt=json", function(data) {
+
+   
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1OhuAQAhomWhUDXFdtj4u-YXEriN_uUBmftXJPBIV4UU/default/public/values?alt=json", function(data) {
                 for (j = 20; j < data.feed.entry.length; j++) {
                     // console.log(data.feed.entry[0])
                     if (parseInt(data.feed.entry[j]['gsx$signal']['$t']) < 0) {

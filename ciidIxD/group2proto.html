@@ -573,13 +573,43 @@ var rectWidth = .5;
             // "https://dl.dropboxusercontent.com/u/97059/fitbit/fitbit.json"
             // OLD
             // $.getJSON("https://spreadsheets.google.com/feeds/list/1CK2L-NwoswZ9l4-MU4tbu-bwt3eI1Oot_bbXkuFNl8c/od6/public/values?alt=json", function(data) {
+function getCETorCESTDate() {
+    var localDate = new Date();
+    var utcOffset = localDate.getTimezoneOffset();
+    var cetOffset = utcOffset + 60;
+    var cestOffset = utcOffset + 120;
+    var cetOffsetInMilliseconds = cetOffset * 60 * 1000;
+    var cestOffsetInMilliseconds = cestOffset * 60 * 1000;
 
+    var cestDateStart = new Date();
+    var cestDateFinish = new Date();
+    var localDateTime = localDate.getTime();
+    var cestDateStartTime;
+    var cestDateFinishTime;
+    var result;
+
+    cestDateStart.setTime(Date.parse('29 March ' + localDate.getFullYear() + ' 02:00:00 GMT+0100'));
+    cestDateFinish.setTime(Date.parse('25 October ' + localDate.getFullYear() + ' 03:00:00 GMT+0200'));
+
+    cestDateStartTime = cestDateStart.getTime();
+    cestDateFinishTime = cestDateFinish.getTime();
+
+    if(localDateTime >= cestDateStartTime && localDateTime <= cestDateFinishTime) {
+        result = new Date(localDateTime + cestOffsetInMilliseconds);
+    } else {
+        result = new Date(localDateTime + cetOffsetInMilliseconds);
+    }
+
+    return result;
+}
             // if (fiveBT.length > 0) {
             mindateBT = mindate;
-            maxdateBT = maxdate;
+            maxdateBT = getCETorCESTDate(maxdateBT)
+// Thu Jul 02 2015 15:59:21 GMT-0400 (EDT)maxdate;
             xScaleBT = d3.time.scale()
                 .domain([mindateBT, maxdateBT])
                 .range([100, w - 100]);
+
             // }
             //old
             //stream4
