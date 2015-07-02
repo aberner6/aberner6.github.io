@@ -104,11 +104,9 @@
 
         //INSTAGRAM
         $(document).ready(function() {
-//this is group 2 anyway
-            // $.getJSON("https://spreadsheets.google.com/feeds/list/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/od6/public/values?alt=json", function(data) {
-//fake data
-// https://docs.google.com/spreadsheets/d/1UHAhP_E9YkGwwf-JKSyK742EUoXos2vkj6DL4c5jIDw/pubhtml
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1UHAhP_E9YkGwwf-JKSyK742EUoXos2vkj6DL4c5jIDw/od6/public/values?alt=json", function(data) {
+            // https://docs.google.com/spreadsheets/d/1XX6jJc4uu4PsNp7JvQ4dZ8K9cIFnheQbqOe4QQsfZdE/pubhtml
+            // https://docs.google.com/spreadsheets/d/1XX6jJc4uu4PsNp7JvQ4dZ8K9cIFnheQbqOe4QQsfZdE/pubhtml
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/od6/public/values?alt=json", function(data) {
                 console.log(data.feed)
                     // ['a', 'b', 'c'].forEach(function(d, i, arr) {
                     //     console.log(d, i, arr)
@@ -146,11 +144,10 @@
                     // console.log()
 
 
-                    mindate = new Date("Wed Jul 01 2015 08:00:00 GMT-0400 (EDT)")//now;
+                    mindate = now;
 
                     maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
-                    maxdate = new Date("Thu Jul 02 2015 00:57:33 GMT-0400 (EDT)")
-                    // calcTime("copenhagen", 2);
+                    maxdate = calcTime("copenhagen", 2);
 
                     function calcTime(city, offset) {
 
@@ -281,7 +278,7 @@
                                 .each("end", function(d, i) {
                                     d3.select(this)
                                         .transition()
-                                        .delay(dur)
+                                        .delay(dur / 7)
                                         .duration(dur / 2)
                                         .attr("width", 50)
                                         .attr("height", 50)
@@ -301,19 +298,14 @@
 
 
 // var buttonEntry = [];
-
         function doButton() {
-//active
-            // $.getJSON("https://spreadsheets.google.com/feeds/list/1iWrQh4Pc1G7DkyTCJGy2QLSI4sqnCRtjMbxOMh1b2tQ/od6/public/values?alt=json", function(data) {
-//static url
-// https://docs.google.com/spreadsheets/d/1BfU7fp8qBIJijYwffOLcVUNjH5cY49ZYcFDuKHXE_rI/pubhtml
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1BfU7fp8qBIJijYwffOLcVUNjH5cY49ZYcFDuKHXE_rI/default/public/values?alt=json", function(data) {
 
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1iWrQh4Pc1G7DkyTCJGy2QLSI4sqnCRtjMbxOMh1b2tQ/od6/public/values?alt=json", function(data) {
                 buttonEntry = data.feed.entry;
                 // var parseDate = d3.time.format('%B %d, %Y %I:%M%p').parse;
                 console.log(buttonEntry[buttonEntry.length - 1])
                 for (i = 0; i < buttonEntry.length; i++) {
-                    if (buttonEntry[i]['gsx$device']['$t'] == "banjo_ferret") { //group 1
+                    if (buttonEntry[i]['gsx$device']['$t'] == "wombat_wombat") {
                         but1.push({
                             "buttonIs": buttonEntry[i]['gsx$button']['$t'],
                             "timeIs": buttonEntry[i]['gsx$timestamp']['$t'].replace(" at", '')
@@ -522,10 +514,7 @@
         var threshold = -70;
 
         var fourDone = false;
-        var threeDone = false;
-        var fiveDone = false;
 
-var rectWidth = .5;
         function doBT() {
 
             // "https://dl.dropboxusercontent.com/u/97059/fitbit/fitbit.json"
@@ -571,8 +560,8 @@ var rectWidth = .5;
                                         "dist": d.dist,
                                         "timestamp": d.timeIs
                                     })
+                                    fourDone = true;
                                 }
-                                fourDone = true;
                                 return d.device //+ "bt1"
                             })
                             .attr("x", function(d, i) {
@@ -590,7 +579,7 @@ var rectWidth = .5;
                                     return -h * 20;
                                 }
                             })
-                            .attr("width", rectWidth)
+                            .attr("width", 6)
                             .attr("height", hHere)
                             .attr("fill", function(d) {
                                 for (j = 0; j < groupNames.length; j++) {
@@ -634,7 +623,6 @@ var rectWidth = .5;
                                     "timestamp": d.timeIs
                                 })
                             }
-                            fiveDone = true;
                             return d.device //+ "bt1"
                         })
                         .attr("y", function(d, i) {
@@ -649,7 +637,7 @@ var rectWidth = .5;
                                 return -h * 20;
                             }
                         })
-                        .attr("width", rectWidth)
+                        .attr("width", 6)
                         .attr("height", hHere)
                         .attr("fill", function(d) {
                             for (j = 0; j < groupNames.length; j++) {
@@ -698,7 +686,6 @@ var rectWidth = .5;
                                     "timestamp": d.timeIs
                                 })
                             }
-                                threeDone = true;
                             return d.device //+ "bt1"
                         })
                         .attr("x", function(d, i) {
@@ -715,7 +702,7 @@ var rectWidth = .5;
                                 return -h * 20;
                             }
                         })
-                        .attr("width", rectWidth)
+                        .attr("width", 6)
                         .attr("height", hHere)
                         .attr("fill", function(d) {
                             for (j = 0; j < groupNames.length; j++) {
@@ -728,7 +715,7 @@ var rectWidth = .5;
             })
         }
         var isDone = setInterval(function() {
-            if (fourDone&&fiveDone&&threeDone) {
+            if (fourDone) {
                 runConsol();
                 clearInterval(isDone)
             }
@@ -771,17 +758,17 @@ var rectWidth = .5;
                 for (j = 0; j < groupNames.length; j++) {
                     totalK.push({
                         "name": groupNames[j],
-                        "total": (threeConsolidation(groupNames[j])*10)/60
+                        "total": threeConsolidation(groupNames[j])
                     })
 
                     totalFour.push({
                         "name": groupNames[j],
-                        "total": (fourConsolidation(groupNames[j])*10)/60
+                        "total": fourConsolidation(groupNames[j])
                     })
 
                     totalFive.push({
                         "name": groupNames[j],
-                        "total": (fiveConsolidation(groupNames[j])*10)/60
+                        "total": fiveConsolidation(groupNames[j])
                     })
                     makeText(totalK, totalFour, totalFive);
                 }
@@ -857,14 +844,8 @@ var rectWidth = .5;
                 })
                 .attr("y", h - 60)
                 .html(function(d, i) {
-                    var thisNum = (d.total/60);
-                    if(thisNum<1&&thisNum>0){
-                        return d.total.toFixed(0)+"m";
-                    }
-                    if(thisNum==0){
-                        return d.total.toFixed(0);
-                    }
-                    return (thisNum.toFixed(1)) + "h";
+                    var thisNum = Math.round(d.total * 10 / 60)
+                    return (thisNum) + "h";
                 })
             var sumText = svg.selectAll("summary")
                 .data(totalK)
@@ -876,7 +857,7 @@ var rectWidth = .5;
                 .attr("x", function(d, i) {
                     return xTotal(i) - leftText;
                 })
-                .attr("y", h - 61)
+                .attr("y", h - 60)
                 .html(function(d, i) {
                     return "AT TABLE" //+d.name; 
                 })
@@ -896,14 +877,8 @@ var rectWidth = .5;
                 })
                 .attr("y", h - 35)
                 .html(function(d, i) {
-                    var thisNum = (d.total/60);
-                   if(thisNum<1&&thisNum>0){
-                        return d.total.toFixed(0)+"m";
-                    }
-                    if(thisNum==0){
-                        return d.total.toFixed(0);
-                    }
-                    return (thisNum.toFixed(1)) + "h";
+                    var thisNum = Math.round(d.total * 10 / 60)
+                    return (thisNum) + "h";
                 })
             var sumText = svg.selectAll("summary")
                 .data(totalFour)
@@ -915,7 +890,7 @@ var rectWidth = .5;
                 .attr("x", function(d, i) {
                     return xTotal(i) - leftText;
                 })
-                .attr("y", h - 36)
+                .attr("y", h - 35)
                 .html(function(d, i) {
                     return "AT WORKSHOP" //+d.name; 
                 })
@@ -934,14 +909,8 @@ var rectWidth = .5;
                 })
                 .attr("y", h - 10)
                 .html(function(d, i) {
-                    var thisNum = (d.total/60);
-                   if(thisNum<1&&thisNum>0){
-                        return d.total.toFixed(0)+"m";
-                    }
-                    if(thisNum==0){
-                        return d.total.toFixed(0);
-                    }
-                    return (thisNum.toFixed(1)) + "h";
+                    var thisNum = Math.round(d.total * 10 / 60)
+                    return (thisNum) + "h";
                 })
             var sumText = svg.selectAll("summary")
                 .data(totalFive)
@@ -953,7 +922,7 @@ var rectWidth = .5;
                 .attr("x", function(d, i) {
                     return xTotal(i) - leftText;
                 })
-                .attr("y", h - 11)
+                .attr("y", h - 10)
                 .html(function(d, i) {
                     return "AT CENTER" //+d.name; 
                 })
