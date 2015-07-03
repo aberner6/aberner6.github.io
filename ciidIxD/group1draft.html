@@ -634,7 +634,8 @@ function getCETorCESTDate() {
  
 d3.tsv("https://dl.dropboxusercontent.com/s/7d7vbq9h8gxba7r/BT4.log.parsed.tab?dl=1", function(error, data) {
                     for (j = 0; j < data.length; j++) {
-                    if (parseInt(data[j]['Signal']) < 0 &&parseInt(data[j]['Signal']) > threshold) {
+                    if (parseInt(data[j]['Signal']) < 0 &&parseInt(data[j]['Signal']) > threshold && parseDateBT(data[j]['Date'])>= mindateBT && parseDateBT(data[j]['Date'])<=maxdateBT) {
+                        // if(){
                         // for (k = 0; k < groupNames.length; k++) {
                             // if (data[j]['Device'] == groupNames[k]) {
                                 fourBT.push({
@@ -642,6 +643,7 @@ d3.tsv("https://dl.dropboxusercontent.com/s/7d7vbq9h8gxba7r/BT4.log.parsed.tab?d
                                     "timestamp": data[j]['Date'],
                                     "dist": data[j]['Signal']
                                 })
+                            // }
                             // }
                         // }
                     }
@@ -706,8 +708,7 @@ d3.tsv("https://dl.dropboxusercontent.com/s/7d7vbq9h8gxba7r/BT4.log.parsed.tab?d
 d3.tsv("https://dl.dropboxusercontent.com/s/d9xhgexpabt4xo4/BT5.log.parsed.tab?dl=1", function(error, data) {
                 for (j = 0; j < data.length; j++) {
                     // console.log(data.feed.entry[0])
-                    if (parseInt(data[j]['Signal']) < 0 && parseInt(data[j]['Signal']) >threshold) {
-                        // for (k = 0; k < groupNames.length; k++) {
+                    if (parseInt(data[j]['Signal']) < 0 &&parseInt(data[j]['Signal']) > threshold && parseDateBT(data[j]['Date'])>= mindateBT && parseDateBT(data[j]['Date'])<=maxdateBT) {                        // for (k = 0; k < groupNames.length; k++) {
                             // if (data[j]['Device'] == groupNames[k]) {
                                 fiveBT.push({
                                     "device": data[j]['Device'],
@@ -786,8 +787,7 @@ d3.tsv("https://dl.dropboxusercontent.com/s/d9xhgexpabt4xo4/BT5.log.parsed.tab?d
 d3.tsv("https://dl.dropboxusercontent.com/s/gglrqlyzwgkixal/BT3.log.parsed.tab?dl=1", function(error, data) {
                 for (j = 0; j < data.length; j++) {
                     // console.log(data.feed.entry[0])
-                    if (parseInt(data[j]['Signal']) < 0 && parseInt(data[j]['Signal']) > threshold) {
-                        // for (k = 0; k < groupNames.length; k++) {
+                    if (parseInt(data[j]['Signal']) < 0 &&parseInt(data[j]['Signal']) > threshold && parseDateBT(data[j]['Date'])>= mindateBT && parseDateBT(data[j]['Date'])<=maxdateBT) {                        // for (k = 0; k < groupNames.length; k++) {
                             // if (data[j]['Device'] == groupNames[k]) {
                                 storeBT.push({
                                     "device": data[j]['Device'],
@@ -824,7 +824,7 @@ d3.tsv("https://dl.dropboxusercontent.com/s/gglrqlyzwgkixal/BT3.log.parsed.tab?d
                             // if (parseInt(d.dist) > threshold) {
                                 for (j = 0; j < groupNames.length; j++) {
                                     if (d.device == groupNames[j]) {
-                                        console.log(groupNames[j]);
+                                        // console.log(groupNames[j]);
                                         return stream3 - 10 - j * multiplier;
                                     }
                                     // else{
