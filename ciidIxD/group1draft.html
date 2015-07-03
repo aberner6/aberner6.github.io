@@ -370,17 +370,21 @@ var entryDone = false;
 // var buttonEntry = [];
 var but1 = [];
 var entryb1 = [];
+var de;
         function doButton() {
 //active
             $.getJSON("https://spreadsheets.google.com/feeds/list/1iWrQh4Pc1G7DkyTCJGy2QLSI4sqnCRtjMbxOMh1b2tQ/od6/public/values?alt=json", function(data) {
-
+// de=(data);
 var entryDone = false;
         for (j = 0; j < data.feed.entry.length; j++) { 
+                    if (data.feed.entry[j]['gsx$device']['$t']=="banjo_ferret"){ //group 1
+                        console.log("yes")
                         entryb1.push({
                             "buttonIs": data.feed.entry[j]['gsx$button']['$t'],
                             "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'].replace(" at", '')
                         })
                         entryDone = true;
+                    }
         }
         if(entryDone){
             // console.log(entryb1);
@@ -545,10 +549,12 @@ var entryDone = false;
                                 return centerline;
                             }
                         });
-                    doBT();
+                    // doBT();
                 }
             })
         }
+                    doBT();
+
         var oColor = d3.scale.ordinal()
             .domain([groupNames])
             .range(["#96CEB4", "#ADB3FF", "#FFEEAD"])
