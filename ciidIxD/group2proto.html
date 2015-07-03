@@ -180,7 +180,6 @@ if it's not present, don't show loader */
                     }
                     console.log(totalPhotos)
 
-                    // mindate = Date.now();
                     var now = new Date; // now
 
                     now.setHours(7); // set hours to 0
@@ -190,9 +189,9 @@ if it's not present, don't show loader */
                     // console.log()
 
 //USUAL WAY
-                    // mindate = now;
+                    mindate = now;
 //STATIC WAY
-                    mindate = new Date("Wed Jul 01 2015 08:00:00 GMT-0400 (EDT)")//now;
+                    // mindate = new Date("Wed Jul 01 2015 08:00:00 GMT-0400 (EDT)")//now;
 
                     maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
                     maxdate = calcTime("copenhagen", 2);
