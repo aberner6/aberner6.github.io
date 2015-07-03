@@ -6,11 +6,11 @@
 <head>
     <title>Pelars@CIID</title>
     <meta charset="utf-8">
-    <script src="colorbrewer.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+    <!-- // <script src="colorbrewer.js"></script> -->
+    <script src="d3.min.js" charset="utf-8"></script>
 <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script> -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="jquery.min.js"></script>
 </head>
 <style>
     .results img {
@@ -102,7 +102,7 @@ if it's not present, don't show loader */
         var uniques = [];
         var storeBT = [];
         // var storeBT = [];
-
+// var entry = []
         var storeThis = [];
 
         var dashArray = "1 5 1 1";
@@ -138,6 +138,7 @@ if it's not present, don't show loader */
         var totalPhotos = [];
         var iconTime = [];
 
+var thisT = [];
         function photoConsolidation(index) {
             var total = 0;
             for (i = 0; i < thisTime.length; i++) {
@@ -147,55 +148,17 @@ if it's not present, don't show loader */
             }
             return total;
         }
-
-        //INSTAGRAM
-        $(document).ready(function() {
-//this is group 2 
-
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1M4Br9JcmwuAYDkpD3h3W4lw96wj5mBndkOYlY7mgtQ8/od6/public/values?alt=json", function(data) {
-                console.log(data.feed)
-                    // ['a', 'b', 'c'].forEach(function(d, i, arr) {
-                    //     console.log(d, i, arr)
-                    //     })
-                // for (i = 0; i < data.feed.entry.length; i++) {
-                    // data.feed.entry[i]['gsx$date']['$t'].replace(" at", '');
-                    // if(parseDate(data.feed.entry[i]['gsx$date']['$t'])>=mindate &&parseDate(data.feed.entry[i]['gsx$date']['$t'])<=maxdate){
-                        entry = data.feed.entry;                       
-                    // }else{}
-                // }
-                    //returns 
-                for (j = 0; j < entry.length; j++) {
-                    thisTime.push(entry[j]['gsx$date']['$t'].replace(" at", ''));
-                    // thisHour.push(parseDate(thisTime[j]).getHours())
-                        // console.log(data.feed.entry[j]['gsx$imageurl']['$t']);
-                        // console.log(data.feed.entry[j]);
-                }
-
-
-                console.log(entry.length + "length")
-
-                if (thisTime.length > 1) {
-                    for (j = 0; j <= 24; j++) {
-                        totalPhotos[j] = photoConsolidation(j)
-                    }
-                    console.log(totalPhotos)
-
                     var now = new Date; // now
-
-                    now.setHours(7); // set hours to 0
+                    now.setHours(1); // set hours to 0
                     now.setMinutes(0); // set minutes to 0
                     now.setSeconds(0); // set seconds to 0// divide by 1000, truncate milliseconds
-                    // new Date("Tue Jun 30 2015 8:00:00 GMT-0400 (EDT)");
-                    // console.log()
-
 //USUAL WAY
-                    mindate = now;
+                    // mindate = now;
 //STATIC WAY
-                    // mindate = new Date("Wed Jul 01 2015 08:00:00 GMT-0400 (EDT)")//now;
+                    mindate = new Date("Wed Jul 01 2015 08:00:00 GMT-0400 (EDT)")//now;
 
                     maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
                     maxdate = calcTime("copenhagen", 2);
-
                     function calcTime(city, offset) {
 
                         // create Date object for current location
@@ -214,7 +177,47 @@ if it's not present, don't show loader */
                         // return time as a string
                         // return "The local time in " + city + " is " + nd.toLocaleString();
 
+                    }                    
+// var entry = [];
+        //INSTAGRAM
+        $(document).ready(function() {
+//this is group 1
+// https://docs.google.com/spreadsheets/d/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/pubhtml
+            $.getJSON("https://spreadsheets.google.com/feeds/list/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/od6/public/values?alt=json", function(data) {
+                // console.log(data.feed)
+
+//                 for (j = 0; j < data.feed.entry.length; j++) { 
+//                     thisT.push(data.feed.entry[j]['gsx$date']['$t'].replace(" at", '')); 
+//                     if(thisT.length>0){        
+//                         if(parseDate(thisT[j])>=mindate&&parseDate(thisT[j])<=maxdate){
+//                         entry.push({
+//                             "photo": buttonEntry[i]['gsx$button']['$t'],
+//                             "timeIs": parseDate(thisT[j])
+//                         })
+//                         } 
+//                         else{} 
+//                     }
+//                 }               
+// if(entry.length>0){
+//                  for (k = 0; k< entry.length; k++) {
+//                     // console.log(entry)
+//                     thisTime.push(entry[k]['gsx$date']['$t'].replace(" at", ''));
+//                 }   
+// }
+
+
+                entry = data.feed.entry;                       
+
+                for (j = 0; j < entry.length; j++) {
+                    thisTime.push(entry[j]['gsx$date']['$t'].replace(" at", ''));
+                }
+                if (thisTime.length > 1) {
+                    for (j = 0; j <= 24; j++) {
+                        totalPhotos[j] = photoConsolidation(j)
                     }
+                    console.log(totalPhotos)
+
+
                     xScale = d3.time.scale()
                         .domain([mindate, maxdate])
                         .range([100, w - 100]);
@@ -258,7 +261,11 @@ if it's not present, don't show loader */
                         .append("svg:line")
                         .attr("class", "imgLine")
                         .attr("x1", function(d, i) {
-                            return xScale(parseDate(thisTime[i])) * extraPad; //scale based on d.time
+                            if(parseDate(thisTime[i])>=mindate && parseDate(thisTime[i])<=maxdate){
+                                    return xScale(parseDate(thisTime[i])) * extraPad; //scale based on d.time
+                                }else{
+                                    return -w;
+                                }
                         })
                         .attr("x2", function(d, i) {
                             return xScale(parseDate(thisTime[i])) * extraPad; //scale based on d.time
@@ -294,7 +301,11 @@ if it's not present, don't show loader */
                             return entry[i]['gsx$imageurl']['$t'];
                         })
                         .attr("x", function(d, i) {
-                            return xScale(parseDate(thisTime[i])) * extraPad; //scale based on d.time
+                            if(parseDate(thisTime[i])>=mindate && parseDate(thisTime[i])<=maxdate){
+                                    return xScale(parseDate(thisTime[i])) * extraPad; //scale based on d.time
+                                }else{
+                                    return -w;
+                                }
                         })
                         .attr("y", centerline)
                         .attr("width", 50)
@@ -354,7 +365,7 @@ if it's not present, don't show loader */
                 // var parseDate = d3.time.format('%B %d, %Y %I:%M%p').parse;
                 console.log(buttonEntry[buttonEntry.length - 1])
                 for (i = 0; i < buttonEntry.length; i++) {
-                    if (buttonEntry[i]['gsx$device']['$t'] == "wombat_wombat") { //group 2
+                    if (buttonEntry[i]['gsx$device']['$t'] == "banjo_ferret") { //group 1
                         but1.push({
                             "buttonIs": buttonEntry[i]['gsx$button']['$t'],
                             "timeIs": buttonEntry[i]['gsx$timestamp']['$t'].replace(" at", '')
@@ -426,7 +437,7 @@ if it's not present, don't show loader */
                             }
                         })
                         // .attr("id", "checks")
-                        .attr("x", function(d, i) {
+                        // .attr("x", function(d, i) {
                             //                             if(i>0){
                             //                                 if(iconTime[i].getHours()==iconTime[i-1].getHours()&&
                             // iconTime[i].getMinutes()<=iconTime[i-1].getMinutes()+5
@@ -438,8 +449,13 @@ if it's not present, don't show loader */
                             //                                 }
                             //                             }
                             //                             else{
-                            return xScale(parseDate(d.timeIs));
-                            // }
+                            // return xScale(parseDate(d.timeIs));
+                        .attr("x", function(d, i) {
+                            if(parseDate(d.timeIs)>=mindate && parseDate(d.timeIs)<=maxdate){
+                                    return xScale(parseDate(d.timeIs)); //scale based on d.time
+                                }else{
+                                    return -w;
+                                }
                         })
                         // return xScale(parseDate(d.timeIs)); //scale based on d.time
 
@@ -531,14 +547,15 @@ if it's not present, don't show loader */
         }
         var oColor = d3.scale.ordinal()
             .domain([groupNames])
-            .range(["#5ECBFF","#FF6F69", "#45E9E9"])
+            .range(["#96CEB4", "#ADB3FF", "#FFEEAD"])
         var maxTime;
         var maxActivity = 100;
         var minActivity = 0;
         var distData = [];
         var names = [];
         var uniqueNames = [];
-        var groupNames = ["Nokia108", "S5610","Xperia Mini"]
+        var groupNames = ["GX15", "J10i", "K610i"];
+        var additional = ["PELARS1"];
 
         var specialBT = [];
         var fourBT = [];
@@ -617,50 +634,53 @@ function getCETorCESTDate() {
  
 d3.tsv("https://dl.dropboxusercontent.com/s/7d7vbq9h8gxba7r/BT4.log.parsed.tab?dl=1", function(error, data) {
                     for (j = 0; j < data.length; j++) {
-                    if (parseInt(data[j]['Signal']) < 0) {
-                        for (k = 0; k < groupNames.length; k++) {
-                            if (data[j]['Device'] == groupNames[k]) {
+                    if (parseInt(data[j]['Signal']) < 0 &&parseInt(data[j]['Signal']) > threshold) {
+                        // for (k = 0; k < groupNames.length; k++) {
+                            // if (data[j]['Device'] == groupNames[k]) {
                                 fourBT.push({
                                     "device": data[j]['Device'],
-                                    "timeIs": data[j]['Date'],
+                                    "timestamp": data[j]['Date'],
                                     "dist": data[j]['Signal']
                                 })
-                            }
-                        }
+                            // }
+                        // }
                     }
                         else {}
+                        fourSpecialStore= fourBT;
                     }
 
-                    if (mindateBT) {
+                    if (fourBT.length>0) {
+                        console.log("four ready")
                         var blRect = svg.append("g").attr("class", "bt4")
                             .selectAll("rect").data(fourBT)
                             .enter()
                             .append("svg:rect")
                             .attr("class", function(d, i) {
-                                if (parseInt(d.dist) > threshold) {
-                                    fourSpecialStore.push({
-                                        "device": d.device,
-                                        "dist": d.dist,
-                                        "timestamp": d.timeIs
-                                    })
-                                }
+                                // if (parseInt(d.dist) > threshold) {
+                                //     fourSpecialStore.push({
+                                //         "device": d.device,
+                                //         "dist": d.dist,
+                                //         "timestamp": d.timeIs
+                                //     })
+                                // }
                                 fourDone = true;
-                                return d.device //+ "bt1"
+                                return "four" //+ "bt1"
                             })
                             .attr("x", function(d, i) {
-                                return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
+                                return xScaleBT(parseDateBT(d.timestamp)); //scale based on d.time
                             })
                             .attr("y", function(d, i) {
-                                if (parseInt(d.dist) > threshold) {
+                                // if (parseInt(d.dist) > threshold) {
                                     // console.log(d.device);
                                     for (j = 0; j < groupNames.length; j++) {
                                         if (d.device == groupNames[j]) {
                                             return stream4 - 10 - j * multiplier;
                                         }
+                                        // else {
+                                        //     return -h * 20;
+                                        // }
                                     }
-                                } else {
-                                    return -h * 20;
-                                }
+                                // } 
                             })
                             .attr("width", rectWidth)
                             .attr("height", hHere)
@@ -668,6 +688,11 @@ d3.tsv("https://dl.dropboxusercontent.com/s/7d7vbq9h8gxba7r/BT4.log.parsed.tab?d
                                 for (j = 0; j < groupNames.length; j++) {
                                     if (d.device == groupNames[j]) {
                                         return oColor(groupNames[j]);
+                                    }
+                                }
+                                for (j = 0; j < groupNames.length; j++) {
+                                    if (d.device != groupNames[j]) {
+                                        return "none"
                                     }
                                 }
                             });
@@ -681,59 +706,70 @@ d3.tsv("https://dl.dropboxusercontent.com/s/7d7vbq9h8gxba7r/BT4.log.parsed.tab?d
 d3.tsv("https://dl.dropboxusercontent.com/s/d9xhgexpabt4xo4/BT5.log.parsed.tab?dl=1", function(error, data) {
                 for (j = 0; j < data.length; j++) {
                     // console.log(data.feed.entry[0])
-                    if (parseInt(data[j]['Signal']) < 0) {
-                        for (k = 0; k < groupNames.length; k++) {
-                            if (data[j]['Device'] == groupNames[k]) {
+                    if (parseInt(data[j]['Signal']) < 0 && parseInt(data[j]['Signal']) >threshold) {
+                        // for (k = 0; k < groupNames.length; k++) {
+                            // if (data[j]['Device'] == groupNames[k]) {
                                 fiveBT.push({
                                     "device": data[j]['Device'],
-                                    "timeIs": data[j]['Date'],
+                                    "timestamp": data[j]['Date'],
                                     "dist": data[j]['Signal']
                                 })
-                            }
-                        }
+                            // }
+                        // }
                     } 
                     else {}
+                     fiveSpecialStore = fiveBT;
                 }
-                if (mindateBT) {
-                    var blRect = svg.append("g").attr("class", "bt4")
+                if (fiveBT.length>0) {
+                    console.log("five");
+                    var blRect = svg.append("g").attr("class", "bt5")
                         .selectAll("rect").data(fiveBT)
                         .enter()
                         .append("svg:rect")
                         .attr("class", function(d, i) {
-                            if (parseInt(d.dist) > threshold) {
-                                fiveSpecialStore.push({
-                                    "device": d.device,
-                                    "dist": d.dist,
-                                    "timestamp": d.timeIs
-                                })
-                            }
+                            // if (parseInt(d.dist) > threshold) {
+                            //     fiveSpecialStore.push({
+                            //         "device": d.device,
+                            //         "dist": d.dist,
+                            //         "timestamp": d.timeIs
+                            //     })
+                            // }
                             fiveDone = true;
-                            return d.device //+ "bt1"
+                                return "five" //+ "bt1"
+                        })
+                        .attr("x", function(d, i) {
+                            return xScaleBT(parseDateBT(d.timestamp)); //scale based on d.time
                         })
                         .attr("y", function(d, i) {
-                            if (parseInt(d.dist) > threshold) {
-                                console.log(d.device);
+                            // if (parseInt(d.dist) > threshold) {
                                 for (j = 0; j < groupNames.length; j++) {
                                     if (d.device == groupNames[j]) {
                                         return stream5 - 10 - j * multiplier;
                                     }
+                                    // else{
+                                         // return -h * 20;
+                                    // }
                                 }
-                            } else {
-                                return -h * 20;
-                            }
+                            // } else {
+                                // return -h * 20;
+                            // }
                         })
                         .attr("width", rectWidth)
                         .attr("height", hHere)
                         .attr("fill", function(d) {
                             for (j = 0; j < groupNames.length; j++) {
                                 if (d.device == groupNames[j]) {
+                                    console.log(groupNames[j])
                                     return oColor(groupNames[j]);
-                                }
+                                } 
                             }
+                                for (j = 0; j < groupNames.length; j++) {
+                                    if (d.device != groupNames[j]) {
+                                        return "none"
+                                    }
+                                }
                         })
-                        .attr("x", function(d, i) {
-                            return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
-                        })
+     
 
                 }
             })
@@ -750,56 +786,54 @@ d3.tsv("https://dl.dropboxusercontent.com/s/d9xhgexpabt4xo4/BT5.log.parsed.tab?d
 d3.tsv("https://dl.dropboxusercontent.com/s/gglrqlyzwgkixal/BT3.log.parsed.tab?dl=1", function(error, data) {
                 for (j = 0; j < data.length; j++) {
                     // console.log(data.feed.entry[0])
-                    if (parseInt(data[j]['Signal']) < 0) {
-                        for (k = 0; k < groupNames.length; k++) {
-                            if (data[j]['Device'] == groupNames[k]) {
+                    if (parseInt(data[j]['Signal']) < 0 && parseInt(data[j]['Signal']) > threshold) {
+                        // for (k = 0; k < groupNames.length; k++) {
+                            // if (data[j]['Device'] == groupNames[k]) {
                                 storeBT.push({
                                     "device": data[j]['Device'],
-                                    "timeIs": data[j]['Date'],
+                                    "timestamp": data[j]['Date'],
                                     "dist": data[j]['Signal']
                                 })
-                            }
-                        }
+                            // }
+                        // }
                     } else {}
-                     names.push(data[j]['Device']);
-                    if (parseInt(data[j]['Signal']) < 0) {
-                        distData.push((parseInt(data[j]['Signal'])) * -1);
-                    }
-                    $.each(names, function(i, el) {
-                        if ($.inArray(el, uniqueNames) === -1) {
-                            uniqueNames.push(el);
-                        }
-                    });                   
+                    specialStore = storeBT;
+                     // names.push(data[j]['Device']);
+                    // if (parseInt(data[j]['Signal']) < 0) {
+                    //     distData.push((parseInt(data[j]['Signal'])) * -1);
+                    // }
+                    // $.each(names, function(i, el) {
+                    //     if ($.inArray(el, uniqueNames) === -1) {
+                    //         uniqueNames.push(el);
+                    //     }
+                    // });                   
                 }
                 if (mindateBT) {
-                    var blRect = svg.append("g").attr("class", "bt1")
+                    var blRect = svg.append("g").attr("class", "bt3")
                         .selectAll("rect").data(storeBT)
                         .enter()
                         .append("svg:rect")
                         .attr("class", function(d, i) {
-                            if (parseInt(d.dist) > threshold) {
-                                specialStore.push({
-                                    "device": d.device,
-                                    "dist": d.dist,
-                                    "timestamp": d.timeIs
-                                })
-                            }
                                 threeDone = true;
-                            return d.device //+ "bt1"
+                            return "three"//d.device //+ "bt1"
                         })
                         .attr("x", function(d, i) {
-                            return xScaleBT(parseDateBT(d.timeIs)); //scale based on d.time
+                            return xScaleBT(parseDateBT(d.timestamp)); //scale based on d.time
                         })
                         .attr("y", function(d, i) {
-                            if (parseInt(d.dist) > threshold) {
+                            // if (parseInt(d.dist) > threshold) {
                                 for (j = 0; j < groupNames.length; j++) {
                                     if (d.device == groupNames[j]) {
+                                        console.log(groupNames[j]);
                                         return stream3 - 10 - j * multiplier;
                                     }
+                                    // else{
+                                         // return -h * 20;
+                                    // }
                                 }
-                            } else {
-                                return -h * 20;
-                            }
+                            // } else {
+                                // return -h * 20;
+                            // }
                         })
                         .attr("width", rectWidth)
                         .attr("height", hHere)
@@ -807,8 +841,13 @@ d3.tsv("https://dl.dropboxusercontent.com/s/gglrqlyzwgkixal/BT3.log.parsed.tab?d
                             for (j = 0; j < groupNames.length; j++) {
                                 if (d.device == groupNames[j]) {
                                     return oColor(groupNames[j]);
-                                }
+                                } 
                             }
+                                for (j = 0; j < groupNames.length; j++) {
+                                    if (d.device != groupNames[j]) {
+                                        return "none"
+                                    }
+                                }
                         })
                 }
             })
