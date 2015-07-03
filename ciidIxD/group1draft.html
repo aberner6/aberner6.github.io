@@ -98,7 +98,7 @@ if it's not present, don't show loader */
 //   }
 // }
         var totalButton1 = 0;
-        var but1 = [];
+        // var but1 = [];
         var uniques = [];
         var storeBT = [];
         // var storeBT = [];
@@ -174,30 +174,10 @@ var entry = [];
 var entry1 = [];
 
         //INSTAGRAM
-        $(document).ready(function() {
+        // $(document).ready(function() {
 //this is group 1
 // https://docs.google.com/spreadsheets/d/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/pubhtml
             $.getJSON("https://spreadsheets.google.com/feeds/list/1JHKJm232Adv1GwDNIz5VLyBfg12d6CNl3GrCfs6y-tU/od6/public/values?alt=json", function(data) {
-                // console.log(data.feed)
-
-//                 for (j = 0; j < data.feed.entry.length; j++) { 
-//                     thisT.push(data.feed.entry[j]['gsx$date']['$t'].replace(" at", '')); 
-//                     if(thisT.length>0){        
-//                         if(parseDate(thisT[j])>=mindate&&parseDate(thisT[j])<=maxdate){
-//                         entry.push({
-//                             "photo": buttonEntry[i]['gsx$button']['$t'],
-//                             "timeIs": parseDate(thisT[j])
-//                         })
-//                         } 
-//                         else{} 
-//                     }
-//                 }               
-// if(entry.length>0){
-//                  for (k = 0; k< entry.length; k++) {
-//                     // console.log(entry)
-//                     thisTime.push(entry[k]['gsx$date']['$t'].replace(" at", ''));
-//                 }   
-// }
 var entryDone = false;
         for (j = 0; j < data.feed.entry.length; j++) { 
                         entry1.push({
@@ -214,7 +194,6 @@ var entryDone = false;
                             "photo": entry1[k].photo,
                             "timeIs": entry1[k].timeIs
                         })
-                             // thisTime.push(entry[k].timeIs);
                     }
                 }            
         }
@@ -235,7 +214,6 @@ var entryDone = false;
                         totalPhotos[j] = photoConsolidation(j)
                     }
                     console.log(totalPhotos)
-
 
                     xScale = d3.time.scale()
                         .domain([mindate, maxdate])
@@ -265,18 +243,10 @@ var entryDone = false;
                     var extraPad = 1;
                     var clicked = false;
 
-
-                    // var maxHour = d3.max(thisHour, function(j) {
-                    //     return j; //References first value in each subarray
-                    // });
-                    // var minHour = d3.min(thisHour, function(j) {
-                    //     return j; //References first value in each subarray
-                    // });
-
-                    var maxHour = d3.max(totalPhotos, function(j) {
+                    maxHour = d3.max(totalPhotos, function(j) {
                         return j; //References first value in each subarray
                     });
-                    var minHour = d3.min(totalPhotos, function(j) {
+                    minHour = d3.min(totalPhotos, function(j) {
                         return j; //References first value in each subarray
                     });
                     var scaleIt = d3.scale.linear()
@@ -302,8 +272,20 @@ var entryDone = false;
                         .transition()
                         .duration(dur)
                         .attr("y2", function(d, i) {
-                            return scaleIt(totalPhotos[parseDate(entry[i].timeIs).getHours()])  
+                            if (i > 0) {
+                                if (parseDate(entry[i].timeIs).getHours() == parseDate(entry[i - 1].timeIs).getHours()) {
+                                    return centerline + totalPhotos[parseDate(entry[i].timeIs).getHours()] * 45;
+                                    // return scaleIt(parseDate(thisTime[i]).getHours());     
+                                } else {
+                                    return centerline + 45;
+                                }
+                            } else {
+                                return centerline + 45;
+                            }   
+                            // return scaleIt(totalPhotos[parseDate(entry[i].timeIs).getHours()])  
                         });
+                    }
+                if(totalPhotos.length>0){
 
                     suns
                         .attr("clip-path", "url(#chart-area)")
@@ -318,21 +300,42 @@ var entryDone = false;
                         .attr("height", 50)
                         .transition()
                         .duration(dur)
-                        .attr("y", function(d, i) {
-                            return scaleIt(totalPhotos[parseDate(entry[i].timeIs).getHours()])
-                        });
+                        .attr("y", function(d,i){
+                            if (i > 0) {
+                                if (parseDate(entry[i].timeIs).getHours() == parseDate(entry[i - 1].timeIs).getHours()) {
+                                    return centerline + totalPhotos[parseDate(entry[i].timeIs).getHours()] * 45;
+                                    // return scaleIt(parseDate(thisTime[i]).getHours());     
+                                } else {
+                                    return centerline + 45;
+                                }
+                            } else {
+                                return centerline + 45;
+                            }                            
+                        })
+
                         // .attr("y", function(d, i) {
+                        //     // return centerline+100;
+                        //     // console.log(totalPhotos[parseDate(d.timeIs).getHours()])
+                        //     // if(totalPhotos[parseDate(d.timeIs).getHours()]==0){
+                        //         // console.log(totalPhotos[parseDate(d.timeIs).getHours()])
+                        //         // return centerline + 100;
+                        //     // }
+
+
+                        //     return parseDate(d.timeIs).getHours()*100;
+
+                        //     // else{
+                        //         // for(j=0; j<totalPhotos[parseDate(d.timeIs).getHours()]; j++){
+                        //             // console.log(d.timeIs+j);
+                        //             // return j*300
+                        //     //         return centerline + j*100;
+                        //     //         // return scaleIt(j)
+                        //         // }
+                        //     // }
+                        //     // return scaleIt(totalPhotos[parseDate(entry[i].timeIs).getHours()])
+                        // });
                         //     // if (i > 0) {
                         //         // if (parseDate(entry[i].timeIs).getHours() == parseDate(entry[i - 1].timeIs).getHours()) {
-                        //         // }
-                        //     //         return centerline + totalPhotos[parseDate(entry[i].timeIs).getHours()] * 50;
-                        //     //     } else {
-                        //     //         return centerline + 50;
-                        //     //     }
-                        //     // } else {
-                        //     //     return centerline + 50;
-                        //     // }
-                        // });
 
                     suns
                         .on("click", function(d) {
@@ -360,38 +363,36 @@ var entryDone = false;
                 }
                 doButton();
             });
-        })
+        // })
 
 
 
 // var buttonEntry = [];
-
+var but1 = [];
+var entryb1 = [];
         function doButton() {
 //active
             $.getJSON("https://spreadsheets.google.com/feeds/list/1iWrQh4Pc1G7DkyTCJGy2QLSI4sqnCRtjMbxOMh1b2tQ/od6/public/values?alt=json", function(data) {
 
-                buttonEntry = data.feed.entry;
-                // var parseDate = d3.time.format('%B %d, %Y %I:%M%p').parse;
-                console.log(buttonEntry[buttonEntry.length - 1])
-                for (i = 0; i < buttonEntry.length; i++) {
-                    if (buttonEntry[i]['gsx$device']['$t'] == "banjo_ferret") { //group 1
-                        but1.push({
-                            "buttonIs": buttonEntry[i]['gsx$button']['$t'],
-                            "timeIs": buttonEntry[i]['gsx$timestamp']['$t'].replace(" at", '')
+var entryDone = false;
+        for (j = 0; j < data.feed.entry.length; j++) { 
+                        entryb1.push({
+                            "buttonIs": data.feed.entry[j]['gsx$button']['$t'],
+                            "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'].replace(" at", '')
                         })
-
+                        entryDone = true;
+        }
+        if(entryDone){
+            // console.log(entryb1);
+                for (k = 0; k < entryb1.length-1; k++) {
+                    if(parseDate(entryb1[k].timeIs)>=mindate&&parseDate(entryb1[k].timeIs)<=maxdate){
+                        but1.push({
+                            "buttonIs": entryb1[k].buttonIs,
+                            "timeIs": entryb1[k].timeIs
+                        })
                     }
-                } // for (i = 0; i < data.feed.entry.length; i++) {
-                //     if (data.feed.entry[i]['gsx$device']['$t'] == "banjo_ferret") {
-                //         but1.push({
-                //             "buttonIs": data.feed.entry[i]['gsx$button']['$t'],
-                //             "timeIs": data.feed.entry[i]['gsx$timestamp']['$t'].replace(" at", '')
-                //         })
-
-                //     }
-                // }
-
-
+                }            
+        }
                 if (but1.length > 1) {
                     // console.log(unique(but1));
                     unique(but1);
@@ -445,7 +446,6 @@ var entryDone = false;
                                 return "star.png";
                             }
                         })
-                        // .attr("id", "checks")
                         // .attr("x", function(d, i) {
                             //                             if(i>0){
                             //                                 if(iconTime[i].getHours()==iconTime[i-1].getHours()&&
@@ -457,17 +457,12 @@ var entryDone = false;
                             //                                     return xScale(parseDate(d.timeIs));
                             //                                 }
                             //                             }
-                            //                             else{
-                            // return xScale(parseDate(d.timeIs));
+                            .attr("class", function(d,i){
+                                return d.timeIs;
+                            })
                         .attr("x", function(d, i) {
-                            if(parseDate(d.timeIs)>=mindate && parseDate(d.timeIs)<=maxdate){
                                     return xScale(parseDate(d.timeIs)); //scale based on d.time
-                                }else{
-                                    return -w;
-                                }
                         })
-                        // return xScale(parseDate(d.timeIs)); //scale based on d.time
-
 
                     .attr("opacity", 0)
                         .attr("y", centerline)
