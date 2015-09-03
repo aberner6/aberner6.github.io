@@ -147,10 +147,11 @@ var thisT = [];
 //USUAL WAY
                     // mindate = now;
 //STATIC WAY
-                    mindate = new Date("Wed Jul 01 2015 08:00:00 GMT-0400 (EDT)")//now;
+                    mindate = new Date("Tue June 30 2015 08:00:00 GMT-0400 (CET)")//now;
+                    maxdate = new Date("Tue June 30 2015 23:59:00 GMT-0400 (CET)")//now;
 
-                    maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
-                    maxdate = calcTime("copenhagen", 2);
+                    // maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
+                    // maxdate = calcTime("copenhagen", 2);
                     function calcTime(city, offset) {
 
                         // create Date object for current location

@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <!-- // <script src="colorbrewer.js"></script> -->
     <script src="d3.min.js" charset="utf-8"></script>
-<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script> -->
+<script src="http://cdn.jsdelivr.net/sparkjs/0.4.2/spark.min.js"></script>
 
     <script src="jquery.min.js"></script>
 </head>
@@ -119,10 +119,13 @@ if it's not present, don't show loader */
             .attr("width", w)
             .attr("height", h);
         var parseDate = d3.time.format('%B %d, %Y %I:%M%p').parse;
+var parseDateBut = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse;
+// undefined        
         var mindate, maxdate, xScale;
         var xAxis = d3.svg.axis();
         var yAxis = d3.svg.axis();
-
+var agreedDate = new Date("Thu Jul 02 2015 18:00:00 GMT-0400 (CET)");
+var agreedFirstDate = new Date("Tues Jun 30 2015 6:00:00 GMT-0400 (CET)");
         var centerline = h / 2;
 
         var mindateBT, maxdateBT, xScaleBT, yScaleBT;
@@ -147,14 +150,15 @@ var thisT = [];
 //USUAL WAY
                     // mindate = now;
 //STATIC WAY
-                    mindate = new Date("Wed Jul 01 2015 08:00:00 GMT-0400 (EDT)")//now;
+                    mindate = agreedFirstDate; //now;
 
-                    maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
+                    // maxD = new Date("Fri Jul 03 2015 08:00:00 GMT-0400 (EDT)")//now;
+                    // maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
                     maxdate = calcTime("copenhagen", 2);
                     function calcTime(city, offset) {
 
                         // create Date object for current location
-                        d = new Date();
+                        d = agreedDate;
 
                         // convert to msec
                         // add local time zone offset
@@ -367,192 +371,226 @@ var entryDone = false;
 
 
 
-// var buttonEntry = [];
-var but1 = [];
-var entryb1 = [];
-var de;
-        function doButton() {
-//active
-            $.getJSON("https://spreadsheets.google.com/feeds/list/1iWrQh4Pc1G7DkyTCJGy2QLSI4sqnCRtjMbxOMh1b2tQ/od6/public/values?alt=json", function(data) {
-// de=(data);
-var entryDone = false;
-        for (j = 0; j < data.feed.entry.length; j++) { 
-                    if (data.feed.entry[j]['gsx$device']['$t']=="banjo_ferret"){ //group 1
-                        console.log("yes")
-                        entryb1.push({
-                            "buttonIs": data.feed.entry[j]['gsx$button']['$t'],
-                            "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'].replace(" at", '')
-                        })
-                        entryDone = true;
-                    }
-        }
-        if(entryDone){
-            // console.log(entryb1);
-                for (k = 0; k < entryb1.length-1; k++) {
-                    if(parseDate(entryb1[k].timeIs)>=mindate&&parseDate(entryb1[k].timeIs)<=maxdate){
-                        but1.push({
-                            "buttonIs": entryb1[k].buttonIs,
-                            "timeIs": entryb1[k].timeIs
-                        })
-                    }
-                }            
-        }
-                if (but1.length > 1) {
-                    // console.log(unique(but1));
-                    unique(but1);
+// // var buttonEntry = [];
+// var but1 = [];
+// var entryb1 = [];
+// var de;
+// var sparkData = [];
+// var sparkDeviceID;
+// function doButton() {
+// //active
+// // $.getJSON("https://spreadsheets.google.com/feeds/list/1iWrQh4Pc1G7DkyTCJGy2QLSI4sqnCRtjMbxOMh1b2tQ/od6/public/values?alt=json", function(data) {
+// // de=(data);
+// var entryDone = false;
+//         // for (j = 0; j < data.feed.entry.length; j++) { 
+//                     // if (data.feed.entry[j]['gsx$device']['$t']=="banjo_ferret"){ //group 1
+//                     //     console.log("yes")
+//                     //     entryb1.push({
+//                     //         "buttonIs": data.feed.entry[j]['gsx$button']['$t'],
+//                     //         "timeIs": data.feed.entry[j]['gsx$timestamp']['$t'].replace(" at", '')
+//                     //     })
+//                     //     entryDone = true;
+//                     // }
 
-                    function unique(obj) {
-                        var stringify = {};
-                        for (var i = 0; i < obj.length; i++) {
-                            var keys = Object.keys(obj[i]);
-                            keys.sort(function(a, b) {
-                                return a - b
-                            });
-                            var str = '';
-                            for (var j = 0; j < keys.length; j++) {
-                                str += JSON.stringify(keys[j]);
-                                str += JSON.stringify(obj[i][keys[j]]);
-                            }
-                            if (!stringify.hasOwnProperty(str)) {
-                                uniques.push(obj[i]);
-                                stringify[str] = true;
-                            }
-                        }
-                        return uniques;
-                    }
-                }
+//                 if (uniques.length > 1) {
+//                     var radius = 10;
+//                     var strokeWeight = 2;
 
-                if (uniques.length > 1) {
+//                     var checks = svg.selectAll("img")
+//                     .data(uniques)
+//                         .enter()
+//                         .append("svg:image")
+//                         .attr("class","butImg")
+//                     checks
+//                         .attr("xlink:href", function(d, i) {
+//                             iconTime.push(d.timeIs);
+//                             if (d.buttonIs == "button1") { //cloud
+//                                 return "idea.png";
+//                             }
+//                             if (d.buttonIs == "button3") {
+//                                 return "thunder.png";
+//                             }
+//                             if (d.buttonIs == "button2") {
+//                                 return "star.png";
+//                             }
+//                         })
+//                         .attr("x", function(d, i) {
+//                                     return xScale(d.timeIs); //scale based on d.time
+//                         })
+//                     .attr("opacity", 0)
+//                         .attr("y", centerline)
+//                         .attr("width", 20)
+//                         .attr("height", 20)
+//                         .transition()
+//                         .duration(dur)
+//                         .attr("opacity", 1)
+//                         .attr("y", function(d, i) {
+//                             if (d.buttonIs == "button1") {
+//                                 return margin * 2;
+//                             }
+//                             if (d.buttonIs == "button3") {
+//                                 return margin * 3;
+//                             }
+//                             if (d.buttonIs == "button2") {
+//                                 return margin * 4;
+//                             }
+//                         })
+//                     var but1Line = svg.append("g")
+//                         .selectAll("line").data(uniques)
+//                         .enter()
+//                         .append("svg:line")
+//                         .attr("class", function(d) {
+//                             return d.buttonIs;
+//                         })
+//                         .attr("x1", function(d, i) {
+//                             return xScale(d.timeIs) + 10; //scale based on d.time
+//                         })
+//                         .attr("x2", function(d, i) {
+//                             return xScale(d.timeIs) + 10; //scale based on d.time
+//                         })
+//                         .attr("y1", centerline)
+//                         .attr("y2", centerline)
+//                         .attr("stroke", "grey")
+//                         .attr("stroke-weight", .5)
+//                         .attr("opacity", .2)
+//                         .transition()
+//                         .duration(dur)
+//                         .attr("y2", function(d, i) {
+//                             if (d.buttonIs == "button1") {
+//                                 return margin * 2 + 10;
+//                             }
+//                             if (d.buttonIs == "button3") {
+//                                 return margin * 3 + 10;
+//                             }
+//                             if (d.buttonIs == "button2") {
+//                                 return margin * 4 + 10;
+//                             } else {
+//                                 return centerline;
+//                             }
+//                         });
+//                 }
+//     var token = 'cd1e06fe5c9ee77f8f2b49b164c4d6ac799b8560';
+//     spark.login({ accessToken: token });
 
-                    // mindate = parseDate(uniques[0].timeIs);
-                    // maxdate = parseDate(uniques[totalButton1 - 1].timeIs);
-                    // x = d3.time.scale()
-                    //     .domain([mindate, maxdate])
-                    //     .range([10, w - 10]);
+//             //On click, update with new data            
+// d3.select("body")
+//     .on("click", function() {
+
+//     // spark.on('login', function() {
+//         spark.getEventStream(false, 'mine', function(data) {
+//         sparkData.push((data));
+//         sparkDeviceID = sparkData['coreid']
+//                     if (data['coreid']=="53ff6c066667574853382567"){ //group 1
+//                         console.log("yes")
+//                         entryb1.push({
+//                             "buttonIs": data['coreid'],
+//                             "timeIs": parseDateBut(data['published_at'])
+//                         })
+//                         entryDone = true;
+//                     }
+//         });
+//     // });
+
+//         // }
+//         if(entryDone){
+//             // console.log(entryb1);
+//                 for (k = 0; k < entryb1.length-1; k++) {
+//                     if(entryb1[k].timeIs>=mindate&&entryb1[k].timeIs<=maxdate){
+//                         but1.push({
+//                             "buttonIs": entryb1[k].buttonIs,
+//                             "timeIs": entryb1[k].timeIs
+//                         })
+//                     }
+//                 }            
+//         }
+//                 if (but1.length > 1) {
+//                     // console.log(unique(but1));
+//                     unique(but1);
+
+//                     function unique(obj) {
+//                         var stringify = {};
+//                         for (var i = 0; i < obj.length; i++) {
+//                             var keys = Object.keys(obj[i]);
+//                             keys.sort(function(a, b) {
+//                                 return a - b
+//                             });
+//                             var str = '';
+//                             for (var j = 0; j < keys.length; j++) {
+//                                 str += JSON.stringify(keys[j]);
+//                                 str += JSON.stringify(obj[i][keys[j]]);
+//                             }
+//                             if (!stringify.hasOwnProperty(str)) {
+//                                 uniques.push(obj[i]);
+//                                 stringify[str] = true;
+//                             }
+//                         }
+//                         return uniques;
+//                     }
+//                 }
+// //eventually calibrate time here for xscale and xaxis
+// // entryb1[k].timeIs
+//                     //Update scale domains
+//                     // xScale.domain(d3.range(dataset.length));    //Recalibrate the x scale domain, given the new length of dataset
+// // svg.select(".axis")
+// //     .transition()
+// //     .duration(1000)
+// //     .call(xAxis);
 
 
-                    var radius = 10;
-                    var strokeWeight = 2;
 
-                    var checks = svg.selectAll("img").data(uniques)
-                        .enter()
-                        .append("svg:image")
-                    checks
-                        .attr("xlink:href", function(d, i) {
-                            iconTime.push(parseDate(d.timeIs));
-                            if (d.buttonIs == "button1") { //cloud
-                                return "idea.png";
-                            }
-                            if (d.buttonIs == "button3") {
-                                return "thunder.png";
-                            }
-                            if (d.buttonIs == "button2") {
-                                return "star.png";
-                            }
-                        })
-                        // .attr("x", function(d, i) {
-                            //                             if(i>0){
-                            //                                 if(iconTime[i].getHours()==iconTime[i-1].getHours()&&
-                            // iconTime[i].getMinutes()<=iconTime[i-1].getMinutes()+5
-                            //                                     ){
-                            //                                     console.log(iconTime[i]+iconTime[i-1])
-                            //                                     return xScale(iconTime[i-1]);
-                            //                                 }else{
-                            //                                     return xScale(parseDate(d.timeIs));
-                            //                                 }
-                            //                             }
-                            .attr("class", function(d,i){
-                                return d.timeIs;
-                            })
-                        .attr("x", function(d, i) {
-                                    return xScale(parseDate(d.timeIs)); //scale based on d.time
-                        })
+//                     //Select…
+//                     var bars = svg.selectAll(".butImg")            //Select all bars
+//                         .data(uniques);                         //Re-bind data to existing bars, return the 'update' selection
+//                                                                 //'bars' is now the update selection
+                    
+//                     //Enter…
+//                     bars.enter()                                //References the enter selection (a subset of the update selection)
+//                         .enter()
+//                         .append("svg:image")
+//                         .attr("class","butImg")
+//                     checks
+//                         .attr("xlink:href", function(d, i) {
+//                             iconTime.push(d.timeIs);
+//                             if (d.buttonIs == "button1") { //cloud
+//                                 return "idea.png";
+//                             }
+//                             if (d.buttonIs == "button3") {
+//                                 return "thunder.png";
+//                             }
+//                             if (d.buttonIs == "button2") {
+//                                 return "star.png";
+//                             }
+//                         })
+//                         .attr("x", function(d, i) {
+//                                     return xScale(d.timeIs); //scale based on d.time
+//                         })
+//                     .attr("opacity", 0)
+//                         .attr("y", centerline)
+//                         .attr("width", 20)
+//                         .attr("height", 20)
+//                         .transition()
+//                         .duration(dur)
+//                         .attr("opacity", 1)
+//                         .attr("y", function(d, i) {
+//                             if (d.buttonIs == "button1") {
+//                                 return margin * 2;
+//                             }
+//                             if (d.buttonIs == "button3") {
+//                                 return margin * 3;
+//                             }
+//                             if (d.buttonIs == "button2") {
+//                                 return margin * 4;
+//                             }
+//                         })
 
-                    .attr("opacity", 0)
-                        .attr("y", centerline)
-                        .attr("width", 20)
-                        .attr("height", 20)
-                        //                         .attr("width", function(d,i){
-                        //                             if(i>0){
-                        //                                 if(iconTime[i].getHours()==iconTime[i-1].getHours()&&
-                        // iconTime[i].getMinutes()<=iconTime[i-1].getMinutes()+1
-                        //                                     ){
-                        //                                     return 40;
-                        //                                 }else{
-                        //                                     return 20;
-                        //                                 }
-                        //                             }
-                        //                             else{
-                        //                                 return 20;
-                        //                             }
-                        //                         })
-                        //                         .attr("height", function(d,i){
-                        //                             if(i>0){
-                        //                                 if(iconTime[i].getHours()==iconTime[i-1].getHours()&&
-                        // iconTime[i].getMinutes()<=iconTime[i-1].getMinutes()+1
-                        //                                     ){
-                        //                                     return 40;
-                        //                                 }else{
-                        //                                     return 20;
-                        //                                 }
-                        //                             }
-                        //                             else{
-                        //                                 return 20;
-                        //                             }
-                        //                         })
-                        .transition()
-                        .duration(dur)
-                        .attr("opacity", 1)
-                        .attr("y", function(d, i) {
-                            if (d.buttonIs == "button1") {
-                                return margin * 2;
-                            }
-                            if (d.buttonIs == "button3") {
-                                return margin * 3;
-                            }
-                            if (d.buttonIs == "button2") {
-                                return margin * 4;
-                            }
-                        })
-                    var but1Line = svg.append("g")
-                        .selectAll("line").data(uniques)
-                        .enter()
-                        .append("svg:line")
-                        .attr("class", function(d) {
-                            return d.buttonIs;
-                        })
-                        .attr("x1", function(d, i) {
-                            return xScale(parseDate(d.timeIs)) + 10; //scale based on d.time
-                        })
-                        .attr("x2", function(d, i) {
-                            return xScale(parseDate(d.timeIs)) + 10; //scale based on d.time
-                        })
-                        .attr("y1", centerline)
-                        .attr("y2", centerline)
-                        .attr("stroke", "grey")
-                        .attr("stroke-weight", .5)
-                        .attr("opacity", .2)
-                        // .attr("stroke-dasharray", dashArray)
-                        // .attr("stroke-dasharray", "1 2 2 2")
-                        .transition()
-                        .duration(dur)
-                        .attr("y2", function(d, i) {
-                            if (d.buttonIs == "button1") {
-                                return margin * 2 + 10;
-                            }
-                            if (d.buttonIs == "button3") {
-                                return margin * 3 + 10;
-                            }
-                            if (d.buttonIs == "button2") {
-                                return margin * 4 + 10;
-                            } else {
-                                return centerline;
-                            }
-                        });
-                    // doBT();
-                }
-            })
-        }
+//                     //Update…
+//                     bars.transition()                           //Initiate a transition on all elements in the update selection (all rects)
+//                         .duration(500)
+//                         .attr("x", function(d, i) {
+//                                     return xScale(d.timeIs); //scale based on d.time
+//                         })
+//     });
+// }
                     doBT();
 
         var oColor = d3.scale.ordinal()
@@ -600,7 +638,9 @@ var rectWidth = .5;
             // OLD
             // $.getJSON("https://spreadsheets.google.com/feeds/list/1CK2L-NwoswZ9l4-MU4tbu-bwt3eI1Oot_bbXkuFNl8c/od6/public/values?alt=json", function(data) {
 function getCETorCESTDate() {
-    var localDate = new Date();
+    //careful here
+    var localDate = agreedDate;//now;
+// agreedDate
     var utcOffset = localDate.getTimezoneOffset();
     var cetOffset = utcOffset + 60;
     var cestOffset = utcOffset + 120;
@@ -630,17 +670,14 @@ function getCETorCESTDate() {
 }
             // if (fiveBT.length > 0) {
             mindateBT = mindate;
-            maxdateBT = getCETorCESTDate(maxdateBT)
+            maxdateBT = calcTime("copenhagen", 2);
+
+            // maxdateBT = calcTime(maxdateBT)
 // Thu Jul 02 2015 15:59:21 GMT-0400 (EDT)maxdate;
             xScaleBT = d3.time.scale()
                 .domain([mindateBT, maxdateBT])
                 .range([100, w - 100]);
-
-            // }
-            //old
-            //stream4
-// $.getJSON("https://spreadsheets.google.com/feeds/list/13mKnqOeD71x6Un7VS-FPKvz3mepx5RewYO9fy680HRw/default/public/values?alt=json", function(data) {
-                // https://www.dropbox.com/s/7d7vbq9h8gxba7r/BT4.log.parsed.tab?dl=0                 
+              
  
 d3.tsv("https://dl.dropboxusercontent.com/s/7d7vbq9h8gxba7r/BT4.log.parsed.tab?dl=1", function(error, data) {
                     for (j = 0; j < data.length; j++) {
