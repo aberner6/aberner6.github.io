@@ -72,11 +72,14 @@
     }
     
     .title {
+position: absolute;
+    right: 10px;
+    top: 35px;
         font-family: 'Lato-Light', sans-serif;
         color: white;
         /*font-family: "Lato-Light";*/
         font-size: 24px;
-        margin-left: 40px;
+        /*margin-left: 40px;*/
     }
     
     text {
@@ -84,8 +87,8 @@ left: 110px;
     top: 13px;
     position: absolute;
 
-        fill: lightgray;
-        
+        fill: white;
+
         font-family: "Lato-Light";
     }
     
@@ -111,7 +114,7 @@ left: 110px;
         width: 100px;
     }
 </style>
-<div class="title">LEARNING DASHBOARD</div>
+<div class="title">LEARNING DASHBOARD: TABLE 1</div>
 <div class="logo">
     <img src="Pelars_logos.png"></img>
 </div>
@@ -142,7 +145,9 @@ left: 110px;
 //         });
 // })
 var whatsthis = Date.now();
-mindate = +(new Date(whatsthis-8000000+4000000));
+mindate = +(new Date(whatsthis-8000000+4000000-5000000));
+// new Date(mindate-5000000)
+// Sat Sep 05 2015 13:33:44 GMT+0200 (CEST)
 // mindate = 1441440000; //thisDate; //Date.now().getHours()
 maxdate = Date.now();
 
@@ -191,7 +196,7 @@ function startTimer(){
                 console.log("prepped")
                 if (prepped && !autoMoving) {
                             var e = [mindate, maxdate]; //set brush range
-                            // var e = [maxdate-timevar*5, maxdate]; //set brush range
+                            // // var e = [maxdate-timevar*5, maxdate]; //set brush range
                             brush.extent(e);
                             mini.call(brush);                             
                 } else {
@@ -227,7 +232,7 @@ function startTimer(){
 
             var m = [20, 15, 15, 120], //top right bottom left
                 w = window.innerWidth - m[1] * 2 - m[3],
-                h = window.innerHeight - m[0] - m[2],
+                h = window.innerHeight - m[3],//m[0] - m[2],
                 miniHeight = 80, //laneLength * 12 + 50,
                 mainHeight = h - miniHeight - 50;
 
@@ -249,7 +254,7 @@ function startTimer(){
                 .attr("class", "main");
 
             var mini = chart.append("g")
-                .attr("transform", "translate(" + m[3] + "," + (mainHeight + m[0]) + ")")
+                .attr("transform", "translate(" + m[3] + "," + (mainHeight + m[0]-30) + ")")
                 .attr("width", w)
                 .attr("height", miniHeight)
                 .attr("class", "mini")
@@ -258,13 +263,17 @@ function startTimer(){
             //scales
             var x = d3.scale.linear()
                 .domain([mindate, maxdate])
-                .range([m[1], w]);
+                .range([-10, w]);
+                // .range([m[1], w]);
 
             var x1 = d3.scale.linear()
+                .domain([mindate, maxdate])
                 .range([m[1] + 10, w]);
             var xAxis = d3.svg.axis();
             var xAxisScale = d3.time.scale()
-                .range([m[1], w]);
+                // .range([m[1], w]);
+                .range([-10, w]);
+
 
             //scales
             var y = d3.scale.linear()
@@ -488,8 +497,9 @@ var buttonData = [];
                 })
                 .attr("width", 20)
                 .attr("height", 20)
+                    // .attr("x", x1(mindate));
                 // .attr("x", m[3] - 40);
-                .attr("x", m[1] + 10 - 20)
+                .attr("x", -45)
 
             var iconText;
             iconText = main.selectAll("optionsText")
@@ -499,7 +509,7 @@ var buttonData = [];
                 .attr("y", function(d) {
                     return yis(d);
                 })
-                .attr("x", m[1] + 10 - 20) //m[3] - 50)
+                .attr("x", -55)//m[1] + 10 - 20) //m[3] - 50)
                 .attr("text-anchor", "end")
                 .text(function(d) {
                     return d;
@@ -516,7 +526,7 @@ var buttonData = [];
                 .attr("y2", function(d) {
                     return yis(d);
                 })
-                .attr("x1", m[1] + 10)
+                .attr("x1", 0)//m[1] + 10)
                 .attr("x2", w) //m[3]) //not w
                 .attr("stroke-dasharray", dashArray)
                 .attr("stroke-width", .5)
@@ -845,18 +855,18 @@ console.log("speci"+d.mod+d.start +"start "+d.end+" end");
                     .data(d3.range(1))
                     .enter()
                     .append("text").attr("class", "wodry1")
-                    .attr("x", x1(minExtent) - 10)
-                    .attr("y", yis(options[0]) - 70)
+                    .attr("x", 0)//x1(minExtent) - 10)
+                    .attr("y", yis(options[0]) - 67)
                     .attr("text-anchor", "end")
                     .text(minHeadline);
                 var timeText = main.selectAll("wodry")
                     .data(d3.range(1))
                     .enter()
                     .append("text").attr("class", "wodry")
-                    .attr("x", x1(minExtent) - 10)
+                    .attr("x", 0)//-45//x1(minExtent) - 10)
                     .attr("y", yis(options[0]) - 50)
                     .attr("text-anchor", "end")
-                    .text("@" + minExtTime + " - ");
+                    .text("@" + minExtTime);
 
                 var timeText2;
                 timeText2 = main.selectAll("wodry2")
@@ -874,7 +884,7 @@ console.log("speci"+d.mod+d.start +"start "+d.end+" end");
                             return 0;
                         }
                     })
-                    .text(" - " + maxExtTime);
+                    .text(maxExtTime);
                 ///////////////////
                 /////////WHAT IS WRONG
                 ardRectz = itemArdz.selectAll("rect")
@@ -1314,9 +1324,9 @@ console.log("speci"+d.mod+d.start +"start "+d.end+" end");
                     timeRect.enter()
                     .append("rect").attr("class", "timeRects")
                         .attr("transform", "translate(" + 0 + "," + -imgHeight*2.5 + ")")
-                    .attr("x", x1(minExtent))
+                    .attr("x", -10)//x1(minExtent))
                     .attr("y", yis(options[0])-5)
-                    .attr("width", w-timeWidth-50) //not -timeiwdth
+                    .attr("width", w-timeWidth) //not -timeiwdth
                     .attr("height", 1)//imgHeight/2)
                     .attr("fill","white")
                     .attr("stroke-dasharray",dashArray)
