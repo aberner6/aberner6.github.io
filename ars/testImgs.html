@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <title>Prep</title>
+</head>
+<style>
+	rect.backround{
+		display:block;
+	}
+	.brush .extent {
+		stroke: lightgray;
+		fill: lightgray;
+		fill-opacity: .365;
+		display:block;
+	}
+	#click{
+		background-color: gray;
+		width:20px;
+		color:white;
+		padding:2px;
+	}
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+/*.clip-svg {
+  clip-path: url(#myClip);
+}*/
+</style>
+<body>
+    <script src="d3.min.js" charset="utf-8"></script>
+    <script src="http://cdn.jsdelivr.net/sparkjs/0.4.2/spark.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <div id="click">up</div>
+ 
+    <!-- <div i -->
+<!--   <svg>
+    <clipPath id="cut-off-bottom">
+      <circle cx="100" cy="100" r="50" />
+    </clipPath>
+</svg> -->
+<script type="text/javascript">
+var svg = d3.select("body")
+            .append("svg")
+            .attr("width", 900)
+            .attr("height", 800);
+// var svg = d3.select("body").append("svg").attr("width",900).attr("height",800)
+            var suns = svg.selectAll("clip").data(d3.range(1));
+                suns.enter()
+                .append("image")
+                .attr("xlink:href", "testImg.jpg")
+                .attr("clip-path","url(#cut-off-bottom)")
+                .attr("x", 200)
+                .attr("y", 200)
+                .attr("width",250)
+                .attr("height",250)
+                // .attr("url(#clipCircle)")
+
+            var sunCirc = svg.selectAll("circle").data(d3.range(1));
+                suns.enter()
+                .append("circle")
+                // .attr("xlink:href", "testImg.jpg")
+                // .attr("clip-path","url(#cut-off-bottom)")
+                .attr("cx", 350)
+                .attr("cy", 350)
+                .attr("r",150)
+                .attr("fill","none")
+                .attr("stroke","white")
+                .attr("stroke-width",30)
+                // .attr("height",100)
+</script>
+</body>
+</html>

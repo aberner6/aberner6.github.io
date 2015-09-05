@@ -1,0 +1,382 @@
+
+<html>
+
+<head>
+    <title>Spark Login Example</title>
+</head>
+
+<body>
+<!-- jQuery library (served from Google) -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!-- bxSlider Javascript file -->
+<script src="jquery.bxslider.min.js"></script>
+<!-- bxSlider CSS file -->
+<link href="jquery.bxslider.css" rel="stylesheet" />
+
+
+    <script src="d3.min.js" charset="utf-8"></script>
+    <script src="http://cdn.jsdelivr.net/sparkjs/0.4.2/spark.min.js"></script>
+
+    <script src="jquery.min.js"></script>
+    <script>
+
+        // var sparkData = [];
+        // var thisToken;
+        //     var token = 'cd1e06fe5c9ee77f8f2b49b164c4d6ac799b8560';
+        //     spark.on('login', function() {
+        //         //Get your devices events
+        //         spark.getEventStream(false, 'mine', function(data) {
+        //         sparkData=((data));
+        //         thisToken = sparkData['coreid']
+        //         });
+        //     });
+        //     spark.login({ accessToken: token });
+
+// $.getJSON("https://spreadsheets.google.com/feeds/list/1__sCc3oOidj_Y4_8s7kKyW_R2Ho3Kd9vdTn30soWMww/default/public/values?alt=json", function(data) {
+//     console.log(data.feed.entry);
+
+//     // ['IMAGE']);
+//     // =IMAGE(
+// })
+
+
+
+
+
+
+
+
+
+        var totalButton1 = 0;
+        // var but1 = [];
+        var storeBT = [];
+        // var storeBT = [];
+        var entry = [];
+        var storeThis = [];
+        var uniques = [];
+
+        var dashArray = "1 5 1 1";
+
+        var dur = 100;
+
+        var w = window.innerWidth;
+        var h = window.innerHeight - 40;
+        margin = 25;
+        var padding = 200;
+        var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+        var parseDate = d3.time.format('%B %d, %Y %I:%M%p').parse;
+        var parseDateBut = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ").parse;
+        // undefined        
+        var mindate, maxdate, xScale;
+        var xAxis = d3.svg.axis();
+        var yAxis = d3.svg.axis();
+        var agreedDate;// = new Date(Date.now());
+        var now = new Date(Date.now()); // now
+                    now.setHours(1); // set hours to 0
+                    now.setMinutes(0); // set minutes to 0
+                    now.setSeconds(0); // set seconds to 0// divide by 1000, truncate milliseconds
+        var agreedFirstDate = now;//new Date("Mon Jul 27 2015 15:15:00 GMT-0400 (EDT)");
+        var centerline = h / 2;
+
+        var mindateBT, maxdateBT, xScaleBT, yScaleBT;
+        // Wed Jul 1 10:14:21 2015
+        var parseDateBT = d3.time.format('%a %b %e %H:%M:%S %Y').parse;
+        // Fri May 22 11:34:30
+        var thisTime = [];
+        var thisHour = [];
+
+        var howMany = [];
+        var countIt = 0;
+
+        var totalPhotos = [];
+        var iconTime = [];
+
+        var thisT = [];
+
+        var now = new Date; // now
+        now.setHours(7); // set hours to 0
+        now.setMinutes(0); // set minutes to 0
+        now.setSeconds(0); // set seconds to 0// divide by 1000, truncate milliseconds
+        //USUAL WAY
+        // mindate = now;
+        //STATIC WAY
+        mindate = agreedFirstDate; //now;
+
+        // maxD = new Date("Fri Jul 03 2015 08:00:00 GMT-0400 (EDT)")//now;
+        // maxD = Date.now(); //parseDate(thisTime[data.feed.entry.length - 1]);
+        maxdate = calcTime("copenhagen", 2);
+
+
+        xScale = d3.time.scale()
+            .domain([mindate, maxdate])
+            .range([100, w - 100]);
+
+
+        function unique(obj) {
+        uniques = [];
+            var stringify = {};
+            for (var i = 0; i < obj.length; i++) {
+                var keys = Object.keys(obj[i]);
+                keys.sort(function(a, b) {
+                    return a - b
+                });
+                var str = '';
+                for (var j = 0; j < keys.length; j++) {
+                    str += JSON.stringify(keys[j]);
+                    str += JSON.stringify(obj[i][keys[j]]);
+                }
+                if (!stringify.hasOwnProperty(str)) {
+                    uniques.push(obj[i]);
+                    stringify[str] = true;
+                }
+            }
+            return uniques;
+        }
+        function calcTime(city, offset) {
+
+            // create Date object for current location
+        d = new Date(Date.now());
+
+            // convert to msec
+            // add local time zone offset
+            // get UTC time in msec
+            utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+
+            // create new Date object for different city
+            // using supplied offset
+            nd = new Date(utc + (3600000 * offset));
+            console.log(nd);
+            return nd;
+            // return time as a string
+            // return "The local time in " + city + " is " + nd.toLocaleString();
+
+        }
+
+        // var buttonEntry = [];
+
+        var sparkDeviceID;
+        var entry = [];
+        var entry1 = [];
+        var but1 = [];
+        var entryb1 = [];
+        var sparkData = [];
+        var entryDone = false;
+
+        doButton();
+
+        function doButton() {
+entry[0] = "http://pelars.netne.net/images/9_06_283_8347.jpg";
+
+entry[1] = "http://pelars.netne.net/images/330029000647343232363230.button2.overview.17:57:25_11-08-2015.jpg";
+
+
+                    // var sparkData = [];
+                    // var thisToken;
+                    var token = 'cd1e06fe5c9ee77f8f2b49b164c4d6ac799b8560';
+                    spark.on('login', function() {
+                        //Get your devices events
+                        spark.getEventStream(false, 'mine', function(data) {
+                            console.log(data);
+                            sparkData = ((data));
+                            thisToken = sparkData['coreid']
+                            //CIID BUTTON
+                            if (data['coreid'] == "330029000647343232363230") { //group 1
+//DIONISIO'S HOME
+                            // if (data['coreid'] == "53ff6c066667574853382567") { //group 1
+                                // console.log("yes")
+                                console.log(sparkData)
+                                entryb1.push({
+                                    "buttonIs": data['coreid'],
+                                    "timeIs": parseDateBut(data['published_at'])
+                                })
+                                if (entryb1.length > 0) {
+                                    // console.log("YS")
+                                            but1 = entryb1;
+
+                                    // for (k = 2; k < entryb1.length - 1; k++) {
+                                    //     if (entryb1[k].timeIs >= mindate && entryb1[k].timeIs <= maxdate && (entryb1[k].timeIs.getTime() != entryb1[k-1].timeIs.getTime())) {
+                                    //         but1 = entryb1;
+                                    //     }
+                                    // }
+                                }
+                            }
+                        });
+                    });
+                    spark.login({
+                        accessToken: token
+                    });
+
+
+
+
+                    if (but1.length > 1) {
+                        console.log("HELLO");
+                        unique(but1);
+                    }
+
+            if (uniques.length > 1) {
+                var radius = 10;
+                var strokeWeight = 2;
+
+                // var checks = 
+                svg.selectAll("image.butImg")
+                    .data(uniques)
+                    .enter()
+                    .append("image")
+                    .attr("class", "butImg")
+                    // checks
+                    .attr("xlink:href", function(d, i) {
+                        iconTime.push(d.timeIs);
+                        if (d.buttonIs == "53ff6c066667574853382567") { //cloud
+                            console.log(d.buttonIs)
+                            return "idea.png";
+                        }
+                    })
+                    .attr("x", function(d, i) {
+                        return xScale(d.timeIs); //scale based on d.time
+                    })
+                    .attr("width", 20)
+                    .attr("height", 20)
+                    .attr("y", function(d, i) {
+                        if (d.buttonIs == "53ff6c066667574853382567") {
+                            return margin * 2;
+                        }
+                    })
+                    svg.selectAll("image.sky")
+                    .data(entry)
+                    .enter()
+                    .append("image")
+                        .attr("class", "sky")
+                        .attr("xlink:href", function(d, i) {
+                            return d;
+                        })
+                        .attr("x", function(d, i) {
+                            return 100*i;
+                        })
+                        .attr("y", 100)
+                        .attr("width", 50)
+                        .attr("height", 50)
+// $(document).ready(function(){
+//   $('image.sky').bxSlider();
+//   slider = $('image.sky').bxSlider();
+// slider.startAuto();
+// });
+            }
+
+
+            //On click, update with new data            
+            d3.select("svg")
+                .on("click", function() {
+                    // var sparkData = [];
+                    // var thisToken;
+                    var token = 'cd1e06fe5c9ee77f8f2b49b164c4d6ac799b8560';
+                    spark.on('login', function() {
+                        //Get your devices events
+                        spark.getEventStream(false, 'mine', function(data) {
+                            sparkData = ((data));
+                            thisToken = sparkData['coreid']
+                            if (data['coreid'] == "330029000647343232363230") { //group 1
+                                // console.log("yes")
+                                // console.log(sparkData)
+                                entryb1.push({
+                                    "buttonIs": data['coreid'],
+                                    "timeIs": parseDateBut(data['published_at'])
+                                })
+                    mindate = now; //entryb1[0].timeIs;
+                    maxdate = entryb1[entryb1.length-1].timeIs;                              
+        xScale
+            .domain([mindate, maxdate])
+                                if (entryb1.length > 0) {
+                                    // console.log("YS")
+                                    for (k = 0; k < entryb1.length - 1; k++) {
+                                        if (entryb1[k].timeIs >= mindate && entryb1[k].timeIs <= maxdate) {
+                                            but1 = entryb1;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    spark.login({
+                        accessToken: token
+                    });
+
+
+
+
+                    if (but1.length > 1) {
+                        console.log("HELLO");
+                        unique(but1);
+                    }
+
+
+
+                    //Select…
+                    var checks = svg.selectAll("image.butImg") //Select all bars
+                        .data(uniques); //Re-bind data to existing bars, return the 'update' selection
+                    //Enter…
+                    checks //References the enter selection (a subset of the update selection)
+                        .enter()
+                        .append("image")
+                        // .attr("class","butImg")
+                        // checks
+                        .attr("xlink:href", function(d, i) {
+                            if (d.buttonIs == "53ff6c066667574853382567") { //cloud
+                                console.log("this button")
+                                return "idea.png";
+                            }
+                        })
+                        .attr("x", function(d, i) {
+                            return xScale(d.timeIs); //scale based on d.time
+                        })
+                        // .attr("opacity", 0)
+                        // .attr("y", centerline)
+                        .attr("width", 20)
+                        .attr("height", 20)
+                        // .transition()
+                        // .duration(dur)
+                        // .attr("opacity", 1)
+                        .attr("y", function(d, i) {
+                            if (d.buttonIs == "53ff6c066667574853382567") {
+                                return margin * 2;
+                            }
+                        })
+        var shots = svg.selectAll("image.sky")
+                    .data(entry);
+                shots
+                    .enter()
+                    .append("image")
+                        .attr("class", "sky")
+                        .attr("xlink:href", function(d, i) {
+                            return d;
+                        })
+                        .attr("x", function(d, i) {
+                            return 100*i;
+                        })
+                        .attr("y", 100)
+                        .attr("width", 50)
+                        .attr("height", 50)
+
+shots.transition()
+.duration(500)
+.attr("x", function(d,i){
+    return 200*i;
+})
+
+                    //Update…
+                    checks.transition() //Initiate a transition on all elements in the update selection (all rects
+                        .duration(500)
+                        .attr("x", function(d, i) {
+                            return xScale(d.timeIs); //scale based on d.time
+                        })
+                });
+        }
+
+
+    </script>
+</body>
+
+</html>
