@@ -22,7 +22,7 @@
 	padding: 0;
 	color: #000000;
 	letter-spacing: .5pt;
-        /*background-color: black;*/
+        background-color: black;
     }
     
     .brush .extent {
@@ -33,6 +33,7 @@
     /* fill-opacity: 0.4; */
     /* fill-opacity: .1; */
     display: block;
+    pointer-events:all;
     }
     
     #click {
@@ -55,7 +56,7 @@
     }
     
     .icons {
-        background-color: black;
+        /*background-color: black;*/
     }
     
     .optionsText {
@@ -88,7 +89,8 @@ position: absolute;
     /*right:10px;*/
     top: 35px;
         font-family: 'Lato-Light', sans-serif;
-        color: black;
+        /*color: black; */
+        color:white;
         /*font-family: "Lato-Light";*/
         font-size: 14px;
         /*margin-left: 40px;*/
@@ -99,13 +101,14 @@ left: 110px;
     top: 13px;
     position: absolute;
 
-        fill: black;
+        fill: white;
+        /*black;*/
 
         font-family: "Lato-Light";
     }
     
     p {
-        color: black;
+        color: white;
         font-family: "Lato-Light";
     }
     #moreinfo{
@@ -113,7 +116,7 @@ left: 110px;
     }
     #connections1 {
         top: 50%;
-        color: black;
+        color: white;
         border-bottom: 1px solid #777;
         position: absolute;
         left: 45%;
@@ -189,6 +192,13 @@ font-family: "Lato-Regular";
 	top: 0;
 	left: 0; 
 	}
+    .resize.w{
+        pointer-events: all;
+    }
+    .resize.e{
+        pointer-events: all;
+    }
+
 </style>
 <img onerror='this.style.display = "none"'>
 
@@ -311,7 +321,7 @@ $(document).ready(function() {
         var labelOpacity = 0;
         var opacity = .9;
         var extentsOpacity = .5;
-        var linkColor = "black"; //not black
+        var linkColor = "white"; //not black
         var amt = 6;
         var index = 0;
 
@@ -1315,12 +1325,12 @@ var ccR = 15;
                     .attr("xlink:href", function(d, i) {
                         // d3.select(this).each(moveToFront)();
                         if (d.buttonIs == "button2") { //1 is bad 3 is good
-                            return "icons/idea.png";
-                            // return "ideaWhite.png";
+                            // return "icons/idea.png";
+                            return "icons/ideaWhite.png";
                         }
                         if (d.buttonIs == "button1") { //1 is bad 3 is good
-                            return "icons/thunder.png";
-                            // return "thunderWhite.png";
+                            // return "icons/thunder.png";
+                            return "icons/thunderWhite.png";
                         } else {}
                     })
                     .attr("y", 4)//imgHeight/2)
@@ -1362,29 +1372,32 @@ var ccR = 15;
 
 
 ////FOR IMAGES
-                // var overview;
-                //     overview = itemRects.selectAll(".screen")
-                //         .data(visItems)
-                //         .attr("x", function(d, i) {
-                //             return x1(d.timeIs)-50; //scale based on d.time
-                //         })
-                //     overview
-                //         .enter()
-                //         .append("image")
-                //         .attr("class", "screen")
-                //         .attr("xlink:href", function(d, i) {
-                //            // if(i>0 && visItems[i].timeIs.getMinutes()!=visItems[i-1].timeIs.getMinutes()){
-                //             //     console.log(visItems[i].timeIs.getMinutes())
-                //                 return d.photO;
-                //         })
-                //         .attr("x", function(d, i) {
-                //             return x1(d.timeIs)-50; //scale based on d.time
-                //         })
-                //         .attr("y", 10)
-                //         .attr("width", 150)
-                //         .attr("height", 150)
-                //         overview.exit().remove();
+                var overview;
+                    overview = itemRects.selectAll(".overview")
+                        .data(visItems)
+                        .attr("x", function(d, i) {
+                            return x1(d.timeIs)-50; //scale based on d.time
+                        })
+                    overview
+                        .enter()
+                        .append("image")
+                        .attr("class", "overview")
+                        .attr("xlink:href", function(d, i) {
+                           // if(i>0 && visItems[i].timeIs.getMinutes()!=visItems[i-1].timeIs.getMinutes()){
+                            //     console.log(visItems[i].timeIs.getMinutes())
+                                return d.photO;
+                        })
+                        .attr("x", function(d, i) {
+                            return x1(d.timeIs)-50; //scale based on d.time
+                        })
+                        .attr("y", 10)
+                        .attr("width", 150)
+                        .attr("height", 150)
+                        overview.exit().remove();
 
+$(".overview").error(function () { 
+    $(this).hide();
+});
 // $(".screen").error(function () { 
 //     $(this).hide();
 // });
