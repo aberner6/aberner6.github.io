@@ -256,7 +256,7 @@ var token;
 function getSession(){
 	var token = pelars_authenticate();
 	$.getJSON("http://pelars.sssup.it:8080/pelars/session?token="+token,function(json1){
-			thisSession = parseInt(json1[json1.length-1].session); //parseInt(834);//832//537//615//
+			thisSession = parseInt(834);//832//537//615//
 			console.log("session"+thisSession);
 			getData(thisSession, token);
 	})
