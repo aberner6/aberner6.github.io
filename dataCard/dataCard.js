@@ -2002,133 +2002,7 @@ console.log(bothLength+"bothlength");
 	      .domain([0,maxHeight+1]) //max software components
 	      .range([timeSVGH/2-(maxFaces*faceRadius), 0]);
 
-
-
-
-
-
-
-
-	// var rectH = timeSVG.selectAll(".rectpathH")
- //  		.data(hardwareOnly).enter().append("rect")
- //    .attr("class","rectpathH")
- //  		.attr("opacity",.5)
- //  		.attr("fill","#15989C")
- //      .attr("x", function(d, i) { 
- //      	if(d==undefined){ return 0; }
- //      		else{
-	// 	       	return xPath(d.time);      			
- //      		}
- //      })
- //      .attr("y",function(d, i) { 
- //      	if(d==undefined){return 0;}
-	//       		else{
-	//       			return yHPath(d.oc);  //actually totals now
-	//       		}
- //      })
- //      .attr("width",10)
- //      .attr("height",function(d, i) { 
- //      	if(d==undefined){return 0;}
- //      		else{
- //      			return timeSVGH/2-yHPath(d.oc);  //actually totals now
- //      		}
- //      })
-
-	// var rectH2 = timeSVG.selectAll(".rectpathH2")
- //  		.data(hardUseComp).enter().append("rect")
- //    .attr("class","rectpathH2")
- //  		.attr("opacity",opacityPath)
- //  		.attr("fill","#15989C")
- //      .attr("x", function(d, i) { 
- //      	if(d==undefined){ return 0; }
- //      		else{
-	// 	       	return xPath(d.time);      			
- //      		}
- //      })
- //      .attr("y",function(d, i) { 
- //      	if(d==undefined){return 0;}
- //      	if(d<0){ return 0; }
-	//       		else{
-	//       			return yHPath(d.total);  //actually totals now
-	//       		}
- //      })
- //      .attr("width",10)
- //      .attr("height",function(d, i) { 
- //      	if(d==undefined){return 0;}
- //      	if(d<0){ return 0; }
- //      		else{
- //      			return timeSVGH/2-yHPath(d.total);  //actually totals now
- //      		}
- //      })
-
-
-
-//OPTION 1
-// 	lineH = d3.svg.line()
-//       .x(function(d, i) { 
-//       	if(d==undefined){ return 0; }
-//       	// if(d<0){ return 0;}
-//       		else{
-// 		       	return xPath(d.time);      			
-//       		}
-//       })
-//       .y(function(d, i) { 
-//       	if(d==undefined){return 0;}
-//       	if(d.total<0){ return 0}
-//       		else{
-//       			return yHPath(d.oc);  //actually totals now
-//       		}
-//       })
-//       .interpolate("linear");
-
-// 	lineS = d3.svg.line()
-//       .x(function(d, i) { 
-//       	if(d==undefined){ return 0; }
-//       		else{
-// 		       	return xPath(d.time);      			
-//       		}
-//       })
-//       .y(function(d, i) { 
-//       	if(d==undefined){return 0;}
-//       	if(d.total<0){ return 0}
-//       		else{
-//       			return ySPath(d.oc); 
-//       		}
-//       })
-//       .interpolate("linear");
-// var opacityPath = .5;
-//   pathH = timeSVG.append("g")
-//     .append("path")
-//     .attr("class","timepathH")
-//   		.attr("fill","none")
-//   		// .attr("opacity",opacityPath)
-//   		.attr("stroke","#15989C");
-//   	pathH
-//   		.datum(hardwareOnly)
-//   		.attr("d", lineH);
-
-// var pathS;
-//   pathS = timeSVG.append("g")
-//     .append("path")
-//     .attr("class","timepathS")
-//   		.attr("fill","none") //"#B19B80"
-//   		// .attr("opacity",opacityPath)
-//   		.attr("stroke","#B19B80");
-//   	pathS
-//   		.datum(softwareOnly)
-//   		.attr("d", lineS);
-//option 1
-
-
-
-
-
-
-
-
-
-
-	lineH = d3.svg.line()
+	lineH = d3.svg.area()
       .x(function(d, i) { 
       	if(d==undefined){ return 0; }
       	// if(d<0){ return 0;}
@@ -2136,7 +2010,8 @@ console.log(bothLength+"bothlength");
 		       	return xPath(d.time);      			
       		}
       })
-      .y(function(d, i) { 
+      .y0(timeSVGH/2-(maxFaces*faceRadius))
+      .y1(function(d, i) { 
       	if(d==undefined){return 0;}
       	if(d.total<0){ return 0}
       		else{
@@ -2145,14 +2020,15 @@ console.log(bothLength+"bothlength");
       })
       .interpolate("linear");
 
-	lineS = d3.svg.line()
+	lineS = d3.svg.area()
       .x(function(d, i) { 
       	if(d==undefined){ return 0; }
       		else{
 		       	return xPath(d.time);      			
       		}
       })
-      .y(function(d, i) { 
+      .y0(timeSVGH/2-(maxFaces*faceRadius))
+      .y1(function(d, i) { 
       	if(d==undefined){return 0;}
       	if(d.total<0){ return 0}
       		else{
@@ -2172,6 +2048,7 @@ var opacityPath = .5;
   		.attr("stroke",hardwareColor);
   	pathH
   		.datum(hardUseComp)
+	    .attr("class","timepathH")
   		.attr("d", lineH);
 
 var pathS;
@@ -2184,7 +2061,10 @@ var pathS;
   	pathS
   		.datum(softUseComp)
   		.attr("d", lineS);
-
+	// svg.append("path")
+	// 	.datum(data)
+	// 	.attr("class", "area")
+	// 	.attr("d", area);
 
 
 
