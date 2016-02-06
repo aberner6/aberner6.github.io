@@ -668,7 +668,7 @@ var netSVG = d3.select("#facehand")
 	.append("g")
 	.style("border","1px solid white") 
 	.style("margin-top","1px")
-    .attr("transform", "translate(" + width/2 + "," + (forceheight/2)+11 + ")");
+    .attr("transform", "translate(" + width/2 + "," + 80.0285714285714411 + ")");
 
 var pathPie = netSVG.selectAll("pathPie")
     .data(pie(phaseArray))
