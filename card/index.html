@@ -59,10 +59,10 @@
     width: 8.27in;
     height: 5.83in;
     /* background-color: #15989C; */
-    border: 3px solid #15989C;
+    /*border: 3px solid #15989C;*/
     }
     #timeline{
-      margin-top:.7in;
+      margin-top:.55in;
       margin-left:50px;
       height: 2.1in; 
       position:absolute;
@@ -103,15 +103,18 @@ margin-left: 138px;
     color: black;*/
     }
     #facehand{
-    margin-top: 2.9in;
+/*    margin-top: 2.9in;
     height: 2in;
-    /* position: absolute; */
     margin-top: 3.3in;
     width: 229px;
   margin-left:14px;
     position: relative;
-    float: left;
-    /* margin-left: 160px; */
+    float: left;*/
+    height: 2in;
+    position: absolute;
+    margin-top: 3.3in;
+    width: 229px;
+        margin-left: 564px;
     }
 
     #comments{
@@ -137,13 +140,14 @@ padding:10px;
       width:30px;
     }
     .date{
-float: left;
+    float: left;
     margin-top: 19px;
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
     height: 39.5px;
     color: black;
     margin-left: 5px;
+    font-weight: bold;
 /*      float:left;
       margin-top:13px;   
       text-align:left;  
@@ -160,10 +164,11 @@ float: left;
 }
     .boxname{
     margin-top: 5px;
-    font-size: 10px;
+    font-size: 12px;
     margin-left: 5px;
     text-align: left;
     color:black;
+    font-weight:bold;
 /*      margin-top: 5px;
       font-size:10px;*/
     }
@@ -198,20 +203,20 @@ float: left;
 
 <div id="container"> 
 <div id = "logo">
-<img src="assets/PELARSlogo_WhiteCentered.png" data-pin-nopin="true" style="
-    background-color: #15989C;
-">
+<!-- <embed src="assets/blackLogo.pdf" type='application/pdf'> -->
+
+<img src="assets/blackLogo.png" data-pin-nopin="true">
   <!-- <img src="assets/PELARSlogo_WhiteCentered.png"> -->
   <!-- <img src="assets/brown.png"> -->
 
 <div class="date">
-  PELARS__data card<br>
+  PELARS DATA CARD<br>
 </div>
 
 </div> 
   <div id = "timeline">
     <div class="boxname">
-      Session over time 
+      SESSION OVER TIME 
     </div>
   </div>
 <!-- Hello -->
@@ -223,18 +228,18 @@ float: left;
 
   <div id = "ardinfo">
     <div class="boxname">
-            What did you link? 
+        WHAT DID YOU LINK? 
     </div>
   </div>
   
   <div id = "buttonuse">
     <div class="boxname">
-      What you used, over time
+      WHAT YOU USED, OVER TIME
     </div>
   </div>
   <div id = "facehand">
     <div class="boxname">
-      Your Project Phases  
+      YOUR PROJECT PHASES  
     </div>
   </div>
 
@@ -244,7 +249,6 @@ float: left;
     </div>
   </div> -->
 </div>  
-<div align="center" id="circle"></div>
 
 </body>
 <script type = "text/javascript" src="dataS.js"></script>  
