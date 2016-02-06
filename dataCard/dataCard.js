@@ -18,6 +18,9 @@ var one = [];
 var two = [];
 var three = [];
 
+	var softS1 = [];
+	var softS2 = [];
+	var softS3 = [];
 
 var marginLeft = 37;
 var xPath;
@@ -284,28 +287,36 @@ firstData = json;
 function getPhases(thisSession,token){
 	$.getJSON("http://pelars.sssup.it:8080/pelars/phase/"+thisSession+"?token="+token,function(phasesJSON){
 		console.log("phase")
-		if(phasesJSON[0].start<startFirst){
-			startTime = phasesJSON[0].start;			
-		} else{
-			startTime = startFirst;			
-		}
-		if(phasesJSON[phasesJSON.length-1].end>phasesJSON[phasesJSON.length-2].end){
-			endPhase = phasesJSON[phasesJSON.length-1].end;
-		} 		
-		else{
-			endPhase = phasesJSON[phasesJSON.length-2].end;
-		}
-		if(endPhase>endFirst){
-			endTime = endPhase;
-		} else{
-			endTime = endFirst;
-		}
-console.log(startTime+"START"+endTime+"end")
-
+		console.log(phasesJSON)
+if(phasesJSON[0].phase=="setup"&&phasesJSON.length==1){
+	console.log("IN HERE")
+	startTime = startFirst;
+	endTime = endFirst;	
 	timeX.domain([startTime, endTime]).range([10, w-50]);
-
-console.log(startTime+"start")
+}
+	else{
+			if(phasesJSON[0].start<startFirst){
+				startTime = phasesJSON[0].start;		
+				console.log(startTime+"phases start")	
+			} else{
+				startTime = startFirst;			
+			}
+			if(phasesJSON[phasesJSON.length-1].end>phasesJSON[phasesJSON.length-2].end){
+				endPhase = phasesJSON[phasesJSON.length-1].end;
+			} 		
+			else{
+				endPhase = phasesJSON[phasesJSON.length-2].end;
+			}
+			if(endPhase>endFirst){
+				endTime = endPhase;
+			} else{
+				endTime = endFirst;
+			}
+	timeX.domain([startTime, endTime]).range([10, w-50]);
 		showPhases(phasesJSON)
+		}
+
+console.log(startTime+"START"+endTime+"end")
 		ready(firstData)
 	})
 }
@@ -333,6 +344,24 @@ function pelars_authenticate(){
 
 function ready(data1) {
 		data = (data1);
+    var xAxisCall = timeSVG.append('g');
+
+    var xAxis = d3.svg.axis();
+    var xAxisScale = d3.time.scale()
+        .domain([startTime, endTime])
+        .range([10, w-40]);
+    var timeFormat = d3.time.format("%H:%M");
+
+    xAxis
+        .scale(xAxisScale)
+        .orient("top")
+        .ticks(7)
+        .tickPadding(1)
+        .tickFormat(timeFormat);
+    xAxisCall.call(xAxis)
+        .attr("class", "axis") //Assign "axis" class
+            .attr("text-anchor", "end")
+        .attr('transform', 'translate(0, ' + (timeSVGH-1) + ')');
 
 var	handPic = svgMain.append("g").attr("class","backlabels")
 		.append("image")
@@ -353,7 +382,7 @@ var	labelsHand = svgMain.append("g").attr("class","backlabels")
 var	facePic = svgMain.append("g").attr("class","backlabels")
 		.append("image")
 	    .attr("x", timeX(startTime)+iconW)
-	    .attr("y", h/2.6 - iconW*1.5)
+	    .attr("y", 173)
 	    .attr("width",iconW)
 	    .attr("height",iconW)
                .attr("xlink:href", "assets/face2.png")
@@ -361,7 +390,7 @@ var	labelsFace = svgMain.append("g").attr("class","backlabels")
 		.append("text")
 	    .attr("x", timeX(startTime)+22)
 	    .attr("text-anchor","middle")
-	    .attr("y", h/2.6)
+	    .attr("y", 197)
 	    .text("Faces")
 	    .attr("font-size",8)
 
@@ -470,7 +499,6 @@ for(i=0; i<data.length; i++){
 		nested_data = d3.nest()
 			.key(function(d) { return d.type; })
 			.key(function(d){ return d.num; })
-			// .key(function(d){ return d.time; })
 			.entries(data);
 
 
@@ -503,40 +531,48 @@ var rey = [];
 						"deviationY": d3.mean(leaves, function(d){ 
 							return parseFloat(d.ry) 
 						})
-						// "deviationX": d3.variance(leaves, function(d){ 
-						// 	return parseFloat(d.rx) 
-						// }),
-						// "deviationY": d3.variance(leaves, function(d){ 
-						// 	return parseFloat(d.ry) 
-						// })
 					} 
 				})
 			.entries(data)
 
 
 		if (typeof nested_data !== "undefined"){
+			console.log(nested_data)
 			for(i=0; i<nested_data.length; i++){
-				if(nested_data[i].key&&nest_again[i].key==types[0]){
-					console.log(nested_data[i].key)
-					goHands(nested_data[i], nest_again[i].values);
-				}
-				if(nested_face[i].key&&nest_again[i].key==types[3]){
-					console.log(nested_face[i].key)
+				console.log(nested_data[i])
+				if(nested_data[i].key==types[3]){
 					goFace(nested_face[i], nest_again[i].values);
 				}
-				// if(nested_data[i].key=="particle"){
-				// 	console.log("here")
-				// // }
-				// 	goButton(nested_data[i].values);
-				// }
-				if(nested_data[i].key&&nest_again[i].key=="ide"){
-					console.log(nested_data[i].key)
-					goIDE(nested_data[i].values, nest_again[i].values);
+				if(nested_data[i].key==types[1]){
+					goIDE(nested_data[i].values, nest_again[i].values);					
 				}
-				compress();
-				// else{ console.log("nope")}
+			}
+			for(i=0; i<nested_data.length; i++){
+				if(nested_data[i].key==types[0]){
+					goHands(nested_data[i], nest_again[i].values);
+				}
 			}	
 		}
+		// if (typeof nested_data != "undefined"){
+		// 	for(i=0; i<nested_data.length; i++){
+		// 			console.log(nested_data[i])
+		// 			console.log(nest_again[i])
+		// 		if(nested_data[i]!=undefined&&nested_data[i].key&&nest_again[i].key==types[0]){
+		// 			console.log(nested_data[i].key)
+		// 			goHands(nested_data[i], nest_again[i].values);
+		// 		}
+		// 		if(nested_data[i]!=undefined&&nest_again[i].key==types[3]){
+		// 			console.log(nested_face[i].key)
+		// 			goFace(nested_face[i], nest_again[i].values);
+		// 		}
+		// 		if(nest_again[i].key=="ide"){
+		// 			console.log(nested_data[i].key)
+		// 			goIDE(nested_data[i].values, nest_again[i].values);
+		// 		}
+		// 		// compress();
+		// 		// else{ console.log("nope")}
+		// 	}	
+		// } 
 goButton(particleOnly);
 	};
 
@@ -668,7 +704,7 @@ var netSVG = d3.select("#facehand")
 	.append("g")
 	.style("border","1px solid white") 
 	.style("margin-top","1px")
-    .attr("transform", "translate(" + width/2 + "," + (height/2)+11 + ")");
+    .attr("transform", "translate(" + width/2 + "," + 80 + ")");
 
 var pathPie = netSVG.selectAll("pathPie")
     .data(pie(phaseArray))
@@ -719,59 +755,6 @@ sliceLabel.enter().append("svg:text")
     })
     .attr("fill", function(d, i) { return color[i]; })
 
-// var sliceLabel2 = label_group.selectAll(".arcLabel2")
-//     .data(pie(phaseArray))
-// sliceLabel2.enter().append("svg:text")
-//     .attr("class", "arcLabel2")
-//     .attr("transform", function(d) {
-//         var c = arc.centroid(d),
-//             x = c[0],
-//             y = c[1],
-//             // pythagorean theorem for hypotenuse
-//             h = Math.sqrt(x*x + y*y);
-//         return "translate(" + (x/h * labelr) +  ',' +
-//            (y/h * labelr) +  ")"; 
-//     })
-//     .attr("dy", function(d){
-//         var c = arc.centroid(d),
-//             x = c[0],
-//             y = c[1],
-//             // pythagorean theorem for hypotenuse
-//             h = Math.sqrt(x*x + y*y);
-//     	if ((y/h * labelr)>outerRadius/2) {
-//     		return "-1.3em"
-//     	}
-// 		else{
-// 			return ("1.3em")
-// 		}
-//     })
-//     .attr("text-anchor", "middle")
-//     .text(function(d, i) { 
-//     	// console.log(d);
-//     	if(i==0){
-//     		var thisDate = new Date(d.data)
-//     		return thisDate.getMinutes()+"mins";
-//     	}
-//     	if(i==1){
-//     		var thisDate = new Date(d.data)
-//     		return thisDate.getMinutes()+"mins";
-//     	}
-//     	if(i==2){
-//     		var thisDate = new Date(d.data)
-//     		return thisDate.getMinutes()+"mins";    	
-//     	}
-//     })
-
-
-
-
-
-
-
-
-
-
-
 obs = cleanArray(obs)
 
 	console.log(obs);
@@ -782,6 +765,8 @@ obs = cleanArray(obs)
 	  	.append("rect")
 	  	.attr("class","phase")
 		  .attr("x",function(d,i){
+		  	console.log(d);
+		  	console.log(timeX(d.start))
 		  	return timeX(d.start); 
 		  })
 		  .attr("y",0)
@@ -798,10 +783,7 @@ obs = cleanArray(obs)
 		  })
 		  .attr("opacity",.1)
 		  .attr("stroke","grey")
-		  //OR
-		  // .attr("fill","none")
-		  // .attr("stroke-dasharray",5)
-		  // .attr("stroke-width",.5)
+
 	var textPhase = timeSVG.selectAll(".phaseText")
 		.data(obs)
 		.enter()
@@ -812,7 +794,6 @@ obs = cleanArray(obs)
 var currentX = timeX(d.start)+(timeX(d.end)-timeX(d.start))/2;
 // var oneBefore = (timeX(obs[i-1].start)+(timeX(obs[i-1].end)-timeX(obs[i-1].start))/2);
 	return currentX;	
-		  // }
 		  })
 		  // .attr("dx","")
 		  .attr("y",function(d,i){
@@ -843,8 +824,6 @@ if(i==0){
 		  	}
 		  })
 		  .attr("text-anchor","middle")
-
-
 }
 
 
@@ -1085,9 +1064,7 @@ function goIDE(incomingD, summary){
 			}
 		}
 	}
-	showFace();
 	showIDE();
-	showHands();
 	// goButton();
 // var itemsOrdered = [];
 // var theOrder = ["Grapes", "Oranges", "Peaches", "Apples", "Watermelons", "Bananas"];
@@ -1272,6 +1249,7 @@ function goFace(incomingData, summary){
 	timeMin = d3.min(miniTime);
 	timeMax = d3.max(whatTime);
 	// timeX.domain([timeMin, timeMax]).range([cmargin, w-cwidth+cmargin]);
+	showFace();
 }
 
 function goHands(incomingData, summary){	
@@ -1283,6 +1261,7 @@ function goHands(incomingData, summary){
 	handData = incomingData;
 	summaryHands = summary;
 	// One cell for each hand tracked (hands are in nested data @ at 1)
+	showHands();
 }
 
 
@@ -1358,9 +1337,8 @@ if(one!="undefined"){
 	}
 	var cumu1 = delta1;
 	    _.map(cumu1,function(num,i){ if(i > 0) cumu1[i] += cumu1[i-1]; });
-
+// console.log(cumu1)
 	var interval = 160;
-	var softS1 = [];
 	for(i=0; i<cumu1.length; i++){
 		if(i>interval){
 			softS1.push((cumu1[i]-cumu1[i-interval])/(activeOne[i].thisTime-activeOne[i-interval].thisTime))
@@ -1374,7 +1352,7 @@ if(one!="undefined"){
 var rx2 = [];
 var ry2 = [];
 var time2 = [];
-if(two!="undefined"){
+if(two.length>0){
 	for(i=0; i<two[0].length; i++){
 	  	time2.push(two[0][i].time)
 	  	rx2.push(two[0][i].rx);
@@ -1400,7 +1378,6 @@ if(two!="undefined"){
 	var cumu2 = delta2;
 	    _.map(cumu2,function(num,i){ if(i > 0) cumu2[i] += cumu2[i-1]; });
 	// var interval = 160;
-	var softS2 = [];
 	for(i=0; i<cumu2.length; i++){
 		if(i>interval){
 			softS2.push((cumu2[i]-cumu2[i-interval])/(activeTwo[i].thisTime-activeTwo[i-interval].thisTime))
@@ -1414,7 +1391,7 @@ if(two!="undefined"){
 var rx3 = [];
 var ry3 = [];
 var time3 = [];
-if(three!="undefined"){
+if(three.length>0){
 	for(i=0; i<three[0].length; i++){
 	  	time3.push(three[0][i].time)
 	  	rx3.push(three[0][i].rx);
@@ -1440,7 +1417,6 @@ if(three!="undefined"){
 	var cumu3 = delta3;
 	    _.map(cumu3,function(num,i){ if(i > 0) cumu3[i] += cumu3[i-1]; });
 	// var interval = 160;
-	var softS3 = [];
 	for(i=0; i<cumu3.length; i++){
 		if(i>interval){
 			softS3.push((cumu3[i]-cumu3[i-interval])/(activeThree[i].thisTime-activeThree[i-interval].thisTime))
@@ -1455,11 +1431,16 @@ if(three!="undefined"){
 
 
 
-
-
-var maxActive1 = d3.max(softS1)//d3.max(justSpeed);//d3.max(justDelta);
-var maxActive2 = d3.max(softS2)//d3.max(justSpeed);//d3.max(justDelta);
-var maxActive3 = d3.max(softS3)//d3.max(justSpeed);//d3.max(justDelta);
+var maxActive1, maxActive2, maxActive3;
+if(softS1.length>0){
+	var maxActive1 = d3.max(softS1)//d3.max(justSpeed);//d3.max(justDelta);	
+}
+if(softS2.length>0){
+	var maxActive2 = d3.max(softS2)//d3.max(justSpeed);//d3.max(justDelta);	
+}
+if(softS3.length>0){
+	var maxActive3 = d3.max(softS3)//d3.max(justSpeed);//d3.max(justDelta);
+}
 // console.log(maxActive1+"maxactive1"+maxActive2);
 var maxActiveOverall;
 
@@ -1619,24 +1600,6 @@ var xG = d3.scale.ordinal()
     .rangePoints([xStart, xEnd]);
 
 function showIDE(){
-    var xAxisCall = timeSVG.append('g');
-
-    var xAxis = d3.svg.axis();
-    var xAxisScale = d3.time.scale()
-        .domain([startTime, endTime])
-        .range([10, w-40]);
-    var timeFormat = d3.time.format("%H:%M");
-
-    xAxis
-        .scale(xAxisScale)
-        .orient("top")
-        .ticks(7)
-        .tickPadding(1)
-        .tickFormat(timeFormat);
-    xAxisCall.call(xAxis)
-        .attr("class", "axis") //Assign "axis" class
-            .attr("text-anchor", "end")
-        .attr('transform', 'translate(0, ' + (timeSVGH-1) + ')');
 
 	yOther
 	    .rangePoints([topMarg, forceheight-topMarg/2-iconW/2]);
