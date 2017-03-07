@@ -1,0 +1,30 @@
+<div data-role="page" id="main">
+    <div data-role="header" data-position="fixed">
+        <h1 id="appTitle"></h1>
+    </div>
+    <div data-role="content">   
+    <ul data-role="listview" data-inset="true" data-filter="true">
+        <li><a href="#geolocationInfo" data-transition="slide" onclick="getGeolocationInfo();">Geolocation</a></li>
+    </ul>
+    </div>
+</div>
+
+<div data-role="page" data-add-back-btn="true" back-btn-text="back" id="geolocationInfo">
+    <div data-role="header">
+        <h1>Geolocation</h1>
+    </div>
+    <div data-role="content">
+        <div id="geolocationProperties" class="mesgBox ui-grid-a"></div>
+        <div data-role="fieldcontain">
+            <form>
+                <label class="smFont" for="geolocFreq">Update frequency (in seconds)</label>
+                <input type="range" name="geolocFreq" id="geolocFreq" value="1" min="0" max="10" step="1" data-highlight="true"/>
+            </form>
+            <a href="#" data-role="button" onclick="updateGeolocation();">Start update</a>
+            <a href="#" data-role="button" onclick="stopUpdateGeolocation();">Stop update</a>
+        </div>
+    </div>
+    <div data-role="footer">
+        <div id="geolocationStatus"></div>
+    </div>
+</div>
