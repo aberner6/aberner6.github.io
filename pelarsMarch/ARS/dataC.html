@@ -1,0 +1,2046 @@
+
+<html>
+
+<head>
+    <title>PELARS</title>
+</head>
+<style>
+    rect.backround {
+        display: block;
+    }
+      image.over{
+        display:inline;
+    }
+.over{
+        border-radius: 400px;
+    -webkit-border-radius: 400px;
+    -moz-border-radius: 400px;
+}
+  image.screen{
+        display:none;
+    }
+svg circle {
+  fill: url(/#tile-ww);
+}
+    body {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        text-decoration: none;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        margin: 0;
+        padding: 0;
+        color: #000000;
+        letter-spacing: .5pt;
+        /*background-color: black;*/
+    }
+    
+    .brush .extent {
+        stroke: lightgray;
+        /*fill: white;*/
+        fill: gray;
+        fill-opacity: .4;
+        /*fill-opacity: .1;*/
+        /*.365;*/
+        display: block;
+        pointer-events: all;
+    }
+    
+    #click {
+        background-color: gray;
+        width: 20px;
+        color: white;
+        padding: 2px;
+    }
+    
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+    }
+    
+    .axis text {
+        /*font-family: sans-serif;*/
+        font-size: 11px;
+    }
+    
+    .icons {
+        background-color: black;
+    }
+    
+    .optionsText {
+        font-family: 'Lato', sans-serif;
+        /*font-family: sans-serif;*/
+        font-size: 12px;
+    }
+    
+    .wodry1 {
+        font-family: 'Lato', sans-serif;
+        /*font-family: sans-serif;*/
+        font-size: 18px;
+    }
+    
+    .wodry {
+        font-family: 'Lato', sans-serif;
+        /*font-family: sans-serif;*/
+        font-size: 18px;
+    }
+    
+    .wodry2 {
+        font-family: 'Lato', sans-serif;
+        /*font-family: Helvetica Neue;*/
+        font-size: 18px;
+    }
+    
+    .title {
+        position: absolute;
+        left: 10px;
+        /*right:10px;*/
+        top: 35px;
+        font-family: 'Lato-Light', sans-serif;
+        color: black;
+        /*font-family: "Lato-Light";*/
+        font-size: 14px;
+        /*margin-left: 40px;*/
+    }
+    
+    text {
+        left: 110px;
+        top: 13px;
+        position: absolute;
+        fill: black;
+        font-family: "Lato-Light";
+    }
+    
+    p {
+        color: black;
+        font-family: "Lato-Light";
+    }
+    
+    #moreinfo {
+        display: none;
+    }
+    
+    #connections1 {
+        top: 50%;
+        color: black;
+        border-bottom: 1px solid #777;
+        position: absolute;
+        left: 45%;
+        border-radius: 10px;
+        padding: 2px 4px;
+        background-color: white;
+        /*opacity:0;*/
+        display: none;
+    }
+    
+    #modeMoved {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        text-decoration: none;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        margin: 0;
+        padding: 0;
+        color: #000000;
+        letter-spacing: 1pt;
+        font-size: 8pt;
+        /*visibility: hidden;*/
+        width: 220px;
+        height: 800px;
+        padding: 8px;
+        /*background: rgba(0,0,0,.4);*/
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+        position: absolute !important;
+        top: 7% !important;
+        left: 1% !important;
+        margin-top: -0px !important;
+        margin-left: -0px !important;
+        z-index: 101;
+        /*color: #F0F0F0;*/
+    }
+    
+    .logo {
+        /*width: 50px;*/
+        /*margin-left:162px;*/
+        /*display:none;*/
+    }
+    
+    #modal {
+        /*border:white 1px solid;
+visibility: hidden;
+width: 500px;
+padding: 36px;
+background: rgba(0, 0, 0, 0.7);
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+border-radius: 8px;
+position: absolute !important;
+top: 50% !important;
+left: 50% !important;
+margin-top: -256px !important;
+margin-left: -246px !important;
+z-index: 101;
+color: #F0F0F0;
+font-family: "Lato-Regular";*/
+        padding: 36px;
+        color: white;
+        font-family: "Lato-Regular";
+        visibility: hidden;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        margin-top: -198px !important;
+        margin-left: -293px !important;
+        z-index: 101;
+        width: 600px;
+        height: 346px;
+        opacity: .5;
+        background-color: #64C7CC;
+        margin: 173px 0;
+    }
+    /*#modal:before,
+#modal:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 300px solid transparent;
+  border-right: 300px solid transparent;
+}
+#modal:before {
+  bottom: 100%;
+  border-bottom: 173px solid #64C7CC;
+}
+#modal:after {
+  top: 100%;
+  width: 0;
+  border-top: 173px solid #64C7CC;
+}
+*/
+    
+    .reveal-modal-bg {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        /*background: #000;*/
+        background: rgba(255, 255, 255, 1);
+        z-index: 100;
+        display: none;
+        /*background-image: url("niceshot.jpg"); */
+        /*0 50%;*/
+        opacity: .5;
+        top: 0;
+        left: 0;
+    }
+    
+    .introText {
+        /*    padding-left: 100px;
+    padding-right: 100px;*/
+font-family: "Lato";
+    }
+</style>
+<img onerror='this.style.display = "none"'>
+
+<!-- <div class="title">TABLE 1 Session</div> -->
+<!-- <div id="moreInfoBtn" style="color: rgb(255, 255, 255); background-color: rgb(145, 145, 145);">i</div> -->
+<!-- <img src="info.png"> -->
+<!-- </div> -->
+
+<!-- <center> -->
+<div id="modal">
+    <div class="logo">
+        <img src="icons/whiteLogo-01.png"></img>
+    </div>
+    <div class="introText">
+        <br> The PELARS dashboard is a prototype visualization of data generated from the Arduino TALKOO kit and feedback button data.
+        <br>
+        <br> It displays how learners use the kit and how they feel about what they are doing. This "feeling" measurement comes from the feedback box where learners can tap a button to record general positive or negative moments in their session.
+        <br>
+        <br> Select a slice of the timeline at the bottom to see that session "writ large" in the main window. Mouse over any visual element for a key of its meaning in the Arduino kit.
+        <br>
+
+    </div>
+</div>
+
+<div id="moreinfo">
+    ARDUINO KIT
+    <br> Hardware Block Connected: Thin line for duration of usage
+    <br> Software Block Connected: Thick line
+    <br> Links between Components: circle @ start of link, square @ disconnection.
+    <br> Manipulation: Dashed line at that moment of manipulation.
+    <br>
+    <br> FEEDBACK BOX
+    <br> The feedback button box has two buttons - one for "success" and "frustration". When either button is pressed, it shows up as a lightbulb or a thundercloud on the timeline. This is accompanied by an overview shot of the table at that moment and a screenshot of the screen at that moment.
+</div>
+<!-- </span> -->
+<!-- <br><br> -->
+
+<!-- </center> -->
+
+<body>
+         <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href="tipsy.css" rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'> 
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+
+
+    <script type="text/javascript" src="js/jquery.tipsy.js"></script>
+    <!-- <script type="text/javascript" src="jquery.hoverIntent.js"></script> -->
+    <script src="js/jquery.reveal.js"></script>
+    <script src="js/d3.min.js"></script>
+
+    <!-- // <script src="jquery.min.js"></script> -->
+    <!-- // <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> -->
+
+    <!-- // <script src="http://cdn.jsdelivr.net/sparkjs/0.4.2/spark.min.js"></script> -->
+    <!-- // <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // $('#button').click(function(e) { // Button which will activate our modal
+            $('#modal').reveal({ // The item which will be opened with reveal
+                animation: 'fade', // fade, fadeAndPop, none
+                animationspeed: 600, // how fast animtions are
+                closeonbackgroundclick: true, // if you click background will modal close?
+                dismissmodalclass: 'close' // the class of a button or element that will close an open modal
+            });
+            return false;
+            // });
+        });
+    </script>
+
+
+
+
+
+    <script type="text/javascript">
+        // $(document).ready(function() {
+        //       // $('#button').click(function(e) { // Button which will activate our modal
+        //           $('#modal').reveal({ // The item which will be opened with reveal
+        //             animation: 'fade',                   // fade, fadeAndPop, none
+        //           animationspeed: 600,                       // how fast animtions are
+        //           closeonbackgroundclick: true,              // if you click background will modal close?
+        //           dismissmodalclass: 'close'    // the class of a button or element that will close an open modal
+        //         });
+        //       return false;
+        //       // });
+        //     });
+
+
+
+
+        //     $(window).load(function() {
+        // jQuery.ajax({
+        //             timeout : 1000,
+        //             type : "GET",
+        //             url : "http://pelars.sssup.it:8080/pelars/session",            
+        //             success : function(jqXHR, status) {
+        //                 console.log(jqXHR);
+        //             },
+        //             error : function(jqXHR, status) {
+        //             }
+        //         });
+        // })
+
+
+        var imgHeight = 20;
+var readyToSlide = false;
+
+    var imgY = 40;
+    var imgW = 150;
+
+        var labelOpacity = 0;
+        var opacity = .9;
+        var extentsOpacity = .5;
+        var linkColor = "black"; //not black
+        var amt = 6;
+        var index = 0;
+
+        var calledAgain = false;
+
+
+
+        var prepdData = false;
+        // var startTime = setTimeout(function() {
+        //     prepData();
+        // }, 10)
+
+
+
+
+        var startTime;
+        prepData();
+        // startTimer();
+        // function startTimer(){
+        // var startTime = setTimeout(function() { 
+        startTime = setInterval(function() {
+                console.log("timer")
+
+                if (prepdData) {
+                    console.log("updateData")
+                    updateData();
+                    calledAgain = false;
+                    prepped = false;
+
+
+                    console.log(uniques1.length + "button");
+                    console.log(ardEntry.length + "ard");
+                    // setTimeout(function() {
+                    // if (ardEntry.length > 0 && uniques1.length > 0) {
+                    prepScales();
+
+                    // var e = [mindate, +Date.now()]; //set brush range
+                    // brush.extent(e);
+                    // mini.call(brush);
+                    // display();
+
+
+
+
+                    console.log("prepped")
+                    if (prepped && !autoMoving) {
+                        var e = [mindate, maxdate]; //set brush range
+                        brush.extent(e);
+                        mini.call(brush);
+                    } else {
+                        autoMovement(0, amt, mindate); //not amt*2
+                    }
+                    // }
+                    // }, 3000)
+                    // }
+                }
+            }, 2000) //not 10000
+            // }
+            // Timestamp,Device,button,overview,screenshot
+        var entry1 = [];
+        var prepped = false;
+        // "2015/09/02 16:36:38"
+
+
+
+        // "Sat Sep 05 2015 13:50:28 GMT+0200 (CEST)"
+        // var parseTime = d3.time.format('%a %b %d %Y %H:%M:%S').parse;
+
+
+        var parseSeshDate = d3.time.format('%Y/%m/%d %H:%M:%S').parse;
+        var sessionData = [];
+        // 15:00:07-314093466_12-08-2015
+        var parseDate = d3.time.format('%X_%d-%m-%Y').parse;
+
+        var weirdFormat = d3.time.format("%H-%M-%S_%d-%m-%Y")
+            // var weirdFormat = d3.time.format("11/31/00_06-09-2015")
+
+
+        var mindate; // = Date.now()-60000;
+        var maxdate; // = "Fri Aug 01 2015 13:24:33 GMT+0200 (CEST)";
+
+        var uniques = [];
+
+        var totalPhotos = [];
+
+        var m = [20, 15, 15, 120], //top right bottom left
+            w = window.innerWidth - m[1] * 2 - m[3],
+            h = window.innerHeight, //- m[3],//m[0] - m[2],
+            miniHeight = 40, //laneLength * 12 + 50,
+            mainHeight = h - miniHeight - 50;
+
+        var chart = d3.select("body")
+            .append("svg")
+            .attr("width", w + m[1] + m[3])
+            .attr("height", h + m[0] + m[2])
+            .attr("class", "chart");
+        chart.append("defs").append("clipPath")
+            .attr("id", "clip")
+            .append("rect")
+            .attr("width", w)
+            .attr("height", mainHeight);
+
+        var main = chart.append("g")
+            .attr("transform", "translate(" + m[3] + "," + 10 + ")")
+            // .attr("transform", "translate(" + m[3] + "," + m[0]*4 + ")")
+            .attr("width", w)
+            .attr("height", mainHeight)
+            .attr("class", "main");
+
+        var mini = chart.append("g")
+            .attr("transform", "translate(" + m[3] + "," + (mainHeight + 5) + ")")
+            // .attr("transform", "translate(" + m[3] + "," + (mainHeight + m[0]-30) + ")")
+            .attr("width", w)
+            .attr("height", miniHeight)
+            .attr("class", "mini")
+            .attr("clip-path", "url(#clip)");
+
+        var startArs = "Thu Sep 03 2015 10:16:11 GMT+0200 (CEST)";
+        //scales
+        var x = d3.scale.linear()
+            // .domain([startArs, Date.now])
+            .domain([mindate, maxdate])
+            .range([-10, w]);
+        // .range([m[1], w]);
+
+        var x1 = d3.scale.linear()
+            .domain([mindate, maxdate])
+            .range([m[1] + 10, w]);
+        var xAxis = d3.svg.axis();
+        var xAxisScale = d3.time.scale()
+            // .range([m[1], w]);
+            .range([-10, w]);
+
+
+        //scales
+        var y = d3.scale.linear()
+            .range([50, h / 2]);
+
+
+
+        var ySum = d3.scale.linear()
+            .range([1, 10]);
+
+        var options = [];
+        //ldr is light sensor
+        options.push("BTN", "COL", "ROT", "RLY", "POT", "LDR", "TMP", "ACR", "PEZ", "LED","RGB", "IF", "Interval", "Fade", "Swap", "Map", "Counter", "Trigger", "Note", "Random", "PONG", "SimonSays");
+
+
+
+var inputs = [];
+var outputs = [];
+var programming = [];
+var games = [];
+inputs.push("BTN","POT","TMP","ACR","COL","ROT","LDR")
+outputs.push("LED","PEZ", "RGB")
+programming.push("IF", "Interval", "Fade", "Swap", "Map", "Counter", "Trigger")
+games.push("Note", "Random", "PONG", "SimonSays")
+
+
+        // var iColor = d3.scale.ordinal()
+        //     .domain(options)
+        //     .range(d3.scale.category20c().range());
+
+
+
+        var specialList = [];
+        var yMargin = 40;
+        var yHeight = 130;
+
+        var yRange = mainHeight - 10;
+        var yis = d3.scale.ordinal()
+            .domain(options)
+            .rangePoints([160+imgY, mainHeight - 20]);
+        // .rangePoints([100, mainHeight-100]);
+
+        var miniY = 40;
+        var yOther = d3.scale.ordinal()
+            // .rangePoints([0, miniHeight])
+            .rangePoints([miniY + 30, miniHeight])
+            .domain(options);
+
+
+        var xis = d3.scale.ordinal()
+            // .domain(options)
+            .rangePoints([m[0], w]);
+
+        var oColor = d3.scale.ordinal()
+            .domain(options)
+            .range(d3.scale.category20c().range());
+
+        var sumMain = chart.append("g")
+            .attr("transform", "translate(" + m[0] + "," + (5 + mainHeight + m[3] / 2) + ")")
+            .attr("width", w)
+            .attr("height", h / 2)
+            .attr("class", "sum");
+
+        var itemRectz = main.append("g")
+            .attr("clip-path", "url(#clip)");
+
+        var itemCircs = main.append("g")
+            .attr("clip-path", "url(#clip)");
+
+        var itemArdz = main.append("g")
+            .attr("clip-path", "url(#clip)");
+
+        var sumArdz = sumMain.append("g")
+            .attr("clip-path", "url(#clip)");
+
+        var itemLinks = main.append("g")
+            .attr("clip-path", "url(#clip)");
+
+        var itemRects = main.append("g")
+            .attr("clip-path", "url(#clip)");
+        // getData();
+
+        var uniques1, uniques2;
+        var ardUniques1;
+        var ardEntry = [];
+        var ardExit = [];
+        var ardAll = [];
+        var ardUni = [];
+        var sessionUI = [];
+        var ardMin = [];
+
+        var oneThing = [];
+
+        var whatIs = [];
+        var onlyArd;
+        var sessionDates = [];
+
+        var indexIs = 2;
+        var indexCard = indexIs + 1;
+
+        function prepData() {
+            d3.csv("arsdb", function(error, arData) {
+// console.log(arData);
+                // d3.csv("https://dl.dropboxusercontent.com/s/19izw72cww803ll/arsdb?dl=0", function(error, arData) {
+
+                onlyArd = arData.filter(function(d) {
+                    if (d.mod != "UI") {
+                        return d;
+                    }
+                })
+console.log(onlyArd)
+                for (var i = 0; i < arData.length; i++) {
+                    ////THIS IS THE REAL DATA VIEW FOR WHEN ARD KIT WORKS
+                   // if (arData[arData.length - (indexIs)]['mod'] == "UI" && arData[arData.length - (indexIs)]['sF'] == "CLOSED") {
+                   //    mindate = parseInt(arData[arData.length - indexCard]['timestamp']);
+                   //    maxdate = parseInt(arData[arData.length - (indexIs)]['timestamp']);
+                   //  }
+                   //  if (arData[arData.length - (indexIs)]['mod'] == "UI" && arData[arData.length - (indexIs)]['sF'] == "OPENED") {
+                   //   mindate = parseInt(arData[arData.length - (indexIs)]['timestamp']);
+                   //    maxdate = Date.now();
+                   // }
+
+                    // set to today
+                    var d = new Date();
+                    d.setHours(11);
+                    mindate = d;
+                    maxdate = Date.now();
+//friday
+// mindate = +new Date("Fri Sep 25 2015 15:00:00 GMT+0200 (CEST)");
+// maxdate = +new Date("Fri Sep 25 2015 17:30:00 GMT+0200 (CEST)");
+
+//arselectronica
+// mindate = +new Date("Thu Sep 3 2015 10:00:00 GMT+0200 (CEST)");
+// maxdate = +new Date("Mon Sep 7 2015 18:00:00 GMT+0200 (CEST)");
+
+                    //saturday
+                    // mindate = 1441440014000;
+                    // maxdate = (1441558800000);
+
+var timeMap = d3.scale.linear()
+    .domain([0,1])
+    .range([1443514799246, 1443525666445])
+
+                    ////if last line in data set is closed that is max time
+                    // min time is the one before
+                    //if the last line is open then that is mindate
+                    //and max date is now
+                    prepdData = true;
+
+                    if (arData[i]['mod'] == "UI" && arData[i]['sF'] == "OPENED") {
+                        sessionDates.push({
+                            startSesh: arData[i]['timestamp'],
+                            // endSesh: arData[i]['timestamp']
+                        })
+                    }
+                    if (arData[i]['mod'] == "UI" && arData[i]['sF'] == "CLOSED") {
+                        sessionDates.push({
+                            endSesh: arData[i]['timestamp'],
+                            // endSesh: arData[i]['timestamp']
+                        })
+                    }
+
+                    if (arData[i]['sF'] == "CLOSED") {
+                        //this is also where the mindate is working
+                        sessionUI.push(parseInt(arData[i]['timestamp']));
+                        // console.log(prepdData+"prepData")
+                    }
+                }
+            })
+        }
+
+        var i = 0;
+        var entry2 = [];
+        var buttonData = [];
+
+        function updateData() {
+            // mindate = 
+            // parseInt(sessionDates[sessionDates.length-1].startSesh);
+            // maxdate = Date.now();
+            // https://www.dropbox.com/s/iz6mkdrd5z4wvvc/db2?dl=0
+
+
+            // d3.csv("https://dl.dropboxusercontent.com/s/h1zyddyuicbn134/db?dl=0", function(error, data) {
+            // console.log("buttondata")
+            // buttonData.push(data);
+            d3.csv("db", function(error, data) {
+console.log(data)
+
+                for (var i = 0; i < data.length; i++) {
+                    // console.log(data)
+                        // if (data[i]['Device'] == "400025000c47343432313031") {
+                    entry2.push({
+                            "buttonIs": data[i]['button'],
+                            "timeIs": parseDate(data[i]['Timestamp']),
+                            "photS": data[i]['screenshot'],
+                            "photO": data[i]['overview']
+                        })
+                        // }
+                }
+                // uniques1 = ["0","0"]
+                uniques1 = unique(entry2);
+            })
+
+            // d3.csv("https://dl.dropboxusercontent.com/s/gucv71ip6w71mib/testarsdb2?dl=0", function(error, arData) {
+            //call one and then the other and then the other
+            //FOR ARDUINO DATA
+            for (var i = 0; i < onlyArd.length - 1; i++) {
+                var blah = [];
+                // if (onlyArd[i]['timestamp'] < maxdate && onlyArd[i]['timestamp'] > mindate) {
+                    ardUni.push(onlyArd[i]['fromType']);
+                // }
+
+
+
+
+                if ((onlyArd[i + 1]['sF']) == "1") {
+                    ardEntry.push({
+                        "specialID": parseInt(onlyArd[i]['timestamp']) + (onlyArd[i]['id']),
+                        "id": parseInt(onlyArd[i]['id']),
+                        "mod": onlyArd[i]['mod'],
+                        "start": parseInt(onlyArd[i]['timestamp']),
+                        "fk": sessionUI.filter(function(d) {
+                            if (d > parseInt(onlyArd[i]['timestamp'])) {
+                                // console.log(d[0]);
+                                blah.push(d);
+                                return 0;
+                                // return 0;
+                            }
+                        }),
+                        "end": blah[0],
+                        "from": (onlyArd[i]['fromType']),
+                        "sF": (onlyArd[i]['sF'])
+                    })
+                } else {
+                    ardEntry.push({
+                        "specialID": parseInt(onlyArd[i]['timestamp']) + (onlyArd[i]['id']),
+                        "id": parseInt(onlyArd[i]['id']),
+                        "mod": onlyArd[i]['mod'],
+                        "start": parseInt(onlyArd[i]['timestamp']),
+                        "end": parseInt(onlyArd[i + 1]['timestamp']),
+                        "from": (onlyArd[i]['fromType']),
+                        "sF": (onlyArd[i]['sF'])
+                    })
+                }
+            }
+            // })
+
+        }
+
+
+
+
+        var dashArray = "1 1 1 1";
+        var timeFormat = d3.time.format("%a %H:%M");
+
+        var timeFormat2 = d3.time.format("%H:%M");
+
+        var timeFormat1 = d3.time.format("%A");
+
+
+        var brush = d3.svg.brush()
+            // var timevar = 60000;
+        var timevar = 0;
+
+
+        var xAxisCall = mini.append('g');
+        var brushCall = mini.append("g");
+
+        var newItems = [];
+
+        function prepScales() {
+            // find data range
+            var xMin = d3.min(ardEntry, function(d) {
+                return Math.min(d.start);
+            });
+            var xMax = d3.max(ardEntry, function(d) {
+                return Math.max(d.start);
+            });
+            console.log(xMin + "xmin")
+            console.log(xMax + "xmax")
+
+            console.log("in prep scales")
+
+            //option 1
+            // mindate = xMin; //ardEntry[0].start;
+            // maxdate = xMax;
+
+
+
+            //hardcode?
+            // maxdate =1441369066161;    //Math.min(sessionUI);
+            // mindate =1441234966973;//1441368912917; 
+            // 1441234980307;// Math.max(sessionUI);
+            // .Date.now()-6000000; //1440510048225;//
+
+            xAxisScale
+            // .domain([mindate, maxdate])
+                .domain([mindate - timevar, maxdate + timevar])
+
+            xAxis
+                .scale(xAxisScale)
+                .orient("bottom")
+                .ticks(5)
+                .tickPadding(5)
+                .tickFormat(timeFormat);
+            xAxisCall.call(xAxis)
+                .attr("class", "axis") //Assign "axis" class
+                .attr('transform', 'translate(0, ' + (18) + ')');
+
+            x.domain([mindate, maxdate]);
+
+
+
+
+            var miniRHeight = 5;
+            ///////////////////
+            mini.append("g").selectAll("rectie")
+                .data(ardEntry, function(d) {
+                    return d.specialID;
+                })
+                .enter().append("rect")
+                .attr("class", function(d) {
+                    return "speci" + d.mod + d.start + "start " + d.end + " end"
+                })
+                .attr("x", function(d) {
+                    if (d.sF == "1") {
+                        return x(d.start);
+                    } else {
+                        return 0
+                    }
+                })
+                .attr("width", function(d, i) {
+                    if (d.sF == "1") {
+                        if ((x(d.end) - x(d.start)) > 0) {
+                            return x(d.end) - x(d.start);
+                        } else {
+                            // console.log("speci"+d.mod+d.start +"start "+d.end+" end");
+                            return 0;
+                        }
+                    } else {
+                        return 0
+                    }
+                })
+                .attr("y", function(d, i) {
+                    return yOther(d.from);
+                })
+                .attr("height", miniRHeight)
+                .attr("fill", function(d) {
+                    if (d.sF == "1") {
+for(j=0; j<inputs.length; j++){
+    if(d.from==inputs[j]){
+        return "#00A2AF"
+    }
+}
+for(k=0; k<outputs.length; k++){
+    if(d.from==outputs[k]){
+        return "red"
+    }
+}
+for(j=0; j<programming.length; j++){
+    if(d.from==programming[j]){
+        return "#907c64";
+    }
+}
+                        // return oColor(d.from);
+                    } else {
+                        return 0
+                    }
+                })
+                .attr("stroke", "none")
+                .attr("opacity", opacity/2);
+
+
+
+            //THESE ARE FOR THE BUTTON PRESSES
+            //mini item lines
+            mini.append("g").selectAll(".linie")
+                .data(uniques1)
+                .enter().append("line")
+                .attr("class", "linie")
+                .attr("x1", function(d) {
+                    return x(d.timeIs);
+                })
+                .attr("x2", function(d) {
+                    return x(d.timeIs);
+                })
+                .attr("y1", miniY)
+                .attr("y2", miniY + 10)
+                .attr("stroke", linkColor)
+                .attr("opacity", opacity);
+
+            //brush
+            brush
+                .x(x)
+                .on("brush", display);
+
+
+            brushCall
+                .attr("class", "brush")
+                .call(brush)
+                .selectAll("rect")
+                .attr("y", 40)
+                .attr("stroke", "lightgrey")
+                .attr("stroke-width", 1)
+                .attr("fill", "none")
+                .style("visibility", "visible")
+                .attr("height", miniHeight - 1);
+            prepped = true;
+            display();
+        }
+
+        var autoMove;
+        var autoMoving = true;
+
+        function autoMovement(index, amt, mindate) {
+            var interval = ((maxdate) - (mindate)) / amt;
+            // var interval = ((maxdate + timevar) - (mindate)) / amt;
+
+            autoMove = setInterval(function() {
+                //going in little chunks where minimum date increases
+                // var e = [+mindate+ interval / 1.1 * index, +mindate + interval * index];
+                // var e = [+mindate - timevar + interval / 1.1 * index, +mindate + interval * index];
+
+
+                //going from 0 to full max date
+                var e = [mindate, +mindate + interval * index]; //set brush range
+
+                brush.extent(e);
+                mini.call(brush);
+                display();
+                index++;
+
+                if ((+mindate + interval * (index)) >= maxdate) {
+                    // if ((+mindate + interval * (index - 1)) >= maxdate + timevar) {
+                    console.log(index + "index");
+                    autoMoving = false;
+                    clearInterval(autoMove);
+                    // display();
+                    console.log("stopping interval")
+                }
+
+            }, 1000);
+            console.log(index + "index");
+        }
+
+
+
+
+        var r = 4;
+        var rects;
+        // var icons;
+        //    icons = main.selectAll(".icons")
+        //        .data(options)
+        //        .attr("xlink:href", function(d, i) {
+        //            return "icons/"+d.toLowerCase() + ".png";
+        //        })
+        //        .attr("y", function(d) {
+        //            return yis(d) - 12;
+        //        });
+        //    icons.enter().append("image")
+        //        .attr("class", "icons")
+        //        .attr("xlink:href", function(d, i) {
+        //            return "icons/"+d.toLowerCase() + ".png";
+        //        })
+        //        .attr("y", function(d) {
+        //            return yis(d) - 12;
+        //        })
+        //        .attr("width", 20)
+        //        .attr("height", 20)
+        //        .attr("x", -38)
+        //        // icons.exit().remove();
+
+        //    var iconText;
+        //    iconText = main.selectAll(".optionsText")
+        //        .data(options)
+        //        .attr("y", function(d) {
+        //            return yis(d);
+        //        })
+        //    iconText
+        //        .enter().append("text")
+        //        .attr("class", "optionsText")
+        //        .attr("y", function(d) {
+        //            return yis(d);
+        //        })
+        //        .attr("x", -45)//m[1] + 10 - 20) //m[3] - 50)
+        //        .attr("text-anchor", "end")
+        //        .text(function(d) {
+        //            return d;
+        //        })
+        //        // iconText.exit().remove();
+
+        //    var iconDelin;
+        //    iconDelin = main.selectAll(".xDelin")
+        //        .data(options)
+        //        .attr("y1", function(d) {
+        //            return yis(d);
+        //        })
+        //        .attr("y2", function(d) {
+        //            return yis(d);
+        //        })
+        //    iconDelin
+        //        .enter().append("line")
+        //        .attr("class", "xDelin")
+        //        .attr("y1", function(d) {
+        //            return yis(d);
+        //        })
+        //        .attr("y2", function(d) {
+        //            return yis(d);
+        //        })
+        //        .attr("x1", 0)//m[1] + 10)
+        //        .attr("x2", w) //m[3]) //not w
+        //        .attr("stroke-dasharray", dashArray)
+        //        .attr("stroke-width", .5)
+        //        .attr("stroke", "lightgray")
+        // iconDelin.exit().remove();
+
+        function display() {
+                // clearInterval(startTime);
+            $(".brush").css('pointer-events', 'all');
+
+            ardUniques1 = unique(ardUni);
+            console.log(ardUniques1 + "arduni");
+            yis.domain(ardUniques1)
+            xis.domain(ardUniques1)
+
+            // var standardRect = (yRange/ardUniques1.length)/2;
+            // yRange
+            var standardRect = (yRange / ardUniques1.length) / 2;//1.5; ///3;
+
+           // if (ardUniques1.length > 0) {
+                var icons;
+                icons = main.selectAll(".icons")
+                    .data(ardUniques1)
+                    .attr("xlink:href", function(d, i) {
+                        return "icons/" + d.toLowerCase() + ".png";
+                    })
+                    .attr("y", function(d) {
+                        return yis(d) - 12;
+                    });
+                icons.enter().append("image")
+                    .attr("class", "icons")
+                    .attr("xlink:href", function(d, i) {
+                        return "icons/" + d.toLowerCase() + ".png";
+                    })
+                    .attr("y", function(d) {
+                        return yis(d) - 12;
+                    })
+                    .attr("width", 20)
+                    .attr("height", 20)
+                    .attr("x", -38)
+                icons.exit().remove();
+
+                var iconText;
+                iconText = main.selectAll(".optionsText")
+                    .data(ardUniques1)
+                    .attr("y", function(d) {
+                        return yis(d);
+                    })
+                iconText
+                    .enter().append("text")
+                    .attr("class", "optionsText")
+                    .attr("y", function(d) {
+                        return yis(d);
+                    })
+                    .attr("x", -45) //m[1] + 10 - 20) //m[3] - 50)
+                    .attr("text-anchor", "end")
+                    .text(function(d) {
+                        return d;
+                    })
+                iconText.exit().remove();
+                //Y1 ISSUE
+                var iconDelin;
+                iconDelin = main.selectAll(".xDelin")
+                    .data(ardUniques1)
+                    .attr("y1", function(d) {
+                        return yis(d);
+                    })
+                    .attr("y2", function(d) {
+                        return yis(d);
+                    })
+                iconDelin
+                    .enter().append("line")
+                    .attr("class", "xDelin")
+                    .attr("y1", function(d) {
+                        return yis(d);
+                    })
+                    .attr("y2", function(d) {
+                        return yis(d);
+                    })
+                    .attr("x1", 0) //m[1] + 10)
+                    .attr("x2", w) //m[3]) //not w
+                    .attr("stroke-dasharray", dashArray)
+                    .attr("stroke-width", .5)
+                    .attr("stroke", "lightgray")
+                iconDelin.exit().remove();
+
+                var button1 = 0;
+                var button2 = 0;
+                clearInterval(startTime);
+
+                var circs, rectz, ardRectz,
+                    minExtent = brush.extent()[0],
+                    maxExtent = brush.extent()[1],
+
+                    visItems = uniques1.filter(function(d) {
+                        return d.timeIs < maxExtent && d.timeIs > minExtent;
+                    });
+                //AND THEN EVERY SESSION, THESE GO BACK TO ZERO...
+
+                for (i = 0; i < visItems.length; i++) {
+                    if (visItems[i].buttonIs == "button1") {
+                        button1++;
+                    }
+                    if (visItems[i].buttonIs == "button2") {
+                        button2++;
+                    }
+                }
+
+                ardItems = ardEntry.filter(function(d) {
+                    return d.start < maxExtent && d.end > minExtent && d.sF == "1" && d.mod == "BM";
+                });
+
+                ccItems = ardEntry.filter(function(d) {
+                    return d.start < maxExtent && d.sF == "1" && d.mod == "CC";
+                });
+
+                mItems = ardEntry.filter(function(d) {
+                    return d.start < maxExtent && d.end > minExtent && d.sF == "1" && d.mod == "M";
+                });
+                mAllItems = ardEntry.filter(function(d) {
+                    return d.start < maxExtent && d.end > minExtent && d.mod == "M";
+                });
+
+                bItems = ardEntry.filter(function(d) {
+                    return d.start < maxExtent && d.end > minExtent && d.sF == "1" && d.mod == "B";
+                });
+                bAllItems = ardEntry.filter(function(d) {
+                    return d.start < maxExtent && d.end > minExtent && d.mod == "B";
+                });
+
+                lineAllItems = ardEntry.filter(function(d) {
+                    return d.start < maxExtent && d.end > minExtent && d.mod == "L";
+                });
+
+                d3.selectAll(".wodry1").remove();
+                d3.selectAll(".wodry").remove();
+                d3.selectAll(".wodry2").remove();
+
+                // d3.selectAll(".atext").remove();
+                // d3.selectAll(".mtext").remove();
+                // d3.selectAll(".btext").remove();
+                // d3.selectAll(".ltext").remove();
+                // d3.selectAll(".ldtext").remove();
+
+                d3.selectAll(".screen").remove();
+
+                d3.selectAll(".sumText").remove();
+
+
+                // d3.selectAll(".timeRects").remove();
+                d3.selectAll(".trect").remove();
+
+                // mini.select(".brush")
+                // .call(brush.extent([minExtent, maxExtent]));
+
+                x1.domain([minExtent, maxExtent]);
+
+                ySum.domain([minExtent, maxExtent]);
+
+                // console.log(minExtent+" min "+timeFormat(new Date(minExtent)));
+
+                // console.log((maxExtent)-(minExtent));
+                // console.log((+maxExtTime)-(+minExtTime));
+
+                //////////////
+                var minExtTime = timeFormat2(new Date(minExtent));
+                var maxExtTime = timeFormat2(new Date(maxExtent));
+                var maxText = timeFormat2(new Date(maxdate));
+                var minHeadline = timeFormat1(new Date(minExtent));
+                // m[3], w
+                var timeText1 = main.selectAll("wodry1")
+                    .data(d3.range(1))
+                    .enter()
+                    .append("text").attr("class", "wodry1")
+                    .attr("x", 0) //x1(minExtent) - 10)
+                    .attr("y", yMargin - 20)
+                    .attr("text-anchor", "end")
+                    .text(minHeadline);
+                var timeText = main.selectAll("wodry")
+                    .data(d3.range(1))
+                    .enter()
+                    .append("text").attr("class", "wodry")
+                    .attr("x", 0) //-45//x1(minExtent) - 10)
+                    .attr("y", yMargin)
+                    .attr("text-anchor", "end")
+                    .text("@" + minExtTime);
+
+                var timeText2;
+                timeText2 = main.selectAll("wodry2")
+                    .data(d3.range(1))
+                    .attr("x", x1(maxExtent));
+                timeText2.enter().append("text")
+                    .attr("class", "wodry2")
+                    .attr("x", x1(maxExtent))
+                    .attr("y", yMargin)
+                    .attr("text-anchor", "end")
+                    .attr("opacity", function(d) {
+                        // timeWidth = $(".wodry2").width();
+                        if (x1(maxExtent) > x1(minExtent)) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    })
+                    .text(maxExtTime);
+
+
+
+
+                ///////////////////
+                var ccCirclez;
+                var ccR = 15;
+                //FOR Y1 ISSUE
+                ccCirclez = itemArdz.selectAll(".ccCirc")
+                    .data(ccItems, function(d) {
+                        return d.specialID;
+                    })
+                    .attr("x1", function(d) {
+                        return x1(d.start); //xis(d.from);
+                    })
+                    .attr("x2", function(d) {
+                        return x1(d.start); //xis(d.from);
+                    })
+                ccCirclez.enter().append("line")
+                    .attr("class", "ccCirc")
+                    .attr("x1", function(d) {
+                        return x1(d.start); //xis(d.from);
+                    })
+                    .attr("x2", function(d) {
+                        return x1(d.start); //xis(d.from);
+                    })
+                    .attr("y1", function(d) {
+                        return yis(d.from);
+                    })
+                    .attr("y2", function(d) {
+                        return yis(d.from) + standardRect;
+                    })
+                    .attr("stroke", "black")
+                    // function(d) {
+                    // return oColor(d.from);
+                    // })
+                    .attr("stroke-width", 1)
+                    .style("stroke-dasharray", dashArray)
+                    .attr("opacity", 1)
+                ccCirclez.exit().remove();
+
+                ///////////////////////////////
+                lines = itemRects.selectAll(".linez")
+                    .data(visItems, function(d) {
+                        return d.timeIs;
+                    })
+                    .attr("x1", function(d) {
+                        return x1(d.timeIs) + imgHeight / 2;
+                    })
+                    .attr("x2", function(d) {
+                        return x1(d.timeIs) + imgHeight / 2;
+                    })
+                    .attr("y1", imgHeight)
+                    .attr("y2", 131)
+                lines.enter().append("line")
+                    .attr("class", "linez")
+                    .attr("y1", imgHeight)
+                    .attr("y2", 131)
+                    .attr("x1", function(d) {
+                        return x1(d.timeIs) + imgHeight / 2;
+                    })
+                    .attr("x2", function(d) {
+                        return x1(d.timeIs) + imgHeight / 2;
+                    })
+                    .attr("stroke", "black")
+                lines.exit().remove();
+                //////////////////////
+                ///////////////////////////////
+
+
+                //////////////////////
+                ///////////////////////////////
+                rects = itemRects.selectAll(".image-cropper")
+                    .data(visItems, function(d) {
+                        return d.timeIs;
+                    })
+                    .attr("x", function(d) {
+                        return x1(d.timeIs);
+                    })
+                rects.enter().append("image")
+                    .attr("class", function(d) {
+                        d3.select(this).each(moveToFront);
+                        return "image-cropper"
+                    })
+                    .attr("xlink:href", function(d, i) {
+                        // d3.select(this).each(moveToFront)();
+                        if (d.buttonIs == "button2") { //1 is bad 3 is good
+                            return "icons/idea.png";
+                            // return "ideaWhite.png";
+                        }
+                        if (d.buttonIs == "button1") { //1 is bad 3 is good
+                            return "icons/thunder.png";
+                            // return "thunderWhite.png";
+                        } else {}
+                    })
+                    .attr("y", 4) //imgHeight/2)
+                    .attr("width", imgHeight)
+                    .attr("height", imgHeight)
+                    .attr("x", function(d) {
+                        return x1(d.timeIs);
+                    })
+                rects.exit().remove();
+                ///////////////////////////////
+        var dur = 2000;
+//NEW ATTEMPT
+                var screens;
+                screens = itemRects.selectAll(".screen")
+                    .data(visItems)
+                    .attr("x", function(d, i) {
+                        return x1(d.timeIs) - 50; //scale based on d.time
+                    })
+                screens
+                    .enter()
+                    .append("image")
+                    .attr("class", "screen")
+                    .attr("xlink:href", function(d, i) {
+                        return d.photS;
+                    })
+                    .attr("x", function(d, i) {
+                        return x1(d.timeIs) - 50; //scale based on d.time
+                    })
+                    .attr("y", imgY)
+                    .attr("width", imgW)
+                    .attr("height", imgW)
+                        .on("mouseover", function(d) {
+                            d3.select(this).each(moveToFront);
+                            d3.select(this)
+                                .transition()
+                                .duration(dur / 2)
+                    .attr("width", imgW*2)
+                    .attr("height", imgW*2)
+                                .each("end", function(d, i) {
+                                    d3.select(this)
+                                        .transition()
+                                        .delay(dur)
+                                        .duration(dur / 2)
+                    .attr("y", imgY)
+                    .attr("width", imgW)
+                    .attr("height", imgW)
+                                })
+                        })
+                screens.exit().remove();
+readyToSlide = true;
+                $(".screen").error(function() {
+                    $(this).hide();
+                });
+                ///////////////////////////////
+
+                var overview;
+                overview = itemRects.selectAll(".over")
+                    .data(visItems)
+                    .attr("x", function(d, i) {
+                        return x1(d.timeIs) - 50; //scale based on d.time
+                    })
+                overview
+                    .enter()
+                    .append("image")
+                    .attr("class", "over")
+                    .attr("xlink:href", function(d, i) {
+                        return d.photO;
+                    })
+                    .attr("x", function(d, i) {
+                        return x1(d.timeIs) - 50; //scale based on d.time
+                    })
+                    .attr("y", imgY)
+                    .attr("width", imgW)
+                    .attr("height", imgW)
+                        .on("mouseover", function(d) {
+                            d3.select(this).each(moveToFront);
+                            d3.select(this)
+                                .transition()
+                                .duration(dur / 2)
+                                .attr("width", imgW*2)
+                                .attr("height", imgW*2)
+                                .each("end", function(d, i) {
+                                    d3.select(this)
+                                        .transition()
+                                        .delay(dur)
+                                        .duration(dur / 2)
+                    .attr("y", imgY)
+                    .attr("width", imgW)
+                    .attr("height", imgW)
+                                })
+                        })
+                overview.exit().remove();
+                $(".over").error(function() {
+                    $(this).hide();
+                });
+
+
+
+
+
+
+
+
+
+                ///////////////////////////////
+                // var overviewC;
+                // overviewC = itemRects.selectAll(".overC")
+                //     .data(visItems)
+                //     .attr("cx", function(d, i) {
+                //         return x1(d.timeIs) - 50; //scale based on d.time
+                //     })
+                // overviewC
+                //     .enter()
+                //     .append("circle")
+                //     .attr("class", "overC")
+                //     // .attr("xlink:href", function(d, i) {
+                //     //     return d.photO;
+                //     // })
+                //     .attr("cx", function(d, i) {
+                //         return x1(d.timeIs) - 50; //scale based on d.time
+                //     })
+                //     .attr("cy", imgY+imgW/2)
+                //     .attr("r", imgW/2)
+                //     .attr("stroke","white")
+                //     .attr("stroke-width",20)
+                //    .style("fill", function(d){
+                //         return "url(#"+d.photO+")";
+                //    }) 
+
+                    //     .on("mouseover", function(d) {
+                    //         d3.select(this).each(moveToFront);
+                    //         d3.select(this)
+                    //             .transition()
+                    //             .duration(dur / 2)
+                    //             .attr("r", imgW)
+                    //             .each("end", function(d, i) {
+                    //                 d3.select(this)
+                    //                     .transition()
+                    //                     .delay(dur)
+                    //                     .duration(dur / 2)
+                    // .attr("cy", imgY+imgW/2)
+                    // .attr("r", imgW/2)
+                    //             })
+                    //     })
+                // overviewC.exit().remove();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            $("image.over").click(function(){
+                 $("image.over").hide()  
+                 $("image.screen").show()   
+                $(".over").error(function() {
+                    $(this).hide();
+                }); 
+             })  
+        // }
+
+        // if($("image.over").css("display")!="inline"){
+            $("image.screen").click(function(){
+                 $("image.over").show()  
+                 $("image.screen").hide()    
+                $(".screen").error(function() {
+                    $(this).hide();
+                });
+             })
+
+
+
+
+
+
+
+
+
+
+
+
+                var lineDelin;
+                lineDelin = main.selectAll(".timeDelin")
+                    .data(d3.range(2))
+                    .attr("y1", yHeight)
+                    .attr("y2", yHeight)
+
+                lineDelin
+                    .enter().append("line")
+                    .attr("class", "timeDelin")
+                    .attr("y1", yHeight)
+                    .attr("y2", yHeight)
+                    .attr("x1", 0)//m[1] + 10)
+                    .attr("x2", w-50) //m[3]) //not w
+                    .attr("stroke-dasharray", "dashArray")
+                    .attr("stroke-width", .5)
+                    .attr("stroke", "lightgray")
+                    lineDelin.exit().remove();
+
+
+
+                /////////////////////////////////
+                //SOFTWARE MODULES
+                var bRectz;
+                bRectz = itemArdz.selectAll(".brect")
+                    .data(bItems, function(d) {
+                        return d.specialID;
+                    })
+                    .attr("x", function(d) {
+                        return x1(d.start);
+                    })
+                    .attr("width", function(d, i) {
+                        return x1(d.end) - x1(d.start);
+                    });
+                bRectz.enter().append("rect")
+                    .attr("class", "brect")
+                    .attr("x", function(d) {
+                        return x1(d.start);
+                    })
+                    .attr("y", function(d, i) {
+                        return yis(d.from); //-standardRect;
+                    })
+                    .attr("width", function(d) {
+                        return x1(d.end) - x1(d.start);
+                    })
+                    .attr("height", standardRect)
+                    // .attr("height", standardRect)
+                    .attr("fill", function(d,i) {
+// inputs.push("BTN","POT","TMP","ACR","COL","ROT","LDR")
+// outputs.push("LED","PEZ", "RGB")
+// programming.push("IF", "Interval", "Fade", "Swap", "Map", "Counter", "Trigger")
+// games.push("Note", "Random", "PONG", "SimonSays")
+for(j=0; j<programming.length; j++){
+    if(d.from==programming[j]){
+        return "#907c64";
+    }
+}
+for(j=0; j<inputs.length; j++){
+    if(d.from==inputs[j]){
+        return "#00A2AF"
+    }
+}
+for(k=0; k<outputs.length; k++){
+    if(d.from==outputs[k]){
+        return "red"
+    }
+}
+
+// if(d.from==outputs[i]){
+//     return "blue";
+// }
+// if(d.from==inputs[i]){
+//     return "red";
+// }
+// if(d.from==games[i]){
+//     return "green";
+// }
+
+                        // return oColor(d.from);
+                    })
+                    .attr("stroke", "none")
+                    .attr("opacity", .4)//opacity/5)
+                bRectz.exit().remove();
+
+
+
+// console.log(ardItems)
+                /////////WHAT IS WRONG
+                ardRectz = itemArdz.selectAll(".bmRect")
+                    .data(ardItems, function(d) {
+                        return d.specialID;
+                    })
+                    .attr("x", function(d) {
+                        return x1(d.start);
+                    })
+                    .attr("width", function(d, i) {
+                        return x1(d.end) - x1(d.start);
+                    })
+                    .attr("y", function(d, i) {
+                        return yis(d.from); //+standardRect/2;
+                        // return yis(d.from)+10;
+                    })
+                ardRectz.enter().append("rect")
+                    .attr("class", "bmRect")
+                    .attr("x", function(d) {
+                        return x1(d.start);
+                    })
+                    .attr("y", function(d, i) {
+                        return yis(d.from); //+standardRect/2;
+                        // return yis(d.from)+standardRect+5;
+                    })
+                    .attr("width", function(d) {
+                        return x1(d.end) - x1(d.start);
+                    })
+                    .attr("height", standardRect)
+                    .attr("fill", function(d,i) {
+                        console.log(d.from+"hello")
+// inputs.push("BTN","POT","TMP","ACR","COL","ROT","LDR")
+// outputs.push("LED","PEZ", "RGB")
+// programming.push("IF", "Interval", "Fade", "Swap", "Map", "Counter", "Trigger")
+// games.push("Note", "Random", "PONG", "SimonSays")
+// if(d.from==outputs[i]){
+//     return "blue";
+// }  
+// if(d.from==inputs[i]){
+//     return "red";
+// } else{console.log("wtf"+d.from)}
+// if(d.from==inputs[i]){
+//     return "red";
+// }                
+for(j=0; j<inputs.length; j++){
+    if(d.from==inputs[j]){
+        return "#00A2AF"
+    }
+}
+for(k=0; k<outputs.length; k++){
+    if(d.from==outputs[k]){
+        return "red"
+    }
+}
+
+                        // return oColor(d.from);
+                    })
+                    .attr("stroke", "none")
+                    .attr("opacity", opacity / 5)
+                ardRectz.exit().remove();
+
+
+
+
+                //////////////////////////////////
+                var mRectz;
+                mRectz = itemArdz.selectAll(".mrect")
+                    .data(mItems, function(d) {
+                        return d.specialID;
+                    })
+                    .attr("x", function(d) {
+                        return x1(d.start);
+                    })
+                    .attr("width", function(d, i) {
+                        return x1(d.end) - x1(d.start);
+                    });
+                mRectz.enter().append("rect")
+                    .attr("class", "mrect")
+                    .attr("x", function(d) {
+                        return x1(d.start);
+                    })
+                    .attr("y", function(d, i) {
+                        return yis(d.from); //+standardRect;
+                        // return yis(d.from)+1;
+                    })
+                    .attr("width", function(d) {
+                        return x1(d.end) - x1(d.start);
+                    })
+                    .attr("height", 2)
+                    .attr("fill", function(d) {
+for(j=0; j<inputs.length; j++){
+    if(d.from==inputs[j]){
+        return "#00A2AF"
+    }
+}
+for(k=0; k<outputs.length; k++){
+    if(d.from==outputs[k]){
+        return "red"
+    }
+}
+for(j=0; j<programming.length; j++){
+    if(d.from==programming[j]){
+        return "#907c64";
+    }
+}
+                        // return oColor(d.from);
+                    })
+                    .attr("stroke", "none")
+                    .attr("opacity", 1)
+                mRectz.exit().remove();
+
+                /////////////////////////////
+                var linkI;
+                var linkD;
+
+
+                var timeRect;
+                var timeWidth; //= $(".wodry2").width();
+                ///////////////////////////////
+                var sumXScale = d3.scale.linear()
+                    .domain([0, button2])
+                    .range([w / 2, w])
+                    //////////////////////////
+
+
+                // if (i > 0) {
+                //     if (parseDate(entry[i].timeIs).getHours() == parseDate(entry[i - 1].timeIs).getHours()) {
+                //         return centerline + totalPhotos[parseDate(entry[i].timeIs).getHours()] * 45;
+                //         // return scaleIt(parseDate(thisTime[i]).getHours());     
+                //     } else {
+                //         return centerline + 45;
+                //     }
+                // } else {
+                //     return centerline + 45;
+                // } 
+                circs = itemCircs.selectAll(".circz")
+                    .data(lineAllItems, function(d, i) {
+                        // console.log(d.specialID)
+                        return d.specialID;
+                    })
+                    .attr("x", function(d) {
+                        return x1(d.start);
+                    })
+                circs.enter().append("text")
+                    .attr("class", "circz")
+                    // .attr("r", r)
+                    .attr("x", function(d) {
+                        d3.select(this).each(moveToFront);
+                        if (d.sF == 1) {
+                            return x1(d.start);
+                        } else {
+                            return x1(d.end);
+                        }
+                    })
+                    .attr("y", function(d, i) {
+                        return yis(d.from); //- standardRect; //*2
+                    })
+                    .attr("fill", function(d) {
+                        if (d.sF == 1) {
+for(j=0; j<inputs.length; j++){
+    if(d.from==inputs[j]){
+        return "#00A2AF"
+    }
+}
+for(k=0; k<outputs.length; k++){
+    if(d.from==outputs[k]){
+        return "red"
+    }
+}
+for(j=0; j<programming.length; j++){
+    if(d.from==programming[j]){
+        return "#907c64";
+    }
+}
+                            // return oColor(d.from);
+                        } else {
+                            return "none";
+                        }
+                    })
+                    .attr("stroke", function(d) {
+                        if (d.sF == 1) {
+for(j=0; j<inputs.length; j++){
+    if(d.from==inputs[j]){
+        return "#00A2AF"
+    }
+}
+for(k=0; k<outputs.length; k++){
+    if(d.from==outputs[k]){
+        return "red"
+    }
+}
+for(j=0; j<programming.length; j++){
+    if(d.from==programming[j]){
+        return "#907c64";
+    }
+}
+                            // return oColor(d.from);
+                        } else {
+                            return "none";
+                        }
+                    })
+                    // ▲ (&#9650;) and ▼ (&#9660;)
+                    .text("v")
+                    .attr("opacity", function(d) {
+                        if (d.sF == 1) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    })
+                    .style("font-size", "7pt")
+                circs.exit().remove();
+
+
+                // // ///////////////////////////////
+                var circR;
+                circR = itemCircs.selectAll(".circR")
+                    .data(lineAllItems, function(d) {
+                        return d.specialID;
+                    })
+                    .attr("x", function(d) {
+                        return x1(d.start);
+                    })
+                circR.enter().append("rect")
+                    .attr("class", "circR")
+                    .attr("width", 5)
+                    .attr("height", 5)
+                    .attr("x", function(d) {
+                        if (d.sF == 1) {
+                            return x1(d.start);
+                        } else {
+                            return x1(d.end);
+                        }
+                    })
+                    .attr("y", function(d, i) {
+
+                        return yis(d.from) - 5;//-standardRect; //*2+yis(d.from)-5;
+                    })
+                    .attr("fill", function(d) {
+                        if (d.sF == 1) {
+                            return "none";
+                        } else {
+                            return "white"
+                                // return linkColor;
+                                // return oColor(d.from);
+                        }
+                    })
+                    .attr("stroke-width", 1)
+                    .attr("stroke", function(d) {
+                        if (d.sF == 1) {
+                            return "none";
+                        } else {
+for(j=0; j<inputs.length; j++){
+    if(d.from==inputs[j]){
+        return "#00A2AF"
+    }
+}
+for(k=0; k<outputs.length; k++){
+    if(d.from==outputs[k]){
+        return "red"
+    }
+}
+for(j=0; j<programming.length; j++){
+    if(d.from==programming[j]){
+        return "#907c64";
+    }
+}
+
+                            // return oColor(d.from);
+                        }
+                    })
+                    .attr("opacity", 1)
+                circR.exit().remove();
+
+
+            } //WOOOOO ADDED THIS THINGIE 
+
+            $('.ccCirc').tipsy({
+                gravity: 'nw',
+                html: true,
+                title: function() {
+                    return "Software Manipulation"
+                }
+            })
+            $('.mrect').tipsy({
+                gravity: 'nw',
+                html: true,
+                title: function() {
+                    return "Hardware Module"
+                }
+            })
+            $('.bmRect').tipsy({
+                gravity: 'nw',
+                html: true,
+                title: function() {
+                    return "Software->Hardware"
+                }
+            })
+            $('.brect').tipsy({
+                gravity: 'nw',
+                html: true,
+                title: function() {
+                    return "Software Module"
+                }
+            })
+            $('.circR').tipsy({
+                gravity: 'nw',
+                html: true,
+                title: function() {
+                    return "Link Disconnected"
+                }
+            })
+            $('.circz').tipsy({
+                gravity: 'nw',
+                html: true,
+                title: function() {
+                    return "Link Made"
+                }
+            })
+
+            d3.selectAll("image").each(moveToFront);
+
+            ///////////////////////////////
+
+            if (autoMoving == false && calledAgain == false) {
+                console.log("HEY down here")
+                    // callNewInterval();
+            }
+        //}
+
+
+
+
+        // $('#infoBtn').on("click", function(){
+        //  $('#moreinfo').show();
+        // })
+
+
+
+        function getUnique(inputArray) {
+            var outputArray = [];
+            for (var i = 0; i < inputArray.length; i++) {
+                if (jQuery.inArray(inputArray[i], outputArray) == -1) {
+                    outputArray.push(inputArray[i]);
+                }
+            }
+            return outputArray;
+        }
+
+
+        function unique(obj) {
+            var uniques = [];
+            var stringify = {};
+            for (var i = 0; i < obj.length; i++) {
+                var keys = Object.keys(obj[i]);
+                keys.sort(function(a, b) {
+                    return a - b
+                });
+                var str = '';
+                for (var j = 0; j < keys.length; j++) {
+                    str += JSON.stringify(keys[j]);
+                    str += JSON.stringify(obj[i][keys[j]]);
+                }
+                if (!stringify.hasOwnProperty(str)) {
+                    uniques.push(obj[i]);
+                    stringify[str] = true;
+                }
+            }
+            return uniques;
+        }
+
+        function photoConsolidation(index) {
+            var total = 0;
+            for (i = 0; i < uniques1.length; i++) {
+                if (uniques1[i].timeIs.getHours() == index) {
+                    total++;
+                } else {}
+            }
+            return total;
+        }
+
+        function ccConsolidation(index) {
+            var total = 0;
+            for (i = 0; i < ardUniques1.length; i++) {
+                if (ardUniques1[i].from == index) {
+                    total++;
+                } else {}
+            }
+            return total;
+        }
+
+        //Move SVG elements to the end of their container,
+        //so they appear "on top".
+        var moveToFront = function() {
+            this.parentNode.appendChild(this);
+        }
+
+
+
+
+        // var summaryCC = ccConsolidation(ccItems);
+        // for (i=0; i<ccItems.length; i++){
+        //     for(j=0; j<ardUniques1.length; j++){
+        //         if(ccItems[i].from==ardUniques1[j]){
+
+        //         }        
+        //     }
+        // }
+        // console.log(summaryCC);
+        // var ccCircText;
+        //                 ccCircText = itemArdz.selectAll(".ccText")
+        //                     .data(ccItems, function(d) {
+        //                         return d.specialID;
+        //                     })
+        //                     .attr("x", function(d) {
+        //                         return x1(d.start)-ccR/2;
+        //                     })
+        //                 ccCircText.enter().append("text")
+        //                     .attr("class", "ccText")
+        //                     .attr("x", function(d) {
+        //                         return x1(d.start)-ccR/2;
+        //                     })
+        //                     .attr("y", function(d){
+        //                         return yis(d.from)
+        //                     })
+        //                     .style("font-size","8px")
+        //                     .attr("fill", function(d) {
+        //                         return oColor(d.from);
+        //                     })
+        //                     .text(function(d){
+        //                         return d.from;
+        //                     })
+        //                 ccCircText.exit().remove();
+
+
+    if(readyToSlide){
+        // if($("image.over").css("display")=="inline"){
+            $("image.over").click(function(){
+                 $("image.over").hide()  
+                 $("image.screen").show()    
+             })  
+        // }
+
+        // if($("image.over").css("display")!="inline"){
+            $("image.screen").click(function(){
+                 $("image.over").show()  
+                 $("image.screen").hide()    
+             })
+         // }
+
+     // setInterval(function () {
+     //     if($("image.over").css("display")!="inline"){
+     //         $("image.over").show()  
+     //         $("image.screen").hide()    
+     //     }
+     // }, 6000);
+    }
+
+        //////////////////////
+    </script>
+    <!-- <div id="click">up</div> -->
+
+</body>
+
+</html>
