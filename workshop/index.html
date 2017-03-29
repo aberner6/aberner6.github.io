@@ -16,35 +16,6 @@
 <body>
 	<script type="text/javascript">
 		// D3 code will go here
-		var activities = [
-
-		      {
-		        "type": "WELCOME",
-		        "underlings": ["peace-envelope", "id-necklace", "move-in-space"],
-		      }, 
-		      {
-		        "type": "OUTSIDE-IN",
-		        "underlings": ["hunt-gather", "regroup-upload", "show-tell","compare-curate"],
-		      },
-		      { 
-		        "type": "OTHER-SHOES",
-		        "underlings": ["stances-characters", "rounds1-2-3"],
-		      },
-		      { 
-		        "type": "FUTURE-PAST-NOW",
-		        "underlings": ["past-see", "now-note", "future-draw"],
-		      },
-		      {
-		        "type": "CO-CREATION",
-		        "underlings": ["design-challenge", "concept-sketch", "group-share"],
-		          // "properties": {
-		          //   "who": "Groups of 4",
-		          //   "what": "blah blah",
-		          //   "where": "blah blah",
-		          //   "why": "blah blah"
-		          // },
-		      }
-		]
 
 
 
@@ -140,8 +111,37 @@ var links = [];
 var nodes = {};
 var drag;
 var circle, path, text;
-createNodes();
+
 function createNodes(){
+	var activities = [
+
+	      {
+	        "type": "WELCOME",
+	        "underlings": ["peace-envelope", "id-necklace", "move-in-space"],
+	      }, 
+	      {
+	        "type": "OUTSIDE-IN",
+	        "underlings": ["hunt-gather", "regroup-upload", "show-tell","compare-curate"],
+	      },
+	      { 
+	        "type": "OTHER-SHOES",
+	        "underlings": ["stances-characters", "rounds1-2-3"],
+	      },
+	      { 
+	        "type": "FUTURE-PAST-NOW",
+	        "underlings": ["past-see", "now-note", "future-draw"],
+	      },
+	      {
+	        "type": "CO-CREATION",
+	        "underlings": ["design-challenge", "concept-sketch", "group-share"],
+	          // "properties": {
+	          //   "who": "Groups of 4",
+	          //   "what": "blah blah",
+	          //   "where": "blah blah",
+	          //   "why": "blah blah"
+	          // },
+	      }
+	]
     links = [];
         for (i=0; i<activities.length; i++){
         	for(j=0; j<activities[i].underlings.length; j++){
