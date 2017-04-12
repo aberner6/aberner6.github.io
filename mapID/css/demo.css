@@ -37,6 +37,7 @@ a:hover, a:focus {
 	margin: 0 auto;
 	text-align: center;
 	overflow: hidden;
+	margin-top: 20px;
 }
 
 .content {
