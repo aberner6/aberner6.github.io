@@ -10,7 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="css/set2.css" />
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   		<script src="https://d3js.org/d3.v4.min.js"></script>
-	    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	    <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNZ19MF_z9i597nPeJmci8xsUiP4j17uo">
+</script>
   		<style>
 			.content h2 {
 				opacity: .9;
@@ -32,6 +34,7 @@
 		</div>
 		<div id="visualization">
 		</div>
+
 		<script src="js/classie.js"></script>
 		<script>
 var current = [];
@@ -171,13 +174,13 @@ var t = d3.transition()
 function drawOtherSpot(){
 	console.log("hey1")
 	d3.selectAll(".rect-1")
-		.transition(t)
+		.transition().duration(3000)
 	    .attr("x", lngScale(spot[0].minLon))
-	    .transition(t)
+		.transition().duration(3000)
 		.attr("y", latScale(spot[0].minLat))
-		.transition(t)
+		.transition().duration(3000)
 		.attr("height", latArea(Math.abs(spot[0].maxLat-spot[0].minLat)))
-		.transition(t)
+		.transition().duration(3000)
 		.attr("width", lngArea(Math.abs(spot[0].maxLon-spot[0].minLon)))
 }
 
