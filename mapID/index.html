@@ -27,13 +27,20 @@
 				left:0px;
 				top:0px;
 			}
-
+			text{
+				text-transform: uppercase;
+			    font-size: 10px;
+			    font-weight: 200;
+			}
+/*			span.input.input--nariko{
+				opacity:0;
+			}*/
   		</style>
 	</head>
 	<body>
 		<div class="container">
 			<section class="content bgcolor-7">
-				<h2>Where are you from?</h2>
+				<h2>This is where you are now</h2>
 				<span class="input input--nariko">
 					<input class="input__field input__field--nariko" type="text" id="input-20" />
 					<label class="input__label input__label--nariko" for="input-20">
@@ -47,10 +54,13 @@
 
 		<script src="js/classie.js"></script>
 		<script>
+d3.selectAll("span.input.input--nariko")
+	.style("opacity",0)
+
 var current = [];
 $.get("http://ipinfo.io", function(response) {
 	current = response;
-	d3.selectAll("label").text("For example: " +response.city+", "+response.country)
+	d3.selectAll("label").text("For example: "+response.city+", "+response.country);
 	    console.log(current.city, current.country);
 	    current.latlng = response.loc.split(",")
 	currentChange();
@@ -93,12 +103,22 @@ var rectData = [
 	{"x": width/2,   "y": 25,  "height": rectSm, "width": rectSm},
     {"x": width/2,  "y": 25, "height": rectSm, "width": rectSm},
 ];
+var textData = [
+	{"x": width/2,   "y": 25},
+    {"x": width/2,  "y": 25},
+];
+var texts = svg.selectAll("text").data(textData).enter().append("text")
+    .attr("class", function(d, i) { 
+    	return "text-" + i; 
+    });
+// texts
+//     .attr("x",      function(d, i) { return d.x;         })
+//     .attr("y",      function(d, i) { return d.y;         })
 
 var rects = svg.selectAll("rect").data(rectData).enter().append("rect")
     .attr("class", function(d, i) { 
     	return "rect-" + i; 
     });
-
 rects
     .attr("x",      function(d, i) { return d.x;         })
     .attr("y",      function(d, i) { return d.y;         })
@@ -134,6 +154,21 @@ function changeLoc(){
 		    .duration(3000)
 		    .attr("y", latScale(parseInt(current.latlng[0])))
 		    .attr("stroke","pink")
+	d3.selectAll(".text-0")
+		.transition()
+		.delay(6000)
+		.text(current.city+", "+current.country)
+		    .attr("x", lngScale(parseInt(current.latlng[1])))
+		    .attr("y", latScale(parseInt(current.latlng[0])))
+	d3.selectAll("span.input.input--nariko")
+		.transition()
+		.delay(7000)
+		.style("opacity",1)
+	d3.select("h2")
+		.transition()
+		.delay(7000)
+		.text("But where are you from?")
+
 }
 
 function changeWidth() {
