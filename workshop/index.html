@@ -355,7 +355,7 @@ var circTwo;
 
 var colorScale = d3.scale.ordinal()
 	.range([ "#fdd922", "#21bbaf", "#ed7c77", "#b895df", "#007aaa" ]);
-
+makeCircs();
 function makeCircs(){
 	colorScale.domain([1,activities.length]);
 	xScale.domain(activities);
