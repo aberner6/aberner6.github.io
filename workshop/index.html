@@ -7,9 +7,10 @@
 	<script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
 	<style type="text/css">
 		/* CSS style rules will go here */
-		.labels{
+		.labels, .labelsMain{
 		    font-family: Gotham-Light;
-		    font-size: 10px;
+		    font-size: 12px;
+		    fill:grey;
 		}
 		.link{
 			fill:grey;
@@ -292,7 +293,45 @@ html, body, .Container
 <script type="text/javascript">
 		// D3 code will go here
 
+	var activities = [
 
+	      {
+	        "type": "WELCOME",
+	        "index":1,
+	        "color":"#fdd922",
+	        "underlings": ["peace-envelope", "id-necklace", "move-in-space"],
+	      }, 
+	      {
+	        "type": "OUTSIDE-IN",
+	        "index":2,
+	        "color":"#21bbaf",
+	        "underlings": ["hunt-gather", "regroup-upload", "show-tell","compare-curate"],
+	      },
+	      { 
+	        "type": "OTHER-SHOES",
+	        "index":3,
+	        "color":"#ed7c77",
+	        "underlings": ["stances-characters", "rounds1-2-3"],
+	      },
+	      { 
+	        "type": "FUTURE-PAST-NOW",
+	        "index":4,
+	        "color":"#b895df",
+	        "underlings": ["past-see", "now-note", "future-draw"],
+	      },
+	      {
+	        "type": "CO-CREATION",
+	        "index":5,
+	        "color":"#007aaa",
+	        "underlings": ["design-challenge", "concept-sketch", "group-share"],
+	          // "properties": {
+	          //   "who": "Groups of 4",
+	          //   "what": "blah blah",
+	          //   "where": "blah blah",
+	          //   "why": "blah blah"
+	          // },
+	      }
+	]
 
 var leftMargin = 60;
 var containerWidth = $("#container").width();
@@ -307,236 +346,154 @@ svg = d3.select("#container").append("svg").attr("class","main")
 
 var circs;
 
-var xScale = d3.scale.linear()
-			.range([leftMargin, w-leftMargin]);
-
-var color = d3.scale.category20c();
+var xScale = d3.scale.ordinal()
+			.range([leftMargin, w/2]);
+var yScale = d3.scale.linear()
+			.range([leftMargin, h-(leftMargin*2)]);
+// var color = d3.scale.category20c();
 var circTwo;
-//Colors by Cynthia Brewer (colorbrewer2.org), YlOrRd
-// var color = d3.scale.quantize()
-					// .range([ "#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026" ]);
 
-// function makeCircs(){
-// 	xScale.domain([0, activities.length])
+var colorScale = d3.scale.ordinal()
+	.range([ "#fdd922", "#21bbaf", "#ed7c77", "#b895df", "#007aaa" ]);
 
-// 	circs = svg.selectAll(".circs")
-// 			.data(activities)
-// 			.enter()
-// 			.append("circle")
-// 			.attr("class","circs")
-// 			.attr("transform", function(d,i){
-// 			    return "translate(" + (xScale(i)) + ", "+(h/4)+")";
-// 			})
-// 			.attr("cx", 0)
-// 			.attr("cy", 0)
-// 			.attr("r", 20)
-// 			.attr("fill", "white")
-// 			.attr("opacity", 1)
-// 			.attr("stroke", function(d,i){
-// 				return color(i);
-// 			});
+function makeCircs(){
+	colorScale.domain([1,activities.length]);
+	xScale.domain(activities);
+	yScale.domain([1,activities.length]);
+	// xScale.domain([0, activities.length])
+	var circsRad = 20;
+	var smallRad = 5;
+	circs = svg.selectAll(".circs")
+			.data(activities)
+			.enter()
+			.append("circle")
+			.attr("class",function(d){
+				return d.type
+			})
+			.attr("transform", function(d,i){
+			    return "translate(" + (xScale(d.type)) + ", "+ (yScale(d.index)) +")";
+			})
+			.attr("cx", 0)
+			.attr("cy", 0)
+			.attr("r", circsRad)
+			.attr("fill", "white")
+			.attr("opacity", 1)
+			.attr("stroke", function(d,i){
+				return d.color;
+			})
+			.attr("stroke-width",3);
+	texts = svg.selectAll(".labels")
+			.data(activities)
+			.enter()
+			.append("text")
+			.attr("class","labels")
+			.attr("transform", function(d,i){
+			    return "translate(" + (xScale(d.type)) + ", "+ (yScale(d.index)) +")";
+			})
+			.attr("x", 0)
+			.attr("y", ".2em")
+			.text(function(d,i){
+				return d.index;
+			})
+			.attr("text-anchor","middle")
+	textsMain = svg.selectAll(".labelsMain")
+			.data(activities)
+			.enter()
+			.append("text")
+			.attr("class","labelsMain")
+			.attr("transform", function(d,i){
+			    return "translate(" + (xScale(d.type)) + ", "+ (yScale(d.index)) +")";
+			})
+			.attr("x", 0)
+			.attr("y", -circsRad-8)
+			.text(function(d,i){
+				return d.type;
+			})
+			.attr("text-anchor","middle")
 
-// 	var ids = svg.selectAll(".id")	
-// 		.data(activities);
-// 	enteringID = ids.enter()
-// 		.append("g")
-// 		.classed("id",true)
-// 		.attr("transform", function(d,i){
-// 		    return "translate(" + (xScale(i)) + ", "+(h/2)+")";
-// 		})
-// 		.attr("fill", function(d,i){
-// 			return color(i);
-// 		});
+	var ids = svg.selectAll(".id")	
+		.data(activities);
+	enteringID = ids.enter()
+		.append("g")
+		.classed("id",true)
+		.attr("transform", function(d,i){
+			return "translate(" + (xScale(d.type)) + ", "+ (yScale(d.index)) +")";
+		})
+		.attr("fill", function(d,i){
+			return d.color;
+		})
+		.attr("stroke", function(d,i){
+			return d.color;
+		});
+var divFactor = 10;
 
-// 	enteringID.selectAll(".cat")
-// 		.data(function(d,i){
-// 			return d.underlings;
-// 		})
-// 		.enter()
-// 		.append("circle")
-// 		.classed("cat",true)
-// 		.attr("cx", function(d,i){
-// 			console.log(d);
-// 			console.log(10+(i*10));
-// 			return 10+(i*10);
-// 		})
-// 		.attr("cy", 0)
-// 		.attr("r", 5)
-// 		.attr("opacity", 1)
-// 		.attr("stroke","white")
+	enteringID.selectAll(".cat")
+		.data(function(d,i){
+			return d.underlings;
+		})
+		.enter()
+		.append("circle")
+		.classed("cat",true)
+		.attr("cx", function(d,i){
+			return circsRad*2+(i*10);
+		})
+		.attr("cy", function(d,i){
+			return circsRad/divFactor+(i*20);
+		})
+		.attr("r", smallRad)
+		.attr("opacity", 1)
 
-// 	enteringID.selectAll(".liney")
-// 		.data(function(d,i){
-// 			return d.underlings;
-// 		})
-// 		.enter()
-// 		.append("line")
-// 		.classed("liney",true)
-// 		.attr("y1", -h/4)
-// 		.attr("x1", 0)
-// 		.attr("x2", function(d,i){
-// 			console.log(d);
-// 			console.log(10+(i*10));
-// 			return 10+(i*10);
-// 		})
-// 		.attr("y2", 0)
-// 		.attr("opacity", 1)
-// 		.attr("stroke","grey")
-// }
+	enteringID.selectAll(".labels")
+		.data(function(d,i){
+			return d.underlings;
+		})
+		.enter()
+		.append("text")
+		.classed("labels",true)
+		.attr("x", function(d,i){
+			return circsRad*2+(i*10);
+		})
+		.attr("y", function(d,i){
+			return circsRad/divFactor+(i*20);
+		})
+		.attr("dx",smallRad*2)
+		.attr("dy",smallRad)
+		.attr("stroke","none")
+		.attr("fill","none")
+		.text(function(d){
+			return d;
+		})
 
-var links = [];
-var nodes = {};
-var drag;
-var circle, path, text;
-createNodes();
-function createNodes(){
-	var activities = [
+	enteringID.selectAll(".liney")
+		.data(function(d,i){
+			return d.underlings;
+		})
+		.enter()
+		.append("line")
+		.classed("liney",true)
+		.attr("y1", function(d,i){
+			if(i>0){
+				return circsRad/divFactor+((i-1)*20);
+			}else{
+				return circsRad/divFactor+(i*20);				
+			}
+		})
+		.attr("y2", function(d,i){
+			return circsRad/divFactor+(i*20);
+		})
 
-	      {
-	        "type": "WELCOME",
-	        "underlings": ["peace-envelope", "id-necklace", "move-in-space"],
-	      }, 
-	      {
-	        "type": "OUTSIDE-IN",
-	        "underlings": ["hunt-gather", "regroup-upload", "show-tell","compare-curate"],
-	      },
-	      { 
-	        "type": "OTHER-SHOES",
-	        "underlings": ["stances-characters", "rounds1-2-3"],
-	      },
-	      { 
-	        "type": "FUTURE-PAST-NOW",
-	        "underlings": ["past-see", "now-note", "future-draw"],
-	      },
-	      {
-	        "type": "CO-CREATION",
-	        "underlings": ["design-challenge", "concept-sketch", "group-share"],
-	          // "properties": {
-	          //   "who": "Groups of 4",
-	          //   "what": "blah blah",
-	          //   "where": "blah blah",
-	          //   "why": "blah blah"
-	          // },
-	      }
-	]
-
-	// var activities = {
-	// 	"workshop":
-	// 	[
-	//       {
-	//         "type": "WELCOME",
-	//         "underlings": ["peace-envelope", "id-necklace", "move-in-space"],
-	//       }, 
-	//       {
-	//         "type": "OUTSIDE-IN",
-	//         "underlings": ["hunt-gather", "regroup-upload", "show-tell","compare-curate"],
-	//       },
-	//       { 
-	//         "type": "OTHER-SHOES",
-	//         "underlings": ["stances-characters", "rounds1-2-3"],
-	//       },
-	//       { 
-	//         "type": "FUTURE-PAST-NOW",
-	//         "underlings": ["past-see", "now-note", "future-draw"],
-	//       },
-	//       {
-	//         "type": "CO-CREATION",
-	//         "underlings": ["design-challenge", "concept-sketch", "group-share"],
-	//       }
-	// 	]
-	// }
-    links = [];
-        for (i=0; i<activities.length; i++){
-        	for(j=0; j<activities[i].underlings.length; j++){
-            	links.push({"source":activities[i].type,"target":activities[i].underlings[j]})
-        	}
-        }
-        simpleNodes();
-}
-var force;
-function simpleNodes(){
-    links.forEach(function(link) {
-      link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
-      link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
-    });	
- force = d3.layout.force()
-        .nodes(d3.values(nodes))
-        .links(links)
-        .size([w/4, h])
-        .linkDistance(50)
-        .charge(-800)
-        .on("tick", tick)
-        .start();
-    drag = force.drag()
-        .on("dragstart", dragstart);
-
-    path = svg.selectAll("path")
-        .data(force.links())
-        .enter().append("path")
-        .attr("class","link")
-        .attr("stroke", "grey")
-
-   	circle = svg.selectAll("node")
-        .data(force.nodes())
-        .enter().append("circle")
-        .attr("class","nodes")
-
-    circle
-        .attr("r", radius)
-        .attr("fill", "pink")
-        .on("click", function(d){
-        	console.log(d.name)
-        	var thisName = d.name.toLowerCase();
-        	w = width/2;
-		   	force
-		        .size([w, h])
-		        .on("tick", tick)
-		        .start();    
-
-        	$("#g-"+thisName+"_A5-box").slideDown();
-        })
-        .call(drag);
-
-
-	var matches;
-    text= svg.selectAll("labels")
-        .data(force.nodes())
-        .enter().append("text")
-        .attr("class","labels")
-        .attr("x", 0)
-        .attr("y", ".31em")
-        .attr("text-anchor", "start")
-        .text(function(d,i) {
-			if (matches = (d.name).match(/\b([A-Z]{2,})\b/g)){ 
-            	return d.name;
-        	}
-        });
-
-    // function transform(d) {
-    //   d.x = Math.max(radius, Math.min(w - radius, d.x));
-    //   d.y = Math.max(radius, Math.min(h - radius, d.y));
-    //   return "translate(" + d.x+ "," + d.y + ")";
-    // }
-}
-function tick() {
-  	circle.attr("transform", transform);
-    text.attr("transform", transform);
-  	path.attr("d", linkArc);
-}
-function linkArc(d) {
-  var dx = d.target.x - d.source.x,
-      dy = d.target.y - d.source.y,
-      dr = Math.sqrt(dx * dx + dy * dy);
-  return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
-}
-
-function transform(d) {
-  d.x = Math.max(radius, Math.min(w - radius, d.x));
-  d.y = Math.max(radius, Math.min(h - radius, d.y));
-  return "translate(" + d.x+ "," + d.y + ")";
-}
-function dragstart(d) {
-    d3.select(this).classed("fixed", d.fixed = true);
+		.attr("x1", function(d,i){
+			if(i==0){
+				return circsRad-1+(i*10);
+			}else{
+				return circsRad+(i*10)+smallRad*2;
+			}
+		})
+		.attr("x2", function(d,i){
+			return circsRad*2+(i*10);
+		})
+		.attr("stroke-width",3)
+		.attr("opacity", .5)
 }
 
 
