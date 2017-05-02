@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Audio - Text</title>
+  <script src="libs/d3.v4.min.js"></script>
+  <!-- <script src="libs/annyang.min.js"></script> -->
+  <style type="text/css">
+    /* Any CSS style rules can go here */
+    .sweetCircle{
+        opacity:.5;
+    }
+    svg circle {
+      fill: aquamarine;
+        opacity:.5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class='viz'>
+  </div>
+
+    <button id="start-button">Start Listening</button>
+    <button id="stop-button">Stop Listening</button>
+    <!-- <button id="" -->
+    <p><strong></strong> <em id="demo-echo"></em></p>
+
+<script type="text/javascript">
+    var recognition = new (webkitSpeechRecognition || SpeechRecognition)();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    var saveThis = []; //let's save our results here
+    function startListening() {
+        recognition.start();
+
+        document.querySelector('#start-button').innerHTML = 'Listening...';
+
+        recognition.onend = function() {
+            recognition.start(); //start again
+
+        };
+
+        recognition.onresult = function() {
+            saveThis.push(event.results[0][0].transcript);
+            console.log(saveThis);
+            continuing();
+            document.querySelector('#demo-echo').textContent = event.results[0][0].transcript;
+        };
+    };
+    function stopListening() {
+        recognition.onend = function() {
+            document.querySelector('#start-button').innerHTML = 'Stopped listening...';
+        };
+
+        recognition.onresult = function() {
+            saveThis.push(event.results[0][0].transcript);
+            console.log(saveThis);
+            document.querySelector('#demo-echo').textContent = event.results[0][0].transcript;
+        };
+    };
+    (function() {
+        document.querySelector('#stop-button').addEventListener('click', stopListening);
+        document.querySelector('#start-button').addEventListener('click', startListening);
+    })();
+
+
+
+    var width=1300;
+    var height=700;
+    var leftMargin = 10;
+
+    // var xScale = d3.scaleLinear()
+    //     .domain([0, saveThis.length])
+    //     .range([leftMargin, width-leftMargin]);
+
+    var svg = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+    // var circs = svg
+    //     .selectAll("circle")
+    //     .data(saveThis)
+    //     .enter()
+    //     .append("circle")
+    //     .attr("cy", 50)
+    //     .attr("fill", "aquamarine")
+    //     .attr("opacity",.3)
+    //     .attr("r", function(d){
+    //         return d.length; 
+    //     })
+    //     .attr("class", function(d){
+    //         return d;
+    //     })
+    //     .attr("cx", function(d,i){ 
+    //         return xScale(i); 
+    //     });
+var continuing;
+(function() {
+  var data = saveThis;
+
+    var xScale = d3.scaleLinear()
+        .domain([0, saveThis.length])
+        .range([leftMargin, width-leftMargin]);
+
+  var refreshGraph = function() {
+    xScale.domain([0, saveThis.length])
+
+    var circles = svg.selectAll("circle").data(data)
+  
+    circles.transition()
+       .attr("cx", function(d,i) { return xScale(i) })
+
+
+    svg.selectAll("circle").data(data).enter()
+     .append("svg:circle")
+     .attr("r", 4)
+       .attr("cx", function(d,i) { return xScale(i) })
+       .attr("cy", function(d) { return 50 }) 
+  }
+  continuing = function(){
+    console.log("continuing")
+        data.push(saveThis);
+        refreshGraph()
+  }
+  refreshGraph()
+
+})();
+
+
+
+
+
+        // function tick() {
+        //     // Add new values
+        //     for (var name in groups) {
+        //         var group = groups[name]
+        //         //group.data.push(group.value) // Real values arrive at irregular intervals
+        //         group.data.push(saveThis)
+        //         // group.circle.attr('cx', line)
+        //     }
+
+        //     // Shift domain
+        //     xScale.domain([0, saveThis.length])
+
+        //     // Slide paths left
+        //     circs.attr('transform', null)
+        //         .transition()
+        //         .duration(duration)
+        //         .ease('linear')
+        //         .attr("cx", function(d,i){ 
+        //             return leftMargin+i*10; 
+        //         }) 
+        //         .attr("r", function(d){
+        //             return d.length; 
+        //         })
+        //         .attr("class", function(d){
+        //             return d;
+        //         })
+        //         .attr("cx", function(d,i){ 
+        //             return xScale(i); 
+        //         });
+        //         // .attr('transform', 'translate(' + x(now - (limit - 1) * duration) + ')')
+        //         .each('end', tick)
+
+        //     // Remove oldest data point from each group
+        //     for (var name in groups) {
+        //         var group = groups[name]
+        //         group.data.shift()
+        //     }
+        // }
+        // tick()
+
+// DEALING WITH TIME
+  // var format = d3.time.format("%a %b %d %Y")
+  // var amountFn = function(d) { return d.amount }
+  // var dateFn = function(d) { return format.parse(d.created_at) }
+  // var x = d3.time.scale()
+  //   .range([10, 280])
+  //   .domain(d3.extent(data, dateFn))
+
+    // var start = d3.min(data, dateFn)
+    //  var end = d3.max(data, dateFn)
+    //  var time = start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    //  var date = new Date(time)
+
+    //  obj = {
+    //    'id': Math.floor(Math.random() * 70),
+    //    'amount': Math.floor(1000 + Math.random() * 20001),
+    //    'created_at': date.toDateString()
+    //  }
+    //  data.push(obj)
+  </script>
+</body>
+
+</html>
