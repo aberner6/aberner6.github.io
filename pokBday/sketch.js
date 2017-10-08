@@ -53,11 +53,13 @@ function onedraw(){
 function speakOne(oneWord, voice){
   console.log("here")
   var voiceStyle;
-  if(voice=="Male"){
-    voiceStyle = "UK English Male";
-  }else{
-    voiceStyle = "US English Female";
-  }
+  // if(voice=="Male"){
+  //   voiceStyle = "UK English Male";
+  // }else{
+  //   voiceStyle = "Danish Female";
+  // }
+    voiceStyle = "Norwegian Female";
+
   $('.svgText').mouseenter(function() { // Attach this function to all mouseenter events for 'a' tags 
     responsiveVoice.cancel(); // Cancel anything else that may currently be speaking
     responsiveVoice.speak(oneWord, voiceStyle); // Speak the text contents of all nodes within the current 'a' tag
