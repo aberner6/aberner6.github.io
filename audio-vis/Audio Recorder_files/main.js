@@ -77,17 +77,20 @@ function makeLink(blob){
   console.log(hf);
   hf.click();
 }
-
+var btn;
 function toggleRecording( e ) {
+  btn = e;
     if (e.classList.contains("recording")) {
         // stop recording
         audioRecorder.stop();
+        e.textContent = "Record";
         e.classList.remove("recording");
         audioRecorder.getBuffers( gotBuffers );
     } else {
         // start recording
         if (!audioRecorder)
             return;
+        e.textContent = "Done";
         e.classList.add("recording");
         audioRecorder.clear();
         audioRecorder.record();
@@ -108,12 +111,14 @@ function cancelAnalyserUpdates() {
     window.cancelAnimationFrame( rafID );
     rafID = null;
 }
-
+var svgNone;
 function updateAnalysers(time) {
     if (!analyserContext) {
         var canvas = document.getElementById("analyser");
         canvasWidth = canvas.width;
-        canvasHeight = canvas.height;
+        canvasHeight = canvasWidth;
+        console.log(canvasHeight)
+
         analyserContext = canvas.getContext('2d');
     }
 
@@ -130,7 +135,6 @@ function updateAnalysers(time) {
         analyserContext.fillStyle = '#F6D565';
         analyserContext.lineCap = 'round';
         var multiplier = analyserNode.frequencyBinCount / numBars;
-
         // Draw rectangle for each frequency bin.
         for (var i = 0; i < numBars; ++i) {
             var magnitude = 0;
@@ -140,7 +144,9 @@ function updateAnalysers(time) {
                 magnitude += freqByteData[offset + j];
             magnitude = magnitude / multiplier;
             var magnitude2 = freqByteData[i * multiplier];
-            analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
+            analyserContext.fillStyle = "white";
+
+            // analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
             analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
         }
     }
@@ -230,6 +236,7 @@ var createNodes = function (numNodes, radius, chunks) {
      return nodes;
 }
 
+
 var createSvg = function (radius, callback) {
  d3.selectAll('svg').remove();
  var svg = d3.select('#datavis').append('svg:svg')
@@ -238,11 +245,14 @@ var createSvg = function (radius, callback) {
  callback(svg);
 }
 
+var oneAud;
 var createElements = function (svg, nodes, elementRadius) {
+  var rScale = d3.scaleLinear()
+      .range([10, 20])
+      .domain([0, 20])
  element = svg.selectAll('circle')
                 .data(nodes)
               .enter().append('svg:circle')
-                .attr('r', elementRadius)
                 .attr("fill","white")
                 .attr('cx', function (d, i) {
                   return d.x;
@@ -250,8 +260,13 @@ var createElements = function (svg, nodes, elementRadius) {
                 .attr('cy', function (d, i) {
                   return d.y;
                 })
+                .attr("r", function(d,i){
+                  return elementRadius;
+                   // oneAud = d.audio;
+                   // var thisAudio = d.audio;
+                   // return rScale(oneAud.duration);
+                })
                 .on("click", function(d, i){
-                    console.log(d.audio);
                     var playThis = d.audio;
                     playThis.play();
                 })
@@ -259,7 +274,7 @@ var createElements = function (svg, nodes, elementRadius) {
 
 var draw = function (chunks) {
  var numNodes = chunks.length || 0;
- var radius = 170;
+ var radius = canvasWidth/2;
  var nodes = createNodes(numNodes, radius, chunks);
  createSvg(radius, function (svg) {
    createElements(svg, nodes, 20);
