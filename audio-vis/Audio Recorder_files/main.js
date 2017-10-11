@@ -250,10 +250,17 @@ var createElements = function (svg, nodes, elementRadius) {
   var rScale = d3.scaleLinear()
       .range([10, 20])
       .domain([0, 20])
+  var opaScale = d3.scaleLinear()
+    .domain([0,nodes.length])
+    .range([.2, 1])
+var clicked = true;    
  element = svg.selectAll('circle')
                 .data(nodes)
               .enter().append('svg:circle')
-                .attr("fill","white")
+                .attr("fill", "aquamarine")
+                .attr("opacity", function(d){
+                  return opaScale(d.id)
+                })
                 .attr('cx', function (d, i) {
                   return d.x;
                 })
@@ -266,9 +273,24 @@ var createElements = function (svg, nodes, elementRadius) {
                    // var thisAudio = d.audio;
                    // return rScale(oneAud.duration);
                 })
+                .attr("stroke","white")
+                .attr("stroke-width",2)
                 .on("click", function(d, i){
-                    var playThis = d.audio;
-                    playThis.play();
+                    if(clicked){
+                      console.log(clicked)
+                      var playThis = d.audio;
+                      playThis.currentTime = 0;
+                      playThis.play();
+                    d3.select(this).transition().attr("fill","white")
+                    }
+                    if(!clicked){
+                      console.log(clicked)
+                      var playThis = d.audio;
+                      playThis.pause();  
+                    d3.select(this).transition().attr("fill","aquamarine")
+                      // clicked = !clicked;                    
+                    }
+                      clicked = !clicked;
                 })
 }
 
