@@ -10,32 +10,24 @@
 	<script src="./Audio Recorder_files/main.js"></script>
 	<style>
 	html { overflow: hidden; }
-	body { 
-		font: 14pt Georgia, sans-serif; 
-		background: black;
-		color:white;
-		display: flex;
-		flex-direction: column;
-		height: 100vh;
-		width: 100%;
-		margin: 0 0;
-    	text-align: center;
-		font-weight:100;
-		letter-spacing: 2px;
-	}
-	.heading{
+
+	#heading{
+  font-family: 'Eczar', serif;
+
     	width: 60%;
-	  	font-size:36px;
-		font-weight:100;
+	  	font-size:26px;
+		/*font-weight:100;*/
 		letter-spacing: 2px;
+		top:25px;
 /*	    display: flex;
 	    flex-direction: row;
 	    align-items: center;*/
 	}
-	.subtitle{
+	#subtitle{
+		font-family:'Gentium', serif;
     font-weight: 100;
-    -webkit-margin-before: 30px;
-    font-size: 14px;
+    /*-webkit-margin-before: 30px;*/
+    font-size: 20px;
     letter-spacing: 2px;
 	}
 	canvas { 
@@ -143,12 +135,15 @@
 <body>
 
 	<div id="viz">
-		<div class="heading">
-			Catalonia necesita Europa? Porque? 
-		<div class = "subtitle">
-			Escucha a otras personas : toca los circulos
-		</div>
-		</div>
+		<!-- <div> -->
+			<div id="heading">
+				Catalonia necesita Europa? Porque?
+				</div>
+
+			<div id = "subtitle">
+				Toca los circulos para escuchar a otras voces
+			</div>
+		<!-- </div> -->
 
 		<canvas id="analyser" width="250" height="250"></canvas>
 		<div id = "datavis"></div>

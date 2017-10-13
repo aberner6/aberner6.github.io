@@ -243,6 +243,16 @@ var createSvg = function (radius, callback) {
             .attr('width', (radius * 2)+100)
             .attr('height', (radius * 2)+100);
  callback(svg);
+ // var elements2 = svg.selectAll('.thing2')
+ //                .data(d3.range(radius)).enter()
+ //      .append('g').attr("transform", function(d,i){
+ //        // X, Y offset for each day.
+ //        if( i % 20 == 0 ){ 
+ //          row++; 
+ //        }
+ //        return "translate(" + (( i % 20 + 1 ) * xOffset - .5 * xOffset) + ", "+(row * yOffset - .5 * yOffset)+")";
+ //      })
+// elements.append("rect").attr("x",0).attr("y",0).attr("width",20).attr("height",20).attr("fill","white")
 }
 
 var oneAud;
@@ -297,9 +307,10 @@ var clicked = true;
 var draw = function (chunks) {
  var numNodes = chunks.length || 0;
  var radius = canvasWidth/2;
+ var elementRadius = 20;
  var nodes = createNodes(numNodes, radius, chunks);
  createSvg(radius, function (svg) {
-   createElements(svg, nodes, 20);
+   createElements(svg, nodes, elementRadius);
  });
 }
 

@@ -1,11 +1,22 @@
 /* BASE */
 html, button, input {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Gentium Basic', serif;
+  /*font-family: 'Roboto', sans-serif;*/
   font-weight: 100;
 }
 
 html, body, #root {
   height: 100%;
+    background: black;
+    color:white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    margin: 0 0;
+      text-align: center;
+    font-weight:100;
+    letter-spacing: 2px;
 }
 
 h1{
