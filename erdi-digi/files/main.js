@@ -212,14 +212,11 @@ function initAudio() {
 
 window.addEventListener('load', initAudio );
 
-//how to detect the class of the circie? d3.select(This)??
 var elementRadius = 20;
 var circie;
-// network();
-// var andthen;
-// function network(){
-  var width = 960,
-      height = 500;
+
+var width = 960,
+    height = 500;
 var svg = d3.select("#datavis").append("svg")
     .attr("width", width)
     .attr("height", height)
@@ -230,10 +227,10 @@ var svg = d3.select("#datavis").append("svg")
 
 
   var fill = d3.scale.category20();
-
   var force = d3.layout.force()
       .size([width, height])
-      .nodes([{}]) // initialize with a single node
+      .nodes([{x: width/2, y: height/2, a: ""}]) // initialize with a single node
+      // .attr("fill","none")
       .linkDistance(30)
     // .charge(function(d){
     //     var charge = -300;
