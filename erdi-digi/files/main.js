@@ -318,6 +318,10 @@ var punta;
     });
     restart();
   }
+
+  //more wobbly more active
+  //more answers a node has more big it should be 
+  //fuzzy edges
   function tick() {
     link.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
@@ -326,12 +330,17 @@ var punta;
 
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; })
+        .attr("opacity", function(d,i){
+          // console.log(i);
+          //this has to be the age within the connected nodes
+          return i*.1
+        })
         .on("mouseover", function(d){
           console.log(d);
             var playThis = d.a;
             playThis.currentTime = 0;
             playThis.play();
-            d3.select(this).transition().attr("fill","white")
+            d3.select(this).transition().attr("fill","gray")
         })
         .on("mouseout", function(d){
             var playThis = d.a;
@@ -339,13 +348,14 @@ var punta;
             d3.select(this).transition().attr("fill","aquamarine")
         })
   }
-
+//touch a color to show that it's a question or  acriticsm or praise
+//age of the comments
   function restart() {
     link = link.data(links);
 
     link.enter().insert("line", ".node")
         .attr("class", "link");
-
+    // console.log(link);
     node = node.data(nodes);
     
     var clicked = true;    
@@ -353,7 +363,7 @@ var punta;
     node.enter().insert("circle", ".cursor")
         .attr("class", "node")
         .attr("fill","black")
-        .attr("r", elementRadius) //adding here?
+        .attr("r", 10) //adding here?
         .call(force.drag);
 
     force.start();
