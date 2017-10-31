@@ -11,6 +11,28 @@
 <body>
 </head>
 <body>
+<input type="text" id="myText" value="Put your question here">
+
+<!-- <p></p> -->
+
+<button onclick="myFunction()">Input</button>
+
+<p id="demo"></p>
+
+<script>
+$('input:text').focus(
+    function(){
+        $(this).val('');
+    });
+function myFunction() {
+  var x = document.getElementById("myText").value;
+  document.getElementById("demo").innerHTML = x;
+  $("#myText").remove();
+  $("button").remove();
+}
+</script>
+
+  HOVER over a node to listen to a thought<br><br>If you have a comment, add it out loud: put the red circle over that node and HOLD the mouse down while you record your comment. <br><br>If you have a new story, CLICK AND HOLD anywhere else in the page to record your new story.
   <div id="viz">
     <canvas id="analyser" width="250" height="250"></canvas>
     <div id = "datavis"></div>
