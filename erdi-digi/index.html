@@ -11,6 +11,7 @@
 <body>
 </head>
 <body>
+  <p id="Description"> This is a empty shell ready for input - it can record people's thoughts in relation to a question (of an event, exhibition, etc.) and so gather their feedback. Also, it allows people to specifically build upon one another's thoughts because you can add your thought to a specific node in a network of thoughts recorded. </br>The "owners" of this site should put the guiding question in first. </br> Then, people can record their thoughts and directly comment on one another's thoughts by adding their thought to another's node / make a branch or tangent. <br>Start by inputting the question you would like your participants to answer.</p>
 <input type="text" id="myText" value="Put your question here">
 
 <!-- <p></p> -->
@@ -18,6 +19,7 @@
 <button onclick="myFunction()">Input</button>
 
 <p id="demo"></p>
+
 
 <script>
 $('input:text').focus(
@@ -29,6 +31,7 @@ function myFunction() {
   document.getElementById("demo").innerHTML = x;
   $("#myText").remove();
   $("button").remove();
+  $("#Description").remove();
 }
 </script>
 
