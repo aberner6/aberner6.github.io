@@ -1,0 +1,183 @@
+/* A Linux- and Windows-friendly sans-serif font stack: http://prospects.mhurrell.co.uk/post/updating-the-helvetica-font-stack */
+body {font-family: 'Share Tech Mono', monospace;}
+
+/* Using local fonts? Check out Font Squirrel's webfont generator: http://www.fontsquirrel.com/tools/webfont-generator */
+
+/* We like off-black for text. */
+body, select, input, textarea {
+	color: #333;
+}
+button{
+    left: 47%;
+    width: 80px;
+    margin: 10px 4px;
+    border: 2px solid #99CC33;
+    padding: 10px 10px;
+    position: relative;
+
+    height: 50px;
+    -webkit-appearance: none;
+    /*margin: 10px 0;*/
+    /*width: 100%;*/
+    border: none;
+    background-color: black;
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 28px;
+}
+#logo{
+	width: 150px;
+	border: 2px solid #99CC33;
+  	padding: 15px 10px;
+  	margin: 20px 4px;
+  	display: inline-block;
+}
+
+#logo img{
+	width: 100%;
+}
+
+#header{
+	display: inline-flex;
+}
+
+#introText{
+	width: 80.7%;
+	height: 171px;
+	border: 2px solid #99CC33;
+	padding: 15px 10px;
+  	margin: 20px 4px;
+  	display: inline-block;
+}
+
+.value{
+	display: inline-block;
+	width: 100%;
+}
+
+.container{
+	display: inline-block;
+	width: 28%;
+/*height: 160px;*/
+	margin: 0px 4px;
+	border: 2px solid #99CC33;
+  	padding: 15px 10px;
+}
+
+.fa{ 
+	margin-top: -8px;
+	float: right;
+	color: #99CC33;
+}
+
+i.fa.fa-times {
+    font-size: 1.5em;
+}
+
+input[type=text] {
+	display: inline-block;
+    height: 30px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
+    border: none;
+    background-color: black;
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 28px;
+}
+
+input[type=text]::placeholder {
+  color: white;
+}
+
+input[type=range] {
+	display: inline-block;
+  	height: 37px;
+  	-webkit-appearance: none;
+  	margin: 10px 0;
+  	width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 15px;
+  border-radius: 0px;
+  background: #000000;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -1px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #FFFFFF;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #FFFFFF;
+  border-radius: 0px;
+  border: 1px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 15px;
+  border-radius: 0px;
+  background: #000000;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 15px;
+  border-radius: 0px;
+  background: #000000;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #FFFFFF;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #FFFFFF;
+}

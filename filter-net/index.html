@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+    <script src="./files/jquery.min.js"></script>
+    <script src="./files/d3.v3.min.js"></script>
+</head>
+
+<body>
+        <div id="header">
+            <div id="logo">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <img src="img/logo.png">
+            </div>
+            <div id="introText">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <h1> A.I training interface ver. 2.0</h1>
+                <p>
+                    Enter up to 3 of your crucial qualities and give them the priority / weight / importance you have set in your paper matrix. The A.I. will select heritage-objects that match your inputs and transform them according to how much weight you have given their associated qualities.
+                </p>
+            </div>
+        </div>
+        
+        <div id="wordInput">
+            <div class="container">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <div class="text1container">
+                    <input type="text" placeholder="Input a word" onfocus="this.placeholder=''" class="attribute">
+                </div>
+                <div class="slide1container">
+                    <input type="range" min="0" max="100" value="33" class="slider" id="range1">
+                </div>
+                <p class="value">Importance of word: <span id="value1"></span> %</p>
+            </div>
+
+            <div class="container">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <div class="text2container">
+                    <input type="text" placeholder="Input a word" onfocus="this.placeholder=''" class="attribute">
+                </div>
+                <div class="slide2container">
+                    <input type="range" min="0" max="100" value="33" class="slider" id="range2">
+                </div>
+                <p class="value">Importance of word: <span id="value2"></span> %</p>
+            </div>
+
+            <div class="container">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                <div class="text3container">
+                    <input type="text" placeholder="Input a word" onfocus="this.placeholder=''" class="attribute">
+                </div>
+                <div class="slide3container">
+                    <input type="range" min="0" max="100" value="33" class="slider" id="range3">
+                </div>
+                <p class="value">Importance of word: <span id="value3"></span> %</p>
+            </div>
+        </div>
+        <button onclick="myFunction()">GO</button>
+    </div>
+    <!-- /*** CONTAINER for nodes ***/ -->
+    <div id="container">
+    </div>
+<script src="js/functions.js"></script>
+    <script>
+        function loadScript(url, callback){
+        
+            var script = document.createElement("script")
+            script.type = "text/javascript";
+        
+            if (script.readyState){  //IE
+                script.onreadystatechange = function(){
+                    if (script.readyState == "loaded" ||
+                            script.readyState == "complete"){
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else {  //Others
+                script.onload = function(){
+                    callback();
+                };
+            }
+        
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+        var w = window.outerWidth;
+        var h = window.innerHeight - 100;
+        var svg = d3.select("#container")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h)
+
+        var inputAttributes = [];
+        var inputWeights = [];
+        function myFunction() {
+            inputWeights = [];
+            var inputWs;        
+            inputAttributes = [];
+            var inputAs;
+            inputAs = d3.selectAll(".attribute");
+                for(var i = 0; i<inputAs[0].length; i++){
+                    inputAttributes.push(inputAs[0][i].value)
+                }
+            inputWs = d3.selectAll(".slider");
+                for(var i = 0; i<inputWs[0].length; i++){
+                    inputWeights.push(inputWs[0][i].value)
+                }
+            console.log(inputWeights)
+            console.log(inputAttributes)
+            
+            // Array.prototype.clean = function(deleteValue) {
+            //   for (var i = 0; i < this.length; i++) {
+            //     if (this[i] == deleteValue) {         
+            //       this.splice(i, 1);
+            //       i--;
+            //     }
+            //   }
+            //   return this;
+            // }; inputValue.clean("");
+
+            makeImages(inputAttributes, inputWeights)
+            // loadScript("tropNet.js", function(inputAttributes){
+            // });
+        }
+    </script>
+    <script type="text/javascript" src="tropNet.js"></script>
+    <!-- <script src="./files/main.js"></script> -->
+</body>
+
+</html>
