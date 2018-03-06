@@ -44,7 +44,10 @@ input[type='email'] {
 input[type='tel'] {     
     font-family: 'Inconsolata', monospace;
 }
-
+#submit-form{
+    font-family: 'Inconsolata', monospace;
+    font-size:16px;
+}
 .container{  
     margin: auto;  
     display: block;
@@ -110,6 +113,10 @@ input[type='tel'] {
         margin-bottom: 0px;
         outline: 2px solid white;
         outline-offset: -2px;
+    }
+    #text{
+        max-height: 220px;
+        overflow: auto;
     }
 }
 

@@ -16,13 +16,14 @@ var selectedDivs = [];
 var userClicks = 0;
 var correctTiles = 0;
 
+var gridWidth;
 function createBackground(){
 	w = window.innerWidth;
 	h = window.innerHeight;
 
 	if(!isMobile){
 		console.log("I'm big");
-		var gridWidth = Math.round(w/squareSize)-9;
+		gridWidth = Math.round(w/squareSize)-9;
 		var gridHeight = Math.round(h/squareSize-1);
 		var squareAmount = gridWidth*gridHeight;
 
@@ -37,7 +38,7 @@ function createBackground(){
 
 	if (isMobile) {
 		console.log("I'm small");
-		var gridWidth = Math.round(w/squareSize);
+		gridWidth = Math.round(w/squareSize);
 		var gridHeight = gridWidth;
 		var squareAmount = gridWidth*gridHeight;
 
@@ -171,18 +172,21 @@ function isSpecialDiv(div,tile){
 						console.log("position : " + i + " is correct");
 						var element = document.createElement("div");
 						element.setAttribute("style", "background-image:url('assets/img/grid/00/"+userSequence[i]+".svg');background-color:green;");
+						element.setAttribute("class","hist");
 						document.getElementById('history').appendChild(element);
 						correctTiles++;
 					} else {
 						console.log("position : " + i + " is in the sequence but wrong");
 						var element = document.createElement("div");
 						element.setAttribute("style", "background-image:url('assets/img/grid/00/"+userSequence[i]+".svg');background-color:yellow;");
+						element.setAttribute("class","hist");
 						document.getElementById('history').appendChild(element);
 					}
 				} else {
 					console.log("position : " + i + " is just wrong");
 					var element = document.createElement("div");
 					element.setAttribute("style", "background-image:url('assets/img/grid/00/"+userSequence[i]+".svg');background-color:red;");
+					element.setAttribute("class","hist");
 					document.getElementById('history').appendChild(element);
 				}
 			}
@@ -222,24 +226,39 @@ function hasWon(){
 	for (var q = 0; q < theGameSequence.length; q++) {
 		document.getElementById("Div"+selectedDivs[q]).style.backgroundColor = "white";
 	}
-	document.getElementById("historyContainer").remove();
+	document.getElementById("historyContainer").setAttribute("style","display:none");
+
 	document.getElementById("loginPrompt").remove();
 	var element = document.createElement("div");
 	element.setAttribute("class", "prompt");
 	element.setAttribute("id", "loginPrompt");
 	document.getElementById('text').appendChild(element);
-	// terminalText("access granted!");
-	document.getElementById("grid").remove();
+	// if(localStorage.getItem('hasWon')=='yes'){
+		// terminalTextArray = [];
+		// terminalTextArray.push("access granted!","invitation[part1]","help us debug the bug of all bugs: ethics in connected devices","","Thursday, March 22nd","16-19H","AMSTERDAM","DRINKS AND SNACKS","","join us for a workshop on March 22 as we seek to understand","ethical reflection and decision-making","when creating IOT devices","we hope to learn from you","and create ideas with you","about how to [keep | bring | remember] ethics","during the design+dev process","the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a> will run the workshop","as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>","we will use your inputs to start building tools","to try to support ethical reflection and decision-making","when designing connected things","","JOIN US!");					
+		// console.log(terminalTextArray)
+		// terminalText();
+	// }else{
+		document.getElementById("grid").remove();
+	// }
 
 	var gridHeight = Math.round(h/squareSize-1);
 	document.getElementById('leftCollum').setAttribute("style", "width:"+(w-10)+"px; height:"+gridHeight*45+"px;");
+	
+	// 420px
+	if(isMobile){
+		document.getElementById('text').setAttribute("style", "max-height:460px;");
+	}else{}
 
 
 	terminalTextArray.push("access granted!","invitation[part1]","help us debug the bug of all bugs: ethics in connected devices","","Thursday, March 22nd","16-19H","AMSTERDAM","DRINKS AND SNACKS","","join us for a workshop on March 22 as we seek to understand","ethical reflection and decision-making","when creating IOT devices","we hope to learn from you","and create ideas with you","about how to [keep | bring | remember] ethics","during the design+dev process","the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a> will run the workshop","as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>","we will use your inputs to start building tools","to try to support ethical reflection and decision-making","when designing connected things","","JOIN US!");					
 	terminalText();
 	 $("#myinput").keydown(function (e) { if(e.which == 13) e.preventDefault(); });
 	document.getElementById('email').setAttribute("style", "display:block;");
+
+	// localStorage.setItem('hasWon', 'yes');
 }
+
 var amountWrong = 0;
 function resetThePuzzle(){
 	amountWrong++;
@@ -279,6 +298,9 @@ function begin(){
 	w = window.innerWidth;
 	h = window.innerHeight;
 
+	// if(localStorage.getItem('hasWon')=='yes'){
+	// 	hasWon();
+	// }
 	if (w <= 500) {
 		isMobile = true;
 	} else {
@@ -318,7 +340,6 @@ function intro(){
 	document.getElementById("Div"+specialDiv[which1][0]).style.backgroundColor = "grey";
 	document.getElementById("Div"+specialDiv[which2][0]).style.backgroundColor = "grey";
 	document.getElementById("Div"+specialDiv[which3][0]).style.backgroundColor = "grey";
-	// debugger;
 
 	var element1 = document.createElement("div");
 	element1.setAttribute("style", "background-image:url('assets/img/grid/00/"+specialDiv[which1][1]+".svg');background-color:red;");
@@ -336,7 +357,11 @@ function intro(){
 	console.log("in intro still")
 	terminalTextArray.push("i'll go first...","click click click","code "+ specialDiv[which1][1] +","+ specialDiv[which2][1] +","+ specialDiv[which3][1] + " access denied","have a look down in the history ↓","red means wrong pattern and wrong order","yellow means right pattern but wrong order","green means right pattern and right order","<a href='#' onclick='setupPuzzle()'>reset the puzzle and begin</a>");					
 	terminalText();
-	document.getElementById('historyContainer').setAttribute("style", "display:inline-block;");
+	if (isMobile) {
+		document.getElementById('historyContainer').setAttribute("style", "display:inline-block; bottom:"+gridWidth*45+"px;");
+	} else {
+		document.getElementById('historyContainer').setAttribute("style", "display:inline-block;");
+	}
 }
 
 function clicks(which1, which2, which3){
@@ -386,6 +411,8 @@ function terminal(txt) {
       		terminalText();
       	}
 	}, time);
+	var elem = document.getElementById('text');
+  	elem.scrollTop = elem.scrollHeight;
 }
 
 function yes(){
@@ -395,7 +422,7 @@ function yes(){
 	element.setAttribute("id", "loginPrompt");
 	document.getElementById('text').appendChild(element);
 	createBackground();
-	terminalTextArray.push("some instructions...","to your right you see a grid of pattern-blocks","try to guess the sequence of pattern-blocks that opens the invitation","it is always a sequence of 3","got it?","click <a href='#' onclick='intro()'>YES</a> or <a href='#' onclick='yes()'>NO</a>");
+	terminalTextArray.push("some instructions...","you should see a grid of pattern-blocks","try to guess the sequence of pattern-blocks that opens the invitation","it is always a sequence of 3","got it?","click <a href='#' onclick='intro()'>YES</a> or <a href='#' onclick='yes()'>NO</a>");
 	terminalText();
 }
 
@@ -413,4 +440,13 @@ function no(){
 	}
 }
 
-
+function replay(){
+	amountWrong = 0;
+	createBackground();
+	$("p").remove()
+	$(".hist").remove()
+	resetThePuzzle();
+	document.getElementById("email").setAttribute("style", "display:none;");
+	document.getElementById("historyContainer").setAttribute("style", "display:block;");
+	terminalText("welcome back")
+}
