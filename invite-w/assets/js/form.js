@@ -15,11 +15,11 @@ $('#test-form').on('click', '#submit-form', function(e) {
 $('#test-form').on('click', '#submit-form', function(e) {
   $('#test-form').hide();
   terminalTextArray.push(
-    "Thank you! You will be hearing from us soon.",
-    "Feel free to share the puzzle with IOT developer+designer friends in the meantime - we are looking for participants!",
-    "You can use this link",
-    "<a href='#' onclick='savelink()'>Save link</a>",
-    "Or you can try again",
-    "<a href='#' onclick='replay()'>Play again!</a>");
+    "thank you! you will be hearing from us soon with more details",
+    "feel free to share the puzzle with IOT developer+designer friends in the meantime - we are looking for participants!",
+    "you can use this link",
+    "<a href='#' onclick='savelink()'>copy link</a>",
+    "or you can try again",
+    "<a href='#' onclick='replay()'>play again!</a>");
   terminalText();
 })

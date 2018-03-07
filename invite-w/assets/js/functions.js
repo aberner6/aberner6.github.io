@@ -252,11 +252,11 @@ function hasWon(){
 	}else{}
 
 	terminalTextArray.push("access granted!","invitation[part1]","help us debug the bug of all bugs: ethics in connected devices","","Wednesday, March 21st","16-19H","AMSTERDAM","DRINKS AND SNACKS","","join us for a workshop as we seek to understand","ethical reflection and decision-making","when creating IOT devices","we hope to learn from you","and create ideas with you","about how to [keep | bring | remember] ethics","during the design+dev process","the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a> will run the workshop","as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>","we will use your inputs to start building tools","to try to support ethical reflection and decision-making","when designing connected things","",
-		"JOIN US!","<div><span class='virt-eu'>virt-eu$: </span><label>Name</label><input type='text' name='field1' placeholder='Full name'/></div>",
-		"<div><span class='virt-eu'>virt-eu$: </span><label>Where do you work?</label><input type='text' name='field2' placeholder='workplace'/></div>",
-		"<div><span class='virt-eu'>virt-eu$: </span><label>Job Titles</label><input type='text' name='field3' placeholder='Dev. + Business'/></div>",
-		"<div><span class='virt-eu'>virt-eu$: </span><label>Email</label><input type='email' name='field4' placeholder='john@appleseed.com'/></div>",
-		"<div><span class='virt-eu'>virt-eu$: </span><label>Mobile</label><input type='tel' name='field5' placeholder='phone number'/></div>",
+		"JOIN US!","","<div><span class='virt-eu'>virt-eu$: </span><label>name</label><input type='text' name='field1' placeholder='full name'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>where do you work?</label><input type='text' name='field2' placeholder='workplace'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>job titles</label><input type='text' name='field3' placeholder='dev. + business'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>email</label><input type='email' name='field4' placeholder='bella@appleseed.com'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>mobile</label><input type='tel' name='field5' placeholder='phone number'/></div>",
 		"<div><span class='virt-eu'>virt-eu$: </span><button type='submit' id='submit-form'>Submit</button></div></form>"
 	);					
 	terminalText();
@@ -475,7 +475,7 @@ function savelink() {
   copyText.select();
   document.execCommand("Copy");
   terminalTextArray.push(
-    "Link saved"
+    "link copied"
     );
   terminalText();
 }
