@@ -255,11 +255,7 @@ function hasWon(){
 		"this game night is led by the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a>",
 		"as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>",
 		"we hope to give a fresh take on tools to support ethical reflection when making connected things",
-		"so let's explore some games, objects, and ethical things", 
-		"and figure out what they're good at / or missing!",
-		"JOIN US!","",
-		"The project's full name is Values and Ethics in Innovation for Responsible Technology in Europe and it aims to address concerns around emerging data practices, responsible research and innovation (RRI), data ethics and privacy at the point of design. Over the next three years we will be researching and intervening upon the development cultures and ethics of the next generation IoT innovators","",
-		);					
+		"JOIN US!","");					
 	terminalText();
 	 $("#myinput").keydown(function (e) { if(e.which == 13) e.preventDefault(); });
 	document.getElementById('email').setAttribute("style", "display:block;");
