@@ -1,7 +1,7 @@
 var $form = $('form#test-form'),
     url = 'https://script.google.com/macros/s/AKfycbzDAYmyvD2gEco8bLrfsGXZ-MLrQ_SnSGukGPsDIShcG1EXCgU/exec'
 
-$('#submit-form').on('click', function(e) {
+$('#test-form').on('click', '#submit-form', function(e) {
   e.preventDefault();
   var jqxhr = $.ajax({
     url: url,
@@ -11,7 +11,15 @@ $('#submit-form').on('click', function(e) {
   }).success(
   );
 })
-$('#submit-form').on('click', function(e) {
+
+$('#test-form').on('click', '#submit-form', function(e) {
   $('#test-form').hide();
-  $('#submitted').show();  
+  terminalTextArray.push(
+    "Thank you! You will be hearing from us soon.",
+    "Feel free to share the puzzle with IOT developer+designer friends in the meantime - we are looking for participants!",
+    "You can use this link",
+    "<a href='#' onclick='savelink()'>Save link</a>",
+    "Or you can try again",
+    "<a href='#' onclick='replay()'>Play again!</a>");
+  terminalText();
 })
