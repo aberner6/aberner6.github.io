@@ -235,10 +235,6 @@ function hasWon(){
 	element.setAttribute("id", "loginPrompt");
 	document.getElementById('text').appendChild(element);
 	// if(localStorage.getItem('hasWon')=='yes'){
-		// terminalTextArray = [];
-		// terminalTextArray.push("access granted!","invitation[part1]","help us debug the bug of all bugs: ethics in connected devices","","Thursday, March 22nd","16-19H","AMSTERDAM","DRINKS AND SNACKS","","join us for a workshop on March 22 as we seek to understand","ethical reflection and decision-making","when creating IOT devices","we hope to learn from you","and create ideas with you","about how to [keep | bring | remember] ethics","during the design+dev process","the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a> will run the workshop","as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>","we will use your inputs to start building tools","to try to support ethical reflection and decision-making","when designing connected things","","JOIN US!");					
-		// console.log(terminalTextArray)
-		// terminalText();
 	// }else{
 		document.getElementById("grid").remove();
 	// }
@@ -252,7 +248,18 @@ function hasWon(){
 	}else{}
 
 
-	terminalTextArray.push("access granted!","invitation[part1]","help us debug the bug of all bugs: ethics in connected devices","","Thursday, March 22nd","16-19H","AMSTERDAM","DRINKS AND SNACKS","","join us for a workshop on March 22 as we seek to understand","ethical reflection and decision-making","when creating IOT devices","we hope to learn from you","and create ideas with you","about how to [keep | bring | remember] ethics","during the design+dev process","the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a> will run the workshop","as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>","we will use your inputs to start building tools","to try to support ethical reflection and decision-making","when designing connected things","","JOIN US!");					
+	terminalTextArray.push("access granted!","invitation[part1]","beers, snacks, ethics and games, oh my","","Friday, March 23rd","16-19H","AMSTERDAM",
+		"come help us debug the bug of all bugs: ethics in connected devices!","",
+		"let's play games that are designed to help us think about ethics + connecting things",
+		"and talk about how they work|don't work","",
+		"this game night is led by the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a>",
+		"as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>",
+		"we hope to give a fresh take on tools to support ethical reflection when making connected things",
+		"so let's explore some games, objects, and ethical things", 
+		"and figure out what they're good at / or missing!",
+		"JOIN US!","",
+		"The project's full name is Values and Ethics in Innovation for Responsible Technology in Europe and it aims to address concerns around emerging data practices, responsible research and innovation (RRI), data ethics and privacy at the point of design. Over the next three years we will be researching and intervening upon the development cultures and ethics of the next generation IoT innovators","",
+		);					
 	terminalText();
 	 $("#myinput").keydown(function (e) { if(e.which == 13) e.preventDefault(); });
 	document.getElementById('email').setAttribute("style", "display:block;");
@@ -320,7 +327,7 @@ function begin(){
 	terminalText();
 }
 
-var terminalTextArray = ["welcome to Virtuous Things","you have been chosen to join us for a workshop on ethics and connected devices","invitation[part0] is a little puzzle to access invitation[part1]","ready?","click <a href='#' onclick='yes()'>YES</a> or <a href='#' onclick='no()'>NO</a>"];
+var terminalTextArray = ["welcome to Virtuous Things","you have been chosen to join us for a game night on ethics and connected devices","invitation[part0] is a little puzzle to access invitation[part1]","ready?","click <a href='#' onclick='yes()'>YES</a> or <a href='#' onclick='no()'>NO</a>"];
 var e = 0;
 
 var introed = false;
