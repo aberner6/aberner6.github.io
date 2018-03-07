@@ -1,0 +1,129 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<head>
+
+	<meta charset="utf-8">
+
+	<!-- Always force latest IE rendering engine (even in intranet) -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115319049-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115319049-3');
+</script>
+	<!-- Important stuff for SEO, don't neglect. (And don't dupicate values across your site!) -->
+	<title></title>
+	<meta name="author" content="" />
+	<meta name="description" content="" />
+
+	<!-- Don't forget to set your site up: http://google.com/webmasters -->
+	<meta name="google-site-verification" content="" />
+
+	<!-- Who owns the content of this site? -->
+	<meta name="Copyright" content="" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Use Iconifyer to generate all the favicons and touch icons you need: http://iconifier.net -->
+	<link rel="shortcut icon" href="favicon.ico" />
+
+	<!-- concatenate and minify for production -->
+	<link rel="stylesheet" href="assets/css/reset.css" />
+	<link rel="stylesheet" href="assets/css/style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+
+	<!-- Lea Verou's prefixfree (http://leaverou.github.io/prefixfree/), lets you use un-prefixed properties in your CSS files -->
+	<script src="assets/js/libs/prefixfree.min.js"></script>
+
+	<!-- Twitter: see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/summary for details -->
+	<meta name="twitter:card" content="">
+	<meta name="twitter:site" content="">
+	<meta name="twitter:title" content="">
+	<meta name="twitter:description" content="">
+	<meta name="twitter:url" content="">
+	<!-- Facebook (and some others) use the Open Graph protocol: see http://ogp.me/ for details -->
+	<meta property="og:title" content="" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:image" content="" />
+</head>
+
+<body>
+	<div id="leftCollum">
+		<div id="text">
+			<p id="loginText"></p>
+			<div id="loginPrompt" class="prompt">
+			</div>
+		</div>
+
+		<div id="email">
+				<form id="test-form">
+  				</br>
+	  			</br>
+				  <div>
+				    <label>Name</label>
+				    <input type="text" name="field1" placeholder="full name"/>
+				  </div>
+				  <div>
+				    <label>Company</label>
+				    <input type="text" name="field2" placeholder="company name"/>
+				  </div>
+				  <div>
+				    <label>Job Titles</label>
+				    <input type="text" name="field3" placeholder="Dev. + Business"/>
+				  </div>
+				  
+				  <div>
+				    <label>Email</label>
+				    <input type="email" name="field4" placeholder="john@appleseed.com"/>
+				  </div>
+				  
+				  <div>
+				    <label>Mobile</label>
+				    <input type="tel" name="field5" placeholder="phone number"/>
+				  </div>
+
+				  <div>
+				    <button type="submit" id="submit-form">Submit</button>
+				  </div>
+				</form>
+				  <div id="submitted">Thank you! You will be hearing from us soon. Feel free to share the puzzle with IOT developer+designer friends in the meantime - we are looking for participants! <a href="http://aberner6.github.io/invite-w">Link</a>
+				  </br>
+				  <p><a href="#" onclick="replay()">Play again!</a></p>
+				  </div>
+			</div>
+		
+		<div id="historyContainer">
+			<p>Attempt History</p>
+			<div id="history">
+			
+			</div>
+		</div>
+	</div>
+
+	<div id="background">		
+	</div>
+
+<!-- SERIALIZE OBJECT SCRIPT MUST BE AFTER JQUERY -->
+<script src="assets/js/libs/jquery-1.11.3.min.js"></script>
+<script src="assets/js/libs/jquery.serialize-object.min.js"></script>
+
+<script src="assets/js/functions.js"></script>
+<script src="assets/js/form.js"></script>
+<script>
+	window.addEventListener("load", begin);
+	window.addEventListener("resize", resizeBackground);
+</script>
+
+</body>
+</html>
