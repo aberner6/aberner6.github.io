@@ -255,7 +255,12 @@ function hasWon(){
 		"this game night is led by the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a>",
 		"as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>",
 		"we hope to give a fresh take on tools to support ethical reflection when making connected things",
-		"JOIN US!","");					
+		"JOIN US!","","<div><span class='virt-eu'>virt-eu$: </span><label>Name</label><input type='text' name='field1' placeholder='Full name'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>Job Titles</label><input type='text' name='field2' placeholder='Dev. + Business'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>Email</label><input type='email' name='field3' placeholder='john@appleseed.com'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>Mobile</label><input type='tel' name='field4' placeholder='phone number'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><button type='submit' id='submit-form'>Submit</button></div></form>"
+	);					
 	terminalText();
 	 $("#myinput").keydown(function (e) { if(e.which == 13) e.preventDefault(); });
 	document.getElementById('email').setAttribute("style", "display:block;");
@@ -394,19 +399,32 @@ function terminal(txt) {
 	
 	if (introed) {
 		$("#background").css("pointer-events","all");
-		element.insertAdjacentHTML( 'beforeend', "<span class='virt-eu'>virt-eu$: </span>" );
+		if (!txt.includes("div")) {
+			element.insertAdjacentHTML( 'beforeend', "<span class='virt-eu'>virt-eu$: </span>" );
+		}
 	} else {
 		element.insertAdjacentHTML( 'beforeend', "<span class='virt-eu'>tutorial$: </span>" );
 	}
 
 	var typeWriter = setInterval(function(){
     	if (i < txt.length) {
-    		if (txt.includes("href")) {
+    		
+    		if (txt.includes("href") && !txt.includes("div")) {
 			    document.getElementById("loginPrompt").lastChild.insertAdjacentHTML( 'beforeend', txt );
 				i++;
 				clearInterval(typeWriter);
       			terminalText();
-			} else {
+			}
+			
+			if (txt.includes("div")) {
+				$( "#test-form" ).append(txt);
+				i++;
+				clearInterval(typeWriter);
+      			terminalText();
+
+			}
+
+			if (!txt.includes("href") && !txt.includes("div")) {
 	    		document.getElementById("loginPrompt").lastChild.innerHTML += txt.charAt(i);
 	      		i++;		
       		}
@@ -453,4 +471,13 @@ function replay(){
 	document.getElementById("email").setAttribute("style", "display:none;");
 	document.getElementById("historyContainer").setAttribute("style", "display:block;");
 	terminalText("welcome back")
+}
+function savelink() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  document.execCommand("Copy");
+  terminalTextArray.push(
+    "Link saved"
+    );
+  terminalText();
 }

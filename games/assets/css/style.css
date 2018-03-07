@@ -28,6 +28,14 @@ textarea:-moz-placeholder { color:#a9a9a9; }
 /* let's give blockquotes *some* default styling, because unstyled blockquotes are dangerous */
 blockquote {padding: 16px; background: #eee;}
 
+#myInput{
+    opacity: 0;
+}
+
+#email{
+    display: none;
+}
+
 #submitted{
     display:none;
     padding: 10px 0px 0px 10px;
