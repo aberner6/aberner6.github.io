@@ -107,7 +107,8 @@ function createBackground(){
 };
 
 function resizeBackground(){
-	if (w <= 500) {
+	var mobileWidth = 768;
+	if (w <= mobileWidth) {
 		isMobile = true;
 	} else {
 		isMobile = false;
@@ -263,7 +264,7 @@ var amountWrong = 0;
 function resetThePuzzle(){
 	amountWrong++;
 	hasLost = false;
-	if(amountWrong < 6){
+	if(amountWrong < 10){
 		for (var q = 0; q < theGameSequence.length; q++) {
 			document.getElementById("Div"+selectedDivs[q]).style.backgroundColor = "white";
 		}
