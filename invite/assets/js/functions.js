@@ -381,7 +381,7 @@ function terminalText(txt){
 	}
 }
 
-var time = 10;//100;
+var time = 100;//100;
 function terminal(txt) {
 	var i = 0;
 	var txt;
