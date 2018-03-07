@@ -391,7 +391,7 @@ function terminalText(txt){
 	}
 }
 
-var time = 90;//100;
+var time = 1;//100;
 function terminal(txt) {
 	var i = 0;
 	var txt;
@@ -474,7 +474,7 @@ function replay(){
 	terminalText("welcome back")
 }
 function savelink() {
-  var copyText = document.getElementById("myInput");
+  var copyText = document.querySelector('.js-copytextarea');
   copyText.select();
   document.execCommand("Copy");
   terminalTextArray.push(

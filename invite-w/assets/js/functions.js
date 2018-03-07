@@ -471,7 +471,7 @@ function replay(){
 	terminalText("welcome back")
 }
 function savelink() {
-  var copyText = document.getElementById("myInput");
+  var copyText = document.querySelector('.js-copytextarea');
   copyText.select();
   document.execCommand("Copy");
   terminalTextArray.push(

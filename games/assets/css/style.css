@@ -28,7 +28,7 @@ textarea:-moz-placeholder { color:#a9a9a9; }
 /* let's give blockquotes *some* default styling, because unstyled blockquotes are dangerous */
 blockquote {padding: 16px; background: #eee;}
 
-#myInput{
+.js-copytextarea{
     opacity: 0;
 }
 
