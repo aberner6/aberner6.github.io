@@ -255,10 +255,11 @@ function hasWon(){
 		"this game night is led by the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a>",
 		"as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>",
 		"we hope to give a fresh take on tools to support ethical reflection when making connected things",
-		"JOIN US!","","<div><span class='virt-eu'>virt-eu$: </span><label>Name</label><input type='text' name='field1' placeholder='Full name'/></div>",
-		"<div><span class='virt-eu'>virt-eu$: </span><label>Job Titles</label><input type='text' name='field2' placeholder='Dev. + Business'/></div>",
-		"<div><span class='virt-eu'>virt-eu$: </span><label>Email</label><input type='email' name='field3' placeholder='john@appleseed.com'/></div>",
-		"<div><span class='virt-eu'>virt-eu$: </span><label>Mobile</label><input type='tel' name='field4' placeholder='phone number'/></div>",
+		"JOIN US!","<div><span class='virt-eu'>virt-eu$: </span><label>Name</label><input type='text' name='field1' placeholder='Full name'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>Where do you work?</label><input type='text' name='field2' placeholder='workplace'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>Job Titles</label><input type='text' name='field3' placeholder='Dev. + Business'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>Email</label><input type='email' name='field4' placeholder='john@appleseed.com'/></div>",
+		"<div><span class='virt-eu'>virt-eu$: </span><label>Mobile</label><input type='tel' name='field5' placeholder='phone number'/></div>",
 		"<div><span class='virt-eu'>virt-eu$: </span><button type='submit' id='submit-form'>Submit</button></div></form>"
 	);					
 	terminalText();
