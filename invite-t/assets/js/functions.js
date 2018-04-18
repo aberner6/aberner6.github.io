@@ -234,14 +234,7 @@ function hasWon(){
 	element.setAttribute("class", "prompt");
 	element.setAttribute("id", "loginPrompt");
 	document.getElementById('text').appendChild(element);
-	// if(localStorage.getItem('hasWon')=='yes'){
-		// terminalTextArray = [];
-		// terminalTextArray.push("access granted!","invitation[part1]","help us debug the bug of all bugs: ethics in connected devices","","Thursday, March 22nd","16-19H","AMSTERDAM","DRINKS AND SNACKS","","join us for a workshop on March 22 as we seek to understand","ethical reflection and decision-making","when creating IOT devices","we hope to learn from you","and create ideas with you","about how to [keep | bring | remember] ethics","during the design+dev process","the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a> will run the workshop","as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>","we will use your inputs to start building tools","to try to support ethical reflection and decision-making","when designing connected things","","JOIN US!");					
-		// console.log(terminalTextArray)
-		// terminalText();
-	// }else{
 		document.getElementById("grid").remove();
-	// }
 
 	var gridHeight = Math.round(h/squareSize-1);
 	document.getElementById('leftCollum').setAttribute("style", "width:"+(w-10)+"px; height:"+gridHeight*45+"px;");
@@ -252,7 +245,7 @@ function hasWon(){
 	}else{}
 
 
-	terminalTextArray.push("access granted!","invitation[part1]","help us debug the bug of all bugs: ethics in connected devices","","Thursday, March 22nd","16-19H","<a href='#' onclick='https://goo.gl/maps/irVnTZXSuFL2'> info.nl </a> AMSTERDAM","DRINKS AND SNACKS","","join us for a workshop to understand ethical reflection and decision-making","when creating IOT devices","we hope to learn from you","and create ideas with you","about how to [keep | bring | remember] ethics","during the design+dev process","the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a> will run the workshop","as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>","we will use your inputs to start building tools","to try to support ethical reflection and decision-making","when designing connected things","",
+	terminalTextArray.push("access granted!","invitation[part1]","help us debug the bug of all bugs: ethics in connected devices","","Thursday, May 10th","18:30-20:30","Venue To Be Revealed","Shoreditch, London","DRINKS AND SNACKS","","join us for a workshop to understand ethical reflection and decision-making","when creating IOT devices","we hope to learn from you","and create ideas with you","about how to [keep | bring | remember] ethics","during the design+dev process","the <a href='#' onclick='http://www.ciid.dk'>Copenhagen Institute of Interaction Design</a> will run the workshop","as part of research project <a href='#' onclick='http://virteuproject.eu'>VIRT-EU</a>","we will use your inputs to start building tools","to try to support ethical reflection and decision-making","when designing connected things","",
 		"JOIN US!","","<div><span class='virt-eu'>virt-eu$: </span><label>name</label><input type='text' name='field1' placeholder='full name'/></div>",
 		"<div><span class='virt-eu'>virt-eu$: </span><label>where do you work?</label><input type='text' name='field2' placeholder='workplace'/></div>",
 		"<div><span class='virt-eu'>virt-eu$: </span><label>job titles</label><input type='text' name='field3' placeholder='dev. + business'/></div>",
