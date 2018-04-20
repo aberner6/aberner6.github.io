@@ -86,17 +86,24 @@ input[type='tel'] {
     outline: 2px solid white;
     outline-offset: -2px;
 }
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-    #text{
-        max-height: 180px;
+#text {
+    max-height: 400px;
+    overflow: auto;
+    padding: 10px 0px 0px 10px;
+}
+@media screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    #text {
+        max-height: 400px;
         overflow: auto;
+        padding: 10px 0px 0px 10px;
     }
 }
 
-@media only screen and (max-width: 320px) {
+@media screen and (max-width: 420px) {
     #text{
-        max-height: 180px;
+        max-height: 250px;
         overflow: auto;
+        padding: 10px 0px 0px 10px;
     }
 
     #background{
@@ -171,11 +178,11 @@ input[type='tel'] {
     outline-offset: -2px;
 }
 
-#text {
-    max-height:400px;
-    overflow: auto;
-    padding: 10px 0px 0px 10px;
-}
+/*#text {*/
+    /*max-height:400px;*/
+    /*overflow: auto;*/
+    /*padding: 10px 0px 0px 10px;*/
+/*}*/
 
 #text h1{
     font-size: 1.3em;
