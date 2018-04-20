@@ -101,7 +101,7 @@ input[type='tel'] {
 
 @media screen and (max-width: 420px) {
     #text{
-        max-height: 250px;
+        max-height: 150px;
         overflow: auto;
         padding: 10px 0px 0px 10px;
     }
