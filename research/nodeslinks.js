@@ -14,7 +14,7 @@ var kLabels = false;
 var allLabels = true;
 
 var journalTypes = [];
-var authors = [];
+var titles = [];
 var keywords = [];
 var uniqueTypes;
 var goSecond = false;
@@ -139,11 +139,11 @@ var paperLabel = vis.selectAll("keylabel")
 //filter num as slider so you can change threshold on demand
 //also have to have date added
 //on change, draw again
-loadData("deskResearch.csv", .3)
+loadData("objectives.csv", .3)
 function loadData(csvName, filterNum){
     citeNums.length = 0;
     keywords.length = 0;
-    authors.length = 0;
+    // authors.length = 0;
     theseKeywords.length = 0;
     theseAuthors.length = 0;
     journalTypes.length = 0;
@@ -167,21 +167,21 @@ function loadData(csvName, filterNum){
                  citeNums[i]=(parseInt(thisData[i].Value))
             }    
 
-            if (data[i].Keywords!="undefined"){
-                keywords[i] = data[i].Keywords.split(", ");
+            if (data[i].keywords!="undefined"){
+                keywords[i] = data[i].keywords.split(", ");
             }
-            if(data[i].Originator!="undefined"){
-                authors[i] = data[i].Originator.split(", ");
+            if(data[i].title!="undefined"){
+                titles[i] = data[i].title;
             }
-            for (j=0; j<authors[i].length; j++){
-                theseAuthors.push(authors[i][j]);            
-            }
+            // for (j=0; j<authors[i].length; j++){
+            //     theseAuthors.push(authors[i][j]);            
+            // }
             for (j=0; j<keywords[i].length; j++){
                 theseKeywords.push(keywords[i][j]);   
             }
-            if(data[i].Medium!="undefined"&&data[i].Medium.length!=0){
-                journalTypes[i] = data[i].Medium.toLowerCase();
-            }
+            // if(data[i].Medium!="undefined"&&data[i].Medium.length!=0){
+            //     journalTypes[i] = data[i].Medium.toLowerCase();
+            // }
     } 
     var keywordSorted = false;
     for (i=0; i<theseKeywords.length; i++){ 
@@ -371,7 +371,7 @@ function callOthers(){
         for (i=0; i<thisData.length; i++){ 
             for (j=0; j<uniqueMostKeyed.length; j++){ 
                 if (keywords[i].indexOf(uniqueMostKeyed[j])!=-1){
-                    links.push({"source":keywords[i],"target":uniqueMostKeyed[j],"sourceTitle":thisData[i].Medium.toLowerCase(), "cites":parseInt(thisData[i].Value), "headline":thisData[i].Title, "authors":thisData[i].Originator, "url":thisData[i].Readings}) 
+                    links.push({"source":keywords[i],"target":uniqueMostKeyed[j],"title":thisData[i].title}) 
                 }
             }
         }    
@@ -406,7 +406,7 @@ function simpleNodes(){
        
     // Compute the distinct nodes from the links.
     links.forEach(function(link) {
-      link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, cites:link.cites, sTitle:link.sourceTitle, url: link.url, headline:link.headline, authors:link.authors});
+      link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, cites:link.title});
       link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
     });
 
@@ -430,19 +430,7 @@ function simpleNodes(){
         .data(force.links())
         .enter().append("path")
         .attr("class","link") 
-        .attr("stroke", function(d,i){
-            // console.log(d);
-            for (k=0; k<uniqueTypes.length; k++){
-               if(d.sourceTitle==uniqueTypes[k]){
-                    return color(k);
-               }
-            }
-            if(howLong.length>0){
-            if(howLong[i][0].length==1){
-                return "white";
-            }        
-            }
-        })
+        .attr("stroke","grey");
 
     circle = vis.selectAll("node")
         .data(force.nodes())

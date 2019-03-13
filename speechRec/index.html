@@ -12,7 +12,7 @@
         opacity:.5;
     }
     svg circle {
-      fill: aquamarine;
+      /*fill: aquamarine;*/
         opacity:.5;
     }
   </style>
@@ -33,6 +33,9 @@
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
     var saveThis = []; //let's save our results here
+    var arraySplits = [];
+var index = -1;
+
     function startListening() {
         recognition.start();
 
@@ -44,7 +47,14 @@
         };
 
         recognition.onresult = function() {
+            // console.log(event.results[0][0].transcript+"transcript")
+            // if(event.results[0][0].transcript)
             saveThis.push(event.results[0][0].transcript);
+            for(var i =0; i<saveThis.length; i++){
+                if(saveThis[i][0].length>1){
+                    saveThis.splice(i, 1)
+                }
+            }
             console.log(saveThis);
             continuing();
             document.querySelector('#demo-echo').textContent = event.results[0][0].transcript;
@@ -57,7 +67,7 @@
 
         recognition.onresult = function() {
             saveThis.push(event.results[0][0].transcript);
-            console.log(saveThis);
+            console.log(saveThis+"hi");
             document.querySelector('#demo-echo').textContent = event.results[0][0].transcript;
         };
     };
@@ -68,8 +78,8 @@
 
 
 
-    var width=1300;
-    var height=700;
+    var width=window.innerWidth;
+    var height=window.innerHeight;
     var leftMargin = 10;
 
     // var xScale = d3.scaleLinear()
@@ -97,6 +107,8 @@
     //     .attr("cx", function(d,i){ 
     //         return xScale(i); 
     //     });
+var ethicalWords = ["should","ought","must","care","constraints","want","do","secure","transparent","value","identity","mission","users","public","received","perception","positioning","honest","sustainable","easy","clear","reliable","environment","legal","law","GDPR","investors","funding","market","bad","good"];
+// var problemWords = []
 var continuing;
 (function() {
   var data = saveThis;
@@ -113,7 +125,6 @@ var continuing;
     circles.transition()
        .attr("cx", function(d,i) { return xScale(i) })
 
-
     svg.selectAll("circle").data(data).enter()
      .append("svg:circle")
      .attr("r", 4)
@@ -122,12 +133,30 @@ var continuing;
   }
   continuing = function(){
     console.log("continuing")
-        data.push(saveThis);
-        refreshGraph()
+    index++;
+    console.log(index);
+    for(var i =0; i<saveThis.length; i++){
+        arraySplits[i]=(saveThis[i].split(" "));
+    }
+    ethicsFlash();
+    data.push(saveThis);
+    refreshGraph();
   }
   refreshGraph()
-
 })();
+
+function ethicsFlash(){
+    // for(var i =0; i<saveThis.length; i++){
+        for(j=0; j<arraySplits[index].length; j++){ 
+            for(k=0; k<ethicalWords.length; k++){
+                if(arraySplits[index][j]==ethicalWords[k]){
+                    console.log("YES");
+                    svg.append("circle").attr("cx",width/2).attr("cy",height/2).attr("fill","pink").attr("r",100).attr("opacity",.3);
+                }
+            }
+        }
+    // }   
+}
 
 
 

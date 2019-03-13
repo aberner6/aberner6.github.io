@@ -260,6 +260,7 @@ var svg = d3.select("#datavis").append("svg")
     cursor.attr("transform", "translate(" + d3.mouse(this) + ")");
   }
 
+//this is how the recording happens
 var recording;
   function mousedown() {
     console.log("hihi")
@@ -287,6 +288,7 @@ var punta;
     // andthen(punta);
 
   }
+  //this is how the audio data is added to each circle node
   function andthen(){
 
     console.log(chunks.length+"chunks length");
@@ -335,6 +337,7 @@ var punta;
           //this has to be the age within the connected nodes
           return i*.1
         })
+//this is how the audio files get played out loud 
         .on("mouseover", function(d){
           console.log(d);
             var playThis = d.a;

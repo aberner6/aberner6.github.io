@@ -247,8 +247,9 @@ $(document).ready(function() {
 // francesca's
     // $.getJSON("https://spreadsheets.google.com/feeds/list/13rLQwhFZMFkNt3PcmMg3E-1lANxRaaR74lBUmer22dU/od6/public/values?alt=json", function(datoo) {
 
+// https://docs.google.com/spreadsheets/d/1cWfQUbARLurJjK0erQX6UuVzkKfSR1OXjzAD526AXwA/edit?usp=sharing
 //mine ABB january 4
-    $.getJSON("https://spreadsheets.google.com/feeds/list/1EmyZhItPL5UDghf5ECEuiCyheaY6O5sttYLuUSGXbYM/od6/public/values?alt=json", function(datoo) {
+    $.getJSON("https://spreadsheets.google.com/feeds/list/1cWfQUbARLurJjK0erQX6UuVzkKfSR1OXjzAD526AXwA/od6/public/values?alt=json", function(datoo) {
         var entry = datoo.feed.entry;
         console.log(entry);
         for (i=0; i<entry.length; i++){
