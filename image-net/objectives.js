@@ -647,7 +647,7 @@ function simpleNodes(){
         .enter().append("text")
         .attr("class","labels")
         .attr("x", 0)
-        .attr("dx",".21em")
+        .attr("dx","1.41em")
         .attr("y", ".31em")
         .attr("text-anchor", "start")
         .text(function(d,i) {
