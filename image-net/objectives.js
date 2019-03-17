@@ -6,7 +6,7 @@
 
 //Datavis
 //number of keywords 0-1, 0 will give a lot of keywords
-var filterNum = .2;
+var filterNum = 0;
 
 
 // SVG
