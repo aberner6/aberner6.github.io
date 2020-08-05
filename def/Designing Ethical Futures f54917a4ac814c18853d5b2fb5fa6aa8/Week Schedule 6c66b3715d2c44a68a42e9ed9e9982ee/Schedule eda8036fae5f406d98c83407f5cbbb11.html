@@ -1,0 +1,641 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Schedule</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="eda8036f-ae5f-406d-98c8-3407f5cbbb11" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🕑</span></div><h1 class="page-title">Schedule</h1></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Day</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Time (adds up)</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Type</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>What to expect</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Supporting materials</th></tr></thead><tbody><tr id="a6a8932d-a0b6-4968-94c5-cb4f7c874bbb"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Every%20day%20a6a8932da0b6496894c5cb4f7c874bbb.html"><span class="icon">🏡</span>Every day</a></td><td class="cell-dsW:">0 o&#x27;clock
+<mark class="highlight-gray">= 14:00 CET / 8:00 EST / 21:00 JST</mark></td><td class="cell-&amp;]:*">Start: </td><td class="cell-ww:z">☀️ We will always begin the day together on zoom. On Monday and Friday, you&#x27;ll start with the general Digital Learning room. All the other days, we begin in our class&#x27;s <a href="https://us02web.zoom.us/j/6244685507">zoom &quot;room&quot;</a></td><td class="cell-,)eK">We&#x27;ll use slides and Miro throughout the course. We&#x27;ll always share the slides in the <a href="https://drive.google.com/drive/folders/1IfrSJ6uanQTk49cDyWFREapxJlExaXAf?usp=sharing">google drive</a> after that day.</td></tr><tr id="69499bae-032e-4a7e-b0b1-ebd45e10585d"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2069499bae032e4a7eb0b1ebd45e10585d.html">Untitled</a></td><td class="cell-dsW:">0 - 0:30</td><td class="cell-&amp;]:*">Inspiration:</td><td class="cell-ww:z">✨ Looking out and around for inspiration for our work - artistic, historical events</td><td class="cell-,)eK"></td></tr><tr id="1ff28c64-db81-49ae-9368-79cc64e3d502"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%201ff28c64db8149ae936879cc64e3d502.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Learn + try:</td><td class="cell-ww:z">🍃 Learn something new, practice it through hands-on digital or analog exercises</td><td class="cell-,)eK"></td></tr><tr id="ac597cff-f691-45da-ac2c-82f0ce648d40"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20ac597cfff69145daac2c82f0ce648d40.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Share-back:</td><td class="cell-ww:z">⑊  Sharing back what you found out on your own or in groups</td><td class="cell-,)eK"></td></tr><tr id="56d91f3f-f354-459e-ae9e-db6c5605641d"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2056d91f3ff354459eae9edb6c5605641d.html">Untitled</a></td><td class="cell-dsW:">1:00 - 1:10</td><td class="cell-&amp;]:*">Break:</td><td class="cell-ww:z">⁐  We will take 10-15 minute breaks every hour</td><td class="cell-,)eK"></td></tr><tr id="559d7bdf-fa00-4f9b-a9d0-acbb3f14af9c"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20559d7bdffa004f9ba9d0acbb3f14af9c.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Discuss:</td><td class="cell-ww:z">🕸 Conversations about the big, provocative questions</td><td class="cell-,)eK"></td></tr><tr id="33368529-17ce-4fe6-a17d-e0c307f02b7f"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%203336852917ce4fe6a17de0c307f02b7f.html">Untitled</a></td><td class="cell-dsW:">@ 4 hours 
+<mark class="highlight-gray">18:00 CET / 12:00 EST / 2:00 JST</mark></td><td class="cell-&amp;]:*">Long Break:</td><td class="cell-ww:z">🛀🏼 After the first 4 hours of class, we&#x27;ll  take a 1 hr &quot;long&quot; break (for relaxing, eating lunch, dinner, breakfast ;)</td><td class="cell-,)eK"></td></tr><tr id="239d4075-d07e-4821-bb06-6a4ca90acac7"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20239d4075d07e4821bb066a4ca90acac7.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Apply:</td><td class="cell-ww:z">꠪ Apply what we are learning to your own projects</td><td class="cell-,)eK"></td></tr><tr id="905319f1-1c33-4320-a363-7fca3c346e64"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20905319f11c334320a3637fca3c346e64.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Check-in:</td><td class="cell-ww:z">🖖🏼 We&#x27;re available at any point while you&#x27;re working on your own. Feel free to ask for help or &quot;office hours&quot; if you&#x27;d like to chat more with us. No matter what, we&#x27;ll come &quot;say hello&quot; at some point during your work session. </td><td class="cell-,)eK"></td></tr><tr id="54256d88-214d-425e-84e1-596cd20255ab"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2054256d88214d425e84e1596cd20255ab.html">Untitled</a></td><td class="cell-dsW:">@ 7:30 hours 
+<mark class="highlight-gray">21:30 CET / 15:30 EST / 5:30 JST</mark></td><td class="cell-&amp;]:*">End: </td><td class="cell-ww:z">🌅 We will always end the day with a check-in together on <a href="https://us02web.zoom.us/j/6244685507">zoom</a></td><td class="cell-,)eK"></td></tr><tr id="35f70924-d4e2-4889-b9e5-7e5315ea4d15"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2035f70924d4e24889b9e57e5315ea4d15.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Optional Evening Intake:</td><td class="cell-ww:z">📖🎧 A reading, video or podcast that we suggest you check out each evening, oriented towards the next day&#x27;s discussion</td><td class="cell-,)eK"></td></tr><tr id="48dde6f9-60c0-4bd0-b735-654ca10f6671"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%2048dde6f960c04bd0b735654ca10f6671.html">———————</a></td><td class="cell-dsW:">——————</td><td class="cell-&amp;]:*">——————————</td><td class="cell-ww:z">————————————————————————————</td><td class="cell-,)eK"></td></tr><tr id="98efea9f-28c1-4c9c-8005-ebe62dc37e8c"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Day%201%2098efea9f28c14c9c8005ebe62dc37e8c.html">Day 1</a></td><td class="cell-dsW:">0</td><td class="cell-&amp;]:*"><mark class="highlight-blue">Kickoff:</mark></td><td class="cell-ww:z"><mark class="highlight-blue">All workshops kickoff in the Digital Learning room</mark></td><td class="cell-,)eK"></td></tr><tr id="ec41afe3-7f94-4eab-97cb-8f33542a7e25"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20ec41afe37f944eab97cb8f33542a7e25.html">Untitled</a></td><td class="cell-dsW:">1</td><td class="cell-&amp;]:*"><mark class="highlight-blue">Start:</mark></td><td class="cell-ww:z">☀️</td><td class="cell-,)eK"></td></tr><tr id="4d47c20d-99b9-4004-9fde-2e9e1ef7debd"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%204d47c20d99b940049fde2e9e1ef7debd.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*"></td><td class="cell-ww:z">Introductions to each other, to the course, hopes, fears, fun games, futures
+What + why ethics</td><td class="cell-,)eK"></td></tr><tr id="4c88a16a-54f2-4b8a-bc74-40380f0c906e"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%204c88a16a54f24b8abc7440380f0c906e.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Inspiration:</td><td class="cell-ww:z"><a href="https://twitter.com/refikanadol/status/1282914452501716992">✨</a> Machine Hallucinations - Nature Dreams using 68,986,479 photographic landscape memories of our Earth with machine intelligence</td><td class="cell-,)eK"></td></tr><tr id="10f3f5ea-183a-46ae-843d-203bc7017ebd"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2010f3f5ea183a46ae843d203bc7017ebd.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Break:</td><td class="cell-ww:z">⁐ 10 minute breaks every hour all day</td><td class="cell-,)eK"></td></tr><tr id="bfeac9a1-d969-41a4-b373-f9c58db5fbab"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20bfeac9a1d96941a4b373f9c58db5fbab.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*"></td><td class="cell-ww:z"></td><td class="cell-,)eK"></td></tr><tr id="d0302d78-b8de-413e-9f2e-b943e4c330f6"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20d0302d78b8de413e9f2eb943e4c330f6.html">Untitled</a></td><td class="cell-dsW:">@ 4 hours </td><td class="cell-&amp;]:*">Long Break:</td><td class="cell-ww:z">🛀🏼</td><td class="cell-,)eK"></td></tr><tr id="0e19a555-da79-4901-b287-cb34ca4b9371"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%200e19a555da794901b287cb34ca4b9371.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Learn + try:</td><td class="cell-ww:z">🍃 Ethics, design, technology
+<a href="https://miro.com/app/board/o9J_ko6CCO4=/?moveToWidget=3074457349071264448&amp;cot=13">Theories, dilemmas</a></td><td class="cell-,)eK"></td></tr><tr id="5450ec8f-b8b7-4741-a6ae-cf5b9d5b5bb3"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%205450ec8fb8b74741a6aecf5b9d5b5bb3.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Apply:</td><td class="cell-ww:z">꠪  <a href="https://miro.com/app/board/o9J_ko6CCO4=/?moveToWidget=3074457349071336959&amp;cot=13">Free-write, engage</a>
+🕸 Discuss
+⑊ What did you find out?</td><td class="cell-,)eK"></td></tr><tr id="eca18e4e-345a-44f5-9603-a10fa98c376c"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20eca18e4e345a44f59603a10fa98c376c.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*"></td><td class="cell-ww:z"></td><td class="cell-,)eK"></td></tr><tr id="66bd5765-df7e-4f0e-80f6-f4cdc1c73ed4"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2066bd5765df7e4f0e80f6f4cdc1c73ed4.html">Untitled</a></td><td class="cell-dsW:">@ 7:30 hours </td><td class="cell-&amp;]:*">End:</td><td class="cell-ww:z">🌅</td><td class="cell-,)eK"></td></tr><tr id="7471ee22-1056-4f12-8829-52468e6c72bb"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%207471ee2210564f12882952468e6c72bb.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Intake:</td><td class="cell-ww:z"><a href="https://www.notion.so/Optional-Evening-Intake-39fa3bc1a92e459c90255cac4693ebf8">📖</a> Optional evening intake</td><td class="cell-,)eK"></td></tr><tr id="71f92b60-a899-4d4f-bfbf-7e3503b9f2b4"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%2071f92b60a8994d4fbfbf7e3503b9f2b4.html">———————</a></td><td class="cell-dsW:">——————</td><td class="cell-&amp;]:*">——————————</td><td class="cell-ww:z">————————————————————————————</td><td class="cell-,)eK"></td></tr><tr id="fa56d03f-a152-4c1f-8182-ac14c4d76bee"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Day%202%20fa56d03fa1524c1f8182ac14c4d76bee.html">Day 2</a></td><td class="cell-dsW:">0</td><td class="cell-&amp;]:*"><mark class="highlight-blue">Start:</mark></td><td class="cell-ww:z">☀️ Philine!</td><td class="cell-,)eK"></td></tr><tr id="166478ce-a1cd-4455-a0df-495132a2b001"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20166478cea1cd4455a0df495132a2b001.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Inspiration:</td><td class="cell-ww:z"><a href="https://sofskidan.com/">✨</a>Sof Skidan</td><td class="cell-,)eK"></td></tr><tr id="5553eba3-56bc-4071-be4b-48d9d599e794"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%205553eba356bc4071be4b48d9d599e794.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*"></td><td class="cell-ww:z">🍃 Ethics &amp; design
+This week&#x27;s flow</td><td class="cell-,)eK"></td></tr><tr id="1f4ae548-a147-4228-9e13-6c9b14ad8ea8"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%201f4ae548a14742289e136c9b14ad8ea8.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Break:</td><td class="cell-ww:z">⁐</td><td class="cell-,)eK"></td></tr><tr id="1f8eacbf-ce1e-4f8b-8475-8ed99b0b9f95"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%201f8eacbfce1e4f8b84758ed99b0b9f95.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Share-back:</td><td class="cell-ww:z">⑊</td><td class="cell-,)eK"></td></tr><tr id="56d1dcad-fb9e-46e0-9348-a6c6adbbdd3b"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2056d1dcadfb9e46e09348a6c6adbbdd3b.html">Untitled</a></td><td class="cell-dsW:">@ 4 hours </td><td class="cell-&amp;]:*">Long Break:</td><td class="cell-ww:z">🛀🏼</td><td class="cell-,)eK"></td></tr><tr id="39aba596-46f4-433e-8f4d-8d3847153840"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2039aba59646f4433e8f4d8d3847153840.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Discuss:</td><td class="cell-ww:z">🕸 <a href="https://miro.com/app/board/o9J_ko6CCO4=/?moveToWidget=3074457349090422733&amp;cot=13">Virtue ethics</a></td><td class="cell-,)eK"></td></tr><tr id="25fc5fc4-b169-453f-91b8-1f02c2098372"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2025fc5fc4b169453f91b81f02c2098372.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Apply:</td><td class="cell-ww:z">꠪ Work in your teams: norm, <a href="https://miro.com/app/board/o9J_ko6CCO4=/?moveToWidget=3074457349086854303&amp;cot=13">select and unpack products</a>, identifying values
+Refs: <a href="https://www.one-tab.com/page/-NPpLEAZSiKiIH75w27tlg">Manifestos</a>, <a href="https://www.youtube.com/watch?v=WBOrfF_qUWw">Unboxing a product</a></td><td class="cell-,)eK"></td></tr><tr id="80e11516-9759-4b72-a87f-903d126fca10"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2080e1151697594b72a87f903d126fca10.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Check-in:</td><td class="cell-ww:z">🖖🏼</td><td class="cell-,)eK"></td></tr><tr id="ddef382e-13f7-477d-ac0d-561d8ea69385"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20ddef382e13f7477dac0d561d8ea69385.html">Untitled</a></td><td class="cell-dsW:">@ 6:45 hours </td><td class="cell-&amp;]:*">End:</td><td class="cell-ww:z">🌅</td><td class="cell-,)eK"></td></tr><tr id="9561529f-a8fc-48c5-b9ce-fd7f9a1cec9a"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%209561529fa8fc48c5b9cefd7f9a1cec9a.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Intake:</td><td class="cell-ww:z"><a href="https://www.notion.so/Optional-Evening-Intake-39fa3bc1a92e459c90255cac4693ebf8">📖</a></td><td class="cell-,)eK"></td></tr><tr id="80583dc3-f48c-4226-ad05-24d27d4a5055"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2080583dc3f48c4226ad0524d27d4a5055.html">Untitled</a></td><td class="cell-dsW:">@ 7 - 8</td><td class="cell-&amp;]:*"><mark class="highlight-blue">All digital learning</mark></td><td class="cell-ww:z"><mark class="highlight-blue">⚡️Faculty Lightning talks </mark></td><td class="cell-,)eK"></td></tr><tr id="98f212c2-c62e-4b3b-9034-d82c9b3ba4c9"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%2098f212c2c62e4b3b9034d82c9b3ba4c9.html">———————</a></td><td class="cell-dsW:">——————</td><td class="cell-&amp;]:*">——————————</td><td class="cell-ww:z">————————————————————————————</td><td class="cell-,)eK"></td></tr><tr id="ba27cc47-a23c-43f4-b745-42e062c927fd"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Day%203%20ba27cc47a23c43f4b74542e062c927fd.html">Day 3</a></td><td class="cell-dsW:">0</td><td class="cell-&amp;]:*"><mark class="highlight-blue">Start: game or stretch?</mark></td><td class="cell-ww:z">☀️</td><td class="cell-,)eK"></td></tr><tr id="66d55e32-cee6-4a61-acc7-dcfe6278a42a"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2066d55e32cee64a61acc7dcfe6278a42a.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Inspiration:</td><td class="cell-ww:z"><a href="https://www.youtube.com/watch?v=0fKBhvDjuy0">✨</a> Powers of 10</td><td class="cell-,)eK"></td></tr><tr id="103bccce-ef44-40a9-8b8c-2ce43adfb6bd"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20103bccceef4440a98b8c2ce43adfb6bd.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Learn + try:</td><td class="cell-ww:z">🍃 Finding misalignment between the virtuous values and the products, misalignment expression
+Consequentialism / utilitarianism, counterfactuals
+Speculative design, futures</td><td class="cell-,)eK"></td></tr><tr id="18813ef4-0a30-414d-9e0f-93a56dd0eed8"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2018813ef40a30414d9e0f93a56dd0eed8.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Break:</td><td class="cell-ww:z">⁐</td><td class="cell-,)eK"></td></tr><tr id="287f0842-c96e-421e-ab3d-f52ca03693aa"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20287f0842c96e421eab3df52ca03693aa.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Share-back:</td><td class="cell-ww:z">⑊</td><td class="cell-,)eK"></td></tr><tr id="6dd36008-6ebc-4205-b03b-eb1e4a506a37"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%206dd360086ebc4205b03beb1e4a506a37.html">Untitled</a></td><td class="cell-dsW:">@ 4 hours </td><td class="cell-&amp;]:*">Long Break:</td><td class="cell-ww:z">🛀🏼</td><td class="cell-,)eK"></td></tr><tr id="ad4aaffa-5d25-4d52-b619-2a0cbd430526"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20ad4aaffa5d254d52b6192a0cbd430526.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Discuss:</td><td class="cell-ww:z">🕸 </td><td class="cell-,)eK"></td></tr><tr id="5b0e19d2-da13-4d57-849a-95b5e1831eba"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%205b0e19d2da134d57849a95b5e1831eba.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Apply:</td><td class="cell-ww:z">꠪  Work in your teams: misalignments, <a href="https://miro.com/app/board/o9J_ko6CCO4=/?moveToWidget=3074457349109427525&amp;cot=13">what if trees, scenarios</a> </td><td class="cell-,)eK"></td></tr><tr id="86a185f4-6e30-4644-8c1b-fb3c2e5df567"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2086a185f46e3046448c1bfb3c2e5df567.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Check-ins:</td><td class="cell-ww:z">🖖🏼</td><td class="cell-,)eK"></td></tr><tr id="c95dc9bc-16a3-4cb1-9baf-05f798ac0fef"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20c95dc9bc16a34cb19baf05f798ac0fef.html">Untitled</a></td><td class="cell-dsW:">@ 6:45 hours </td><td class="cell-&amp;]:*">End:</td><td class="cell-ww:z">🌅</td><td class="cell-,)eK"></td></tr><tr id="96b3e63b-7efe-475d-9981-29cbb591ed8c"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2096b3e63b7efe475d998129cbb591ed8c.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Intake:</td><td class="cell-ww:z"><a href="https://www.notion.so/Optional-Evening-Intake-39fa3bc1a92e459c90255cac4693ebf8">📖</a></td><td class="cell-,)eK"></td></tr><tr id="057e1674-664a-4ea8-9358-1211eb91c53a"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20057e1674664a4ea893581211eb91c53a.html">Untitled</a></td><td class="cell-dsW:">@ 7 - 8</td><td class="cell-&amp;]:*"><mark class="highlight-blue">All digital learning</mark></td><td class="cell-ww:z"><mark class="highlight-blue">⚡️Participant Lightning talks </mark></td><td class="cell-,)eK"></td></tr><tr id="49c3fe08-0137-4ded-b1b4-c5f8fad243e7"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%2049c3fe0801374dedb1b4c5f8fad243e7.html">———————</a></td><td class="cell-dsW:">——————</td><td class="cell-&amp;]:*">——————————</td><td class="cell-ww:z">————————————————————————————</td><td class="cell-,)eK"></td></tr><tr id="c4319afe-efed-49f0-bf51-dd05b94bd96e"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Day%204%20c4319afeefed49f0bf51dd05b94bd96e.html">Day 4</a></td><td class="cell-dsW:">0</td><td class="cell-&amp;]:*"><mark class="highlight-blue">Start: game?</mark></td><td class="cell-ww:z">☀️ Check in</td><td class="cell-,)eK"></td></tr><tr id="c90f66ff-c531-4376-b739-970d38c350f8"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20c90f66ffc5314376b739970d38c350f8.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Inspiration:</td><td class="cell-ww:z">✨ </td><td class="cell-,)eK"></td></tr><tr id="33c7a805-15b4-4c05-b4f8-021c1132f34f"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2033c7a80515b44c05b4f8021c1132f34f.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Learn + try:</td><td class="cell-ww:z">🍃 What if&#x27;s
+Expression through provocatypes
+&quot;Ethical&quot; critiques </td><td class="cell-,)eK"></td></tr><tr id="cac7df87-49f9-4523-bbd1-17e8583f3dbb"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20cac7df8749f94523bbd117e8583f3dbb.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Break:</td><td class="cell-ww:z">⁐</td><td class="cell-,)eK"></td></tr><tr id="746836e2-c9f9-4d1b-8071-a58211fb83ab"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20746836e2c9f94d1b8071a58211fb83ab.html">Untitled</a></td><td class="cell-dsW:">@ 4 hours </td><td class="cell-&amp;]:*">Long Break:</td><td class="cell-ww:z">🛀🏼</td><td class="cell-,)eK"></td></tr><tr id="5e6fa6e2-60e4-422a-9d57-3b1ae7eca4be"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%205e6fa6e260e4422a9d573b1ae7eca4be.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Discuss:</td><td class="cell-ww:z">🕸 Care Ethics</td><td class="cell-,)eK"></td></tr><tr id="ef1dc2bd-48f2-4bc4-8e6b-2229f7f2f174"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20ef1dc2bd48f24bc48e6b2229f7f2f174.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Apply:</td><td class="cell-ww:z">꠪  Work in your teams: <a href="https://miro.com/app/board/o9J_ko6CCO4=/?moveToWidget=3074457349123878112&amp;cot=13">provocatypes</a> 
+⑊ Share and constructive critiques</td><td class="cell-,)eK"></td></tr><tr id="29e87836-7f12-42e6-be09-6109a4588565"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2029e878367f1242e6be096109a4588565.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Check-ins:</td><td class="cell-ww:z">🖖🏼</td><td class="cell-,)eK"></td></tr><tr id="03f31443-d20f-4747-95a1-5326a4ac77e7"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2003f31443d20f474795a15326a4ac77e7.html">Untitled</a></td><td class="cell-dsW:">@ 7:30 hours </td><td class="cell-&amp;]:*">End:</td><td class="cell-ww:z">🌅</td><td class="cell-,)eK"></td></tr><tr id="0b77ba2d-379c-4f46-bc3b-de3c81a318c4"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%200b77ba2d379c4f46bc3bde3c81a318c4.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Optional Intake:</td><td class="cell-ww:z"><a href="https://www.jacobinmag.com/2014/10/les-simerables/">📖</a></td><td class="cell-,)eK"></td></tr><tr id="183735e4-208f-4035-a81d-ae8c79ea9c11"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E2%80%94%20183735e4208f4035a81dae8c79ea9c11.html">———————</a></td><td class="cell-dsW:">——————</td><td class="cell-&amp;]:*">——————————</td><td class="cell-ww:z">————————————————————————————</td><td class="cell-,)eK"></td></tr><tr id="5ac3d2f7-dfb7-44ce-948c-aa5fc2d3b2e9"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Day%205%205ac3d2f7dfb744ce948caa5fc2d3b2e9.html">Day 5</a></td><td class="cell-dsW:">0</td><td class="cell-&amp;]:*"><mark class="highlight-blue">All digital learning</mark></td><td class="cell-ww:z"><mark class="highlight-blue">Meditation Session</mark></td><td class="cell-,)eK"></td></tr><tr id="91497c41-4106-454e-9384-3390fd30ecad"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2091497c414106454e93843390fd30ecad.html">Untitled</a></td><td class="cell-dsW:">0:20</td><td class="cell-&amp;]:*"><mark class="highlight-blue">Start: game?</mark></td><td class="cell-ww:z"></td><td class="cell-,)eK"></td></tr><tr id="2093b3f7-672d-4c8b-a606-9a954f9ac10e"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%202093b3f7672d4c8ba6069a954f9ac10e.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Apply:</td><td class="cell-ww:z">꠪  Work in your teams: summarise, refine to share</td><td class="cell-,)eK"></td></tr><tr id="a23b8508-9d2b-4c24-863d-c49b7811e02d"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20a23b85089d2b4c24863dc49b7811e02d.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*"></td><td class="cell-ww:z">☀️ Summary of the class</td><td class="cell-,)eK"></td></tr><tr id="04f07a41-3619-437e-b4ec-60f84d971003"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2004f07a413619437eb4ec60f84d971003.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*">Discuss:</td><td class="cell-ww:z">🕸</td><td class="cell-,)eK"></td></tr><tr id="a4d691b9-9724-4159-8060-bb0d6bc3e07b"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20a4d691b9972441598060bb0d6bc3e07b.html">Untitled</a></td><td class="cell-dsW:">@ 4 hours </td><td class="cell-&amp;]:*">Long Break:</td><td class="cell-ww:z">🛀🏼</td><td class="cell-,)eK"></td></tr><tr id="6bb406eb-4e12-45cb-9275-87910b7e453f"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%206bb406eb4e1245cb927587910b7e453f.html">Untitled</a></td><td class="cell-dsW:">@ 5 - 6</td><td class="cell-&amp;]:*">Share:</td><td class="cell-ww:z">👏🏽⑊ <mark class="highlight-blue">Presentations space </mark></td><td class="cell-,)eK"></td></tr><tr id="07d22f42-002a-4ce3-b4db-da577ce37278"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%2007d22f42002a4ce3b4dbda577ce37278.html">Untitled</a></td><td class="cell-dsW:">@ 6 - 7</td><td class="cell-&amp;]:*">Reflection:</td><td class="cell-ww:z"></td><td class="cell-,)eK"></td></tr><tr id="9c5583e5-542a-4781-b744-0cdcbb1bf1b9"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%209c5583e5542a4781b7440cdcbb1bf1b9.html">Untitled</a></td><td class="cell-dsW:">@ 7 - 8 </td><td class="cell-&amp;]:*">Celebration:</td><td class="cell-ww:z">🎊Celebration of the week and wrap-up discussion</td><td class="cell-,)eK"></td></tr><tr id="014114d8-7aa4-4ace-8127-f38a443b839a"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20014114d87aa44ace8127f38a443b839a.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*"></td><td class="cell-ww:z"></td><td class="cell-,)eK"></td></tr><tr id="d5875b5c-6784-413b-9fa6-c74abf36748c"><td class="cell-title"><a href="Schedule%20eda8036fae5f406d98c83407f5cbbb11/Untitled%20d5875b5c6784413b9fa6c74abf36748c.html">Untitled</a></td><td class="cell-dsW:"></td><td class="cell-&amp;]:*"></td><td class="cell-ww:z"></td><td class="cell-,)eK"></td></tr></tbody></table></div></article></body></html>

@@ -1,0 +1,634 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Futures</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="904d4bcc-9a8d-49a1-807d-7b37e1fe85ab" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">👨‍🚀</span></div><h1 class="page-title">Futures</h1></header><div class="page-body"><figure id="642475d8-c18f-4384-ad38-90b868b26e08"><a href="https://heritage-futures.org/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Heritage Futures | Assembling Alternative Futures for Heritage</div><div class="bookmark-description">Assembling Alternative Futures for Heritage: Exploring ways of shaping future legacies and common worlds across different fields of conservation practice.</div></div><div class="bookmark-href"><img src="https://heritage-futures.org/favicon/favicon-16x16.png" class="icon bookmark-icon"/>https://heritage-futures.org/</div></div><img src="https://heritage-futures.org/app/uploads/2018/05/Antony-pic2.jpg" class="bookmark-image"/></a></figure><h3 id="948a61a3-f3a3-4074-b23d-0c001bebc62d" class="">+Future-ing Studios, People</h3><figure id="0f9bf626-7afd-4c2a-b0f3-ed595006aa44"><a href="http://www.hyphen-labs.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Home</div><div class="bookmark-description">International award-winning immersive experience and interaction design studio led by Ece Tankal and Carmen Aguilar y Wedge.</div></div><div class="bookmark-href"><img src="http://www.hyphen-labs.com/images/favicon.ico?3784107745" class="icon bookmark-icon"/>http://www.hyphen-labs.com/</div></div><img src="http://www.hyphen-labs.com/images/veritas_universitycostarica_2x.jpg" class="bookmark-image"/></a></figure><figure id="ccec6804-790e-4f7c-828b-4c98fbdcbb5e"><a href="https://www.bespokecph.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Bespoke</div><div class="bookmark-description">BESPOKE IS A COPENHAGEN BASED STRATEGIC FORESIGHT &amp; DESIGN THINKING FIRM. WE DESIGN THE FUTURE.</div></div><div class="bookmark-href"><img src="https://images.squarespace-cdn.com/content/v1/53f1c66ee4b0b2ea897de7ee/1505895636820-W2LTDFL886KXL3GM56J2/ke17ZwdGBToddI8pDm48kHxZW8G9yQIB8WDax7xpbxxZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Wt5K3jmsiBpJAJjNxwpFT48K2g_wJ5Tvrry30-swdfDUdj1yWJm5f7xpqDxWrxJCQ/favicon.ico?format=100w" class="icon bookmark-icon"/>https://www.bespokecph.com/</div></div><img src="http://static1.squarespace.com/static/53f1c66ee4b0b2ea897de7ee/t/5c1a1f6e21c67cd47c4e662a/1545215859866/bespokecph_ogimg.jpg?format=1500w" class="bookmark-image"/></a></figure><figure id="3d82318c-de37-4460-b204-f2c89f318842"><a href="https://superflux.in/#" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Superflux - Translating Future Uncertainty into Present Day Choices.</div><div class="bookmark-description">Instant Archetypes: A New Tarot for the New Normal is our new futures toolkit to activate creative and critical thinking through live storytelling, problem-solving and insight exploration. Now on Kickstarter! At the end of April, I gave the opening talk at the TED 2017 conference &#x27;The Future You&#x27; in Vancouver.</div></div><div class="bookmark-href"><img src="https://superflux.in/wp-content/uploads/2017/01/cropped-superflux-favicon-192x192.png" class="icon bookmark-icon"/>https://superflux.in/#</div></div><img src="https://superflux.in/wp-content/uploads/2018/07/VnA_DSC0048mc.jpg" class="bookmark-image"/></a></figure><figure id="760833a0-990f-4ede-8a15-3e4d7478b230"><a href="https://extrapolationfactory.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Extrapolation Factory</div><div class="bookmark-description">Cargo</div></div><div class="bookmark-href"><img src="https://freight.cargo.site/t/original/i/ef8b29f21c35f6701037af33657320c8373a6134c2b0f20daf8341b0d9fd9990/hangtag.ico" class="icon bookmark-icon"/>https://extrapolationfactory.com/</div></div></a></figure><div id="536d0912-6823-4da2-a6fa-da5fcdc77cda" class="column-list"><div id="2747c94c-7a1b-4796-81a9-22a1451e393f" style="width:50%" class="column"><figure id="04868b59-5afb-49ca-8319-f9f86ebadfe2"><a href="https://www.futures.design/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Speculative Futures</div><div class="bookmark-description">The Design Futures Initiative is a nonprofit organization based in San Francisco, CA dedicated to the advancement and development of Futures Design Thinking - Speculative &amp; Critical Design, Design Fiction, Futurism, and Strategic Foresight. We have a community of Speculative Futures chapters &amp; meetups around the world and organize the annual PRIMER conference in the US and Europe .</div></div><div class="bookmark-href"><img src="https://images.squarespace-cdn.com/content/v1/5832765c59cc687f522fbd0b/1479704268612-387LKSIW1241O4B5MJ0S/ke17ZwdGBToddI8pDm48kNjpXgdB2GQ4GXsvq_1og8aoCXeSvxnTEQmG4uwOsdIceAoHiyRoc52GMN5_2H8Wp6_MLhNeL9yWw1amyLjdgohmCNS_LeH4t9qD0d_SmSPc_VumPslpQQgM4-VHAcYf4g/favicon.ico?format=" class="icon bookmark-icon"/>https://www.futures.design/</div></div><img src="http://static1.squarespace.com/static/5832765c59cc687f522fbd0b/t/583283e02e69cfe8ead06508/1479705568564/logo_sm_black.png?format=1500w" class="bookmark-image"/></a></figure></div><div id="a5b0b904-c370-4878-9463-10b9fa37ea1f" style="width:50%" class="column"><figure id="a6b1cc48-1f95-415d-8e82-adbba87437ce"><a href="https://speculativeedu.eu/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">SpeculativeEdu</div><div class="bookmark-description">SpeculativeEdu is an educational, project funded by ERASMUS+, the European Union programme for education, training, youth, and sport, with the aim of strengthening speculative design education by collecting and exchanging existing knowledge and experience whilst developing new methods in the field of speculative design.</div></div><div class="bookmark-href"><img src="https://speculativeedu.eu/wp-content/uploads/2019/02/cropped-prof-192x192.jpg" class="icon bookmark-icon"/>https://speculativeedu.eu/</div></div></a></figure></div></div><figure id="d6d2935f-0711-4be7-ae5c-3498aad35e40"><a href="http://nearfuturelaboratory.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Near Future Laboratory | Clarify today, design tomorrow</div><div class="bookmark-description">At the Near Future Laboratory, our goal is to understand how imaginations and hypothesis become materialized to swerve the present into new, more habitable near future worlds. We work from a variety of conceptual and creative platforms to help explicate context and explore future states, including various calibers of research - from the field to the desk to the lab bench and everything in between.</div></div><div class="bookmark-href"><img src="http://nearfuturelaboratory.com/img/favicon.png" class="icon bookmark-icon"/>http://nearfuturelaboratory.com/</div></div><img src="http://nearfuturelaboratory.com/img/logo_arizoan_university.jpg" class="bookmark-image"/></a></figure><p id="ff22125f-a1b6-49f3-b2da-a66ac3512bd4" class="">
+</p><h3 id="3080da6a-fcf2-4b05-9546-63a7e4a77525" class="">+Projects</h3><p id="8ea28378-24f9-45e7-8361-179c6e3addbb" class="">
+</p><div id="47ea84df-7b97-42e3-aef5-3414389f8d1b" class="column-list"><div id="b32fe013-6089-4a22-9ba9-7786e1e74d7c" style="width:50%" class="column"><figure id="727a6335-6d0b-4382-bcc0-506cc7b08dbf"><div class="source"><a href="https://vimeo.com/128873380">https://vimeo.com/128873380</a></div></figure><p id="d09fab64-261b-4b1c-bfcf-19bc8da8fcc0" class="">
+</p><figure id="965d3086-9df1-466b-a1ec-cc2952eab695"><div class="source"><a href="https://vimeo.com/171291326">https://vimeo.com/171291326</a></div></figure><figure id="087a24a3-34e1-4f57-9a89-e39a89a9c221"><div class="source"><a href="https://www.youtube.com/watch?v=VPIoUQbO_V8">https://www.youtube.com/watch?v=VPIoUQbO_V8</a></div></figure><figure id="c0338c18-8361-4f70-a106-5cdb9fa7ffee"><div class="source"><a href="https://vimeo.com/208264686">https://vimeo.com/208264686</a></div></figure><figure id="b20db876-dd8b-446a-aeb0-7c0da18e7ea5"><a href="http://unitedmicrokingdoms.org/introduction/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">UMK</div><div class="bookmark-description">The United Micro Kingdoms (UmK) is divided into four super-shires inhabited by Digitarians, Bioliberals, Anarcho-evolutionists and Communo-nuclearists. Each county is an experimental zone, free to develop its own form of governance, economy and lifestyle. These include neoliberalism and digital technology, social democracy and biotechnology, anarchy and self-experimentation and communism and nuclear energy.</div></div><div class="bookmark-href"><img src="http://unitedmicrokingdoms.org/wp-content/themes/unitedmicrokingdom/_/img/favicon.ico" class="icon bookmark-icon"/>http://unitedmicrokingdoms.org/introduction/</div></div><img src="http://unitedmicrokingdoms.org/wp-content/uploads/2013/04/carsFinal-Color-Output0000-crop.jpg" class="bookmark-image"/></a></figure><figure id="f66f5f99-d3c4-4801-9093-b4bd2f718739"><a href="https://www.researchgate.net/publication/334307616_Using_the_Future_at_NASA" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://www.researchgate.net/publication/334307616_Using_the_Future_at_NASA</div></div></a></figure><figure id="200e08ce-9421-4a64-ba39-255d33f6d04e"><a href="https://medium.com/@futuryst/u-s-earth-force-58a2c1576d35" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">U.S. Earth Force</div><div class="bookmark-description">Introducing the sixth branch of the American military, founded in 2029. What happens when the world&#x27;s richest and most powerful country puts its full weight behind efforts to address climate disruption? Earth Force is neither a prediction nor a preference, but a possibility, a way of asking how climate action might look if addressed seriously at a federal level.</div></div><div class="bookmark-href"><img src="https://cdn-static-1.medium.com/_/fp/icons/favicon-rebrand-medium.3Y6xpZ-0FSdWDnPM3hSBIA.ico" class="icon bookmark-icon"/>https://medium.com/@futuryst/u-s-earth-force-58a2c1576d35</div></div><img src="https://miro.medium.com/max/1200/1*nfZG9hVk9taRLdUNpu3LtA.jpeg" class="bookmark-image"/></a></figure><figure id="c1306926-d996-4a80-9113-869d60b0c346"><a href="https://www.fromthefutures.org/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">From the Futures</div><div class="bookmark-description">Using Speculative Design as a practice, From The Futures gathers more than 1000 artists, makers, thinkers, educators and anyone interested in imagining new futures. The project is an act of co-creation and we see our journey as an art experiment.</div></div><div class="bookmark-href"><img src="https://images.squarespace-cdn.com/content/v1/5e81358fabd507573eda3783/1585607326471-IL6WS6OY1EKIJB2C6YM9/ke17ZwdGBToddI8pDm48kN_nhuc2jtYftkhDJVBqz29Zw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7baX_VdYN7eZTOScYEC6H_rKk_Qs2XyaqH68tCoErkqE2u3cNWPIH2nqsOYJg770Ag/favicon.ico?format=100w" class="icon bookmark-icon"/>https://www.fromthefutures.org/</div></div><img src="http://static1.squarespace.com/static/5e81358fabd507573eda3783/t/5e9c7d2c49f74c43e7afac31/1587313967132/FromTheFuturesLogowhit.png?format=1500w" class="bookmark-image"/></a></figure><figure id="6ea31d30-f09f-4ed2-abc0-4bc0d611410a"><a href="https://twitter.com/futuryst/status/1240324093553106944" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div><div class="bookmark-description">Our elaborate hypotheticals went out the window. &quot;Alternate reality game&quot; morphed into &quot;emergent reality game.&quot; While still a playable pandemic preparedness campaign, we were now racing a real disease, H1N1 swine flu. The new plan: harness unfolding events to fuel engagement. /27 pic.twitter.com/cafLT7ZgVV</div></div><div class="bookmark-href"><img src="https://abs.twimg.com/favicons/twitter.ico" class="icon bookmark-icon"/>https://twitter.com/futuryst/status/1240324093553106944</div></div></a></figure></div><div id="a0b01955-74b0-46de-8216-ef7d6c4234f5" style="width:50%" class="column"><figure id="e784af70-5adc-4d48-8933-c2e063fbe22b"><div class="source"><a href="https://vimeo.com/252188354">https://vimeo.com/252188354</a></div></figure><p id="8ff91843-c4e8-426c-bdea-9381f0a82e7f" class="">
+</p><figure id="f0e50004-37b6-48fe-8b50-b9b083b89ace"><div class="source"><a href="https://www.youtube.com/watch?v=YJg02ivYzSs">https://www.youtube.com/watch?v=YJg02ivYzSs</a></div></figure><figure id="a9df7674-0ba4-4a30-b224-7bf45d2b6313"><div class="source"><a href="https://www.youtube.com/watch?v=YhJR_iN6QBM">https://www.youtube.com/watch?v=YhJR_iN6QBM</a></div></figure><p id="60f96a77-301c-44f8-b6ab-44c76fa9bc58" class="">
+</p><figure id="4942dfef-11be-4ac7-a5b4-b3820ff9dced"><a href="https://superflux.in/index.php/work/mitigation-of-shock/#" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Mitigation of Shock (London) - Superflux</div><div class="bookmark-description">Take a tour around a future London apartment radically adapted for living with the consequences of climate change. One of the inhabitants shares their personal experience of adjusting to a world transformed by food insecurity and climate extremities at home, and in their local community.</div></div><div class="bookmark-href"><img src="https://superflux.in/wp-content/uploads/2017/01/cropped-superflux-favicon-192x192.png" class="icon bookmark-icon"/>https://superflux.in/index.php/work/mitigation-of-shock/#</div></div><img src="https://superflux.in/wp-content/uploads/2019/04/Main-Image-MOS-Resized.jpg" class="bookmark-image"/></a></figure><figure id="946f10fe-b004-40f0-9bdd-4479da561f8b"><a href="https://www.theguardian.com/environment/2020/apr/22/environment-pandemic-side-effects-earth-day-coronavirus" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Pandemic side-effects offer glimpse of alternative future on Earth Day 2020</div><div class="bookmark-description">The skies are clearing of pollution, wildlife is returning to newly clear waters, a host of flights have been scrapped and crude oil is so worthless that the industry would have to pay you to take it off their hands - a few months ago, environmentalists could only dream of such a scenario as the 50th anniversary of Earth Day hove into view.</div></div><div class="bookmark-href"><img src="https://assets.guim.co.uk/images/favicons/46bd2faa1ab438684a6d4528a655a8bd/32x32.ico" class="icon bookmark-icon"/>https://www.theguardian.com/environment/2020/apr/22/environment-pandemic-side-effects-earth-day-coronavirus</div></div><img src="https://i.guim.co.uk/img/media/1dfac6f2d6f380d1c902bddf117bde7afb8938be/0_4_3500_2101/master/3500.jpg?width=1200&amp;height=630&amp;quality=85&amp;auto=format&amp;fit=crop&amp;overlay-align=bottom%2Cleft&amp;overlay-width=100p&amp;overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&amp;enable=upscale&amp;s=2b68753cb48eb6cbcdb8fe529aae8349" class="bookmark-image"/></a></figure><figure id="fa0bcc17-14b4-4311-9be0-b39690d41698"><a href="https://www.youtube.com/watch?v=EgJHhe17L5o" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">SCIFI WAHABI</div><div class="bookmark-description">It&#x27;s after the end of the world. Don&#x27;t you know that yet? http://scifiwahabi.blogspot.com/</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=EgJHhe17L5o</div></div><img src="https://i.ytimg.com/vi/EgJHhe17L5o/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="386c5cae-4b47-48c0-a67c-4581cbb1ce01"><a href="https://hyperallergic.com/515449/congresswoman-alexandria-ocasio-cortez-unveils-a-series-of-green-new-deal-art-posters/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Congresswoman Alexandria Ocasio-Cortez Unveils a Series of Green New Deal Art Posters</div><div class="bookmark-description">The posters promote the congresswoman&#x27;s environmental plan with WPA-style lithographs highlighting monuments from Queens and the Bronx in New York City. Congresswoman Alexandria Ocasio-Cortez, who represents the 14th district of New York in the Bronx and Queens, unveiled a series of New Deal Era-style posters to promote her Green New Deal (GND) plan.</div></div><div class="bookmark-href"><img src="https://hyperallergic.com/wp-content/uploads/2019/11/cropped-Hyperallergic-favicon-192x192.png" class="icon bookmark-icon"/>https://hyperallergic.com/515449/congresswoman-alexandria-ocasio-cortez-unveils-a-series-of-green-new-deal-art-posters/</div></div><img src="https://hyperallergic.com/wp-content/uploads/2019/08/aoc_1_1000.gif" class="bookmark-image"/></a></figure><figure id="2e8f30ca-ad20-4f5f-bc14-5a695b4ab725"><a href="http://www.ffffffffaq.com/appliances.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">🔌APPLIANCES</div><div class="bookmark-description">Near future frequently asked questions</div></div><div class="bookmark-href">http://www.ffffffffaq.com/appliances.html</div></div></a></figure><figure id="ada77341-e0ab-44f0-86c2-2eb4b7f908bf"><a href="http://www.auger-loizeau.com/projects/real-prediction-machines" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Auger Loizeau: Real Prediction Machines</div><div class="bookmark-description">Predicting the future is no longer about the mystical reading of natural and celestial phenomena. Today it is all about data. The Real Prediction Machine (RPM) is a domestic product that uses big and small data, in combination with machine learning and predictive modelling to make predictions about specific future events.</div></div><div class="bookmark-href"><img src="http://www.auger-loizeau.com/favicon.ico" class="icon bookmark-icon"/>http://www.auger-loizeau.com/projects/real-prediction-machines</div></div><img src="http://www.auger-loizeau.com//images/173.jpg" class="bookmark-image"/></a></figure></div></div><figure id="68280ab8-0f3c-4d6d-b36b-91d3aaa07ba9"><a href="https://medium.com/message/a-desirable-future-haiku-ff01d63c93c6" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">A Desirable-Future Haiku</div><div class="bookmark-description">Recently I sent a twitter request out into the wider internets. I got 23 responses, which I am running (with permission) below. I&#x27;ll tell you who I selected as the winner in a moment, but first I&#x27;d like to tell you what I learned. It&#x27;s a hard assignment.</div></div><div class="bookmark-href"><img src="https://cdn-static-1.medium.com/_/fp/icons/favicon-rebrand-medium.3Y6xpZ-0FSdWDnPM3hSBIA.ico" class="icon bookmark-icon"/>https://medium.com/message/a-desirable-future-haiku-ff01d63c93c6</div></div><img src="https://miro.medium.com/freeze/max/1200/1*YfFvLSQfUuaBihgMP4o3PA.gif" class="bookmark-image"/></a></figure><div id="aeb36131-d010-4ff9-89a2-836c35e92ef1" class="column-list"><div id="8dd45e34-f827-426c-a673-29cd58aac5b3" style="width:50%" class="column"><figure id="d0f8d711-09b2-440e-a833-32d02df05e25"><a href="http://automato.farm/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">automato.farm</div><div class="bookmark-description">Research, design &amp; prototype from 7 hours in the future</div></div><div class="bookmark-href"><img src="http://www.automato.farm/assets/favicons/favicon.ico" class="icon bookmark-icon"/>http://automato.farm/</div></div><img src="http://www.automato.farm/img/OR_gif.gif" class="bookmark-image"/></a></figure></div><div id="0739a31e-85bc-4555-acb2-2a8d622f9766" style="width:50%" class="column"><figure id="6ea8cd73-0f20-499d-9920-3420357a1141"><a href="http://www.simonerebaudengo.com/project/ethicalthings" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ethical Things - Simone Rebaudengo</div><div class="bookmark-description">Ethical Things is an exploration of the implications of the huge amount of data available and mundane objects that might become &quot;smarter&quot;. It&#x27;s a system that uses collaboration between a fan and crowdsourced ethical reasoning from remote people to help the object overcome complex daily dilemmas.</div></div><div class="bookmark-href"><img src="http://www.simonerebaudengo.com/wp-content/uploads/2019/01/favicon.png" class="icon bookmark-icon"/>http://www.simonerebaudengo.com/project/ethicalthings</div></div><img src="http://www.simonerebaudengo.com/wp-content/uploads/2019/01/back.jpg" class="bookmark-image"/></a></figure></div></div><div id="725968d8-842f-4c0d-bbfb-017fb9b07731" class="column-list"><div id="aede5591-db67-4300-a9a9-68643871147d" style="width:50%" class="column"><figure id="de21b2b1-6a0b-4a2a-9c78-8ad58dee9e8f"><a href="http://ikea.nearfuturelaboratory.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">An Ikea Catalog from the Near Future</div><div class="bookmark-description">The process of our workshop was to use Design Fiction, a practice we&#x27;ve developed at the Near Future Laboratory that combines pragmatic hands-on production of material assets - in this case, graphic design production of a print catalog - with micro-scale science, technological and social fictions contained in the product descriptions, ancillary texts, disclaimers, footnotes and annotations.</div></div><div class="bookmark-href"><img src="http://ikea.nearfuturelaboratory.com/img/nfl.gif" class="icon bookmark-icon"/>http://ikea.nearfuturelaboratory.com/</div></div><img src="http://ikea.nearfuturelaboratory.com/img/iot-workshop2.jpg" class="bookmark-image"/></a></figure></div><div id="622e0f00-aa0b-4259-845e-13edcbecb5ea" style="width:50%" class="column"><figure id="96db16e0-25ef-4177-a35f-95777a81f5c6"><a href="https://futuryst.blogspot.com/2020/06/when-reality-outruns-imagination.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">When reality outruns imagination</div><div class="bookmark-description">I wrote this reflection a few months ago, just after the COVID-19 pandemic was recognised as such. Now posting here to make it easier to find. A key purpose of futures practice is to invest thought in possible contingencies, so that when something unexpected suddenly happens you are better prepared.</div></div><div class="bookmark-href"><img src="https://futuryst.blogspot.com/favicon.ico" class="icon bookmark-icon"/>https://futuryst.blogspot.com/2020/06/when-reality-outruns-imagination.html</div></div><img src="https://1.bp.blogspot.com/-N3WHWURsaDA/XvvqbtLj68I/AAAAAAAANAE/qJPPu334JBocAitZ9rDOmCLv-P_o-TXEwCLcBGAsYHQ/w1200-h630-p-k-no-nu/cc-1.jpg" class="bookmark-image"/></a></figure></div></div><div id="39dfb767-ae94-4f00-876d-31f2e859130c" class="column-list"><div id="68b58711-3552-4ab1-b131-d79e405763b2" style="width:50%" class="column"><figure id="ba96e049-fbb4-4099-b2a6-eaba37560f38"><a href="https://ahprojects.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Adam Harvey</div><div class="bookmark-description">Berlin / NYC. CV Dazzle. Stealth Wear. Privacy Gift Shop.</div></div><div class="bookmark-href"><img src="https://ahprojects.com/assets/img/global/favicons/favicon-16x16.png" class="icon bookmark-icon"/>https://ahprojects.com/</div></div><img src="https://ahprojects.com/theme/img/logo-sm.gif" class="bookmark-image"/></a></figure></div><div id="b85c6e82-c341-4a3b-8b43-0e9e58c90d1f" style="width:50%" class="column"><figure id="802929c6-3999-4e6c-a368-d45c9aeec6a1"><a href="https://lukesturgeon.co.uk/Citizen-Rotation-Office" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Citizen Rotation Office - Luke Sturgeon</div><div class="bookmark-description">Citizen Rotation Office 24hr immersive experience of a future london A 24-hour immersive experience that places participants within a possible future, created by extrapolating existing trends and applying online behaviours to the urban environment. A speculative government service was designed to highlight the results of a technocratic policy designed with data.</div></div><div class="bookmark-href"><img src="https://static.cargo.site/favicon/favicon.ico" class="icon bookmark-icon"/>https://lukesturgeon.co.uk/Citizen-Rotation-Office</div></div><img src="https://freight.cargo.site/w/800/i/b4a9e33bae564df9bff0a13a33eaf85debb691f187ed5e934258141df004f60d/cro-thumb.jpg" class="bookmark-image"/></a></figure></div></div><div id="663fa0c4-6133-4b5d-a9b2-32fdf082574d" class="column-list"><div id="6565ab28-27e0-436a-95f3-e9effe25a8e1" style="width:50%" class="column"><figure id="a212e452-6ee2-4089-aefc-27bd0fd1de87"><a href="https://strelka.com/en/research" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Research</div><div class="bookmark-description">Final projects prepared by Strelka students of different years</div></div><div class="bookmark-href"><img src="https://strelka.com/webicons/favicon.ico" class="icon bookmark-icon"/>https://strelka.com/en/research</div></div><img src="https://strelka.com/img/89c8683488358b59/fb-dimensions-2-08.png" class="bookmark-image"/></a></figure></div><div id="46d9aa27-d353-44fb-ab4d-ab18adea9e58" style="width:50%" class="column"><figure id="6b18c523-3749-4b31-9452-8830bb3f8a19"><a href="http://dunneandraby.co.uk/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Dunne &amp; Raby</div></div><div class="bookmark-href">http://dunneandraby.co.uk/</div></div><img src="http://dunneandraby.co.uk/img/content/cctv_dr.jpg" class="bookmark-image"/></a></figure><figure id="8987a44f-786f-4cce-a50d-d332fbd770a2"><a href="https://heritage-futures.org/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Heritage Futures | Assembling Alternative Futures for Heritage</div><div class="bookmark-description">Assembling Alternative Futures for Heritage: Exploring ways of shaping future legacies and common worlds across different fields of conservation practice.</div></div><div class="bookmark-href"><img src="https://heritage-futures.org/favicon/favicon-16x16.png" class="icon bookmark-icon"/>https://heritage-futures.org/</div></div><img src="https://heritage-futures.org/app/uploads/2018/05/Antony-pic2.jpg" class="bookmark-image"/></a></figure><p id="1d4e2e28-2752-4e1a-bf49-c435202a422d" class="">
+</p></div></div><figure id="03918d28-c1ac-4e18-a3d9-25ce36040b4b"><a href="https://www.youtube.com/watch?v=0fKBhvDjuy0" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Powers of Ten™ (1977)</div><div class="bookmark-description">Powers of Ten takes us on an adventure in magnitudes. Starting at a picnic by the lakeside in Chicago, this famous film transports us to the outer edges of t...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=0fKBhvDjuy0</div></div><img src="https://i.ytimg.com/vi/0fKBhvDjuy0/hqdefault.jpg" class="bookmark-image"/></a></figure><h3 id="5b6b06a6-b923-4d45-bd3a-6508eec46df7" class="">+Talks</h3><figure id="464ea7eb-4b07-46eb-9899-78c8b4acac39"><a href="https://www.vox.com/podcasts/2020/1/7/21055676/nathan-robinson-ezra-klein-socialism-bernie-sanders" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Nathan Robinson&#x27;s case for socialism</div><div class="bookmark-description">&quot;Socialism&quot; is simultaneously one of the most commonly used and most confusing terms in American politics. Does being a socialist mean advocating for the complete abolition of capitalism, markets, and private property? Does it mean supporting a higher tax rate, Medicare-for-all, and Sen. Bernie Sanders?</div></div><div class="bookmark-href"><img src="https://cdn.vox-cdn.com/uploads/hub/sbnu_logo_minimal/441/touch_icon_iphone_retina_1000_yellow.755.png" class="icon bookmark-icon"/>https://www.vox.com/podcasts/2020/1/7/21055676/nathan-robinson-ezra-klein-socialism-bernie-sanders</div></div><img src="https://cdn.vox-cdn.com/thumbor/VSDv6vcwT2609yT92M9EFt_FyFs=/0x215:3000x1786/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/19582756/1177451904.jpg.jpg" class="bookmark-image"/></a></figure><figure id="0eed0005-227e-4722-9060-50239fd6a625"><a href="https://www.ted.com/talks/anab_jain_a_sneak_preview_of_the_future?language=en" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Anab Jain: A sneak preview of the future</div><div class="bookmark-description">Designer Anab Jain creates provocative works that ask us to face the future we&#x27;re creating through the decisions we make right now. What will we see, what will we eat, how will we breathe? Step into the future -- then think about how we can change it.</div></div><div class="bookmark-href"><img src="https://pa.tedcdn.com/favicon.ico" class="icon bookmark-icon"/>https://www.ted.com/talks/anab_jain_a_sneak_preview_of_the_future?language=en</div></div><img src="https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/da1fb29d-c89c-49f9-bf66-be364bc3604b/AnabJain_2017I-embed.jpg?h=315&amp;w=560" class="bookmark-image"/></a></figure><figure id="0b148c2e-f314-47d6-b8c7-17293542cfe8"><a href="https://www.tellart.com/projects/designnonfiction/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Design Nonfiction</div><div class="bookmark-description">Transformations in design practice between the Dotcom Crash and the rise of machine intelligence As technology becomes more complex and opaque, how will we as designers understand its potential, do hands-on work, translate it into forms people can understand and use, and lead meaningful conversations with manufacturers and policymakers about its downstream implications?</div></div><div class="bookmark-href"><img src="https://www.tellart.com/favicon-16x16.png" class="icon bookmark-icon"/>https://www.tellart.com/projects/designnonfiction/</div></div><img src="https://www.tellart.com/assets/img/projects/dnf/dnf-video-0.jpg" class="bookmark-image"/></a></figure><div id="19621008-df62-439d-853c-bc6f87f96c5a" class="column-list"><div id="454a8d72-85be-4a2c-89da-f49715e183c7" style="width:50%" class="column"><figure id="443f4fdb-66e2-4886-8d84-5428a2a3bb58"><a href="https://www.youtube.com/watch?v=_ocLtzcQ2rI" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Keller Easterling</div><div class="bookmark-description">Medium Design, a lecture by Keller Easterling In conversation with Felicity Scott and Mark Wasiuta. Keller Easterling is an architect, writer and professor a...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=_ocLtzcQ2rI</div></div><img src="https://i.ytimg.com/vi/_ocLtzcQ2rI/hqdefault.jpg" class="bookmark-image"/></a></figure></div><div id="b86211ea-912d-4dc7-ad23-3745fc27e4dc" style="width:50%" class="column"><figure id="62de9ce6-8027-4c9c-80d8-70968a85ea2c"><a href="https://www.youtube.com/watch?v=rE_c0hmx9Fg" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">City Everywhere by Liam Young (Lecture Performance) - MUTEK_IMG 2018</div><div class="bookmark-description">Liam Young is a speculative architect who operates in the spaces between design, fiction and futures. He is cofounder of Tomorrows&#x27; Thoughts Today, an urban ...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=rE_c0hmx9Fg</div></div><img src="https://i.ytimg.com/vi/rE_c0hmx9Fg/hqdefault.jpg" class="bookmark-image"/></a></figure></div></div><h3 id="88613e4c-ba7c-46a2-aa43-bd0c46255b3d" class="">+Articles, Writings</h3><p id="90dee882-80f7-43d8-9a67-3692cd98612e" class="">
+</p><figure id="4cc72924-32fd-46aa-a47f-47bcea66e6c5"><a href="https://www.dazeddigital.com/music/article/15037/1/al-qadiri-al-maria-on-gulf-futurism" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">https://www.dazeddigital.com/music/article/15037/1/al-qadiri-al-maria-on-gulf-futurism</div></div><div class="bookmark-href">https://www.dazeddigital.com/music/article/15037/1/al-qadiri-al-maria-on-gulf-futurism</div></div></a></figure><figure id="db855623-3945-457c-b1f7-35aabcb7962c"><a href="https://www.middleeastmonitor.com/20150306-arab-sci-fi-the-future-is-here/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Arab Sci-Fi: The Future Is Here</div><div class="bookmark-description">Science fiction from the Arab world has been capturing the attention of western audiences as of late. This year, sci-fi across the fields of literature, film and art in the region is getting much of the critical attention it lacked in the past.</div></div><div class="bookmark-href"><img src="https://i2.wp.com/www.middleeastmonitor.com/wp-content/uploads/2016/04/cropped-favicon-large.png?fit=192%2C192&amp;quality=85&amp;strip=all&amp;zoom=1&amp;ssl=1" class="icon bookmark-icon"/>https://www.middleeastmonitor.com/20150306-arab-sci-fi-the-future-is-here/</div></div><img src="https://www.middleeastmonitor.com/wp-content/uploads/images/article_images/temp_images/The-Secret-Life-of-Saeed.jpg" class="bookmark-image"/></a></figure><figure id="472bc72c-a5a4-4ed4-9fd5-3d4cb863378a"><a href="https://www.core77.com/posts/25678/the-future-mundane-25678" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">The Future Mundane - Core77</div><div class="bookmark-description">Broadly speaking, design projects may be split into three categories: now, next and future. Most of our time as designers is concerned with the now or next, but occasionally we are called upon to embrace projects which are overtly future facing in nature.These projects are typically used as a platform...</div></div><div class="bookmark-href"><img src="https://static.core77.com/images/favicons/favicon-32x32.png" class="icon bookmark-icon"/>https://www.core77.com/posts/25678/the-future-mundane-25678</div></div><img src="https://s3files.core77.com/blog/images/lead_n_spotlight/lead_400_25678_.jpg" class="bookmark-image"/></a></figure><div id="1a4cf21d-f54a-41ff-85cf-15a2b1b22c06" class="column-list"><div id="ab845a2e-d52e-4f3f-9cbb-e23a89c6e11c" style="width:50%" class="column"><figure id="316de42a-8057-496b-a30c-dd1ad3b1fb71"><a href="https://www.newyorker.com/magazine/2019/05/13/science-fiction-doesnt-have-to-be-dystopian" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Science Fiction Doesn&#x27;t Have to Be Dystopian</div><div class="bookmark-description">When Henry James remarked, in his preface to &quot; The Portrait of a Lady,&quot; that &quot;the house of fiction has . . . not one window, but a million,&quot; he could not have anticipated the genre of fiction to which we have given the inexact term &quot;science fiction.&quot;</div></div><div class="bookmark-href"><img src="https://www.newyorker.com/verso/static/the-new-yorker/assets/favicon.0c115fcf6bb2ed8491d6f719d237ae1b1e68b08d.ico" class="icon bookmark-icon"/>https://www.newyorker.com/magazine/2019/05/13/science-fiction-doesnt-have-to-be-dystopian</div></div><img src="https://media.newyorker.com/photos/5ccb26060e05b12e4ad9298a/16:9/w_1280,c_limit/190513_r34298.jpg" class="bookmark-image"/></a></figure></div><div id="0ffd95cf-7ab5-45da-92f1-c471fe4c46ce" style="width:50%" class="column"><figure id="248b3824-bf5e-429f-b313-ead4d1215167"><a href="https://www.nytimes.com/2016/08/25/books/n-k-jemisin-on-diversity-in-science-fiction-and-inspiration-from-dreams.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">N. K. Jemisin on Diversity in Science Fiction and Inspiration From Dreams</div><div class="bookmark-description">When N. K. Jemisin was halfway through writing her fantasy novel &quot; The Fifth Season,&quot; she called her editor in a panic and said she couldn&#x27;t finish. Ms. Jemisin felt the story - which unfolds in a world where mutants who can control seismic energy are feared and oppressed - was too painful to write, given the uncomfortable parallels to persistent racial injustice in the real world.</div></div><div class="bookmark-href"><img src="https://www.nytimes.com/vi-assets/static-assets/favicon-4bf96cb6a1093748bf5b3c429accb9b4.ico" class="icon bookmark-icon"/>https://www.nytimes.com/2016/08/25/books/n-k-jemisin-on-diversity-in-science-fiction-and-inspiration-from-dreams.html</div></div><img src="https://static01.nyt.com/images/2016/09/07/arts/07JEMISIN/25jemisin-facebookJumbo.jpg" class="bookmark-image"/></a></figure></div></div><figure id="06e138cc-60d8-4734-852b-e42b3979ac8f"><a href="https://en.wikipedia.org/wiki/Exhalation:_Stories" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Exhalation: Stories</div><div class="bookmark-description">Exhalation: Stories is a collection of short stories by American writer Ted Chiang. The book was initially released on May 7, 2019 by Alfred A. Knopf. This is Ted Chiang&#x27;s second collection of short works, after the 2002 book Stories of Your Life and Others .</div></div><div class="bookmark-href"><img src="https://en.wikipedia.org/static/favicon/wikipedia.ico" class="icon bookmark-icon"/>https://en.wikipedia.org/wiki/Exhalation:_Stories</div></div><img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/22/Exhalation_-_Stories.jpg/220px-Exhalation_-_Stories.jpg" class="bookmark-image"/></a></figure><figure id="3bd6403e-ee55-4a7c-a688-79a287e16f85"><a href="https://strelkamag.com/en/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Strelka Mag</div><div class="bookmark-description">Strelka Mag - Exploring new urban conditions. The online magazine of Strelka Institute for Media, Architecture and Design.</div></div><div class="bookmark-href"><img src="https://strelkamag.com/favicon.ico" class="icon bookmark-icon"/>https://strelkamag.com/en/</div></div><img src="https://storage.strelka.com/i/0d6645ac-abe2-4dad-aecf-66ba31ead4a1" class="bookmark-image"/></a></figure><div id="52534cda-8075-430d-916c-c4a02745c206" class="column-list"><div id="a19e37e2-a581-4e09-9d12-4445cecc0757" style="width:50%" class="column"><p id="2345f19d-e1f8-4f74-a456-287e56da8526" class=""><em>Alternative Futures, by Jim Dator</em></p><figure id="27dff4b4-4156-4ce0-9d97-4d58ff9db49c"><a href="https://static1.squarespace.com/static/5bc578bdfb22a52798f8a038/t/5d1844ec3a01db000100f67b/1561871599474/3.+Dator-Alt+Futs+Manoa.pdf" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://static1.squarespace.com/static/5bc578bdfb22a52798f8a038/t/5d1844ec3a01db000100f67b/1561871599474/3.+Dator-Alt+Futs+Manoa.pdf</div></div></a></figure></div><div id="5762d2bb-5588-40e4-8acf-53ccad2e1326" style="width:50%" class="column"><p id="7afef8b6-a723-429d-83d3-08d786257766" class=""><em>Writing Scenarios, by Jim Dator</em></p><figure id="8c849b85-4174-4a98-b2a2-761bb58241df"><a href="http://www.futures.hawaii.edu/publications/futures-theories-methods/WritingScenarios1994.pdf" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">http://www.futures.hawaii.edu/publications/futures-theories-methods/WritingScenarios1994.pdf</div></div></a></figure></div></div><p id="1865e08b-5f48-460a-8488-a9bec2e5faa2" class=""><em>Speculative Everything, by Dunne &amp; Raby</em></p><figure id="aa7cbe23-012f-4d22-9082-bb63ae3e7ea6"><a href="https://readings.design/PDF/speculative-everything.pdf" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://readings.design/PDF/speculative-everything.pdf</div></div></a></figure><h3 id="ffdbc3a1-e6a0-4a52-9f23-4694f2947a47" class="">+Nature</h3><figure id="ed944317-e51b-44b2-90c2-9b63327e62b8"><a href="http://inogo.stanford.edu/tools/scenarios/future-scenarios?language=en" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Future Scenarios</div><div class="bookmark-description">Using existing data and available models, the team at GeoAdaptive created a series of three possible future scenarios of what the Osa and Golfito regions could look like by 2030: Business-as-Usual, Rapid Growth and Proactive.</div></div><div class="bookmark-href"><img src="http://inogo.stanford.edu/sites/all/themes/inogo/core/img/favicons/favicon.ico" class="icon bookmark-icon"/>http://inogo.stanford.edu/tools/scenarios/future-scenarios?language=en</div></div></a></figure><figure id="f885c2a8-6eed-487d-97b3-e5e240f8bde9"><a href="https://faberfutures.com/projects/other-biological-futures/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">http://faberfutures.com/projects/other-biological-futures/</div><div class="bookmark-description">Issue 4 of the Journal of Design and Science (JoDS), &quot;Other Biological Futures&quot; looks at biodesign, the design of, with, or from biology. Biodesign is being promoted by scientists and designers as an ecological remedy, a technological challenge, an economic opportunity, and a manufacturing and industrial revolution.</div></div><div class="bookmark-href"><img src="https://faberfutures.com/wp-content/uploads/2018/06/cropped-FF-favicon-192x192.png" class="icon bookmark-icon"/>https://faberfutures.com/projects/other-biological-futures/</div></div><img src="https://faberfutures.com/wp-content/uploads/2018/05/MIT_JV_29-1.jpg" class="bookmark-image"/></a></figure><figure id="2e0b55f6-8daf-4289-8ab9-408bcc55c019"><a href="http://www.daisyginsberg.com/...work/designing-for-the-sixth-extinction" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">ALEXANDRA DAISY GINSBERG</div><div class="bookmark-description">Can we &#x27;preserve&#x27; by looking forward? The sixth great extinction event in the history of biology is underway, and we humans may be its cause. While conservationists struggle to protect existing &#x27;natural&#x27; species and reverse the effects of the Anthropocene (the human epoch), synthetic biologists are busy designing new organisms for the &#x27;benefit of humanity&#x27;.</div></div><div class="bookmark-href"><img src="https://www.daisyginsberg.com/img/daisy-favicon.gif" class="icon bookmark-icon"/>http://www.daisyginsberg.com/...work/designing-for-the-sixth-extinction</div></div><img src="https://www.daisyginsberg.com/img/work/D46ex_Forest_bitmap_projectpage.jpg" class="bookmark-image"/></a></figure><figure id="a0ae7c10-1576-49eb-8831-8566a00b7096"><a href="http://tegabrain.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">tegabrain</div><div class="bookmark-description">Tega Brain is an Australian artist whose work work reimagines infrastructures, technologies and institutions that structure our relationship with environmental systems..</div></div><div class="bookmark-href"><img src="https://favicon.cargocollective.com/351441-1388110400.ico" class="icon bookmark-icon"/>http://tegabrain.com/</div></div><img src="https://media.cargocollective.com/1/10/351441/headerimg/tega.png" class="bookmark-image"/></a></figure><figure id="52cb54ac-f283-4f2f-bdc3-21a90d501d0f"><a href="https://en.wikipedia.org/wiki/Natalie_Jeremijenko" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Natalie Jeremijenko</div><div class="bookmark-description">Natalie Jeremijenko (born 1966) is an artist and engineer whose background includes studies in biochemistry, physics, neuroscience and precision engineering. She is an active member of the net.art movement, and her work primarily explores the interface between society, the environment and technology.</div></div><div class="bookmark-href"><img src="https://en.wikipedia.org/static/favicon/wikipedia.ico" class="icon bookmark-icon"/>https://en.wikipedia.org/wiki/Natalie_Jeremijenko</div></div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Natalie_Jeremijenko.jpg/220px-Natalie_Jeremijenko.jpg" class="bookmark-image"/></a></figure><figure id="3b345b28-0038-4d43-8697-dd24b6ca6faf"><a href="https://sand14.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Sand14</div><div class="bookmark-description">My documentary &#x27;Black and Scottish&#x27; is airing on BBC Scotland on Friday 5th June at 8:30pm and streaming now on BBC iPlayer. This is a significant film for the Black, White, and Asian community in ... Scotland. #blacklivesmatter https://www.bbc.co.uk/iplayer/episode/m00098n0/black-and-scottish Want some good news? Of course you do.</div></div><div class="bookmark-href"><img src="https://sand14.com/wp-content/uploads/2015/10/cropped-sand14_siteicon1-192x192.png" class="icon bookmark-icon"/>https://sand14.com/</div></div><img src="https://sand14.com/wp-content/uploads/2019/11/DataCrematorium_400px.jpg" class="bookmark-image"/></a></figure><figure id="9f82fa27-3393-45de-a11f-ee1886bc2200"><a href="https://strelkamag.com/en/article/introduction-to-comparative-planetology" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Excerpt: &#x27;Introduction to Comparative Planetology&#x27; by Lukáš Likavčan</div><div class="bookmark-description">These implications are then mapped on respective prospects of these figures in developing an infrastructural space for planetary coordination of our design interventions against runaway global heating, and ultimately against mass species extinction. The book looks at the way we envisage our planet through cultural artifacts, in order to ask questions such as &quot;For what Earth do we design?&quot;</div></div><div class="bookmark-href"><img src="https://strelkamag.com/favicon.ico" class="icon bookmark-icon"/>https://strelkamag.com/en/article/introduction-to-comparative-planetology</div></div><img src="https://storage.strelka.com/i/1d7cd113-759f-40dd-be9c-9d58177f1c97/w/1200" class="bookmark-image"/></a></figure><h3 id="c59237f4-cc36-41f8-9fbb-3c3d8c565f5e" class="">+World Building</h3><figure id="176ed2b9-dc00-4339-afeb-617c2ff4a73f"><a href="https://www.stitcher.com/podcast/vox/the-ezra-klein-show/e/55964162" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">The Ezra Klein Show</div><div class="bookmark-description">Listen to The Ezra Klein Show episodes free, on demand. Winner of the 2020 Webby and People&#x27;s Voice awards for best interview podcast. Ezra Klein brings you far-reaching conversations about hard problems, big ideas, illuminating theories, and cutting-edge research. Want to know how Stacey Abrams feels about identity politics?</div></div><div class="bookmark-href"><img src="https://www.stitcher.com/favicon.png?cb=1" class="icon bookmark-icon"/>https://www.stitcher.com/podcast/vox/the-ezra-klein-show/e/55964162</div></div><img src="https://images.megaphone.fm/gLzttW8zYmEDKj3l0IhWzeBGQpnwyUabmesVkY27N7U/plain/s3://megaphone-prod/podcasts/d5e1ef20-e112-11e8-83b5-ff093e8a88a8/image/uploads_2F1567109122292-1arrrzgdq41-5f052f5cc51f50e2b13dd609d9fb43a5_2FTile_3000x3000.png" class="bookmark-image"/></a></figure><figure id="3fd571aa-7d8d-4a9c-a565-d5e532693854"><a href="https://www.newyorker.com/magazine/2020/01/27/nk-jemisins-dream-worlds" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">N. K. Jemisin&#x27;s Dream Worlds</div><div class="bookmark-description">Several years ago, N. K. Jemisin, the fantasy and science-fiction author, had a dream that shook her. In her sleep, she found herself standing in a surreal tableau with a massif floating in the distance. &quot;It was a chunk of rock shaped like a volcanic cone-a cone-shaped smoking mountain,&quot; she recalled.</div></div><div class="bookmark-href"><img src="https://www.newyorker.com/verso/static/the-new-yorker/assets/favicon.0c115fcf6bb2ed8491d6f719d237ae1b1e68b08d.ico" class="icon bookmark-icon"/>https://www.newyorker.com/magazine/2020/01/27/nk-jemisins-dream-worlds</div></div><img src="https://media.newyorker.com/photos/5e210caff4cb89000996ef7b/16:9/w_1280,c_limit/200127_r35387_rd.jpg" class="bookmark-image"/></a></figure><h3 id="dacbe8bf-e895-432b-bc7c-9020db75965f" class="">+Other Resource Lists </h3><figure id="5351a60a-b307-4cc3-a9a4-d0823559bce9"><a href="https://www.are.na/ciid-idp-2020/speculative-design-design-futures" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Speculative Design (Design Futures) - Are.na</div><div class="bookmark-description">Are.na is a platform for connecting ideas and building knowledge.</div></div><div class="bookmark-href"><img src="https://www.are.na/favicon.ico" class="icon bookmark-icon"/>https://www.are.na/ciid-idp-2020/speculative-design-design-futures</div></div><img src="https://d2w9rnfcy7mm78.cloudfront.net/7230921/display_aa4f0d65d04fb94fdec2ac43ff010e68.jpg?1589152504?bc=0" class="bookmark-image"/></a></figure><h3 id="b4b35c71-0fc5-4e94-852f-d6408af20cac" class="">Long Now Podcast Selection</h3><figure id="4a78ce2f-08a8-48ae-8530-03da05caa9ee"><a href="http://longnow.org/seminars/02007/nov/09/enduring-principles-for-changing-times/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Rosabeth Moss Kanter</div><div class="bookmark-description">A sociologist by training, Professor Kanter teaches at Harvard Business School. Her newest book is America the Principled, the 17th in a body of work that includes Confidence, Men &amp; Women of the Corporation, The Change Masters, When Giants Learn to Dance, The Mind of the Strategist, The Borderless World, and Work &amp; Family in the United States.</div></div><div class="bookmark-href"><img src="http://longnow.org/static/ui/favicon.png" class="icon bookmark-icon"/>http://longnow.org/seminars/02007/nov/09/enduring-principles-for-changing-times/</div></div><img src="http://longnow.org/media/djlongnow_media/seminar_screenshots/salt-020071109-moss-screenshot.jpg" class="bookmark-image"/></a></figure><figure id="bf8b699b-c349-444b-9826-cfe8a89fadde"><a href="http://longnow.org/seminars/02020/jan/15/long-term-thinking-distracted-world/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Bina Venkataraman</div><div class="bookmark-description">Bina Venkataraman is the editorial page editor of The Boston Globe. Before joining the Globe, she served as a senior adviser for climate change innovation in the Obama White House, was the director of Global Policy Initiatives at the Broad Institute of MIT and Harvard, and taught in the Program on Science, Technology, and Society at MIT.</div></div><div class="bookmark-href"><img src="http://longnow.org/static/ui/favicon.png" class="icon bookmark-icon"/>http://longnow.org/seminars/02020/jan/15/long-term-thinking-distracted-world/</div></div><img src="http://longnow.org/media/djlongnow_media/seminar_screenshots/salt-020200115-venkataraman-wilson-1547-1920x1080.jpg" class="bookmark-image"/></a></figure><figure id="d54f19da-95fb-49fa-94a2-e18b86e573c7"><a href="http://longnow.org/seminars/02005/oct/05/the-difficulty-of-looking-far-ahead/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Esther Dyson, Freeman Dyson, George Dyson</div><div class="bookmark-description">Instead of one podium there were four chairs on the stage of Wednesday&#x27;s seminar. In three seats, three Dysons: Esther, George and Freeman. They were appearing together on stage for the first time. The fourth held Stewart Brand who led the three through an evening of queries.</div></div><div class="bookmark-href"><img src="http://longnow.org/static/ui/favicon.png" class="icon bookmark-icon"/>http://longnow.org/seminars/02005/oct/05/the-difficulty-of-looking-far-ahead/</div></div><img src="http://longnow.org/media/djlongnow_media/seminar_screenshots/salt-020051005-dyson-dyson-dyson-screenshot_2.jpg" class="bookmark-image"/></a></figure></div></article></body></html>

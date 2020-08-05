@@ -1,0 +1,630 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Optional Evening Intake</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="39fa3bc1-a92e-459c-9025-5cac4693ebf8" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📖</span></div><h1 class="page-title">Optional Evening Intake</h1></header><div class="page-body"><p id="7b4807a5-0f47-4dab-89d1-c9da3b2d2c3a" class=""><em>Optional things to read, watch, check out in relation to what we will discuss</em></p><h3 id="c1a2c7ed-7c26-4a23-9160-40dd8e4dd40d" class="">Day 1:</h3><figure id="031d8792-bc05-4d20-a222-1c5f7abee817"><a href="https://www.youtube.com/watch?v=eIFTbuEW7MA" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Payal Arora - The Next Billion Users</div><div class="bookmark-description">After immersing herself in factory towns, slums, townships, and favelas, Payal Arora assesses real patterns of internet usage in India, China, South Africa, ...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=eIFTbuEW7MA</div></div><img src="https://i.ytimg.com/vi/eIFTbuEW7MA/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="3c1c2ec1-3e19-411d-bd7c-a7028139cdf4"><a href="http://ethicsfordesign.com/player?lang=en" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ethics for Design</div><div class="bookmark-description">What is the role of a designer?</div></div><div class="bookmark-href"><img src="http://ethicsfordesign.com/favicon.ico" class="icon bookmark-icon"/>http://ethicsfordesign.com/player?lang=en</div></div></a></figure><h3 id="daba8c5e-0659-4eec-8e39-c007fe35d5ff" class="">Day 2:</h3><figure id="23fe3555-1a8d-4a44-a78a-db8cd331b162"><a href="https://philosophicaldisquisitions.blogspot.com/2018/09/episode-45-vallor-on-virtue-ethics-and.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Episode #45 - Vallor on Virtue Ethics and Technology</div><div class="bookmark-description">In this episode I talk to Shannon Vallor. Shannon is the Regis and Diane McKenna Professor in the Department of Philosophy at Santa Clara University, where her research addresses the ethical implications of emerging science and technology, especially AI, robotics and new media.</div></div><div class="bookmark-href"><img src="https://philosophicaldisquisitions.blogspot.com/favicon.ico" class="icon bookmark-icon"/>https://philosophicaldisquisitions.blogspot.com/2018/09/episode-45-vallor-on-virtue-ethics-and.html</div></div><img src="https://lh4.googleusercontent.com/proxy/qqYjrWtgqrIhvy1OUSttIwgJLSfSUhnzLXgb2g6IwWI4A4K1G-ki1KIVfPOOIEhwc_yKPQ6qOyOjFYwYlVpl0m_jkWG3WTMruuneAqWe-e-W_4Ak=w1200-h630-p-k-no-nu" class="bookmark-image"/></a></figure><figure id="ffd54f69-1208-4d39-9103-644b3b8f28f2"><a href="https://en.wikipedia.org/wiki/The_Good_Place" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">The Good Place</div><div class="bookmark-description">The Good Place is an American fantasy comedy television series created by Michael Schur. The series aired from September 19, 2016 to January 30, 2020 on NBC. It focuses on Eleanor Shellstrop ( Kristen Bell), who arrives in the afterlife and is welcomed by Michael ( Ted Danson) to &quot;the Good Place&quot;, a highly selective Heaven-like utopia he designed, as a reward for her righteous life.</div></div><div class="bookmark-href"><img src="https://en.wikipedia.org/static/favicon/wikipedia.ico" class="icon bookmark-icon"/>https://en.wikipedia.org/wiki/The_Good_Place</div></div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/The_Good_Place_careta.png/250px-The_Good_Place_careta.png" class="bookmark-image"/></a></figure><h3 id="7ba5150c-1ea4-483b-abd3-a8a670f98f07" class="">Day 3:</h3><figure id="811b7e46-db3e-4136-9d76-06e9c57df4a7"><a href="http://longnow.org/seminars/02020/jan/15/long-term-thinking-distracted-world/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Bina Venkataraman</div><div class="bookmark-description">Bina Venkataraman is the editorial page editor of The Boston Globe. Before joining the Globe, she served as a senior adviser for climate change innovation in the Obama White House, was the director of Global Policy Initiatives at the Broad Institute of MIT and Harvard, and taught in the Program on Science, Technology, and Society at MIT.</div></div><div class="bookmark-href"><img src="http://longnow.org/static/ui/favicon.png" class="icon bookmark-icon"/>http://longnow.org/seminars/02020/jan/15/long-term-thinking-distracted-world/</div></div><img src="http://longnow.org/media/djlongnow_media/seminar_screenshots/salt-020200115-venkataraman-wilson-1547-1920x1080.jpg" class="bookmark-image"/></a></figure><figure id="ade36100-8114-4ae4-be33-dd9da9e409bc"><a href="http://longnow.org/seminars/02005/oct/05/the-difficulty-of-looking-far-ahead/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Esther Dyson, Freeman Dyson, George Dyson</div><div class="bookmark-description">Instead of one podium there were four chairs on the stage of Wednesday&#x27;s seminar. In three seats, three Dysons: Esther, George and Freeman. They were appearing together on stage for the first time. The fourth held Stewart Brand who led the three through an evening of queries.</div></div><div class="bookmark-href"><img src="http://longnow.org/static/ui/favicon.png" class="icon bookmark-icon"/>http://longnow.org/seminars/02005/oct/05/the-difficulty-of-looking-far-ahead/</div></div><img src="http://longnow.org/media/djlongnow_media/seminar_screenshots/salt-020051005-dyson-dyson-dyson-screenshot_2.jpg" class="bookmark-image"/></a></figure><figure id="0cade306-ca82-4038-9c69-c4169dd19945"><a href="https://en.wikipedia.org/wiki/Years_and_Years_(TV_series)" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Years and Years (TV series)</div><div class="bookmark-description">Years and Years is a British television drama series which is a joint production by the BBC and HBO. It began broadcasting on BBC One in the United Kingdom on 14 May 2019 and on HBO on 24 June 2019.</div></div><div class="bookmark-href"><img src="https://en.wikipedia.org/static/favicon/wikipedia.ico" class="icon bookmark-icon"/>https://en.wikipedia.org/wiki/Years_and_Years_(TV_series)</div></div><img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Years_and_Years.jpg/250px-Years_and_Years.jpg" class="bookmark-image"/></a></figure><h3 id="fe3153ae-51f9-4fc5-98b7-c7c63e1a8130" class="">Day 4:</h3><p id="c91c2f72-c576-45d8-af78-e794ab4a0487" class="">
+</p><p id="155157ce-73ab-484d-8b6e-72d6e834f731" class="">
+</p><p id="e45174f1-d02a-49a1-b651-b48fd6007a86" class="">
+</p><h3 id="3641c9f6-af0e-4952-88c5-8af2fe19ef88" class="">Day 5:</h3><figure id="9b610201-a524-46ca-95f1-61e2040f01e8"><a href="https://www.youtube.com/watch?v=_ocLtzcQ2rI" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Keller Easterling</div><div class="bookmark-description">Medium Design, a lecture by Keller Easterling In conversation with Felicity Scott and Mark Wasiuta. Keller Easterling is an architect, writer and professor a...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=_ocLtzcQ2rI</div></div><img src="https://i.ytimg.com/vi/_ocLtzcQ2rI/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="bd7c8da0-5117-49d3-a4e1-35811ea4255f"><a href="http://longnow.org/seminars/02007/nov/09/enduring-principles-for-changing-times/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Rosabeth Moss Kanter</div><div class="bookmark-description">A sociologist by training, Professor Kanter teaches at Harvard Business School. Her newest book is America the Principled, the 17th in a body of work that includes Confidence, Men &amp; Women of the Corporation, The Change Masters, When Giants Learn to Dance, The Mind of the Strategist, The Borderless World, and Work &amp; Family in the United States.</div></div><div class="bookmark-href"><img src="http://longnow.org/static/ui/favicon.png" class="icon bookmark-icon"/>http://longnow.org/seminars/02007/nov/09/enduring-principles-for-changing-times/</div></div><img src="http://longnow.org/media/djlongnow_media/seminar_screenshots/salt-020071109-moss-screenshot.jpg" class="bookmark-image"/></a></figure><figure id="24b5261c-6f1b-4c87-b336-addb39a00c53"><a href="https://hbr.org/2020/07/emerging-from-the-crisis#learning-from-the-future" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Emerging from the Crisis</div><div class="bookmark-description">Executive Summary One night some time ago I was in a movie theater in Los Angeles when an earthquake struck. It was a rather long one, with several aftershocks. I remember distinctly that people in the theater seemed to fall naturally into one of three groups: Some panicked and moved chaotically, unsure what to do or where to go.</div></div><div class="bookmark-href"><img src="https://hbr.org/resources/images/favicon.ico" class="icon bookmark-icon"/>https://hbr.org/2020/07/emerging-from-the-crisis#learning-from-the-future</div></div><img src="https://hbr.org/resources/images/article_assets/2020/05/R2004B_SPOT_HERO.jpg" class="bookmark-image"/></a></figure></div></article></body></html>

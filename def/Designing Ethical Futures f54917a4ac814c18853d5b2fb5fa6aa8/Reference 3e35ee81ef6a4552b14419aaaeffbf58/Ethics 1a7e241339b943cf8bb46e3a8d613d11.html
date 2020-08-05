@@ -1,0 +1,633 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Ethics</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1a7e2413-39b9-43cf-8bb4-6e3a8d613d11" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📔</span></div><h1 class="page-title">Ethics</h1></header><div class="page-body"><h1 id="15e4d8cb-1d46-4918-86e1-4816d37d8316" class="">Theories</h1><h3 id="b3d4a0b9-542a-47d6-a730-b28de70a4eea" class="">Guides, Overviews, Dilemmas</h3><figure id="1c35b391-705e-4d67-b23e-3320c37f27bf"><a href="https://plato.stanford.edu/contents.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Table of Contents</div><div class="bookmark-description">philosophy of logic and language (Wilfrid Hodges and Therese-Anne Druart)</div></div><div class="bookmark-href"><img src="https://plato.stanford.edu/favicon.ico" class="icon bookmark-icon"/>https://plato.stanford.edu/contents.html</div></div><img src="https://plato.stanford.edu/symbols/sep-man-red.png" class="bookmark-image"/></a></figure><div id="360b6926-3de0-4117-8bd9-4fdf4c44b766" class="column-list"><div id="9437ece7-61af-4f6c-8d3f-69383420ac8e" style="width:33.33333333333333%" class="column"><figure id="916b84ed-f4ae-4e3e-911d-abb4fadd5eb1"><div class="source"><a href="https://www.youtube.com/playlist?list=PLH37By4v_fxl-VGRzq7R6yC4-uSihxAHK">https://www.youtube.com/playlist?list=PLH37By4v_fxl-VGRzq7R6yC4-uSihxAHK</a></div></figure></div><div id="d58aa2d1-094c-49e3-af06-7bdd9caf57eb" style="width:33.333333333333336%" class="column"><figure id="a3b9bc77-4ab2-4263-95ef-9088dc43744f"><a href="https://www.khanacademy.org/partner-content/wi-phi/wiphi-value-theory/wiphi-ethics/v/problem-of-evil" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ethics: The Problem of Evil (video) | Ethics | Khan Academy</div><div class="bookmark-description">Sally discusses a classic argument that God does not exist, called &#x27;The Problem of Evil&#x27;. Along the way, she distinguishes different ways in which people believe that God exists, and discusses what&#x27;s bad about having contradictory beliefs.</div></div><div class="bookmark-href"><img src="https://www.khanacademy.org/favicon.ico?logo" class="icon bookmark-icon"/>https://www.khanacademy.org/partner-content/wi-phi/wiphi-value-theory/wiphi-ethics/v/problem-of-evil</div></div><img src="https://img.youtube.com/vi/9pRzyioUKp0/0.jpg" class="bookmark-image"/></a></figure></div><div id="39945532-0c14-41ac-8774-d1774947d5b4" style="width:33.333333333333336%" class="column"><figure id="9acdcfa5-fb06-4099-9e11-0a039ab71fea"><a href="http://www.bbc.co.uk/ethics/guide/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">BBC - Ethics: Guide to moral and ethical issues</div><div class="bookmark-description">Guides to moral and ethical issues.</div></div><div class="bookmark-href"><img src="http://www.bbc.co.uk/favicon.ico" class="icon bookmark-icon"/>http://www.bbc.co.uk/ethics/guide/</div></div><img src="http://www.bbc.co.uk/staticarchive/24141a823dcfb2cc8596fd721457a46181ac48a6.jpg" class="bookmark-image"/></a></figure><p id="04beb1b9-7bab-4def-8448-1abe833b0fba" class="">
+</p></div></div><h2 id="af9505b9-f887-479d-b682-ddee52be7c90" class="">Care Ethics</h2><figure id="6bec5201-a4ed-4f03-886b-67f83d8ab7f9"><a href="https://www.virteuproject.eu/wp-content/uploads/2019/12/ethics-primer.pdf" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://www.virteuproject.eu/wp-content/uploads/2019/12/ethics-primer.pdf</div></div></a></figure><p id="7e761dc4-1144-4929-8e2c-af43170eac6d" class="">For a deep discussion of ethics of care, Virginia Held’s book is a good place to start: Held, V. (2006). The ethics of care: Personal, political, and global. Oxford University Press on Demand.
+</p><p id="189b0dbc-4257-4858-92e0-3503d822e9c4" class="">For a more example-focused discussion of care ethics consider the work of Annemarie Mol:
+Mol, A. (2008). The logic of care: Health and the problem of patient choice. Routledge.
+</p><p id="ec783456-5d39-477d-a37e-99450b7b5411" class="">For an example of how care ethics can be applied to think about technology consider the following study: Ruckenstein, M., &amp; Turunen, L. L. M. (2019). Re-humanizing the platform: Content moderators and the logic of care. New Media &amp; Society, 1461444819875990.
+</p><h3 id="6a60e876-c080-46fe-ba23-9e25f6ba72a6" class="">Care, Virtue, Capabilities</h3><p id="59350cea-5fe2-4084-96f3-10d6d6218fea" class=""><a href="https://www.virteuproject.eu/wp-content/uploads/2019/12/ethics-primer.pdf">https://www.virteuproject.eu/wp-content/uploads/2019/12/ethics-primer.pdf</a></p><div id="534e581d-3a6f-41a7-94ab-114a33ac7987" class="column-list"><div id="d0c97307-9c55-4142-b3c3-81a2a9ccf394" style="width:50%" class="column"><figure id="5a162284-945a-46de-a9d8-8c962d0cda7b"><div class="source"><a href="https://www.youtube.com/watch?v=PCYuZjyOaS4">https://www.youtube.com/watch?v=PCYuZjyOaS4</a></div></figure></div><div id="9f7f9cdf-13cf-41c6-9afa-8f9045300e8e" style="width:50%" class="column"><figure id="3bee13d4-c193-4202-8d39-e89db5bc14e2"><a href="https://www.virteu-235.com/ethical-approaches" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ethical Approaches - VIRT-EU</div><div class="bookmark-description">Ethics has come to have many meanings. In general terms, ethics concerns the frameworks and principles that define our ability to have a good life and to clearly conceptualise our rights and responsibilities. In many fields of ethics, these frameworks and principles are either considered in terms of outcome, as in consequential ethics, or in terms of rules, as in deontological ethics.</div></div><div class="bookmark-href"><img src="https://assets.squarespace.com/universal/default-favicon.ico" class="icon bookmark-icon"/>https://www.virteu-235.com/ethical-approaches</div></div><img src="https://images.squarespace-cdn.com/content/v1/59e89f9812abd9d682697abb/1537872333952-YPSXY8ABZ7020PNRYYZF/ke17ZwdGBToddI8pDm48kLdL40TmVryAZnFYQ_8SJtJ7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0ouw-8l5B_J38LMU7OZFvYcDHBnv7IPzW9n9li-LF8GWln2m9DyUuzLaFyo_kJ79pg/cap_diagram.jpg" class="bookmark-image"/></a></figure></div></div><h3 id="04a0868d-529d-49b5-b5a8-3994bb75efbc" class="">Free Will</h3><figure id="65c386c1-ea8d-4ef4-b7b7-e2c1e079dc53"><a href="https://www.naturalism.org/philosophy/free-will/doubting-free-will-the-argument-from-celebrity-authority" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Doubting Free Will: The Argument from Celebrity-Authority</div><div class="bookmark-description">&quot;Every one knows that the heavenly bodies move in certain paths in relation to each other with seeming consistency and regularity which we call [physical] law. ... No one attributes freewill or motive to the material world. Is the conduct of man or the other animals any more subject to whim or choice than the action of the planets?</div></div><div class="bookmark-href"><img src="https://www.naturalism.org/sites/naturalism.org/files/swirl-logo.png" class="icon bookmark-icon"/>https://www.naturalism.org/philosophy/free-will/doubting-free-will-the-argument-from-celebrity-authority</div></div></a></figure><h3 id="d56bd3f4-9dfd-41da-84b6-1839907e8c42" class="">Moral Relativism</h3><figure id="363cd691-8010-47fa-be36-c8a61d4118ce"><a href="https://www.nytimes.com/2015/03/10/opinion/david-brooks-the-cost-of-relativism.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Opinion | The Cost of Relativism</div><div class="bookmark-description">One of America&#x27;s leading political scientists, Robert Putnam, has just come out with a book called &quot;Our Kids&quot; about the growing chasm between those who live in college-educated America and those who live in high-school-educated America. It&#x27;s got a definitive collection of data about this divide.</div></div><div class="bookmark-href"><img src="https://www.nytimes.com/vi-assets/static-assets/favicon-4bf96cb6a1093748bf5b3c429accb9b4.ico" class="icon bookmark-icon"/>https://www.nytimes.com/2015/03/10/opinion/david-brooks-the-cost-of-relativism.html</div></div><img src="https://static01.nyt.com/images/2014/11/01/opinion/brooks-circular/brooks-circular-facebookJumbo-v2.jpg" class="bookmark-image"/></a></figure><p id="dc3a9993-e3c9-4e20-8777-87ff59ca8bc1" class="">But it’s increasingly clear that sympathy is not enough. It’s not only money and better policy that are missing in these circles; it’s norms. The health of society is primarily determined by the habits and virtues of its citizens. In many parts of America there are no minimally agreed upon standards for what it means to be a father. There are no basic codes and rules woven into daily life, which people can absorb unconsciously and follow automatically. Reintroducing norms will require, first, a moral vocabulary. These norms weren’t destroyed because of people with bad values. They were destroyed by a plague of nonjudgmentalism, which refused to assert that one way of behaving was better than another. People got out of the habit of setting standards or understanding how they were set.</p><h3 id="00d4fdd4-77ea-4306-9a36-c13081989b46" class="">All the &quot;Ethical Tools&quot;</h3><figure id="e8f9aa94-b471-4e8f-bb07-06d11b9c9908"><a href="https://docs.google.com/spreadsheets/d/1Tv1qtlGug99h2-G34CLKhpjIUpvMr56f/edit#gid=2070281166" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">VIRT-EU Ethical tools index.xlsx</div><div class="bookmark-description">From the Ethical Tools Report Author Title Year Price To pay Type Type Internal comment Description: this is what you&#x27;re supposed to be doing in here Problem: what is the problem they are trying to address? Ethical theory/idea/definition Values: which values does their tool express? Conflict mediation: how do they deal with conflict?</div></div><div class="bookmark-href"><img src="https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico" class="icon bookmark-icon"/>https://docs.google.com/spreadsheets/d/1Tv1qtlGug99h2-G34CLKhpjIUpvMr56f/edit#gid=2070281166</div></div><img src="https://lh5.googleusercontent.com/VRHDpIshlqnzm7OYOvC_3A316vbRJWlPjO6OOvoicbHyXx_lyqsyCKhvd0_iqg0=w1200-h630-p" class="bookmark-image"/></a></figure><h1 id="a1cdd05e-606c-41d3-9938-48ce5d961cdc" class="">Projects</h1><div id="2c8ba0fc-1155-4dca-ae67-8240910fabf1" class="column-list"><div id="241d4f44-08ae-4c9c-a20f-594f6c0e6c48" style="width:50%" class="column"><figure id="10f5893b-10ee-4a1c-b62d-2821ca13e9a2"><a href="http://mchrbn.net/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Matthieu Cherubini</div></div><div class="bookmark-href"><img src="http://mchrbn.net/favicon.ico" class="icon bookmark-icon"/>http://mchrbn.net/</div></div><img src="http://mchrbn.net/wp-content/uploads/2014/06/awd-thumb.jpg" class="bookmark-image"/></a></figure><figure id="4c2bb8cc-4479-4831-8f6a-6ad924e502b5"><a href="https://creepyleaks.itu.dk/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">About Us</div><div class="bookmark-description">IRINA SHKLOVSKI Associate Professor Business IT Department IT University of Copenhagen Rued Langgaards Vej 7 DK-2300 Copenhagen S Denmark Email: irsh@itu.dk Website: www.itu.dk/people/irsh/ Phone: +45 7218 5363 ERIK GRÖNVALL Associate Professor Digital Design Department IT University of Copenhagen Rued Langgaards Vej 7 DK-2300 Copenhagen S Denmark Email: erig@itu.dk Phone: +45 7218 5132</div></div><div class="bookmark-href">https://creepyleaks.itu.dk/</div></div><img src="https://blogit.itu.dk/creepyleaks/wp-content/uploads/sites/70/2019/01/cropped-IMG_1454.jpg" class="bookmark-image"/></a></figure><figure id="7dafb081-d9ea-4f11-98c7-22b3d35579e0"><a href="http://www.unknownfieldsdivision.com/summer2014china-aworldadriftpart02.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Unknown Fields Division - Summer 2014 China Cargo Ship Expedition</div><div class="bookmark-description">To discuss the project and image use please email us here. Rare Earthenware Film Trailer © Toby Smith/Unknown Fields The finished vases are made from the exact amount of toxic waste produced in the manufacture of 3 objects of technology- the smartphone, the laptop and the electric car battery cell.</div></div><div class="bookmark-href">http://www.unknownfieldsdivision.com/summer2014china-aworldadriftpart02.html</div></div><img src="http://www.unknownfieldsdivision.com/img/projects/summer2014/Rare_Earthenware_Film_Stills-3502.jpg" class="bookmark-image"/></a></figure><figure id="9ae45cef-e29f-4691-a6e0-d5ff804091f0"><a href="https://www.youtube.com/watch?v=WBOrfF_qUWw" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ethical Unboxing #3 - Sleeping Devices</div><div class="bookmark-description">This is the third video in our Ethical Unboxing series here at VIRT-EU, where we will be unboxing internet of things (IoT) devices and review them from an et...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=WBOrfF_qUWw</div></div><img src="https://i.ytimg.com/vi/WBOrfF_qUWw/hqdefault.jpg" class="bookmark-image"/></a></figure></div><div id="68169eb3-3b27-4888-9c37-2dead933d745" style="width:50%" class="column"><figure id="03de118a-c341-4ec6-86cf-d6f71d5b9b94"><a href="https://medium.com/@mchrbn/ethical-autonomous-algorithms-5ad07c311bcc" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ethical Autonomous Algorithms</div><div class="bookmark-description">These are a few chapters I wrote during my PhD by project in the Design Interactions department at the Royal College of Art between 2012-2015, under the supervision of James Auger and Daniel Pinkas. These chapters focus on projects I did, their failures, and how these led me to &quot;the next stage&quot;.</div></div><div class="bookmark-href"><img src="https://cdn-static-1.medium.com/_/fp/icons/favicon-rebrand-medium.3Y6xpZ-0FSdWDnPM3hSBIA.ico" class="icon bookmark-icon"/>https://medium.com/@mchrbn/ethical-autonomous-algorithms-5ad07c311bcc</div></div><img src="https://miro.medium.com/max/1200/1*0ZOrUwB9kV-i8ExhG4GrDw.jpeg" class="bookmark-image"/></a></figure><figure id="7afc87cc-72f7-43b2-9a3d-e6e80c14eb04"><a href="https://dailycreepy.tumblr.com/post/189904471610/colleges-are-turning-students-phones-into" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Colleges are turning students&#x27; phones into surveillance machines, tracking the locations of hundreds of thousands</div><div class="bookmark-description">The systems highlight how widespread surveillance has increasingly become a fact of life: Students &quot;should have all the rights, responsibilities and privileges that an adult has. So why do we treat...</div></div><div class="bookmark-href"><img src="https://assets.tumblr.com/images/default_avatar/octahedron_closed_128.png" class="icon bookmark-icon"/>https://dailycreepy.tumblr.com/post/189904471610/colleges-are-turning-students-phones-into</div></div><img src="https://assets.tumblr.com/images/default_avatar/octahedron_closed_512.png" class="bookmark-image"/></a></figure><figure id="4eb49e4d-24e7-41c2-9d66-2a52283cd754"><a href="https://www.youtube.com/watch?v=eIFTbuEW7MA" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Payal Arora - The Next Billion Users</div><div class="bookmark-description">After immersing herself in factory towns, slums, townships, and favelas, Payal Arora assesses real patterns of internet usage in India, China, South Africa, ...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=eIFTbuEW7MA</div></div><img src="https://i.ytimg.com/vi/eIFTbuEW7MA/hqdefault.jpg" class="bookmark-image"/></a></figure></div></div><div id="6657ad74-ac55-455e-a3cb-4047f353deb0" class="column-list"><div id="99b20fc9-ef7f-4be0-b120-da9858cfe12b" style="width:50%" class="column"><figure id="a2bbe406-284f-459d-a8b2-91eff4c92860"><a href="https://asunder.earth/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Asunder</div><div class="bookmark-description">Asunder responds to a growing interest in the application of AI to critical environmental challenges by situating this approach as a literal proposition, combining state of the art climate and environmental simulation technology, a 144 CPU super-computer and Machine Learning image-making techniques.</div></div><div class="bookmark-href">https://asunder.earth/</div></div></a></figure></div><div id="6b33c2fb-b480-4bea-b4b5-4ca1e4e47252" style="width:50%" class="column"><figure id="9380272d-9dcd-45b5-af93-12f569942053"><a href="http://tegabrain.com/Deep-Swamp" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Deep Swamp - tegabrain</div><div class="bookmark-description">Glass tanks, wetland plant species, gravel, sand, acrylic pipes, shade balls, electronics, misters, lighting, pumps, custom software, 3 channel sound. Deep Swamp is a triptych of semi-inundated environments that gather together wetland life forms and artificially intelligent software agents. The agents, Nicholas, Hans and Harrison, patiently watch their swampy territories and modify the conditions in them.</div></div><div class="bookmark-href"><img src="https://favicon.cargocollective.com/351441-1388110400.ico" class="icon bookmark-icon"/>http://tegabrain.com/Deep-Swamp</div></div><img src="https://payload.cargocollective.com/1/10/351441/13613651/first_800.jpg" class="bookmark-image"/></a></figure></div></div><figure id="924cb24e-52a7-49b6-a0d0-21b7b0dbc225"><a href="https://anatomyof.ai/img/ai-anatomy-map.pdf" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href"><img src="https://anatomyof.ai/favicon.ico" class="icon bookmark-icon"/>https://anatomyof.ai/img/ai-anatomy-map.pdf</div></div></a></figure><figure id="039f81b6-7893-4903-b162-44010649415a"><a href="https://strelkamag.com/en/article/humanizing-the-non-human-in-virtual-worlds" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Empathy for the Machine: Inside Lawrence Lek&#x27;s Virtual Worlds</div><div class="bookmark-description">Using the medium of game design, artist and filmmaker Lawrence Lek explores the nature of intelligence and ethics of the non-human. Our rapidly developing technologies change the socio-political landscape, economics, and environments, but also alter the ways in which we understand humanity.</div></div><div class="bookmark-href"><img src="https://strelkamag.com/favicon.ico" class="icon bookmark-icon"/>https://strelkamag.com/en/article/humanizing-the-non-human-in-virtual-worlds</div></div><img src="https://storage.strelka.com/i/19991f01-242b-457f-8634-b657bc6eadb0/w/1200" class="bookmark-image"/></a></figure><h1 id="621aeae8-e740-4757-aa3f-8fd3b00d88ba" class="">Ethics, Design, Technology +</h1><h3 id="e7daa86c-c9c6-417e-b270-d982ab54a734" class="">Videos, Podcasts, Articles</h3><figure id="9b97177c-14fc-4d30-8ad0-10ab5dc1a323"><a href="https://www.youtube.com/watch?v=ipzpHOwtbII" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Closing Keynote Irina Shklovski</div><div class="bookmark-description">Irina Shklovski works across many disciplines, focusing on ethics in technology development, information privacy, social networks, and relational practices. ...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=ipzpHOwtbII</div></div><img src="https://i.ytimg.com/vi/ipzpHOwtbII/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="88d6b62a-4425-4890-9d90-7ff69a1eb3fb"><a href="http://ethicsfordesign.com/about" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ethics for Design</div><div class="bookmark-description">What is the role of a designer?</div></div><div class="bookmark-href"><img src="http://ethicsfordesign.com/favicon.ico" class="icon bookmark-icon"/>http://ethicsfordesign.com/about</div></div><img src="http://ethicsfordesign.com/content/3-about/1-why/why.jpg" class="bookmark-image"/></a></figure><figure id="9f01c80c-7977-4599-933d-4dec8947db09"><a href="https://samharris.org/podcasts/what-is-technology-doing-to-us/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Making Sense Podcast #71 - What is Technology Doing to Us? | Sam Harris</div><div class="bookmark-description">In this episode of the Making Sense podcast, Sam Harris speaks with Tristan Harris about the arms race for human attention, the ethics of persuasion, the consequences of having an ad-based economy, the dynamics of regret, and other topics. Tristan Harris has been called the &quot;closest thing Silicon Valley has to a conscience,&quot; by The Atlantic magazine.</div></div><div class="bookmark-href"><img src="https://samharris.org/wp-content/themes/samharris/dist/images/favicons/favicon-16x16.png" class="icon bookmark-icon"/>https://samharris.org/podcasts/what-is-technology-doing-to-us/</div></div><img src="https://samharris.org/wp-content/uploads/legacy-site/socialmedia.png" class="bookmark-image"/></a></figure><div id="e9b6b004-d2af-48d0-9b00-95cf96c92e68" class="column-list"><div id="e3ffc739-d06a-42ed-8a8b-e804bd6b1928" style="width:50%" class="column"><figure id="e9875421-8d2f-425a-9efd-7a2e39bcbd00"><a href="https://www.theatlantic.com/technology/archive/2012/04/why-the-landline-telephone-was-the-perfect-tool/255930/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Why the Landline Telephone Was the Perfect Tool</div><div class="bookmark-description">With (1973), Illich extended his analysis of education to a broader critique of the technologies of Western capitalism. The major inflection point in the history of technology, he asserts, is when, in the life of each tool or system, the means overtake the ends.</div></div><div class="bookmark-href"><img src="https://cdn.theatlantic.com/assets/static/a/theatlantic/img/lacroix/favicon.fb04af6390eb.ico" class="icon bookmark-icon"/>https://www.theatlantic.com/technology/archive/2012/04/why-the-landline-telephone-was-the-perfect-tool/255930/</div></div><img src="https://cdn.theatlantic.com/assets/media/mt/science/AP0301040853-330.jpg" class="bookmark-image"/></a></figure></div><div id="3d5bf33a-d0f6-41ad-bd42-3280cc576276" style="width:50%" class="column"><figure id="2c76cc26-8288-418a-aea9-7fdcdc6168eb"><a href="https://walkerart.org/magazine/soundboard-reenvisioning-internet-robinson-pressman" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Reenvisioning the Internet: Decentralize the Web to Sidestep Corporate Control</div><div class="bookmark-description">&quot;Through the use of peer-to-peer protocols, the decentralized web puts online ownership and control back into the hands of individual people.&quot; In the sixth edition of our Soundboard series, Danielle Robinson and Andy Pressman answer the the question, &quot;How can we reenvision the internet?&quot;</div></div><div class="bookmark-href"><img src="https://walkerart.org/favicon.ico" class="icon bookmark-icon"/>https://walkerart.org/magazine/soundboard-reenvisioning-internet-robinson-pressman</div></div><img src="https://walker-web.imgix.net/cms/walker-arena-OG-fin.jpg?fm=jpg&amp;auto=format,compress&amp;width=512&amp;height=512&amp;fit=max" class="bookmark-image"/></a></figure></div></div><div id="65e6487b-747f-41f1-9b50-c92a7d9fd7b0" class="column-list"><div id="e01dc957-698d-4686-8eb5-7ea1b15e6474" style="width:50%" class="column"><figure id="55c25373-7915-494d-8842-a5ed8139fbff"><a href="https://www.youtube.com/watch?v=JJfCin12sxo" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Behind every artifact lurks an ideology | Gillian Crampton Smith | TEDxCaFoscariU</div><div class="bookmark-description">This talk was given at a local TEDx event, produced independently of the TED Conferences. Efficiency is necessary but not sufficient: Gillian Crampton Smith ...</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/8ace1dc9/htdocs-ytimg-desktop-kevlar-production/img/favicon.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=JJfCin12sxo</div></div><img src="https://i.ytimg.com/vi/JJfCin12sxo/hqdefault.jpg" class="bookmark-image"/></a></figure></div><div id="ad7bdb94-1ecb-487c-8f7d-2a31a8e8f5f5" style="width:50%" class="column"><p id="d305a517-f1d8-431d-b086-c8c928c436a8" class="">“It is impossible to work with information technology without also engaging with social engineering… a tiny group of engineers can make decisions that affect millions.” The blackberry mobile has the ideology of work comes first and people should be available where and whenever. There was an article in the NYT and a commenter equated non-work time with idle time - something that has a Puritan overtone of a vice. Facebook’s worldview is that popularity = success.</p></div></div><figure id="f9907735-8dd4-4d46-b94a-045f9e709820"><a href="https://medium.com/@katecrawford/artificial-intelligence-is-hard-to-see-a71e74f386db" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Artificial intelligence is hard to see</div><div class="bookmark-description">Why we urgently need to measure AI&#x27;s societal impacts By Kate Crawford and Meredith Whittaker How will artificial intelligence systems change the way we live? This is a tough question: on one hand, AI tools are producing compelling advances in complex tasks, with dramatic improvements in energy consumption, audio processing, and leukemia detection.</div></div><div class="bookmark-href"><img src="https://cdn-static-1.medium.com/_/fp/icons/favicon-rebrand-medium.3Y6xpZ-0FSdWDnPM3hSBIA.ico" class="icon bookmark-icon"/>https://medium.com/@katecrawford/artificial-intelligence-is-hard-to-see-a71e74f386db</div></div><img src="https://miro.medium.com/max/1022/0*KUbEwaIrSN4k7bDQ." class="bookmark-image"/></a></figure><div id="89919753-50a4-4540-b654-96d43f580836" class="column-list"><div id="b2b447a5-bbb9-4d30-b852-8b8b2dd553d9" style="width:50%" class="column"><figure id="526ac3c1-2bae-42da-8e6f-65f1197b590c"><a href="https://www.youtube.com/watch?v=iT45s4roNME" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">James Bridle - What Is Real? | The Conference 2018</div><div class="bookmark-description">&quot;There&#x27;s a concrete and causal relationship between the public understanding of technology and the stability and inequality of democracy in societies that go...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=iT45s4roNME</div></div><img src="https://i.ytimg.com/vi/iT45s4roNME/hqdefault.jpg" class="bookmark-image"/></a></figure></div><div id="30bf0c9b-69ac-40a6-b259-b5dc0309fddc" style="width:50%" class="column"><figure id="3bb2cf55-dba4-4a19-820f-d9e7213bf7e1"><a href="https://www.theatlantic.com/technology/archive/2018/12/your-iphone-selfies-dont-look-like-your-face/578353/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">No, You Don&#x27;t Really Look Like That</div><div class="bookmark-description">What&#x27;s changed is this: The cameras know too much. All cameras capture information about the world-in the past, it was recorded by chemicals interacting with photons, and by definition, a photograph was one exposure, short or long, of a sensor to light.</div></div><div class="bookmark-href"><img src="https://cdn.theatlantic.com/assets/static/a/theatlantic/img/lacroix/favicon.fb04af6390eb.ico" class="icon bookmark-icon"/>https://www.theatlantic.com/technology/archive/2018/12/your-iphone-selfies-dont-look-like-your-face/578353/</div></div><img src="https://cdn.theatlantic.com/thumbor/WGg7hDf455w7zDbo_yoTcUaT5Ms=/0x22:2228x1179/960x500/filters:format(png)/media/img/mt/2018/12/skinsmoothing/original.png" class="bookmark-image"/></a></figure></div></div><p id="ff19a31b-b976-4fd3-8a28-c2f45f16980d" class="">It is a problematic situation when the conscious human attempts to speak on behalf of the non-human other. How can you, as the author, the observer, or the filmmaker, take the position of speaking on behalf of an ethnic, gendered, or non-human minority? But this goes back to the idea of personification, where you temporarily imagine yourself in the position of that other being. This embodiment in the other mind might help open up ethical and political dimensions that evolve discourse on what AI might become... am I just an algorithm, making “cost-benefit” decisions for aesthetic choices? This happened over and over again: I would have to make decisions to place this building here, frame this shot like that, or choose the words to generate an evocative phrase. What if my entire artistic process is not a biologically driven sense of intuition, but a process of probabilistic decision-making just like the cost functions used in machine learning? Instead of anthropomorphizing AI, I started to explore ways in which I behave like a deep learning algorithm. I don’t mean this as a call for some transhumanist viewpoint. But I started to think from another perspective, like a kind of empathy for the machine.</p><div id="22f65bbe-6c53-4fe2-abbf-86c8693fcea7" class="column-list"><div id="c5689216-2314-4e51-813b-7d425e3abf33" style="width:50%" class="column"><figure id="f7307153-fc7c-41de-89e9-1f03954c99b4"><a href="https://journals.sagepub.com/doi/full/10.1177/2053951719879468" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Engaging with ethics in Internet of Things: Imaginaries in the social milieu of technology developers - Funda Ustek-Spilda, Alison Powell, Selena Nemorin, 2019</div><div class="bookmark-description">Discussions about ethics of Big Data often focus on the ethics of data processing: collecting, storing, handling, analysing and sharing data. Data-based systems, however, do not come from nowhere. They are designed and brought into being within social spaces - or social milieu.</div></div><div class="bookmark-href"><img src="https://journals.sagepub.com/favicon.ico" class="icon bookmark-icon"/>https://journals.sagepub.com/doi/full/10.1177/2053951719879468</div></div><img src="https://journals.sagepub.com/pb-assets/cover-alt/bds-cover-social-1565280399650.jpg" class="bookmark-image"/></a></figure></div><div id="86826639-dc53-4b46-bfa6-171707d9d60c" style="width:50%" class="column"><figure id="c9527a83-f50c-4342-8eb7-2fc1e9e1ff26"><a href="https://livingwithdata.org/project/wp-content/uploads/2020/05/living-with-data-2020-summary-review-of-existing-research.pdf" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href"><img src="https://livingwithdata.org/favicon.ico" class="icon bookmark-icon"/>https://livingwithdata.org/project/wp-content/uploads/2020/05/living-with-data-2020-summary-review-of-existing-research.pdf</div></div></a></figure></div></div><h3 id="866d0483-b13c-4a1d-a5e2-19f62f9dd4a2" class="">Moral Fiction:</h3><figure id="c5bd9f2e-8000-473f-b6be-7990f5e928b5"><a href="https://archive.org/stream/HarrisonBergeron/Harrison%20Bergeron_djvu.txt" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Full text of &quot;Harrison Bergeron (&amp; Activity)&quot;</div><div class="bookmark-description">HARRISON BERGERON by Kurt Vonnegut, Jr. THE YEAR WAS 2081, and everybody was finally equal. They weren&#x27;t only equal before God and the law. They were equal every which way. Nobody was smarter than anybody else. Nobody was better looking than anybody else. Nobody was stronger or quicker than anybody else.</div></div><div class="bookmark-href"><img src="https://archive.org/images/glogo.jpg" class="icon bookmark-icon"/>https://archive.org/stream/HarrisonBergeron/Harrison%20Bergeron_djvu.txt</div></div></a></figure><p id="fcda0b2c-6c78-41d9-890d-8bf9285fb0a1" class="">
+</p><p id="19aea778-bbd8-4199-a433-e458912dbac4" class="">THE YEAR WAS 2081, and everybody was finally equal. They weren&#x27;t only equal before God and the law. They were equal every which way. Nobody was smarter than anybody else. Nobody was better looking than anybody else. Nobody was stronger or quicker than anybody else. All this equality was due to the 211th, 212th, and 213 th Amendments to the Constitution, and to the unceasing vigilance of agents of the United States Handicapper General. Some things about living still weren&#x27;t quite right, though. April for instance, still drove people crazy by not being springtime. And it was in that clammy month that the H-G men took George and Hazel Bergeron&#x27;s fourteen- year-old son, Harrison, away.</p></div></article></body></html>

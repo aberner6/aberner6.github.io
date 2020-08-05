@@ -1,0 +1,635 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Q+D</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ad91dc05-b986-4dd5-a6ad-1e0f0d0574dd" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">❔</span></div><h1 class="page-title">Q+D</h1></header><div class="page-body"><p id="53ee8c73-961a-438c-9d69-e3081d476041" class=""><em>This page attempts to clarify and present our way of thinking and some the decisions we make when teaching the course. Q+D: Q is for questions, D is for discussion.  </em></p><h3 id="fa1b13fe-71ed-401d-af64-df686a58bc35" class="">Why is ethics relevant to design?</h3><p id="f5859598-7a9a-4363-89f1-6e26bfae7b59" class=""><em>Some key thoughts from us. Please add.</em></p><ul id="d7702215-6bf5-442d-933a-426663ab1da3" class="bulleted-list"><li>Scale and impact of design work<ul id="a512a3a0-dfae-4ad9-bff3-518bd32186b2" class="bulleted-list"><li>Scale: if we make a bad decision, it affects many more people and quickly</li></ul><ul id="6459592b-7ce2-4eaa-9983-825a0717637a" class="bulleted-list"><li>Scale: products go out to areas of the world that we, as designers, may never know deeply enough to design with them in mind</li></ul><ul id="80aa0ea1-5d9c-4419-b969-94ed60c33fcc" class="bulleted-list"><li>Impact: can be good or bad or &quot;weird&quot; </li></ul><ul id="cd430606-5005-471c-ac46-07593d0d7671" class="bulleted-list"><li>Impact: happens over time. So something that is working well now may become problematic in the future</li></ul></li></ul><ul id="98aa6903-282e-4cfe-b153-346e28b44824" class="bulleted-list"><li>Invisible data, black boxes, math and thresholds, seamlessness<ul id="5f097d1d-d401-41fd-833a-4b10c8f8fba1" class="bulleted-list"><li>Invisible data: data behind the scenes also means that data could be recombined, sent elsewhere, used to control what someone sees or doesn&#x27;t see, how they are categorised, what they get access to - </li></ul><ul id="fa603b82-9c19-4dfd-bb99-0606a31c4026" class="bulleted-list"><li>Math and thresholds: let&#x27;s say we have an activity wearable - a smartwatch that tracks our steps. At a certain point it says we&#x27;ve walked enough. That feedback hides a) constant measurement of our position b) smoothing of those measurements and c) comparison of the total of those smoothed measurements to some average definition of &quot;walked enough&quot; so that d) if we walked as much or more than &quot;walked enough&quot; we get the feedback of &quot;you have walked enough&quot; and if we walked less than that threshold, we will not get that feedback. <ul id="192366d0-c465-4ac8-abc8-c712552d916e" class="bulleted-list"><li>So... what if? What if we were walking up a mountain the whole time? What if we have a sprained ankle? What if we have a debilitating chronic disease? What if we are super active? What if the sensor&#x27;s readings were off because.... ? </li></ul><ul id="1343109a-b03d-4e44-be29-602a4fe076e8" class="bulleted-list"><li>If you look inside the algorithm - or even the very &quot;simple&quot; threshold function - there&#x27;s often something to be discussed. Sensors are imperfect. Math is not objective. Giving feedback is not objective either. It aligns with a certain definition of &quot;goodness&quot; or wellbeing or good life at the end of the day. </li></ul></li></ul><ul id="dfc554b0-9a70-49d2-a03e-5a9cec7046c5" class="bulleted-list"><li>Bias: built-in biases (largely in favour of those born to privilege such as Western Caucasian males, and, to a lesser extent, young south-Asian and east-Asian men) will have profound, largely unintended negative consequences to the detriment of everybody else: women, especially single parents, people of colour (any shade of brown or black), the ‘olds’ over 50, immigrants, Muslims, non-English speakers, etc. [<a href="https://www.pewresearch.org/internet/2017/02/08/theme-4-biases-exist-in-algorithmically-organized-systems/">ref</a>]</li></ul><ul id="d6b95a4b-623f-49c1-a39e-403732515c8e" class="bulleted-list"><li>Black boxes: the idea that a product is working, but the person using it don&#x27;t exactly know how it works, nor could they pull it apart and make it work in a way that fits their needs better</li></ul><ul id="2d8e8038-568f-48ec-9201-90181121e3e7" class="bulleted-list"><li>Seamlessness: goes with black boxes and invisible data. The less you see of the inner workings of the product, the easier it might be to use, but the harder it is to make it your own at its core</li></ul></li></ul><ul id="36cb77d1-89e8-4bf0-bb67-77abd81c32d4" class="bulleted-list"><li>There&#x27;s an idea that we could make good designs, ethical designs if we had some tools for ethics. In our view, the best tools are your own minds - learning to embrace, capture and consider the complexity of what you create, to spend time asking questions upon questions upon questions, and that it&#x27;s possibly impossible to define &quot;good&quot;, &quot;right&quot;, or &quot;ethical&quot; but we can still try.  </li></ul><ul id="b0c8b47d-d8a1-4da9-8822-fcd780114fdd" class="bulleted-list"><li>&quot;Philosophy estranges us from the familiar. Not by supplying new information, but by inviting and provoking a new way of seeing. But, once the familiar turns strange, it&#x27;s never quite the same again... but watch out for the scepticism, which could lead us to say: we cannot resolve the cases or principles and if they haven&#x27;t been resolved after all of these years, who are we to think we can resolve them? Well, the very fact that these questions have persisted for a long time. The reason they are inescapable is that we live some answer to these questions every day. Giving up on moral reflection is no solution. &quot; [<a href="https://en.wikipedia.org/wiki/Michael_J._Sandel">Michael Sandel</a>]</li></ul><p id="59e4bb31-d7f3-4b6e-ba99-4debd5f5c5c4" class="">
+</p><p id="2c66c932-4868-4ba1-bc4b-784f398f6b5b" class=""><mark class="highlight-yellow_background">... and why or what else? And what do you think? Add or comment on our writing.</mark></p><p id="cd411c29-9a73-45db-86d5-5dfb21fe9e4c" class="">
+</p><p id="9daed996-1999-48f0-8b43-d9f94e275419" class="">
+</p><h3 id="a4daa453-3708-4deb-9d75-828a62963a60" class="">Why does the course combine &quot;ethics&quot; and &quot;futures&quot; and &quot;design&quot;?</h3><p id="39c937a9-1894-4027-9291-4b95737db06e" class="">We want to try anchoring a design to ethical principles - starting out with good intentions and trying to stick to them. That&#x27;s all well and good because issues, conflicts and tensions can occur already at the onset, so aligning and defining is a strong place to begin. </p><p id="148641c1-0316-44e2-af7e-9e7caff24023" class="">But... we have the sneaking suspicion that sometimes, challenging scenarios come up that are as unexpected as they are full of thorny, difficult decisions. And how we engage with those challenges is part of how we enact ethics. To our view, ethics is not just about stating &quot;I am ethical&quot; or &quot;I will be responsible&quot;. It&#x27;s about digging into the words of <em>ethical</em> and <em>responsible</em>, defining them by how we act in the face of complex challenges and the decisions we make.</p><p id="32c48dee-d81c-4a42-a389-e5bebfc576be" class="">We seek to envision possible futures so that complex challenges are a little less unexpected. So that we&#x27;re a bit more prepared. Maybe we even rehearsed for a scenario that we will actually experience in 5 years time. </p><p id="97305af0-9624-4ccb-8489-dcdff57b3952" class="">By trying to imagine and understand possible future challenges, we could be more prepared to take them on if something similar occurs.</p><p id="e8701cda-b4e7-4e9d-93dd-383529858628" class="">But ethics - or rather, different theories of ethics - do not give us <em>answers</em>. Rather, they ask us more questions, and lead to more possible scenarios, which we then will want to consider. Taking ethics into account is the ultimate exercise in iteration and handling complexity.<div class="indented"><p id="a243f6d3-fceb-40a2-8cc2-ee3755612c58" class="">For example: the theory of <a href="https://plato.stanford.edu/entries/ethics-virtue/">virtue ethics</a> leads us to ask the question: &quot;Would I be happy for this to be a front-page story?&quot; </p></div></p><p id="267bc53c-eb51-42eb-af09-63ca9edb362e" class="">&quot;This&quot; could be a choice we need to make now, about something that is presently in our sights and hands to decide, or we could project it into a near and possible scenario. <div class="indented"><p id="ba81bf56-5a3f-400a-8cd8-be31eb63b99b" class="">Or another example: the <a href="https://plato.stanford.edu/entries/ethics-deontological/">theory of deontology</a> leads us to ask the question: &quot;Am I treating people as ends or means?&quot; and &quot;What if everyone did what I’m about to do?&quot;</p></div></p><p id="13053b54-2cd0-49c4-931f-291c0b1d9541" class="">Depending on how we answer those questions, we could again apply more questions on top.<div class="indented"><p id="5787dd91-fe2e-485c-b51d-730db8aee33c" class="">For example: for a given decision, if we are treating people as a means to an end, (yes to the previous block), then &quot;Would I be happy for this [decision] to be a front-page story?&quot;</p></div></p><p id="abfa0130-47b6-4cc3-8a37-d94b18e0dd41" class="">🐢upon 🐢.</p><p id="35962ab2-6240-42dd-be4d-9be83805d5d9" class="">
+</p><p id="f697d7e2-47f9-43af-9cef-b53a69f15d89" class=""><mark class="highlight-yellow_background">... what do you think? Highlight and comment on our writing.</mark></p><p id="828bde08-994f-41d6-ad5a-65c4951e9ed7" class="">
+</p><h3 id="62bfed17-ca42-46c4-8843-75dfd41d1770" class="">How far in the future will we focus?</h3><p id="0e5a70e2-32ee-4a5f-bb84-ce4b86c8914b" class="">We&#x27;ll focus on possible, near and mundane futures.</p><h3 id="4213d74b-6e59-4688-92ed-0c790451e73f" class="">How deep will we go on ethics?</h3><p id="eb3a548b-5773-4426-9995-ca62ec98edcd" class="">That is to some extent up to you. We rely on you to let us know if you want to give it a break, go deeper, stay at the same level of depth. That said, this is only 5 days, so think of it more as an introduction. </p><h3 id="75c21fbb-762d-4763-90e8-88b8b1547c01" class="">Why the emphasis on scenarios?</h3><p id="80d14822-5945-4a84-91e9-0d3871599637" class="">Our emphasis on scenarios aligns with and to some extent is the front-facing view of an emphasis on counterfactuals - the what if&#x27;s, what can be, what isn&#x27;t but could have been. These give us diverse investigations that lead to difficult questions. They  reveal contradictions in our belief systems and highlight double standards in our moral judgments, necessary to evaluate the moral benefits of real world outcomes.</p><p id="83efc955-c3d0-4f14-95c7-fc47d7227317" class="">Refs: </p><figure id="82d0d3ad-2e46-4b69-acd3-8392a8f8afd5"><a href="https://www.frontiersin.org/articles/10.3389/fpsyg.2014.00451/full#B35" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Counterfactual thinking in moral judgment: an experimental study</div><div class="bookmark-description">Counterfactual thinking is thinking about a past that did not happen. This is often the case in &quot;if only...&quot; situations, where we wish something had or had not happened. To make a choice in a moral decision-making situation is particularly hard and, therefore, may be often associated with the imagination of a different outcome.</div></div><div class="bookmark-href"><img src="https://3718aeafc638f96f5bd6-d4a9ca15fc46ba40e71f94dec0aad28c.ssl.cf1.rackcdn.com/favicon_16x16.ico" class="icon bookmark-icon"/>https://www.frontiersin.org/articles/10.3389/fpsyg.2014.00451/full#B35</div></div><img src="https://www.frontiersin.org/files/Articles/85844/fpsyg-05-00451-HTML/image_t/fpsyg-05-00451-t001.gif" class="bookmark-image"/></a></figure><figure id="24b42924-fc0a-4adb-8bbb-5a7c758ffc2e"><a href="https://plato.stanford.edu/entries/counterfactuals/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Counterfactuals</div><div class="bookmark-description">This section begins with some terminological issues ( §1.1). It then provides two broad surveys of research that places counterfactuals at the center of key philosophical issues. Section 1.2 covers the role of counterfactuals in theories of rational agency, mental representation, and knowledge.</div></div><div class="bookmark-href"><img src="https://plato.stanford.edu/favicon.ico" class="icon bookmark-icon"/>https://plato.stanford.edu/entries/counterfactuals/</div></div></a></figure><p id="d91650d8-cdfa-40b0-8acf-b70e8b8b69d6" class="">
+</p><ul id="1befd555-495d-4dbf-bf93-db97fd234ce3" class="toggle"><li><details open=""><summary><a href="https://www.jstor.org/stable/20128279?read-now=1&amp;seq=2#page_scan_tab_contents">Daniel A. Putnam, Ethical Decisions and Contrary-to-Fact Conditionals</a></summary><p id="bcfbf58e-c303-4303-a2fe-667089d02794" class="">Counterfactual reflection is not just used for the “sentimental” purposes discussed above, but as part of what Byrne (2005) calls rational imagination.</p><p id="7ef7daab-a66e-4816-b529-7bf3292573b8" class="">&quot;Reflection in ethical decision-making involves imagining the possible world of another entity or entities, a world that is contingent on an action that we or a third party have the power to perform. Ethical counterfactuals posit materially possible worlds (consequentialism) or logically possible worlds (Kantian deontology). Along with imagining the properties of a projected world, an ethical counterfactural incorporates a realisation of how that world would be experienced. Contrary to fact conditionals, or counterfactuals, are bound up intimately with reasoning. When the reasoning is practical, these conditionals serve to limit or guide future actions. Before deciding whether to order the new delicacy at the local restaurant, one imagines what the taste might be like. Counterfacturals in ethical reflection serve the same purpose of guiding future actions. </p><p id="f82b2ea7-4d6d-4375-82dc-c8ae146dcf90" class="">For example, if we do not control acid rain, we can imagine what the experience of nature would be like for our children. Or Dewey&#x27;s point about how a simple act like opening a window can turn into a moral issues if one recognizes that there is an invalid in the room who might be harmed  by the outside air.&quot;</p><p id="28f78a63-bb7d-45ae-b270-20a129a5b88d" class="">Source: <a href="https://www.jstor.org/stable/20128279?read-now=1&amp;seq=2#page_scan_tab_contents">Daniel A. Putnam, Ethical Decisions and Contrary-to-Fact Conditionals</a></p></details></li></ul><p id="104a2997-a8da-4c24-8f3a-3eb5f93adeec" class="">
+</p><h3 id="8c5ba129-9825-4c14-97c5-11a096f5ac70" class="">Which theories of ethics will we learn about and use? Why?</h3><p id="7eec77b3-7218-46d7-898d-62ff597a7854" class="">We&#x27;ll focus on virtue ethics, consequentialism, care ethics. We will also introduce theories such as deontological or kantian ethics, the rights and respect approaches. </p><p id="565f2aa2-08aa-4b63-8d22-3143edcd0b7e" class="">There are overlaps among them, but each has a sharp angle that we&#x27;ll try to use to see and discuss something new.</p><p id="114a7261-31d1-4297-ab80-85db54f7ea00" class="">Virtue and care were specifically identified as relevant to the field of technology design during our project, VIRT-EU, along with the capabilities approach. Read more about how they interrelate <a href="https://www.virteuproject.eu/wp-content/uploads/2019/12/ethics-primer.pdf">here</a>.</p><p id="321f50ae-9add-48ca-9ff5-4ccf31d5b65a" class="">We welcome other suggestions of theories to include. </p><p id="87139c57-953d-4cdb-9db6-4fcf0e6fae85" class="">
+</p><h3 id="c35fc786-9c97-442b-b8d9-1174dbbfb2df" class="">Why do we focus on making things? Why not just discuss?</h3><p id="39c24d91-36fc-4a6d-8d5d-5e4e9a7deb89" class="">Depicting possible future and worrying scenarios in relation to what we are designing is not easy, yet it is crucial to do as a comunication tool within teams and across hierarchies. It&#x27;s not the only thing to do when facing a dilemma, but it is one tool in the quiver that we will explore. Another tool we&#x27;ll make for ourselves are our manifestos. We also encourage you to explore and maybe even make or propose other tools for confronting, persuading, discussing ethical issues.</p></div></article></body></html>
